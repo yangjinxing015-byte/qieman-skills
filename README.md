@@ -12,4 +12,4 @@
 - [AI 工作流 / AI Workflow](./skills-design/ai-workflow/README.md)
 
 ## 更新记录
-- 2026.xx.xx：初始化仓库结构
+- 2026.2.25：初始化仓库结构
