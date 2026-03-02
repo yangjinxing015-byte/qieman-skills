@@ -1,1 +1,3 @@
-Place reference docs, templates, and examples here.
+## References
+- references/ui-design-skill.md
+- references/ui-design-skill_zh.md
