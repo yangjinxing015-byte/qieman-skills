@@ -1,1 +1,0 @@
-Yingmi logos.
