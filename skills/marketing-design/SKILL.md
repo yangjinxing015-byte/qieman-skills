@@ -11,3 +11,13 @@ description: "Marketing assets for Qieman: KV/banner/poster/H5 structure, brand 
 - Typography & color usage
 - Copy/CTA notes
 - Asset list & export specs
+## References
+- references/README.md
+- references/marketing-design-spec_zh.md
+- references/color-guidelines_zh.md
+- references/card-styles_zh.md
+- references/header-hero-guidelines_zh.md
+- references/skill-overview_zh.md
+
+## Assets
+- assets/README.md
