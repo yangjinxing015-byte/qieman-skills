@@ -1,6 +1,5 @@
-## What goes here
-- UI/UX-only small assets (icons, sample images, templates)
-- Avoid large binaries (fonts, big zip files)
+## Logos
+- UI/UX logos live in `assets/logos/` (qieman / yingmi / lockups)
 
 ## Shared assets
-- Use root `/assets` for shared logos and brand-wide items
+- If you later create a root `/assets`, put brand-wide shared items there.
