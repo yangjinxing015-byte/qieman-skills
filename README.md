@@ -1,6 +1,6 @@
 # Qieman Design Skills (且慢设计技能库)
 
-面向且慢（Qieman）设计团队的 **Skill / Spec / Asset** 共享仓库：沉淀 UI/UX、营销设计、数据图表、PPT、动效、小顾 IP、AI 工作流等规范与素材，作为可复用的“技能单元”，便于在 Cursor / Claude / Agent 工作流中按需调用。
+面向且慢（Qieman）设计团队的 **Skill / Spec / Asset** 共享仓库：沉淀 UI/UX、营销设计、数据图表、PPT、动效、小顾 IP、AI 工作流等规范与素材，作为可复用的“skills单元”，便于在 Cursor / Claude / Agent 工作流中按需调用。
 
 > Repo structure inspired by Anthropic Skills-style organization: each skill is self-contained with `SKILL.md` + optional `references/` + optional `assets/`.
 
