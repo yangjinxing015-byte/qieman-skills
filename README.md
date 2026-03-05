@@ -6,15 +6,16 @@
 
 ---
 
-```md ## Skill index（入口导航） - UI/UX → [skills/ui-ux/SKILL.md](skills/ui-ux/SKILL.md) - Marketing Design → [skills/marketing-design/SKILL.md](skills/marketing-design/SKILL.md) - Data Visualization → [skills/data-visualization/SKILL.md](skills/data-visualization/SKILL.md) - PPT → [skills/ppt/SKILL.md](skills/ppt/SKILL.md) - Motion → [skills/motion/SKILL.md](skills/motion/SKILL.md) - Xiaogu IP → [skills/xiaogu-ip/SKILL.md](skills/xiaogu-ip/SKILL.md) - AI Workflow → [skills/ai-workflow/SKILL.md](skills/ai-workflow/SKILL.md) ```
 
-- UI/UX → `skills/ui-ux/SKILL.md`
-- Marketing Design → `skills/marketing-design/SKILL.md`
-- Data Visualization → `skills/data-visualization/SKILL.md`
-- PPT → `skills/ppt/SKILL.md`
-- Motion → `skills/motion/SKILL.md`
-- Xiaogu IP → `skills/xiaogu-ip/SKILL.md`
-- AI Workflow → `skills/ai-workflow/SKILL.md`
+## Skill index（入口导航）
+
+- **UI/UX** → [skills/ui-ux/SKILL.md](skills/ui-ux/SKILL.md)
+- **Marketing Design** → [skills/marketing-design/SKILL.md](skills/marketing-design/SKILL.md)
+- **Data Visualization** → [skills/data-visualization/SKILL.md](skills/data-visualization/SKILL.md)
+- **PPT** → [skills/ppt/SKILL.md](skills/ppt/SKILL.md)
+- **Motion** → [skills/motion/SKILL.md](skills/motion/SKILL.md)
+- **Xiaogu IP** → [skills/xiaogu-ip/SKILL.md](skills/xiaogu-ip/SKILL.md)
+- **AI Workflow** → [skills/ai-workflow/SKILL.md](skills/ai-workflow/SKILL.md)
 
 ---
 
