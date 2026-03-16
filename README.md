@@ -1,72 +1,141 @@
+# Qieman Design Skills（且慢 Design Skills）
 
-```md
+面向且慢（Qieman）设计团队的 Skill / Spec / Asset 共享仓库，用于沉淀 UI/UX、营销 H5、数据图表、PPT、动效、小顾 IP、AI 工作流等规范，便于在 Claude / Agent / 设计工作流中按需调用。
+
+每个 Skill 以独立目录组织，核心入口为 `SKILL.md`；补充说明文档统一放在 `references/` 目录下；素材与轻量资产统一放在 `assets/` 目录下。
+
 ---
-name: marketing-h5
-description: 用于且慢营销 H5 设计相关任务，包括页面结构梳理、首屏 Hero 区设计、卡片模块设计、配色规范、营销专题页规划和可直接用于设计执行或 AI 工具生成的结构化描述输出。
+
+## Skill index（入口导航）
+
+- UI/UX → `skills/ui-ux/SKILL.md`
+- Marketing H5 → `skills/marketing-h5/SKILL.md`
+- Data Visualization → `skills/data-visualization/SKILL.md`
+- PPT → `skills/ppt/SKILL.md`
+- Motion → `skills/motion/SKILL.md`
+- Xiaogu IP → `skills/xiaogu-ip/SKILL.md`
+- AI Workflow → `skills/ai-workflow/SKILL.md`
+
 ---
 
-# Qieman Marketing H5 Skill
+## Project structure
 
-## Purpose
-本 Skill 用于支持且慢营销 H5 相关内容的生成、整理与规范约束，帮助输出符合且慢品牌调性的页面结构、视觉建议、模块说明和可复用的设计描述，便于用于设计执行、策划沟通或 AI 工具生成。
+```text
+qieman-skills/
+├── .claude-plugin/
+│   └── plugin.json
+├── skills/
+│   ├── ui-ux/
+│   │   ├── SKILL.md
+│   │   ├── references/
+│   │   └── assets/
+│   │
+│   ├── marketing-h5/
+│   │   ├── SKILL.md
+│   │   ├── assets/
+│   │   │   ├── fonts/
+│   │   │   └── library/
+│   │   │       ├── characters/
+│   │   │       ├── decorations/
+│   │   │       ├── icons/
+│   │   │       └── scenes/
+│   │   └── references/
+│   │       ├── README.md
+│   │       ├── card-styles_zh.md
+│   │       ├── color-guidelines_zh.md
+│   │       ├── header-hero-guidelines_zh.md
+│   │       └── marketing-design-spec_zh.md
+│   │
+│   ├── data-visualization/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │
+│   ├── ppt/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │
+│   ├── motion/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │
+│   ├── xiaogu-ip/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │
+│   └── ai-workflow/
+│       ├── SKILL.md
+│       └── references/
+│
+└── README.md
+```
 
-## When to use
-当需求涉及以下方向时，优先使用本 Skill：
+---
 
-- 生成且慢营销 H5 页面结构
-- 规划活动页、专题页、品牌传播页内容框架
-- 输出首屏 Hero 区设计建议
-- 输出卡片式营销模块设计建议
-- 统一 H5 页面视觉风格、布局逻辑和配色规则
-- 输出适用于 Figma、即梦、Lovart、H5 搭建工具或其他 AI 工具的结构化描述
+## Naming conventions
 
-## Core principles
-处理且慢营销 H5 相关任务时，遵循以下原则：
+### Skill directory
+- 使用英文、小写、短横线命名
+- 例如：`marketing-h5`、`ui-ux`、`data-visualization`
 
-1. 保持且慢品牌调性一致，突出专业、可信、轻盈、现代的金融服务感。
-2. 页面结构清晰，首屏价值表达明确，重点信息突出，减少无效装饰。
-3. 在强调营销传播效果的同时，保留金融品牌应有的专业度与秩序感。
-4. 优先采用模块化、卡片化、可复用的表达方式，便于设计沉淀与后续复用。
-5. 输出内容尽量具体、清晰、结构化，可直接支持设计执行或 AI 生成。
-6. 节日、热点、活动场景可以适度增强氛围感，但不能削弱品牌可信度与金融属性。
+### Required files
+- 每个 Skill 必须有 `SKILL.md`
+- 规范说明文档放在 `references/`
+- 轻量素材放在 `assets/`
 
-## Output expectations
-输出内容通常应尽量包含以下部分：
+### Reference documents
+- 规范文档统一使用语义清晰的英文文件名
+- 中文版本可加 `_zh` 后缀
+- 例如：
+  - `card-styles_zh.md`
+  - `color-guidelines_zh.md`
+  - `header-hero-guidelines_zh.md`
+  - `marketing-design-spec_zh.md`
 
-- 页面目标
-- 目标用户或传播场景
-- 页面结构层级
-- 模块划分建议
-- 首屏 / Hero 区设计建议
-- 卡片 / 内容区设计建议
-- 配色与视觉风格建议
-- 可直接用于设计执行或 AI 工具的提示词 / 描述文本
+### Asset naming
+- 文件名统一使用英文、小写、短横线
+- 推荐格式：
+  - 字体：`family-weight-version.ext`
+  - 角色：`qieman-character-name-state-01.png`
+  - 装饰：`qieman-decoration-element-style-01.png`
+  - 图标：`qieman-icon-name-style-01.svg`
+  - 场景：`qieman-scene-theme-layout-01.png`
 
-## Additional resources
-根据任务需要，加载以下补充文档：
+---
 
-- `references/color-guidelines_zh.md`：且慢营销 H5 配色规范
-- `references/card-styles_zh.md`：卡片样式规范
-- `references/header-hero-guidelines_zh.md`：首屏 Hero 区规范
-- `references/marketing-design-spec_zh.md`：营销设计通用规范
+## Marketing H5 asset naming examples
 
-## Loading guidance
-处理任务时按需加载补充文档：
+### Fonts
+- `alibaba-puhuiti-bold-v03.ttf`
+- `alibaba-puhuiti-medium.ttf`
+- `alibaba-puhuiti-regular-v02.ttf`
+- `mi-sans-demibold.ttf`
+- `mi-sans-medium.ttf`
+- `mi-sans-regular.ttf`
 
-- 需要确定页面氛围、主色、辅助色、场景色时，查看 `references/color-guidelines_zh.md`
-- 需要设计卡片模块、信息块、数据块时，查看 `references/card-styles_zh.md`
-- 需要设计首屏、标题区、按钮区、核心卖点展示时，查看 `references/header-hero-guidelines_zh.md`
-- 需要整理整体页面结构、营销节奏和通用设计规则时，查看 `references/marketing-design-spec_zh.md`
+### Characters
+- `qieman-character-xiaogu-default-01.png`
+- `qieman-character-xiaogu-smile-02.png`
+- `qieman-character-user-female-default-01.png`
 
-## Assets
-营销 H5 相关素材统一放在 `assets/` 下，包括字体与素材库。
+### Decorations
+- `qieman-decoration-confetti-gold-01.png`
+- `qieman-decoration-lantern-red-01.png`
+- `qieman-decoration-cloud-gold-02.png`
 
-## Default style direction
-且慢营销 H5 默认建议采用以下方向：
+### Icons
+- `qieman-icon-arrow-right-cool-01.svg`
+- `qieman-icon-calendar-warm-01.svg`
+- `qieman-icon-coin-cool-01.svg`
 
-- 品牌可信的金融科技感
-- 清晰留白与层级分明的结构表达
-- 明亮、轻盈、克制的视觉氛围
-- 强调关键信息转化路径和模块节奏
-- 优先采用卡片化与模块化布局
-- 在节日或活动场景中适度增强情绪氛围，但不削弱品牌专业性
+### Scenes
+- `qieman-scene-newyear-landscape-01.png`
+- `qieman-scene-investment-landscape-02.png`
+- `qieman-scene-festival-landscape-03.png`
+
+---
+
+## Notes
+
+- `marketing-h5` 是当前唯一保留的营销设计 Skill。
+- 旧目录如 `marketing-design/`、`qieman-mktdesign-H5/` 在确认内容已迁移完成后应删除，避免重复。
+- `README.md` 用于仓库入口导航，不应直接粘贴某个 `SKILL.md` 的正文内容。
