@@ -1,4 +1,4 @@
-# Scenes
-Marketing scene illustrations.
+# Landscape Scenes
+Landscape / environment illustrations for marketing.
 
-Naming: scene-<theme>-<name>-vNN.<ext>
+Naming: scene-landscape-<name>-vNN.<ext>
