@@ -43,18 +43,18 @@ description: 用于且慢营销 H5 设计相关任务，包括页面结构梳理
 ## Additional resources
 根据任务需要，加载以下补充文档：
 
-- `references/h5/color-guidelines_zh.md`：且慢营销 H5 配色规范，用于颜色体系、场景色板、主辅色和页面氛围定义。
-- `references/h5/card-styles_zh.md`：卡片样式规范，用于信息卡、数据卡、引导卡、活动卡等模块设计参考。
-- `references/h5/header-hero-guidelines_zh.md`：首屏 Hero 区规范，用于标题层级、主视觉构图、CTA 区域和首屏信息表达。
-- `references/h5/marketing-design-spec_zh.md`：营销设计通用规范，用于页面结构、模块节奏、内容组织和整体视觉一致性。
+- `references/color-guidelines_zh.md`：且慢营销 H5 配色规范，用于颜色体系、场景色板、主辅色和页面氛围定义。
+- `references/card-styles_zh.md`：卡片样式规范，用于信息卡、数据卡、引导卡、活动卡等模块设计参考。
+- `references/header-hero-guidelines_zh.md`：首屏 Hero 区规范，用于标题层级、主视觉构图、CTA 区域和首屏信息表达。
+- `references/marketing-design-spec_zh.md`：营销设计通用规范，用于页面结构、模块节奏、内容组织和整体视觉一致性。
 
 ## Loading guidance
 处理任务时按需加载补充文档：
 
-- 需要确定页面氛围、主色、辅助色、场景色时，查看 `references/h5/color-guidelines_zh.md`
-- 需要设计卡片模块、信息块、数据块时，查看 `references/h5/card-styles_zh.md`
-- 需要设计首屏、标题区、按钮区、核心卖点展示时，查看 `references/h5/header-hero-guidelines_zh.md`
-- 需要整理整体页面结构、营销节奏和通用设计规则时，查看 `references/h5/marketing-design-spec_zh.md`
+- 需要确定页面氛围、主色、辅助色、场景色时，查看 `references/color-guidelines_zh.md`
+- 需要设计卡片模块、信息块、数据块时，查看 `references/card-styles_zh.md`
+- 需要设计首屏、标题区、按钮区、核心卖点展示时，查看 `references/header-hero-guidelines_zh.md`
+- 需要整理整体页面结构、营销节奏和通用设计规则时，查看 `references/marketing-design-spec_zh.md`
 
 ## Workflow
 建议按以下方式处理任务：
