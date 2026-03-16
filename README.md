@@ -1,3 +1,6 @@
+## Project structure
+
+```text
 qieman-skills/
 ├── .claude-plugin/                         # Claude/Agent 插件元信息
 │   └── plugin.json
