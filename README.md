@@ -1,45 +1,68 @@
+# Qieman Design Skills（且慢 Design Skills）
+
+面向且慢（Qieman）设计团队的 Skill / Spec / Asset 共享仓库，用于沉淀 UI/UX、营销设计、营销 H5、数据图表、PPT、动效、小顾 IP、AI 工作流等规范，便于在 Claude / Agent / 设计工作流中按需调用。
+
+每个 Skill 以独立目录组织，核心入口为 `SKILL.md`；补充说明文档统一放在 `references/` 目录下。
+
+---
+
+## Skill index（入口导航）
+
+- UI/UX → `skills/ui-ux/SKILL.md`
+- Marketing Design → `skills/marketing-design/SKILL.md`
+- Qieman Marketing H5 → `skills/qieman-mktdesign-H5/SKILL.md`
+- Data Visualization → `skills/data-visualization/SKILL.md`
+- PPT → `skills/ppt/SKILL.md`
+- Motion → `skills/motion/SKILL.md`
+- Xiaogu IP → `skills/xiaogu-ip/SKILL.md`
+- AI Workflow → `skills/ai-workflow/SKILL.md`
+
+---
+
 ## Project structure
 
 ```text
 qieman-skills/
-├── .claude-plugin/                         # Claude/Agent 插件元信息
+├── .claude-plugin/
 │   └── plugin.json
-├── skills/                                # Skills 主目录（每个子目录 = 一个技能域）
-│   ├── ui-ux/                             # App UI/UX（组件/版式/交互/交付）
+├── skills/
+│   ├── ui-ux/
 │   │   ├── SKILL.md
-│   │   ├── references/                    # 规范长文/清单/模板/示例（source of truth）
-│   │   └── assets/                        # UI/UX 小素材（logos/snippets，避免大文件）
+│   │   ├── references/
+│   │   └── assets/
 │   │
-│   ├── marketing-design/                  # 营销设计（KV/H5/海报/活动视觉）
+│   ├── marketing-design/
 │   │   ├── SKILL.md
-│   │   ├── references/                    # 营销规范/模块/配色/导出标准等（source of truth）
-│   │   │   ├── README.md
-│   │   │   └── h5/                        # H5 专项规范
-│   │   │       ├── color-guidelines_zh.md
-│   │   │       ├── card-styles_zh.md
-│   │   │       ├── header-hero-guidelines_zh.md
-│   │   │       └── marketing-design-spec_zh.md
-│   │   └── assets/                        # 营销素材库（library/* + fonts）
+│   │   ├── references/
+│   │   └── assets/
 │   │
-│   ├── data-visualization/                # 数据图表（ECharts/配色/图表规范）
+│   ├── qieman-mktdesign-H5/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       ├── card-styles_zh.md
+│   │       ├── color-guidelines_zh.md
+│   │       ├── header-hero-guidelines_zh.md
+│   │       └── marketing-design-spec_zh.md
+│   │
+│   ├── data-visualization/
 │   │   ├── SKILL.md
 │   │   └── references/
 │   │
-│   ├── ppt/                               # PPT 规范（模板结构/排版/交付）
+│   ├── ppt/
 │   │   ├── SKILL.md
 │   │   └── references/
 │   │
-│   ├── motion/                            # 动效规范（节奏/转场/导出）
+│   ├── motion/
 │   │   ├── SKILL.md
 │   │   └── references/
 │   │
-│   ├── xiaogu-ip/                         # 小顾 IP（角色设定/表情/姿态/风格）
+│   ├── xiaogu-ip/
 │   │   ├── SKILL.md
 │   │   └── references/
 │   │
-│   └── ai-workflow/                       # AI 工作流（SOP/提示词/质量门槛/交付流程）
+│   └── ai-workflow/
 │       ├── SKILL.md
 │       └── references/
 │
-├── CONTRIBUTING.md                        # 贡献指南（可选）
-└── README.md                              # 本文件（入口与导航）
+└── README.md
+```
