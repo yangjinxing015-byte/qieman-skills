@@ -137,5 +137,5 @@ qieman-skills/
 ## Notes
 
 - `marketing-h5` 是当前唯一保留的营销设计 Skill。
-- 旧目录如 `marketing-design/`、`qieman-mktdesign-H5/` 在确认内容已迁移完成后应删除，避免重复。
+- 已完成将旧营销目录统一收敛为 `marketing-h5/`，不再保留 `marketing-design/` 与 `qieman-mktdesign-H5/`。
 - `README.md` 用于仓库入口导航，不应直接粘贴某个 `SKILL.md` 的正文内容。
