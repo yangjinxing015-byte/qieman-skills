@@ -1,9 +1,4 @@
 
----
-
-## `SKILL.md` 最终版也一起给你
-直接替换成这份：
-
 ```md
 ---
 name: marketing-h5
