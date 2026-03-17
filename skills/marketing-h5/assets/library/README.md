@@ -1,61 +1,299 @@
-# Marketing Asset Library
+# 且慢营销素材库说明
 
-Reusable **marketing assets** for KV / banner / poster / H5 production.
-Organized by asset type so teams can browse, reuse, and keep naming consistent.
+本目录用于存放 **且慢营销 H5 / KV / 海报 / 专题页 / 年度账单** 等场景下使用的核心视觉素材，供页面设计、HTML Demo、原型搭建与 AI 生成任务统一调用。
 
-## What goes here
-- Lightweight PNG/SVG assets used in marketing visuals
-- Reusable elements (icons / characters / scenes / decorations)
-- Small templates or examples (keep files reasonably sized)
+本素材库强调：
+- 素材来源统一
+- 品牌风格一致
+- 调用路径明确
+- 场景匹配优先
+- 不使用通用占位图替代正式视觉资源
 
-## Folder structure
-- `icons/`
-  - `cool/` — cool-tone icon set (blue/cyan)
-  - `warm/` — warm-tone icon set (red/orange/gold)
-- `characters/` — character illustrations used in marketing (not the IP core library)
-- `scenes/` — background / environment / landscape scenes
-- `decorations/` — ornaments & flourishes (wheat, ribbons, confetti, frames)
+---
 
-## Naming convention (required)
-Use **kebab-case + versioning**:
+## 目录结构
 
-### Icons
-`icon-<cool|warm>-<keyword>-vNN.<ext>`
+本目录建议按以下方式组织：
 
-Examples:
-- `icon-cool-chat-bubble-v01.png`
-- `icon-warm-gold-ingot-v01.png`
+- `characters/`：IP、人物、角色类素材
+- `decorations/`：装饰元素、节日气氛、光感/几何辅助元素
+- `icons/`：图标资源
+- `scenes/`：场景插画、背景辅助图、专题场景图
 
-### Characters
-`char-<gender|role>-<action|pose>-vNN.<ext>`
+---
 
-Examples:
-- `char-male-analyst-laptop-v01.png`
-- `char-female-advisor-presenting-v01.png`
+## 素材分类说明
 
-### Scenes
-`scene-<type>-<keyword>-vNN.<ext>`
+### characters/
+用于存放人物或角色类视觉素材，例如：
 
-Examples:
-- `scene-landscape-snow-mountain-v01.png`
-- `scene-interior-office-desk-v01.png`
+- 小顾 IP
+- 人物插画
+- 陪伴型角色形象
+- 节日互动人物素材
+- 品牌角色延展视觉
 
-### Decorations
-`dec-<type>-<detail>-vNN.<ext>`
+适用场景：
+- 首屏 Hero 主视觉
+- 品牌传播页
+- 节日活动页
+- 情绪型营销页面
+- 陪伴感 / 服务感表达场景
 
-Examples:
-- `dec-wheat-ear-left-v01.png`
-- `dec-ribbon-banner-red-v01.png`
-- `dec-confetti-sparkles-v01.png`
+使用原则：
+- 优先用于需要传达品牌温度、陪伴感、互动感的页面
+- 不应用于过度理性、纯数据导向的极简页面主视觉，除非页面主题明确需要人物表达
+- 若使用人物素材，动作与表情应服务于主题，不得抢占标题信息焦点
 
-## File rules
-- Prefer **PNG with transparent background** or **SVG**.
-- Keep assets lightweight; avoid huge images/videos and ZIPs.
-- If something becomes **brand-wide shared**, consider moving it to a shared location (not inside one skill).
+---
 
-## Quick links
-- Icons: `icons/`
-- Characters: `characters/`
-- Scenes: `scenes/`
-- Decorations: `decorations/`
+### decorations/
+用于存放装饰性辅助视觉素材，例如：
 
+- 节日装饰
+- 气氛点缀元素
+- 柔和光感元素
+- 几何装饰图形
+- 小范围悬浮辅助视觉
+
+适用场景：
+- 节日活动页
+- 氛围增强型专题页
+- 首屏 / 卡片 / 模块中的辅助点缀
+- 页面留白区域的轻装饰补充
+
+使用原则：
+- 仅作为辅助视觉，不可替代主视觉
+- 不应喧宾夺主，不应影响关键信息可读性
+- 优先小面积使用，用于增强节奏和氛围，而不是堆砌装饰
+- 金融品牌页面中，装饰元素应保持克制，不可过度花哨
+
+---
+
+### icons/
+用于存放页面图标、功能图标、摘要图标、数据意向图标等素材。
+
+建议进一步分为：
+- `cool/`：偏冷静、科技、金融感的图标
+- `warm/`：偏节日、活动、情绪化氛围的图标
+
+适用场景：
+- Hero 辅助图标
+- KPI 卡片图标
+- 数据亮点模块
+- 功能说明模块
+- 活动权益模块
+- 页面摘要信息区
+
+使用原则：
+- 页面图标必须从本目录中选取，不建议临时拼接默认图标
+- 同一页面内图标风格应保持一致
+- 数据或金融信息优先使用 `cool/`
+- 节日、活动、传播氛围页面可按需使用 `warm/`
+- 不得将不匹配场景的图标强行用于页面，只因其“存在于素材库中”
+
+---
+
+### scenes/
+用于存放场景插画、背景辅助图、专题页环境图等素材。
+
+适用场景：
+- 场景型首屏 Hero
+- 品牌故事页
+- 节日专题页
+- 强主题活动页
+- 需要氛围背景或场景感的模块
+
+使用原则：
+- 场景图用于增强环境氛围，不可压住标题与 CTA
+- 页面主信息应优先于场景图
+- 背景图与场景图应保证文字对比度与信息可读性
+- 场景图使用时需先判断是否真的需要，如果只需轻量表达，应优先使用图标或装饰，而非复杂场景
+
+---
+
+## 图标使用优先级
+
+### cool/
+适用于：
+- 年度账单
+- 数据总结
+- 收益概览
+- 投顾 / 配置 / 分析页面
+- AI / 智能投顾专题
+- 金融信息导向型活动页
+
+特点：
+- 更理性
+- 更克制
+- 更适合金融科技品牌表达
+- 不易与标题抢焦点
+
+---
+
+### warm/
+适用于：
+- 节日营销页
+- 活动专题页
+- 品牌氛围传播页
+- 情绪感更强的模块
+- 运营型权益说明场景
+
+特点：
+- 更温暖
+- 更有氛围感
+- 更适合活动利益点和节日话题表达
+
+注意：
+- warm 图标不应大面积取代金融页面中的常规信息图标
+- 在强金融、强数据页面中，仍应优先使用 cool 图标体系
+
+---
+
+## 素材使用优先级
+
+当页面需要调用素材时，建议遵循以下优先顺序：
+
+1. 用户明确指定的素材精确路径
+2. 与当前页面场景最匹配的现有素材
+3. 品牌一致性最高、构图最合适的一项
+4. 若无匹配项，则明确输出：
+   - `缺失素材：［类型/用途］`
+
+---
+
+## H5 场景示例
+
+### 场景 1：年度账单首页
+推荐优先：
+- `icons/cool/`
+
+适合素材：
+- 增长图标
+- 数据图表意向图标
+- 柱状图 / 饼图 / 趋势类抽象图标
+
+不建议：
+- 大面积人物主视觉
+- 复杂节日装饰
+- 与数据主题无关的场景图
+
+---
+
+### 场景 2：年度亮点 KPI 模块
+推荐优先：
+- `icons/cool/`
+
+适合素材：
+- 金额、增长、收益、趋势、持仓、配置等摘要图标
+
+使用建议：
+- 图标体量应小于数字本身
+- 图标用于辅助理解，不替代核心数据表达
+
+---
+
+### 场景 3：品牌活动页 / 节日营销页
+推荐优先：
+- `characters/`
+- `decorations/`
+- `icons/warm/`
+- `scenes/`
+
+适合素材：
+- 小顾 IP
+- 节日装饰
+- 氛围型插画
+- 场景背景
+
+使用建议：
+- 先保证活动标题与利益点清晰
+- 素材用于增强情绪，不应压住转化按钮与关键信息
+
+---
+
+### 场景 4：AI / 智能投顾专题
+推荐优先：
+- `icons/cool/`
+- 少量 `decorations/`
+
+适合素材：
+- 科技感图标
+- 数据抽象图形
+- AI / 图表 / 仪表盘意向图标
+
+不建议：
+- 过多人物插画
+- 过度节日化装饰
+- 与科技主题不一致的场景图
+
+---
+
+### 场景 5：品牌故事 / 陪伴型页面
+推荐优先：
+- `characters/`
+- `scenes/`
+- `decorations/`
+
+适合素材：
+- 小顾 IP
+- 陪伴感人物
+- 柔和场景插画
+- 环境气氛辅助元素
+
+使用建议：
+- 让人物 / 场景服务于情绪氛围
+- 不要让素材压住叙事主线与品牌信息
+
+---
+
+## 命名建议
+
+建议文件与目录命名保持统一、清晰、可检索：
+
+- 使用小写字母
+- 使用 kebab-case
+- 不使用空格
+- 不使用中文文件名
+- 必要时补版本号
+
+示例：
+- `icon-cool-bar-chart-growth-v01.png`
+- `character-xiaogu-wave-v02.png`
+- `scene-spring-festival-lantern-v01.png`
+- `decoration-gold-sparkle-v01.png`
+
+---
+
+## 维护原则
+
+- 只保留会被真实调用的正式素材
+- 相同用途素材避免重复堆积
+- 若同一素材有多版本，应保留最适合当前品牌体系的版本
+- 若素材风格明显过时，应及时清理或归档
+- 新增素材时应优先考虑：
+  - 是否符合且慢品牌调性
+  - 是否适合复用
+  - 是否有清晰命名
+  - 是否容易被 Skill / Agent 正确检索与调用
+
+---
+
+## 推荐调用原则
+
+- 首屏 Hero：优先匹配页面主题最强的主视觉素材
+- 卡片模块：优先使用信息表达清晰的小型图标
+- 节日页面：先控制信息层级，再补充氛围装饰
+- 数据页面：先保证理性与清晰，再补充轻量视觉强化
+- HTML Demo：仅使用本地真实存在的素材路径，不使用占位图或外部默认资源
+
+---
+
+## 不建议的用法
+
+- 不要因为素材“存在于库里”就强行使用
+- 不要混用明显不同风格的 icons / scenes / characters
+- 不要让 decorations 替代主视觉
+- 不要在强数据页面中堆砌情绪型装饰
+- 不要用场景图压住标题、按钮和关键信息
+- 不要用默认图、emoji、通用占位图替代正式素材
