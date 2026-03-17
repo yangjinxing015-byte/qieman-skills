@@ -104,7 +104,7 @@ description: 用于且慢营销 H5 设计相关任务，包括页面结构梳理
   用于主色、辅助色、背景色、文本色、状态色、节日场景色、 CTA 色和页面氛围定义。
 
 - `references/header-hero-guidelines_zh.md`  
-  用于首屏 Hero 区布局、标题层级、 CTA 、插画 / 人物 / 氛围图位置、留白和信息顺序设计。
+  用于首屏 Hero 区布局、标题层级、 CTA、插画 / 人物 / 氛围图位置、留白和信息顺序设计。
 
 - `references/marketing-design-spec_zh.md`  
   用于营销 H5 整体页面结构、模块节奏、信息优先级、转化路径和品牌一致性控制。
@@ -213,7 +213,6 @@ description: 用于且慢营销 H5 设计相关任务，包括页面结构梳理
 - `SKILL.md`
 - `references/`
 - `assets/`
-- `.gitignore`
 
 其中：
 
@@ -236,7 +235,7 @@ description: 用于且慢营销 H5 设计相关任务，包括页面结构梳理
 说明：
 - `output/` 仅作为本地预览或临时产物目录说明，不属于正式仓库内容
 - 正式维护目录为 `skills/marketing-h5`
-- 不应将 demo / output / 临时预览文件纳入正式 skill 版本控制
+- 不应将 demo、output、临时预览文件纳入正式 skill 版本控制
 
 ---
 
