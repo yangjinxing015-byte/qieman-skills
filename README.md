@@ -31,14 +31,26 @@ qieman-skills/
 │   │   └── assets/
 │   │
 │   ├── marketing-h5/
+│   │   ├── README.md
 │   │   ├── SKILL.md
 │   │   ├── assets/
+│   │   │   ├── README.md
 │   │   │   ├── fonts/
+│   │   │   │   └── README.md
 │   │   │   └── library/
+│   │   │       ├── README.md
 │   │   │       ├── characters/
+│   │   │       │   └── README.md
 │   │   │       ├── decorations/
+│   │   │       │   └── README.md
 │   │   │       ├── icons/
+│   │   │       │   ├── README.md
+│   │   │       │   ├── cool/
+│   │   │       │   │   └── README.md
+│   │   │       │   └── warm/
+│   │   │       │       └── README.md
 │   │   │       └── scenes/
+│   │   │           └── README.md
 │   │   └── references/
 │   │       ├── README.md
 │   │       ├── card-styles_zh.md
@@ -67,75 +79,3 @@ qieman-skills/
 │       └── references/
 │
 └── README.md
-```
-
----
-
-## Naming conventions
-
-### Skill directory
-- 使用英文、小写、短横线命名
-- 例如：`marketing-h5`、`ui-ux`、`data-visualization`
-
-### Required files
-- 每个 Skill 必须有 `SKILL.md`
-- 规范说明文档放在 `references/`
-- 轻量素材放在 `assets/`
-
-### Reference documents
-- 规范文档统一使用语义清晰的英文文件名
-- 中文版本可加 `_zh` 后缀
-- 例如：
-  - `card-styles_zh.md`
-  - `color-guidelines_zh.md`
-  - `header-hero-guidelines_zh.md`
-  - `marketing-design-spec_zh.md`
-
-### Asset naming
-- 文件名统一使用英文、小写、短横线
-- 推荐格式：
-  - 字体：`family-weight-version.ext`
-  - 角色：`qieman-character-name-state-01.png`
-  - 装饰：`qieman-decoration-element-style-01.png`
-  - 图标：`qieman-icon-name-style-01.svg`
-  - 场景：`qieman-scene-theme-layout-01.png`
-
----
-
-## Marketing H5 asset naming examples
-
-### Fonts
-- `alibaba-puhuiti-bold-v03.ttf`
-- `alibaba-puhuiti-medium.ttf`
-- `alibaba-puhuiti-regular-v02.ttf`
-- `mi-sans-demibold.ttf`
-- `mi-sans-medium.ttf`
-- `mi-sans-regular.ttf`
-
-### Characters
-- `qieman-character-xiaogu-default-01.png`
-- `qieman-character-xiaogu-smile-02.png`
-- `qieman-character-user-female-default-01.png`
-
-### Decorations
-- `qieman-decoration-confetti-gold-01.png`
-- `qieman-decoration-lantern-red-01.png`
-- `qieman-decoration-cloud-gold-02.png`
-
-### Icons
-- `qieman-icon-arrow-right-cool-01.svg`
-- `qieman-icon-calendar-warm-01.svg`
-- `qieman-icon-coin-cool-01.svg`
-
-### Scenes
-- `qieman-scene-newyear-landscape-01.png`
-- `qieman-scene-investment-landscape-02.png`
-- `qieman-scene-festival-landscape-03.png`
-
----
-
-## Notes
-
-- `marketing-h5` 是当前唯一保留的营销设计 Skill。
-- 已完成将旧营销目录统一收敛为 `marketing-h5/`，不再保留 `marketing-design/` 与 `qieman-mktdesign-H5/`。
-- `README.md` 用于仓库入口导航，不应直接粘贴某个 `SKILL.md` 的正文内容。
