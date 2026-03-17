@@ -98,13 +98,13 @@ description: 用于且慢营销 H5 设计相关任务，包括页面结构梳理
 根据任务需要，按需加载以下参考文档：
 
 - `references/card-styles_zh.md`  
-  用于卡片类型、层级、圆角、阴影、信息密度、数据卡/引导卡/活动卡/对比卡的设计参考。
+  用于卡片类型、层级、圆角、阴影、信息密度、数据卡 / 引导卡 / 活动卡 / 对比卡的设计参考。
 
 - `references/color-guidelines_zh.md`  
-  用于主色、辅助色、背景色、文本色、状态色、节日场景色、CTA 色和页面氛围定义。
+  用于主色、辅助色、背景色、文本色、状态色、节日场景色、 CTA 色和页面氛围定义。
 
 - `references/header-hero-guidelines_zh.md`  
-  用于首屏 Hero 区布局、标题层级、CTA、插画/人物/氛围图位置、留白和信息顺序设计。
+  用于首屏 Hero 区布局、标题层级、 CTA 、插画 / 人物 / 氛围图位置、留白和信息顺序设计。
 
 - `references/marketing-design-spec_zh.md`  
   用于营销 H5 整体页面结构、模块节奏、信息优先级、转化路径和品牌一致性控制。
@@ -115,7 +115,7 @@ description: 用于且慢营销 H5 设计相关任务，包括页面结构梳理
 处理任务时按需读取参考文档：
 
 - 需要设计卡片模块、信息块、数据块时，读取 `references/card-styles_zh.md`
-- 需要确定页面氛围、品牌主色、辅助色、CTA 色时，读取 `references/color-guidelines_zh.md`
+- 需要确定页面氛围、品牌主色、辅助色、 CTA 色时，读取 `references/color-guidelines_zh.md`
 - 需要设计首屏、标题区、按钮区、主视觉区时，读取 `references/header-hero-guidelines_zh.md`
 - 需要整理整体页面结构、模块节奏、营销层级和转化路径时，读取 `references/marketing-design-spec_zh.md`
 
@@ -149,73 +149,94 @@ description: 用于且慢营销 H5 设计相关任务，包括页面结构梳理
 如用户要求“不要 markdown，而要页面原型”，应优先生成 HTML 文件而不是文案方案。
 
 ---
+
 ## Asset loading guidance（强制）
 
 ### 强制规则（必须遵守）
-- **必须使用本地素材**：logo、IP、插画、图标、背景、UI、图表等视觉元素**仅允许**来自 `assets/`，禁止用 emoji、占位图、通用图标或自绘图形替代。
-- **先搜 assets**：接到任务后**先搜索** `assets/`（及 `assets/library/`）下是否存在匹配素材，再决定布局与文案。
-- **优先用户提供的素材**：用户已指定文件或路径时，必须使用该**精确路径**，不得替换为其他默认或通用资源。
-- **不得忽略素材库**：必须查阅素材库（icons/characters/decorations/scenes/fonts），有匹配项则必须选用。
-- **使用精确文件与路径**：引用时使用**实际存在的**文件名与相对路径，禁止写「某图标」「占位图」等泛化描述。
-- **禁止泛化替代**：不得用「类似图标」「默认 logo」「通用插画」等替代；若库内无合适素材，见下条。
-- **保持且慢品牌一致**：所有视觉均需符合且慢品牌调性；若匹配素材存在，**必须使用**。
-- **缺失须明确声明**：若某类素材在 `assets/` 中**不存在**（如 logo、某场景图、某背景），必须在输出中**显式写出**「缺失素材：［类型/用途］」，不得静默用其他元素顶替。
+- **必须使用本地素材**：logo、IP、插画、图标、背景、UI、图表等视觉元素仅允许来自 `assets/`，禁止用 emoji、占位图、通用图标或默认图形替代。
+- **先搜索 assets**：接到任务后先检查 `assets/`（及 `assets/library/`）下是否存在匹配素材，再决定布局、主视觉与文案。
+- **优先用户提供素材**：用户已指定文件或路径时，必须使用该精确路径，不得替换为其他资源。
+- **不得忽略素材库**：有匹配素材则必须选用，不得跳过已有素材直接使用替代图。
+- **使用精确文件与路径**：引用时使用实际存在的文件名与相对路径，禁止写泛化描述。
+- **禁止泛化替代**：不得用“类似图标”“默认 logo”“通用插画”等说法替代真实素材。
+- **保持品牌一致**：视觉素材必须符合且慢品牌调性。
+- **缺失须明确声明**：若某类素材在 `assets/` 中不存在，必须显式写出 `缺失素材：［类型/用途］`，不得静默用其他元素顶替。
 
-### 素材类型与来源（仅允许来自 assets）
+### 素材类型与来源
 | 类型 | 允许来源 | 说明 |
 |------|----------|------|
-| logo | `assets/` 下对应文件 | 若库内无，输出中写「缺失素材：logo」 |
-| IP/人物 | `assets/library/characters/` | 小顾 IP、人物插画仅从此目录 |
-| 插画/场景 | `assets/library/scenes/` | 背景、场景图仅从此目录 |
-| 图标 | `assets/library/icons/cool/`、`assets/library/icons/warm/` | 页面图标、数据意向仅从此目录 |
-| 背景/装饰 | `assets/library/decorations/`、或规范中的 CSS 渐变 | 装饰图仅从此目录或纯色/渐变 |
-| UI/图表 | `assets/library/icons/` 等 | 图表意向图标仅从素材库 |
+| logo | `assets/` 下对应文件 | 若无则输出 `缺失素材：logo` |
+| IP / 人物 | `assets/library/characters/` | 小顾 IP、人物插画仅从此目录 |
+| 插画 / 场景 | `assets/library/scenes/` | 背景、场景图仅从此目录 |
+| 图标 | `assets/library/icons/cool/`、`assets/library/icons/warm/` | 页面图标、数据意向图标仅从此目录 |
+| 背景 / 装饰 | `assets/library/decorations/` 或 CSS 渐变 | 装饰图仅从此目录或纯色 / 渐变 |
+| 字体 | `assets/fonts/` | 字体资源 |
 
 ### Priority rules
-优先使用顺序如下：
+优先顺序如下：
 
-1. 用户明确指定的本地素材**精确路径**
-2. `assets/library/` 下与页面场景**最匹配的已有文件**
-3. 若库内**无**匹配素材：在方案/代码注释中**显式写出**「缺失素材：［具体类型/用途］」，不得用通用图或 emoji 替代
+1. 用户明确指定的本地素材精确路径
+2. `assets/library/` 下与页面场景最匹配的已有文件
+3. 若库内无匹配素材：在方案或代码注释中显式写出 `缺失素材：［具体类型/用途］`
 
 ### Asset categories（查阅顺序）
-处理任务时**先**按需查阅以下目录，再落稿：
+处理任务时优先按需查阅以下目录：
 
-- `assets/library/icons/`：页面图标、摘要卡图标、Hero 辅助图标、数据/图表意向图标
+- `assets/library/icons/`：页面图标、摘要卡图标、 Hero 辅助图标、数据 / 图表意向图标
 - `assets/library/characters/`：小顾 IP、人物辅助视觉
 - `assets/library/decorations/`：节日装饰、气氛元素
 - `assets/library/scenes/`：场景插画、背景辅助图
 - `assets/fonts/`：字体资源
 
-### Usage guidance
-当任务涉及首屏 Hero、年度账单/活动页图标或插画、卡片视觉辅助、页面图标统一、HTML Demo 主视觉时，**先搜索** `assets/` 再落稿。
-
 ### Required behavior
-- 若库内**存在**与需求匹配的素材，**必须使用**该素材的**精确路径**。
-- 若库内**不存在**所需素材，必须在输出中**明确写出**「缺失素材：［类型］」，不得静默使用占位或通用图。
-- 用户已给出素材路径时，必须使用该**精确路径**，不得改用其他默认图形。
+- 若库内存在与需求匹配的素材，必须使用该素材的精确路径
+- 若库内不存在所需素材，必须在输出中明确写出 `缺失素材：［类型］`
+- 用户已给出素材路径时，必须使用该精确路径，不得改用其他默认图形
 
 ### HTML demo requirements
-- 仅引用本地 `assets/` 下的**实际文件路径**（如 `../assets/library/icons/cool/icon-cool-bar-chart-growth-v01.png`）。
-- 禁止使用 emoji、外部占位图、通用破图作为主视觉或正式图标。
-- 首屏 Hero、卡片、图表意向等所需图标/人物/装饰**仅**从 `assets/library/` 选取；若无合适项，在 HTML 注释或说明中写「缺失素材：［具体说明］」。
+- 仅引用本地 `assets/` 下的实际文件路径
+- 禁止使用 emoji、外部占位图、通用破图作为主视觉或正式图标
+- 首屏 Hero、卡片、图表意向等所需图标 / 人物 / 装饰仅从 `assets/library/` 选取；若无合适项，在 HTML 注释或说明中写 `缺失素材：［具体说明］`
+- 若本地预览环境下跨目录引用不稳定，可将首屏所需素材复制到本地 `output/` 同级目录预览，但该目录不属于正式 skill 仓库内容
 
 ### Example
-- 库内存在 `assets/library/icons/cool/icon-cool-bar-chart-growth-v01.png` 时：**必须**在首屏或年度亮点模块使用该**精确路径**，不得改用 emoji 或其它默认图形。
-- 库内不存在某类素材（如小顾 IP、某场景图）时：在方案或代码中写 **缺失素材：小顾 IP（首屏主视觉）** 或 **缺失素材：场景图（xx 模块）**，不得用其它图片静默替代。
+- 若库内存在 `assets/library/icons/cool/icon-cool-bar-chart-growth-v01.png`，则应优先在首屏或年度亮点模块中使用该精确路径
+- 若库内不存在某类素材（如小顾 IP、某场景图），则在方案或代码中写 `缺失素材：小顾 IP（首屏主视觉）` 或 `缺失素材：场景图（xx 模块）`
 
 ---
 
 ## Project structure
 
+正式目录结构如下：
+
+- `README.md`
+- `SKILL.md`
+- `references/`
+- `assets/`
+- `.gitignore`
+
+其中：
+
 **assets/**
 - fonts
 - library
+
+**references/**
+- README.md
+- card-styles_zh.md
+- color-guidelines_zh.md
+- header-hero-guidelines_zh.md
+- marketing-design-spec_zh.md
 
 **output/**
 - HTML demo
 - 页面规划
 - 原型草稿
+
+说明：
+- `output/` 仅作为本地预览或临时产物目录说明，不属于正式仓库内容
+- 正式维护目录为 `skills/marketing-h5`
+- 不应将 demo / output / 临时预览文件纳入正式 skill 版本控制
 
 ---
 
