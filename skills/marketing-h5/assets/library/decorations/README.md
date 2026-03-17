@@ -1,42 +1,262 @@
-# Decorations
+# 且慢营销装饰素材说明
 
-Ornaments and flourishes for **marketing layouts** (KV / poster / H5 / data cards).
-Use this folder for decorative elements that are **not icons**, **not characters**, and **not scenes**.
+本目录用于存放 **且慢营销 H5 / 活动页 / 节日专题页 / 品牌传播页** 中使用的装饰性视觉素材，供页面设计、HTML Demo、原型搭建与 AI 生成任务统一调用。
 
-## What goes here
-- Wheat / laurel / ribbons / borders / frames
-- Confetti / sparkles / light streaks / gradients (small overlays)
-- Badges / stickers / seals used as decoration (non-functional)
-- Corner marks, separators, background patterns (lightweight)
+装饰素材的核心作用是：
 
-## Folder structure
-Each decoration type gets its own folder:
+- 补充页面氛围
+- 强化节奏与层次
+- 丰富留白区域的视觉完成度
+- 在不干扰关键信息的前提下增强品牌表达
 
-- `wheat/` — yearly report wheat ears (left/right)
-- `ribbons/` — ribbons & banners
-- `confetti/` — celebration confetti
-- `frames/` — decorative frames / borders
-- `badges/` — decorative badges / seals
+装饰素材不是主视觉，也不承担核心信息表达职责。
 
-## Naming convention
-Use a consistent prefix so files are searchable:
+---
 
-`dec-<type>-<detail>-vNN.<ext>`
+## 素材范围
 
-- `type`: wheat / ribbon / confetti / frame / badge / laurel / etc
-- `detail`: ear-left / ear-right / gold / outline / small / large / etc
-- `vNN`: version number (`v01`, `v02`...)
-- `ext`: `png` (preferred for transparency), `svg` (preferred when available)
+本目录建议包含以下类型素材：
 
-Examples:
-- `dec-wheat-ear-left-v01.png`
-- `dec-wheat-ear-right-v01.png`
-- `dec-ribbon-banner-red-v01.png`
-- `dec-confetti-sparkles-v01.png`
-- `dec-frame-corner-line-v01.svg`
+- 节日装饰元素
+- 柔和光感元素
+- 几何辅助图形
+- 漂浮小元素
+- 星点、粒子、光斑、彩带等气氛元素
+- 小范围角标装饰
+- 页面边缘辅助视觉
 
-## Notes
-- Prefer **transparent PNG** (or SVG when possible).
-- Keep assets lightweight; avoid huge images / ZIP files.
-- If a decoration becomes **brand-wide shared**, consider moving it to a higher-level shared location (not inside a single skill).
+---
 
+## 适用场景
+
+装饰素材优先用于以下页面：
+
+- 节日营销页
+- 活动专题页
+- 品牌传播页
+- 首屏 Hero 的氛围补充
+- 模块留白区域的轻量装饰
+- 权益页 / 转化页的氛围强化
+
+---
+
+## 使用原则
+
+### 1. 装饰只做辅助，不做主角
+装饰元素只能作为辅助视觉，不可替代：
+- 主标题
+- CTA
+- 主视觉
+- 核心图标
+- 关键信息表达
+
+### 2. 优先保证信息可读性
+无论页面氛围多强，装饰都不能影响：
+- 标题可读性
+- 按钮可识别性
+- 数据可读性
+- 模块边界清晰度
+
+### 3. 控制数量与面积
+装饰应小范围、轻量使用，不宜大面积堆砌。  
+优先通过少量高质量装饰建立气氛，而不是依赖数量制造“热闹感”。
+
+### 4. 与页面主题一致
+装饰素材必须与当前页面主题、节日场景、传播目标一致，不应为了“填满页面”而机械添加。
+
+### 5. 保持金融品牌克制感
+且慢属于金融品牌，装饰元素即使在节日场景中也应保持：
+- 克制
+- 清晰
+- 有秩序
+- 不浮夸
+- 不杂乱
+
+---
+
+## 适合的装饰类型
+
+### 柔和光感类
+适用于：
+- Hero 区氛围增强
+- 品牌科技感强化
+- 按钮周边轻量聚焦
+- 留白区域气氛补充
+
+特点：
+- 轻
+- 柔和
+- 不干扰主信息
+- 适合品牌科技感与现代感表达
+
+---
+
+### 节日点缀类
+适用于：
+- 春节
+- 元宵
+- 节日活动页
+- 营销节点传播页
+
+特点：
+- 有节庆氛围
+- 适合活动页点缀
+- 应适量使用，避免过度“喜庆化”导致品牌失稳
+
+---
+
+### 几何辅助类
+适用于：
+- 数据页
+- AI 专题页
+- 科技投顾页
+- 品牌传播页
+
+特点：
+- 更理性
+- 更现代
+- 更适合金融科技页面
+- 可用于边角、底层背景、轻悬浮辅助图形
+
+---
+
+### 漂浮小元素类
+适用于：
+- Hero 区边缘
+- 卡片周边
+- 模块留白区域
+- 轻互动氛围区域
+
+特点：
+- 强调节奏感
+- 体量小
+- 更适合做细节补充，不适合作为主体
+
+---
+
+## H5 场景示例
+
+### 场景 1：年度账单首页
+推荐装饰：
+- 少量柔和光感
+- 极轻量几何辅助元素
+
+使用建议：
+- 装饰只做背景补充
+- 不要抢主标题和数据意向图标
+- 不建议使用节庆型重装饰
+
+---
+
+### 场景 2：年度亮点 KPI 模块
+推荐装饰：
+- 极轻量几何元素
+- 轻微数据感点缀
+
+使用建议：
+- 装饰应弱于数字与卡片本身
+- 不要干扰 KPI 数值识别
+
+---
+
+### 场景 3：节日营销首屏
+推荐装饰：
+- 节庆点缀元素
+- 柔和氛围装饰
+- 边缘型小型辅助元素
+
+使用建议：
+- 装饰服务于节日氛围
+- 不应压住人物 / IP、标题和 CTA
+- 可与 characters / scenes 组合使用，但总量要可控
+
+---
+
+### 场景 4：AI / 智能投顾专题
+推荐装饰：
+- 轻量几何元素
+- 科技感光感点缀
+- 数据抽象辅助装饰
+
+使用建议：
+- 优先服务于“科技、理性、专业”的主题
+- 不要引入节庆型或强情绪化装饰
+
+---
+
+### 场景 5：品牌故事页
+推荐装饰：
+- 柔和辅助氛围元素
+- 页面边缘轻量点缀
+- 与 scenes / characters 协同的小型装饰
+
+使用建议：
+- 装饰不应抢叙事
+- 重点是辅助气氛，而不是制造复杂背景
+
+---
+
+## 使用优先级
+
+调用 decorations 素材时，建议遵循以下顺序：
+
+1. 用户明确指定的装饰素材精确路径
+2. 与当前页面主题最匹配的轻量装饰
+3. 品牌一致性最高、最不干扰信息的一项
+4. 若无匹配项，明确输出：
+   - `缺失素材：装饰元素（具体用途）`
+
+---
+
+## 推荐命名方式
+
+建议统一使用：
+
+- 小写字母
+- kebab-case
+- 不使用空格
+- 不使用中文文件名
+- 必要时补版本号
+
+示例：
+- `decoration-gold-sparkle-v01.png`
+- `decoration-soft-light-glow-v02.png`
+- `decoration-geo-floating-circle-v01.png`
+- `decoration-festival-ribbon-v01.png`
+
+---
+
+## 维护原则
+
+- 只保留有明确复用价值的装饰素材
+- 相同效果的重复装饰应去重
+- 风格过时、质量过低、用途不明的装饰应及时清理
+- 新增装饰素材时应优先判断：
+  - 是否符合且慢品牌调性
+  - 是否真的能服务页面气氛
+  - 是否会影响信息清晰度
+  - 是否具备复用价值与清晰命名
+
+---
+
+## 推荐调用原则
+
+- 强信息页面慎用重装饰
+- 强氛围页面可适度增加装饰，但应先保证层级清晰
+- Hero 区装饰应弱于标题、CTA 和主视觉
+- 卡片周边装饰应弱于卡片本身
+- HTML Demo 中仅使用本地真实存在的装饰素材路径
+- 若无匹配装饰素材，应明确输出：
+  - `缺失素材：装饰元素（具体用途）`
+
+---
+
+## 不建议的用法
+
+- 不要让 decorations 替代主视觉
+- 不要用装饰掩盖页面结构问题
+- 不要因为页面“空”就机械增加装饰
+- 不要在同一页面堆叠过多装饰元素
+- 不要使用风格明显不一致的装饰混搭
+- 不要让装饰压住标题、按钮、数字和关键信息
+- 不要用外部占位元素替代正式装饰素材
