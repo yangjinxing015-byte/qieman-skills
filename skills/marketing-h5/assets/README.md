@@ -1,14 +1,103 @@
-# Marketing Design Assets
+# 且慢营销素材目录说明
 
-Marketing-only assets used for KV/H5/Poster production.
+本目录用于存放 **且慢营销 H5 / 年度账单 / 专题页 / 活动页 / 品牌传播页** 中使用的正式素材资源，供页面设计、HTML Demo、原型搭建与 AI 生成任务统一调用。
 
-## What goes here
-- Small textures / stickers / small illustrations
-- Lightweight templates (SVG/PNG under reasonable size)
-- Example outputs (small)
+本目录下的素材应满足以下要求：
 
-## Avoid
-- Fonts (.ttf/.otf) and large ZIP packages
-- Huge images or videos (store externally and link in references)
-- Duplicating shared logos (use UI/UX logos: `skills/ui-ux/assets/logos/`)
+- 来源清晰
+- 品牌风格一致
+- 命名规范统一
+- 可被 Skill / Agent 正确检索与调用
+- 不使用通用占位资源替代正式素材
 
+---
+
+## 目录说明
+
+本目录当前包含：
+
+- `fonts/`：字体资源说明与字体文件
+- `library/`：核心视觉素材库，包含 icons、characters、decorations、scenes 等分类素材
+
+---
+
+## 使用原则
+
+- 页面视觉素材优先从本目录中选择
+- 调用素材时应优先使用**实际存在的精确路径**
+- 若用户已指定素材路径，必须优先使用用户指定路径
+- 若库内存在匹配素材，不应跳过素材库改用默认图、emoji、占位图或外部临时资源
+- 若库内不存在所需素材，应明确输出：
+  - `缺失素材：［类型/用途］`
+
+---
+
+## 素材分类说明
+
+### fonts/
+用于存放字体资源及字体使用说明。
+
+适用内容：
+- 中文主字体
+- 数字专用字体
+- 字体命名规范
+- H5 / KPI / 年度账单等场景下的字体使用建议
+
+---
+
+### library/
+用于存放可直接用于页面设计的正式素材资源，建议进一步分为：
+
+- `icons/`：图标素材
+- `characters/`：人物 / IP 素材
+- `decorations/`：装饰元素
+- `scenes/`：场景图 / 背景辅助图
+
+---
+
+## 正式维护范围
+
+本目录中纳入正式维护的内容包括：
+
+- 正式使用的字体文件
+- 正式使用的图标、人物、装饰、场景素材
+- 各子目录下的 README 说明文件
+- 可复用、可检索、可统一调用的品牌素材
+
+---
+
+## 不建议放入本目录的内容
+
+以下内容不建议放入 `assets/`：
+
+- 临时预览图
+- output 产物
+- HTML demo 文件
+- 过大的测试文件
+- 无明确用途的重复素材
+- 风格明显不一致或已废弃的旧素材
+- 来源不明、授权不清晰的字体或图片资源
+
+---
+
+## 推荐目录结构
+
+```text
+assets/
+├── README.md
+├── fonts/
+│   └── README.md
+└── library/
+    ├── README.md
+    ├── icons/
+    │   ├── README.md
+    │   ├── cool/
+    │   │   └── README.md
+    │   └── warm/
+    │       └── README.md
+    ├── characters/
+    │   └── README.md
+    ├── decorations/
+    │   └── README.md
+    └── scenes/
+        └── README.md
