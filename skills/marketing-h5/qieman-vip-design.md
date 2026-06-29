@@ -1428,7 +1428,7 @@ text, logo, watermark, letters, Chinese characters, garbled text, green theme, r
 ## 17. Single Poster Prompt Template
 
 ```txt
-请使用 Qieman-VIP-Design Skill 生成一张且慢高净值私域宣传海报。
+请使用 qieman-vip-design Skill 生成一张且慢高净值私域宣传海报。
 
 尺寸：
 1080×1920，比例 9:16。
@@ -1528,7 +1528,7 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, gr
 ## 19. Nine-grid Prompt Template
 
 ```txt
-请使用 Qieman-VIP-Design Skill 生成一组且慢高净值私域宣传九宫格。
+请使用 qieman-vip-design Skill 生成一组且慢高净值私域宣传九宫格。
 
 尺寸：
 单张尺寸 360×360，共 9 张。
