@@ -1,17 +1,23 @@
+---
 
-[qieman-ui-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/qieman-ui-design.md)
+description: "且慢 ui design skill。适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务，统一基础视觉规范、组件规则、页面结构、交互原则和设计检查清单。"
+globs: "**/*.md,**/*.html,**/*.png,**/*.jpg,**/*.jpeg,**/*.webp"
+alwaysApply: false
+------------------
+
+> 快捷入口：[下载 qieman-ui-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/qieman-ui-design.md)
 
 # qieman-ui-design skill
 
-> Version: alpha  
-> Skill Name: `qieman-ui-design`  
-> 中文名：且慢 ui design skill  
-> 适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务。  
-> 目标：把且慢产品设计中的基础视觉规范、组件规则、页面结构、交互原则、品牌约束和生成检查清单沉淀成一套可复用的 UI Design Skill。
+> Version: alpha
+> Skill Name: `qieman-ui-design`
+> 中文名：且慢 ui design skill
+> 适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务。
+> 目标：把且慢产品设计中的基础视觉规范、组件规则、页面结构、交互原则、品牌约束和生成检查清单沉淀成一套可复用的 ui design skill。
 
 ## design tokens
 
-以下为 `qieman-ui-design` 的结构化 tokens。为了避免 GitHub 将大量 YAML 配置错误渲染，正式 front matter 只保留 `description / globs / alwaysApply`，完整 tokens 放在本文档代码块中维护。
+以下为 `qieman-ui-design` 的结构化 tokens。为避免 GitHub 将大量 YAML 配置错误渲染，正式 front matter 只保留 `description` / `globs` / `alwaysApply`，完整 tokens 放在本文档代码块中维护。
 
 ```yaml
 version: alpha
@@ -385,22 +391,23 @@ components:
 这个 Skill 采用 **“前置结构化 tokens + 后置执行型说明”** 的格式。前置 YAML 提供 agent 可直接引用的颜色、字体、圆角、间距、阴影和组件键；正文解释这些 token 的使用规则、页面结构、组件语法、响应式策略、风险披露和输出约束。
 
 **核心设计气质：**
-- 金融可信：信息真实、风险提示可读、结论优先。
-- 克制轻盈：浅蓝、白底、轻卡片、低阴影，不制造过度装饰。
-- 数据清晰：收益、回撤、仓位、现金流、风险等级必须有口径说明。
-- 移动优先：适合 375px / 750px H5、App 页面、长图和响应式 HTML。
-- Agent 友好：所有视觉决策优先引用 token，而不是临时硬编码。
+
+* 金融可信：信息真实、风险提示可读、结论优先。
+* 克制轻盈：浅蓝、白底、轻卡片、低阴影，不制造过度装饰。
+* 数据清晰：收益、回撤、仓位、现金流、风险等级必须有口径说明。
+* 移动优先：适合 375px / 750px H5、App 页面、长图和响应式 HTML。
+* Agent 友好：所有视觉决策优先引用 token，而不是临时硬编码。
 
 ## When to Use
 
 使用本 Skill 当用户提出以下需求：
 
-- 生成且慢 / 盈米基金风格的网页、H5、App 页面或 UI 原型。
-- 设计账户复盘、基金报告、低回撤策略筛选报告、财富规划报告。
-- 设计策略介绍页、投顾组合卡、基金诊断看板、资产配置图表。
-- 设计营销活动页、优惠券卡、权益页、活动海报型 H5。
-- 需要输出完整单文件 HTML、CSS、JS、ECharts 图表或可视化页面。
-- 用户明确要求遵守“且慢设计规范”“Qieman UI”“金融 APP 浅蓝风格”。
+* 生成且慢 / 盈米基金风格的网页、H5、App 页面或 UI 原型。
+* 设计账户复盘、基金报告、低回撤策略筛选报告、财富规划报告。
+* 设计策略介绍页、投顾组合卡、基金诊断看板、资产配置图表。
+* 设计营销活动页、优惠券卡、权益页、活动海报型 H5。
+* 需要输出完整单文件 HTML、CSS、JS、ECharts 图表或可视化页面。
+* 用户明确要求遵守“且慢设计规范”“Qieman UI”“金融 APP 浅蓝风格”。
 
 不要使用本 Skill 处理与且慢金融 UI 无关的纯文本写作、论文写作、通用插画生成、照片编辑或非品牌视觉任务。
 
@@ -408,23 +415,23 @@ components:
 
 ### Token 使用规则
 
-- 所有颜色必须来自 `colors:`。
-- 所有字号、字体、行高必须来自 `typography:`。
-- 所有圆角必须来自 `rounded:`。
-- 所有模块间距优先来自 `spacing:`。
-- 所有常用组件优先来自 `components:`。
-- 所有图标优先来自 `icons:` 定义的 [Remix Icon](https://remixicon.com/) 库，通过 CDN 引入。
-- 生成 HTML/CSS 时，将 YAML token 映射为 CSS variables；不要在组件 CSS 中反复硬编码十六进制色值。
+* 所有颜色必须来自 `colors:`。
+* 所有字号、字体、行高必须来自 `typography:`。
+* 所有圆角必须来自 `rounded:`。
+* 所有模块间距优先来自 `spacing:`。
+* 所有常用组件优先来自 `components:`。
+* 所有图标优先来自 `icons:` 定义的 [Remix Icon](https://remixicon.com/) 库，通过 CDN 引入。
+* 生成 HTML/CSS 时，将 YAML token 映射为 CSS variables；不要在组件 CSS 中反复硬编码十六进制色值。
 
 ### 命名原则
 
-- `brand-*`：品牌与行动色。
-- `text-*`：文本层级。
-- `surface-*`：页面、卡片、摘要等表面颜色。
-- `border-*`：边框颜色。
-- `semantic-*`：错误、提醒、成功等状态颜色。
-- `chart-*`：图表数据色。
-- `*-pressed` / `*-focus`：只描述按下和焦点，不鼓励依赖 hover 作为核心状态。
+* `brand-*`：品牌与行动色。
+* `text-*`：文本层级。
+* `surface-*`：页面、卡片、摘要等表面颜色。
+* `border-*`：边框颜色。
+* `semantic-*`：错误、提醒、成功等状态颜色。
+* `chart-*`：图表数据色。
+* `*-pressed` / `*-focus`：只描述按下和焦点，不鼓励依赖 hover 作为核心状态。
 
 ## Colors
 
@@ -440,21 +447,21 @@ components:
 
 文本层级遵循：
 
-| Token | 色值 | 用途 |
-|---|---|---|
-| `{colors.text-primary}` | #333333 | 标题、核心结论、主要正文 |
-| `{colors.text-secondary}` | #606060 | 解释性正文、普通描述 |
-| `{colors.text-tertiary}` | #999999 | 辅助说明、图例、时间、单位 |
-| `{colors.text-disabled}` | #CCCCCC | 禁用态、弱提示 |
-| `{colors.text-inverse}` | #FFFFFF | 蓝色或深色背景反白文字 |
+| Token                     | 色值      | 用途            |
+| ------------------------- | ------- | ------------- |
+| `{colors.text-primary}`   | #333333 | 标题、核心结论、主要正文  |
+| `{colors.text-secondary}` | #606060 | 解释性正文、普通描述    |
+| `{colors.text-tertiary}`  | #999999 | 辅助说明、图例、时间、单位 |
+| `{colors.text-disabled}`  | #CCCCCC | 禁用态、弱提示       |
+| `{colors.text-inverse}`   | #FFFFFF | 蓝色或深色背景反白文字   |
 
 ### Semantic
 
-| Token | 色值 | 用途 |
-|---|---|---|
-| `{colors.semantic-error}` | #FA440C | 风险、异常、亏损、卖出、上涨等需警示状态 |
-| `{colors.semantic-warning}` | #EA9500 | 提醒、待确认、风险说明 |
-| `{colors.semantic-success}` | #07AD8F | 买入、下跌、完成等业务定义为正向的状态 |
+| Token                       | 色值      | 用途                   |
+| --------------------------- | ------- | -------------------- |
+| `{colors.semantic-error}`   | #FA440C | 风险、异常、亏损、卖出、上涨等需警示状态 |
+| `{colors.semantic-warning}` | #EA9500 | 提醒、待确认、风险说明          |
+| `{colors.semantic-success}` | #07AD8F | 买入、下跌、完成等业务定义为正向的状态  |
 
 金融红绿语义必须服从业务。不要默认“绿色=赚钱”或“红色=亏损”。在且慢营销视觉中，绿色不作为主视觉色；只有业务语义明确时才使用 `{colors.semantic-success}`。
 
@@ -470,38 +477,38 @@ components:
 
 ### 字体策略
 
-- 中文标题、正文、按钮：优先使用 `PingFang SC / MiSans / system-ui`；macOS/iOS 回退 `-apple-system`，末位 `sans-serif` 兜底。
-- 数字：优先使用 `MiSans / DIN Alternate`，用于收益率、金额、百分比、仓位；无数字字体时回退 `PingFang SC / system-ui`。
-- 等宽：用于代码、原始数据和调试信息。
-- 不要输出字体文件；只使用字体族声明和系统 fallback。
+* 中文标题、正文、按钮：优先使用 `PingFang SC / MiSans / system-ui`；macOS/iOS 回退 `-apple-system`，末位 `sans-serif` 兜底。
+* 数字：优先使用 `MiSans / DIN Alternate`，用于收益率、金额、百分比、仓位；无数字字体时回退 `PingFang SC / system-ui`。
+* 等宽：用于代码、原始数据和调试信息。
+* 不要输出字体文件；只使用字体族声明和系统 fallback。
 
 ### 层级
 
-| Token | 大小 | 字重 | 用途 |
-|---|---:|---:|---|
+| Token                       |   大小 |  字重 | 用途             |
+| --------------------------- | ---: | --: | -------------- |
 | `{typography.hero-display}` | 40px | 700 | H5 首屏标题、报告封面标题 |
-| `{typography.display-lg}` | 32px | 700 | 页面主标题、大模块标题 |
-| `{typography.display-md}` | 26px | 600 | 二级分区标题 |
-| `{typography.title-lg}` | 24px | 600 | 模块标题、图表组标题 |
-| `{typography.title-md}` | 20px | 600 | 卡片标题 |
-| `{typography.title-sm}` | 18px | 600 | 小卡片标题、列表标题 |
-| `{typography.body-lg}` | 17px | 400 | 主要正文、摘要段落 |
-| `{typography.body}` | 16px | 400 | 标准正文、表格正文 |
-| `{typography.body-sm}` | 15px | 400 | 次级正文 |
-| `{typography.caption}` | 14px | 400 | 图例、说明、标签 |
-| `{typography.caption-sm}` | 12px | 400 | 数据来源、补充说明 |
-| `{typography.micro-legal}` | 11px | 400 | 风险披露、法律声明 |
-| `{typography.number-xl}` | 36px | 700 | 关键收益、金额、百分比 |
-| `{typography.number-lg}` | 28px | 700 | 指标卡核心数字 |
-| `{typography.number-md}` | 22px | 600 | 小指标数字 |
+| `{typography.display-lg}`   | 32px | 700 | 页面主标题、大模块标题    |
+| `{typography.display-md}`   | 26px | 600 | 二级分区标题         |
+| `{typography.title-lg}`     | 24px | 600 | 模块标题、图表组标题     |
+| `{typography.title-md}`     | 20px | 600 | 卡片标题           |
+| `{typography.title-sm}`     | 18px | 600 | 小卡片标题、列表标题     |
+| `{typography.body-lg}`      | 17px | 400 | 主要正文、摘要段落      |
+| `{typography.body}`         | 16px | 400 | 标准正文、表格正文      |
+| `{typography.body-sm}`      | 15px | 400 | 次级正文           |
+| `{typography.caption}`      | 14px | 400 | 图例、说明、标签       |
+| `{typography.caption-sm}`   | 12px | 400 | 数据来源、补充说明      |
+| `{typography.micro-legal}`  | 11px | 400 | 风险披露、法律声明      |
+| `{typography.number-xl}`    | 36px | 700 | 关键收益、金额、百分比    |
+| `{typography.number-lg}`    | 28px | 700 | 指标卡核心数字        |
+| `{typography.number-md}`    | 22px | 600 | 小指标数字          |
 
 ### 排版原则
 
-- 先用标题和摘要建立判断，再用正文解释原因。
-- 核心数字必须配单位、时间口径和必要说明。
-- 风险提示不得低于 11px，且对比度必须可读。
-- 同一卡片内不要同时出现超过 3 个字号层级。
-- 长报告正文桌面端行宽建议 640–760px；移动端保持 16px 安全边距。
+* 先用标题和摘要建立判断，再用正文解释原因。
+* 核心数字必须配单位、时间口径和必要说明。
+* 风险提示不得低于 11px，且对比度必须可读。
+* 同一卡片内不要同时出现超过 3 个字号层级。
+* 长报告正文桌面端行宽建议 640–760px；移动端保持 16px 安全边距。
 
 ## Layout
 
@@ -509,18 +516,18 @@ components:
 
 结构节奏以 4px 为基础，常用间距为 8 / 12 / 16 / 24 / 32 / 48 / 64px。
 
-- 页面左右安全边距：移动端 `{spacing.h5-safe}` 16px。
-- 卡片内边距：标准 16px；信息密集卡可用 12px；大型营销模块可用 24px。
-- 模块间距：默认 16px；大区块间距 32–64px。
-- 图表上下留白：标题区与图表区至少 12px；图表与说明至少 8px。
+* 页面左右安全边距：移动端 `{spacing.h5-safe}` 16px。
+* 卡片内边距：标准 16px；信息密集卡可用 12px；大型营销模块可用 24px。
+* 模块间距：默认 16px；大区块间距 32–64px。
+* 图表上下留白：标题区与图表区至少 12px；图表与说明至少 8px。
 
 ### Containers
 
-- 移动 H5：推荐宽度 375px / 750px 设计稿，左右 16px。
-- App 页面：按 iPhone 13 mini / 375px 宽度优先适配。
-- 报告页：桌面最大宽度 960–1120px。
-- 看板页：桌面最大宽度 1200–1440px。
-- 长图：保留顶部和底部呼吸感，避免首屏堆满信息。
+* 移动 H5：推荐宽度 375px / 750px 设计稿，左右 16px。
+* App 页面：按 iPhone 13 mini / 375px 宽度优先适配。
+* 报告页：桌面最大宽度 960–1120px。
+* 看板页：桌面最大宽度 1200–1440px。
+* 长图：保留顶部和底部呼吸感，避免首屏堆满信息。
 
 ### Page Rhythm
 
@@ -544,12 +551,12 @@ components:
 
 ## Elevation & Depth
 
-| Level | Treatment | Use |
-|---|---|---|
-| Flat | `{shadow.none}` | 页面背景、页头海报、页尾 |
-| Hairline | 1px 弱边框 | 表格、普通卡片、输入框 |
-| Soft Card | `{shadow.card-soft}` | 白卡片从浅灰背景中轻微浮起 |
-| Floating | `{shadow.floating}` | 底部固定栏、重要浮层、轻量弹窗 |
+| Level     | Treatment            | Use             |
+| --------- | -------------------- | --------------- |
+| Flat      | `{shadow.none}`      | 页面背景、页头海报、页尾    |
+| Hairline  | 1px 弱边框              | 表格、普通卡片、输入框     |
+| Soft Card | `{shadow.card-soft}` | 白卡片从浅灰背景中轻微浮起   |
+| Floating  | `{shadow.floating}`  | 底部固定栏、重要浮层、轻量弹窗 |
 
 不要使用厚重投影、玻璃拟态、霓虹光效或复杂 3D 装饰来表达金融专业感。层级优先通过背景、边框、间距、字号建立。
 
@@ -557,16 +564,16 @@ components:
 
 ### Radius Scale
 
-| Token | Value | Use |
-|---|---:|---|
-| `{rounded.none}` | 0px | 页尾、满版背景 |
-| `{rounded.xs}` | 4px | 表格内小标签 |
-| `{rounded.sm}` | 8px | 按钮、输入框、小卡片 |
-| `{rounded.md}` | 12px | 标准卡片、摘要卡 |
-| `{rounded.lg}` | 20px | 图表卡、策略卡、权益卡 |
-| `{rounded.xl}` | 24px | H5 首屏、大型营销模块 |
-| `{rounded.pill}` | 9999px | 胶囊标签、筛选项 |
-| `{rounded.full}` | 9999px | 圆形图标按钮、头像 |
+| Token            |  Value | Use          |
+| ---------------- | -----: | ------------ |
+| `{rounded.none}` |    0px | 页尾、满版背景      |
+| `{rounded.xs}`   |    4px | 表格内小标签       |
+| `{rounded.sm}`   |    8px | 按钮、输入框、小卡片   |
+| `{rounded.md}`   |   12px | 标准卡片、摘要卡     |
+| `{rounded.lg}`   |   20px | 图表卡、策略卡、权益卡  |
+| `{rounded.xl}`   |   24px | H5 首屏、大型营销模块 |
+| `{rounded.pill}` | 9999px | 胶囊标签、筛选项     |
+| `{rounded.full}` | 9999px | 圆形图标按钮、头像    |
 
 同一页面建议只使用 2–3 个圆角层级。不要让圆角成为视觉噪音。
 
@@ -630,16 +637,16 @@ components:
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
 ```
 
-图标库官网：[https://remixicon.com/](https://remixicon.com/) — 可在官网搜索图标名称后再写入代码。
+图标库官网：https://remixicon.com/ — 可在官网搜索图标名称后再写入代码。
 
 #### 基础调用
 
 Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{style}`：
 
-| 风格 | 类名后缀 | 且慢使用建议 |
-|---|---|---|
+| 风格 | 类名后缀    | 且慢使用建议                    |
+| -- | ------- | ------------------------- |
 | 线性 | `-line` | **默认首选**，用于导航、列表、卡片、按钮、标签 |
-| 填充 | `-fill` | 仅用于选中态、成功态、强调态（如已勾选、已完成） |
+| 填充 | `-fill` | 仅用于选中态、成功态、强调态（如已勾选、已完成）  |
 
 ```html
 <!-- 辅助说明图标 -->
@@ -656,12 +663,12 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 图标视觉尺寸固定为 **16 / 20 / 24 / 32px** 四档，通过 `font-size` 控制（Remix Icon 为 icon font，尺寸即字号）：
 
-| 尺寸 | 用途 | 对应场景 |
-|---:|---|---|
-| 16px | 辅助、内联、表格 | 标签内小图标、脚注、列表次要操作 |
+|   尺寸 | 用途       | 对应场景                                      |
+| ---: | -------- | ----------------------------------------- |
+| 16px | 辅助、内联、表格 | 标签内小图标、脚注、列表次要操作                          |
 | 20px | **默认标准** | 卡片标题旁、表单、导航项（`{component.icon-standard}`） |
-| 24px | 模块强调 | 价值卡图标区、步骤序号、Toast |
-| 32px | 首屏/空状态 | H5 首屏利益点、空状态占位 |
+| 24px | 模块强调     | 价值卡图标区、步骤序号、Toast                         |
+| 32px | 首屏/空状态   | H5 首屏利益点、空状态占位                            |
 
 ```css
 .icon-sm  { font-size: 16px; line-height: 1; vertical-align: -0.15em; }
@@ -676,15 +683,15 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 颜色必须引用 `colors` token，禁止随意硬编码：
 
-| Token / 类名 | 色值 | 用途 |
-|---|---|---|
-| `{component.icon-standard}` / `.icon-standard` | `{colors.text-tertiary}` #999999 | 默认辅助图标 |
-| `{component.icon-primary}` / `.icon-primary` | `{colors.brand-primary}` #1B88EE | 主操作、链接、当前步骤 |
-| `.icon-secondary` | `{colors.text-secondary}` #606060 | 正文旁说明图标 |
-| `.icon-inverse` | `{colors.text-inverse}` #FFFFFF | 蓝色/深色背景上的反白图标 |
-| `.icon-success` | `{colors.semantic-success}` #07AD8F | 完成、成功（需业务语义明确） |
-| `.icon-warning` | `{colors.semantic-warning}` #EA9500 | 提醒、待确认 |
-| `.icon-error` | `{colors.semantic-error}` #FA440C | 风险、异常 |
+| Token / 类名                                     | 色值                                  | 用途             |
+| ---------------------------------------------- | ----------------------------------- | -------------- |
+| `{component.icon-standard}` / `.icon-standard` | `{colors.text-tertiary}` #999999    | 默认辅助图标         |
+| `{component.icon-primary}` / `.icon-primary`   | `{colors.brand-primary}` #1B88EE    | 主操作、链接、当前步骤    |
+| `.icon-secondary`                              | `{colors.text-secondary}` #606060   | 正文旁说明图标        |
+| `.icon-inverse`                                | `{colors.text-inverse}` #FFFFFF     | 蓝色/深色背景上的反白图标  |
+| `.icon-success`                                | `{colors.semantic-success}` #07AD8F | 完成、成功（需业务语义明确） |
+| `.icon-warning`                                | `{colors.semantic-warning}` #EA9500 | 提醒、待确认         |
+| `.icon-error`                                  | `{colors.semantic-error}` #FA440C   | 风险、异常          |
 
 ```css
 .icon-standard { color: var(--text-tertiary); font-size: 20px; line-height: 1; }
@@ -698,72 +705,72 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 在 [remixicon.com](https://remixicon.com/) 搜索以下关键词选取对应图标；名称以官网为准，生成代码时使用完整类名：
 
-| 场景 | 推荐类名 | 说明 |
-|---|---|---|
-| 收益/趋势 | `ri-line-chart-line` | 收益走势、净值图表 |
-| 基金/资产 | `ri-exchange-funds-line` | 基金转换、资产配置 |
-| 礼物/权益 | `ri-gift-line` / `ri-gift-2-line` | 优惠券、重逢礼、活动 |
-| 时间/限时 | `ri-time-line` / `ri-timer-line` | 倒计时、有效期 |
-| 规则/协议 | `ri-file-list-3-line` | 活动规则、风险披露入口 |
-| 信息说明 | `ri-information-line` | 口径说明、辅助提示 |
-| 成功/完成 | `ri-check-line` / `ri-checkbox-circle-line` | Toast、步骤完成 |
-| 警告/风险 | `ri-error-warning-line` | 风险提示、异常状态 |
-| 箭头/跳转 | `ri-arrow-right-s-line` | 列表跳转、查看更多 |
-| 关闭 | `ri-close-line` | 弹层、Toast 关闭 |
-| 搜索 | `ri-search-line` | 基金/策略搜索 |
-| 设置 | `ri-settings-3-line` | 账户设置、偏好 |
-| 用户/账户 | `ri-user-line` | 个人中心、客户信息 |
-| 分享 | `ri-share-line` | 报告分享、活动转发 |
-| 下载/导出 | `ri-download-line` | 报告 PDF、数据导出 |
+| 场景    | 推荐类名                                        | 说明          |
+| ----- | ------------------------------------------- | ----------- |
+| 收益/趋势 | `ri-line-chart-line`                        | 收益走势、净值图表   |
+| 基金/资产 | `ri-exchange-funds-line`                    | 基金转换、资产配置   |
+| 礼物/权益 | `ri-gift-line` / `ri-gift-2-line`           | 优惠券、重逢礼、活动  |
+| 时间/限时 | `ri-time-line` / `ri-timer-line`            | 倒计时、有效期     |
+| 规则/协议 | `ri-file-list-3-line`                       | 活动规则、风险披露入口 |
+| 信息说明  | `ri-information-line`                       | 口径说明、辅助提示   |
+| 成功/完成 | `ri-check-line` / `ri-checkbox-circle-line` | Toast、步骤完成  |
+| 警告/风险 | `ri-error-warning-line`                     | 风险提示、异常状态   |
+| 箭头/跳转 | `ri-arrow-right-s-line`                     | 列表跳转、查看更多   |
+| 关闭    | `ri-close-line`                             | 弹层、Toast 关闭 |
+| 搜索    | `ri-search-line`                            | 基金/策略搜索     |
+| 设置    | `ri-settings-3-line`                        | 账户设置、偏好     |
+| 用户/账户 | `ri-user-line`                              | 个人中心、客户信息   |
+| 分享    | `ri-share-line`                             | 报告分享、活动转发   |
+| 下载/导出 | `ri-download-line`                          | 报告 PDF、数据导出 |
 
 同一页面内，相同语义应复用同一图标，不要混用多个近义图标。
 
 #### 使用原则
 
-- **Line 优先**：未选中、未激活状态一律用 `-line`；仅选中/成功/强调时用 `-fill`。
-- **图文并存**：图标旁必须有文字标签或 aria 说明，不可只用图标表达关键金融信息。
-- **对齐正文**：内联图标使用 `vertical-align: -0.15em` 或与文字 flex 居中对齐。
-- **不抢层级**：图标不得比核心数字、结论标题更醒目；装饰性图标密度每屏不超过 3–5 处。
-- **禁止混库**：不要在同一页面同时使用 Remix Icon 与其他 icon font（如 Font Awesome、Material Icons）。
+* **Line 优先**：未选中、未激活状态一律用 `-line`；仅选中/成功/强调时用 `-fill`。
+* **图文并存**：图标旁必须有文字标签或 aria 说明，不可只用图标表达关键金融信息。
+* **对齐正文**：内联图标使用 `vertical-align: -0.15em` 或与文字 flex 居中对齐。
+* **不抢层级**：图标不得比核心数字、结论标题更醒目；装饰性图标密度每屏不超过 3–5 处。
+* **禁止混库**：不要在同一页面同时使用 Remix Icon 与其他 icon font（如 Font Awesome、Material Icons）。
 
 ## Data Visualization
 
 ### Chart Palette
 
-- 主系列：`chart-01`。
-- 对比系列：`chart-02`。
-- 警示/目标线：`chart-03` 或语义色。
-- 多系列：按 `chart-01` 到 `chart-12` 顺序取色。
-- 避免绿色作为营销主视觉；若业务中绿色表示特定金融含义，必须明确说明。
+* 主系列：`chart-01`。
+* 对比系列：`chart-02`。
+* 警示/目标线：`chart-03` 或语义色。
+* 多系列：按 `chart-01` 到 `chart-12` 顺序取色。
+* 避免绿色作为营销主视觉；若业务中绿色表示特定金融含义，必须明确说明。
 
 ### Required Chart Metadata
 
 每个金融图表必须包含：
 
-- 指标名称。
-- 时间范围。
-- 单位。
-- 图例。
-- 数据来源。
-- 必要风险提示，例如“历史数据不预示未来表现”。
+* 指标名称。
+* 时间范围。
+* 单位。
+* 图例。
+* 数据来源。
+* 必要风险提示，例如“历史数据不预示未来表现”。
 
 ### Chart Types
 
-- 折线图：收益趋势、净值走势、回撤曲线。
-- 柱状图：收益贡献、分月分红、资产收益对比。
-- 饼图 / 环图：资产占比、行业占比、组合结构。
-- 面积图：资金流、累计收益、现金流变化。
-- 雷达图：组合能力画像、风险收益特征。
-- 仪表盘：发车信号、市场深度、风险评分。
+* 折线图：收益趋势、净值走势、回撤曲线。
+* 柱状图：收益贡献、分月分红、资产收益对比。
+* 饼图 / 环图：资产占比、行业占比、组合结构。
+* 面积图：资金流、累计收益、现金流变化。
+* 雷达图：组合能力画像、风险收益特征。
+* 仪表盘：发车信号、市场深度、风险评分。
 
 ### ECharts Rules
 
-- DOM Ready 后初始化。
-- `window.resize` 时调用 `chart.resize()`。
-- 移动端减少坐标轴标签密度。
-- 饼图移动端图例放到底部。
-- tooltip 数字必须带单位。
-- 不要把重要结论只藏在 tooltip 里。
+* DOM Ready 后初始化。
+* `window.resize` 时调用 `chart.resize()`。
+* 移动端减少坐标轴标签密度。
+* 饼图移动端图例放到底部。
+* tooltip 数字必须带单位。
+* 不要把重要结论只藏在 tooltip 里。
 
 ## Page Patterns
 
@@ -801,26 +808,26 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 ### HTML
 
-- 输出单文件 HTML，内嵌 CSS 和 JS。
-- 使用语义化标签：`header`、`main`、`section`、`article`、`footer`。
-- 保持结构清晰，模块有注释。
-- 金融风险提示不要放在不可见区域。
-- 需要图标时，在 `<head>` 引入 [Remix Icon](https://remixicon.com/) CDN，使用 `<i class="ri-*-line">` 调用；详见 **Components → Icons**。
+* 输出单文件 HTML，内嵌 CSS 和 JS。
+* 使用语义化标签：`header`、`main`、`section`、`article`、`footer`。
+* 保持结构清晰，模块有注释。
+* 金融风险提示不要放在不可见区域。
+* 需要图标时，在 `<head>` 引入 [Remix Icon](https://remixicon.com/) CDN，使用 `<i class="ri-*-line">` 调用；详见 **Components → Icons**。
 
 ### CSS
 
-- YAML token 必须映射为 `:root` CSS variables。
-- CSS 结构顺序：tokens → reset/base → layout → components → charts → responsive。
-- 使用 Flexbox / Grid。
-- 不使用固定死宽度破坏响应式。
-- 不引入无关 CSS 框架，除非用户明确要求。
+* YAML token 必须映射为 `:root` CSS variables。
+* CSS 结构顺序：tokens → reset/base → layout → components → charts → responsive。
+* 使用 Flexbox / Grid。
+* 不使用固定死宽度破坏响应式。
+* 不引入无关 CSS 框架，除非用户明确要求。
 
 ### JavaScript
 
-- 仅在需要图表和基础交互时使用 JS。
-- ECharts 数据集中定义，便于替换。
-- 图表初始化和 resize 逻辑必须完整。
-- 不模拟真实交易，不生成误导性收益承诺。
+* 仅在需要图表和基础交互时使用 JS。
+* ECharts 数据集中定义，便于替换。
+* 图表初始化和 resize 逻辑必须完整。
+* 不模拟真实交易，不生成误导性收益承诺。
 
 ### CSS Variable Baseline
 
@@ -901,57 +908,57 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 ### Do
 
-- 使用 `{colors.brand-primary}` 作为唯一行动色。
-- 先输出结构和信息层级，再做装饰。
-- 金融数据必须有单位、时间口径、数据来源。
-- 重要结论优先放在 `{component.summary-card}`。
-- 图表使用 `chart-*` token，不随机生成颜色。
-- 使用浅灰页面 + 白色卡片 + 蓝色强调的稳定结构。
-- 图标统一使用 [Remix Icon](https://remixicon.com/) `-line` 风格，颜色与尺寸引用 icon token。
-- 移动端保持 16px 安全边距和 44px 触控目标。
-- 风险提示必须可读，不能过浅或过小。
-- 输出 HTML 时使用 CSS variables 和语义化结构。
+* 使用 `{colors.brand-primary}` 作为唯一行动色。
+* 先输出结构和信息层级，再做装饰。
+* 金融数据必须有单位、时间口径、数据来源。
+* 重要结论优先放在 `{component.summary-card}`。
+* 图表使用 `chart-*` token，不随机生成颜色。
+* 使用浅灰页面 + 白色卡片 + 蓝色强调的稳定结构。
+* 图标统一使用 [Remix Icon](https://remixicon.com/) `-line` 风格，颜色与尺寸引用 icon token。
+* 移动端保持 16px 安全边距和 44px 触控目标。
+* 风险提示必须可读，不能过浅或过小。
+* 输出 HTML 时使用 CSS variables 和语义化结构。
 
 ### Don't
 
-- 不要使用多个主行动色。
-- 不要用厚重阴影、强玻璃拟态、霓虹渐变破坏金融可信感。
-- 不要把风险披露放到不可读的小字或隐藏区域。
-- 不要在没有业务语义确认时用红绿暗示收益好坏。
-- 不要让图标、插画、装饰抢走核心数据层级。
-- 不要在移动端单屏堆叠过多图表和表格。
-- 不要硬编码 token 已定义的颜色、字号、间距。
-- 不要承诺收益或生成“稳赚”“无风险”等金融误导表达。
-- 不要在且慢品牌页面中使用低幼卡通、杂乱城市背景或高饱和绿色主视觉。
-- 不要混用多个 icon 库，不要用 emoji 替代正式 UI 图标。
+* 不要使用多个主行动色。
+* 不要用厚重阴影、强玻璃拟态、霓虹渐变破坏金融可信感。
+* 不要把风险披露放到不可读的小字或隐藏区域。
+* 不要在没有业务语义确认时用红绿暗示收益好坏。
+* 不要让图标、插画、装饰抢走核心数据层级。
+* 不要在移动端单屏堆叠过多图表和表格。
+* 不要硬编码 token 已定义的颜色、字号、间距。
+* 不要承诺收益或生成“稳赚”“无风险”等金融误导表达。
+* 不要在且慢品牌页面中使用低幼卡通、杂乱城市背景或高饱和绿色主视觉。
+* 不要混用多个 icon 库，不要用 emoji 替代正式 UI 图标。
 
 ## Responsive Behavior
 
 ### Breakpoints
 
-| Name | Width | Behavior |
-|---|---:|---|
-| Small phone | ≤ 375px | 单列布局，减少图表标签密度，保持 16px 安全边距 |
-| Phone | 376–640px | H5 / App 主布局，卡片单列，指标 1–2 列 |
-| Tablet | 641–1024px | 指标 2 列，图表可整行或 2 列 |
-| Small desktop | 1025–1199px | 报告最大 960–1120px，看板 3 列指标 |
-| Desktop | 1200–1440px | 看板 4 列指标，图表栅格布局 |
-| Wide desktop | ≥ 1441px | 内容锁定最大宽度，外侧留白吸收 |
+| Name          |       Width | Behavior                   |
+| ------------- | ----------: | -------------------------- |
+| Small phone   |     ≤ 375px | 单列布局，减少图表标签密度，保持 16px 安全边距 |
+| Phone         |   376–640px | H5 / App 主布局，卡片单列，指标 1–2 列 |
+| Tablet        |  641–1024px | 指标 2 列，图表可整行或 2 列          |
+| Small desktop | 1025–1199px | 报告最大 960–1120px，看板 3 列指标   |
+| Desktop       | 1200–1440px | 看板 4 列指标，图表栅格布局            |
+| Wide desktop  |    ≥ 1441px | 内容锁定最大宽度，外侧留白吸收            |
 
 ### Collapsing Strategy
 
-- 指标卡：4 → 3 → 2 → 1 列。
-- 图表卡：桌面可并排，移动端单列。
-- 表格：桌面完整表格，移动端横向滚动或卡片化。
-- H5 首屏：桌面左右结构，移动端标题优先、视觉后置。
-- 页尾：桌面横向，移动端纵向堆叠。
+* 指标卡：4 → 3 → 2 → 1 列。
+* 图表卡：桌面可并排，移动端单列。
+* 表格：桌面完整表格，移动端横向滚动或卡片化。
+* H5 首屏：桌面左右结构，移动端标题优先、视觉后置。
+* 页尾：桌面横向，移动端纵向堆叠。
 
 ### Touch Targets
 
-- 主按钮最小高度 44px。
-- 图标按钮触控区域 40–44px，即使图标为 20px。
-- 表单输入框最小高度 44px。
-- 筛选标签点击区域高度不低于 32px。
+* 主按钮最小高度 44px。
+* 图标按钮触控区域 40–44px，即使图标为 20px。
+* 表单输入框最小高度 44px。
+* 筛选标签点击区域高度不低于 32px。
 
 ## Output Requirements
 
@@ -971,12 +978,12 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 生成结果必须满足：
 
-- 视觉符合且慢浅蓝、白卡、克制金融风格。
-- 信息层级清晰，首屏能看到核心结论或利益点。
-- 数据图表可读，移动端不溢出。
-- 风险提示存在且可读。
-- 无明显无关色彩、无随机字体、无混乱阴影。
-- 组件可复用，CSS 变量可维护。
+* 视觉符合且慢浅蓝、白卡、克制金融风格。
+* 信息层级清晰，首屏能看到核心结论或利益点。
+* 数据图表可读，移动端不溢出。
+* 风险提示存在且可读。
+* 无明显无关色彩、无随机字体、无混乱阴影。
+* 组件可复用，CSS 变量可维护。
 
 ## Iteration Guide
 
@@ -991,11 +998,10 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 ## Known Gaps
 
-- 本 Skill 不定义完整品牌 Logo 使用规范；Logo 位置和尺寸需根据实际品牌文件确定。
-- 本 Skill 不包含暗色模式；默认浅色金融界面。
-- 本 Skill 不包含完整弹窗、Toast、Tab、导航栏、复杂表单组件；需要时应在现有 token 基础上扩展。
-- 图表参数只定义原则和色板，具体坐标轴、tooltip、legend 需按页面场景补充。
-- 字体族不包含字体文件；若生产环境缺少品牌字体，使用系统 fallback。
-- 金融红绿语义需要结合具体业务确认，不能由 agent 自行推断。
-- 如果输出用于真实投资决策页面，必须由业务、合规和投顾团队复核文案与风险披露。
-n-ui-design-skill-complete.md…]()
+* 本 Skill 不定义完整品牌 Logo 使用规范；Logo 位置和尺寸需根据实际品牌文件确定。
+* 本 Skill 不包含暗色模式；默认浅色金融界面。
+* 本 Skill 不包含完整弹窗、Toast、Tab、导航栏、复杂表单组件；需要时应在现有 token 基础上扩展。
+* 图表参数只定义原则和色板，具体坐标轴、tooltip、legend 需按页面场景补充。
+* 字体族不包含字体文件；若生产环境缺少品牌字体，使用系统 fallback。
+* 金融红绿语义需要结合具体业务确认，不能由 agent 自行推断。
+* 如果输出用于真实投资决策页面，必须由业务、合规和投顾团队复核文案与风险披露。
