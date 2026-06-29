@@ -1,12 +1,13 @@
 ---
-description: 且慢 App 内营销 H5 设计 Skill。适用于活动页、策略介绍页、权益页、定投页、诊断页、报告页、功能上线页、投教专题页等 375px 移动端营销页面。
+description: "且慢 App 内营销 H5 设计 Skill。适用于活动页、策略介绍页、权益页、定投页、诊断页、报告页、功能上线页、投教专题页等 375px 移动端营销页面。"
 globs: "**/*.html,**/*.md"
 alwaysApply: false
 ---
 
 # 且慢营销 H5 Design Skill
 
-> Version: V0.4.9.4.3  
+> Version: V0.4.9.4.4  
+> Skill Name: `qieman-h5-design`  
 > 适用于且慢 App 内营销 H5、策略介绍页、活动页、权益页、定投页、诊断页、报告页、功能上线页、内容专题页等移动端页面。  
 > 目标：把真实业务中的营销页面沉淀成一套 **页面框架 + 视觉规范 + Pattern Library + 生成检查清单**。
 
@@ -3603,7 +3604,7 @@ Hero 首屏
 ## 14. Example Cursor Prompt
 
 ```txt
-请使用 qieman-marketing-h5 skill 生成一个且慢 App 内营销 H5 页面。
+请使用 qieman-h5-design skill 生成一个且慢 App 内营销 H5 页面。
 
 要求：
 1. 先判断页面类型，并选择最合适的 Pattern。
