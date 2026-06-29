@@ -4,7 +4,7 @@ globs: "**/*.md,**/*.html,**/*.png,**/*.jpg,**/*.jpeg,**/*.webp"
 alwaysApply: false
 ---
 
-> 快捷入口：[下载 qieman-ui-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/qieman-ui-design.md)
+[qieman-ui-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/qieman-ui-design.md)
 
 # qieman-ui-design skill
 
