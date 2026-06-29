@@ -2,20 +2,21 @@
 
 面向且慢（Qieman）设计团队的 Skill / Spec / Asset 共享仓库，用于沉淀 UI/UX、营销 H5、VIP 高净值私域、数据图表、PPT、动效、小顾 IP、AI 工作流等规范，便于在 Claude / Agent / 设计工作流中按需调用。
 
-每个 Skill 以独立目录组织，核心入口为 `SKILL.md`；补充说明文档统一放在 `references/` 目录下；素材与轻量资产统一放在 `assets/` 目录下。
+每个 Skill 以独立目录组织，正式入口文件优先使用英文、小写、短横线命名；补充说明文档统一放在 `references/` 目录下；素材与轻量资产统一放在 `assets/` 目录下。
 
 ---
 
 ## Skill index（入口导航）
 
-* UI/UX → [skills/ui-ux/SKILL.md](skills/ui-ux/SKILL.md)
-* Marketing H5 → [skills/marketing-h5/SKILL.md](skills/marketing-h5/SKILL.md)
-* VIP 高净值私域 → [skills/qieman-vip-design/SKILL.md](skills/qieman-vip-design/SKILL.md)
+* UI/UX → [skills/ui-ux/qieman-ui-design.md](skills/ui-ux/qieman-ui-design.md)
+* Marketing H5 → [skills/marketing-h5/qieman-h5-design.md](skills/marketing-h5/qieman-h5-design.md)
+* VIP 高净值私域 → [skills/marketing-h5/qieman-vip-design.md](skills/marketing-h5/qieman-vip-design.md)
 * Data Visualization → [skills/data-visualization/SKILL.md](skills/data-visualization/SKILL.md)
 * PPT → [skills/ppt/SKILL.md](skills/ppt/SKILL.md)
 * Motion → [skills/motion/SKILL.md](skills/motion/SKILL.md)
 * Xiaogu IP → [skills/xiaogu-ip/SKILL.md](skills/xiaogu-ip/SKILL.md)
 * AI Workflow → [skills/ai-workflow/SKILL.md](skills/ai-workflow/SKILL.md)
+
 
 ---
 
