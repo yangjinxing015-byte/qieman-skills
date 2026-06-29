@@ -1,10 +1,5 @@
-[qieman-ui-design-skill-complete.md](https://github.com/user-attachments/files/29460796/qieman-ui-design-skill-complete.md)[Uploading qiema---
-description: "且慢 ui design skill。适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务，统一基础视觉规范、组件规则、页面结构、交互原则和设计检查清单。"
-globs: "**/*.md,**/*.html,**/*.png,**/*.jpg,**/*.jpeg,**/*.webp"
-alwaysApply: false
----
 
-> 快捷入口：[下载 skill.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/SKILL.md)
+[qieman-ui-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/qieman-ui-design.md)
 
 # qieman-ui-design skill
 
