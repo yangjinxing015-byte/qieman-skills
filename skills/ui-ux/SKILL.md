@@ -1,6 +1,27 @@
-[Qieman-UI-Design.md](https://github.com/user-attachments/files/29460508/Qieman-UI-Design.md)
+[qieman-ui-skill.md](https://github.com/user-attachments/files/29460570/qieman-ui-skill.md)
+---
+description: "且慢 UI Design Skill。适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务，统一基础视觉规范、组件规则、页面结构、交互原则和设计检查清单。"
+globs: "**/*.md,**/*.html,**/*.png,**/*.jpg,**/*.jpeg,**/*.webp"
+alwaysApply: false
+---
+
+> 快捷入口：[下载 SKILL.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/SKILL.md)
+
+# 且慢 UI Design Agent Skill
+
+> Version: alpha  
+> Skill Name: `qieman-ui-design`  
+> 中文名：且慢 UI Design Skill  
+> 适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务。  
+> 目标：把且慢产品设计中的基础视觉规范、组件规则、页面结构、交互原则、品牌约束和生成检查清单沉淀成一套可复用的 UI Design Skill。
 
 ---
+
+## Design Tokens
+
+以下为 `qieman-ui-design` 的结构化 tokens，生成页面时应优先引用，不建议在组件 CSS 中反复硬编码色值、字号、圆角和间距。
+
+```yaml
 version: alpha
 name: qieman-ui-design
 license: Complete terms in LICENSE.txt
@@ -363,9 +384,9 @@ components:
     typography: "{typography.caption}"
     rounded: "{rounded.none}"
     padding: 24px
----
+```
 
-# 且慢 UI Design Agent Skill
+---
 
 ## Overview
 
