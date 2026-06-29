@@ -1,9 +1,12 @@
----
 
-description: "且慢 ui design skill。适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务，统一基础视觉规范、组件规则、页面结构、交互原则和设计检查清单。"
-globs: "**/*.md,**/*.html,**/*.png,**/*.jpg,**/*.jpeg,**/*.webp"
-alwaysApply: false
-------------------
+# qieman-ui-design skill
+
+> Version: alpha
+> Skill Name: `qieman-ui-design`
+> 中文名：且慢 ui design skill
+> 适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务。
+> 目标：把且慢产品设计中的基础视觉规范、组件规则、页面结构、交互原则、品牌约束和生成检查清单沉淀成一套可复用的 ui design skill。
+
 
 > 快捷入口：[下载 qieman-ui-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/qieman-ui-design.md)
 
