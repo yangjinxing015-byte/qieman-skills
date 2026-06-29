@@ -4,6 +4,8 @@ globs: "**/*.html,**/*.md"
 alwaysApply: false
 ---
 
+> 快捷入口：[下载 qieman-h5-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/marketing-h5/qieman-h5-design.md)
+
 # 且慢营销 H5 Design Skill
 
 > Version: V0.4.9.4.4  
