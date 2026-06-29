@@ -8,7 +8,7 @@ alwaysApply: false
 # 且慢VIP Design Skill
 
 > Version: V0.1.4  
-> Skill Name: `Qieman-VIP-Design`  
+> Skill Name: `qieman-vip-design`  
 > 中文名：且慢VIP Design Skill  
 > 适用于且慢高净值用户私域宣传海报、投资圈层邀请图、300万+资产门槛海报、投研观点 / 严选机会 / 全球视野主题图、顾问朋友圈转发图、九宫格传播图等。  
 > 目标：把高净值私域传播中的视觉风格、版式结构、品牌规则、文案逻辑、AI 生图提示词和九宫格传播方法沉淀成一套可复用的高净值私域营销视觉生成规范。
