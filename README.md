@@ -10,7 +10,7 @@
 
 * UI/UX → [skills/ui-ux/qieman-ui-design.md](skills/ui-ux/qieman-ui-design.md)
 * Marketing H5 → [skills/marketing-h5/qieman-h5-design.md](skills/marketing-h5/qieman-h5-design.md)
-* VIP 高净值私域 → [skills/marketing-h5/qieman-vip-design.md](skills/marketing-h5/qieman-vip-design.md)
+* VIP → [skills/marketing-h5/qieman-vip-design.md](skills/marketing-h5/qieman-vip-design.md)
 * Data Visualization → [skills/data-visualization/SKILL.md](skills/data-visualization/SKILL.md)
 * PPT → [skills/ppt/SKILL.md](skills/ppt/SKILL.md)
 * Motion → [skills/motion/SKILL.md](skills/motion/SKILL.md)
