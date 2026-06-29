@@ -4,11 +4,11 @@ globs: "**/*.md,**/*.png,**/*.jpg,**/*.jpeg,**/*.webp"
 alwaysApply: false
 ---
 
-# 高净值私域 Design Skill
+# 且慢-VIP高净值私域 Design Skill
 
-> Version: V0.1.2
-> Skill Name: `Qieman-high-net-worth-private-Design`
-> 中文名：高净值私域 Skill
+> Version: V0.1.3
+> Skill Name: `Qieman-VIP-Design`
+> 中文名：且慢-VIP高净值私域 Skill
 > 适用于且慢高净值用户私域宣传海报、投资圈层邀请图、300万+资产门槛海报、投研观点 / 严选机会 / 全球视野主题图、顾问朋友圈转发图、九宫格传播图等。
 > 目标：把高净值私域传播中的视觉风格、版式结构、品牌规则、文案逻辑、AI 生图提示词和九宫格传播方法沉淀成一套可复用的高净值私域营销视觉生成规范。
 
@@ -1426,7 +1426,7 @@ text, logo, watermark, letters, Chinese characters, garbled text, green theme, r
 ## 17. Single Poster Prompt Template
 
 ```txt
-请使用 Qieman-high-net-worth-private-Design Skill 生成一张且慢高净值私域宣传海报。
+请使用 Qieman-VIP-Design Skill 生成一张且慢高净值私域宣传海报。
 
 尺寸：
 1080×1920，比例 9:16。
@@ -1526,7 +1526,7 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, gr
 ## 19. Nine-grid Prompt Template
 
 ```txt
-请使用 Qieman-high-net-worth-private-Design Skill 生成一组且慢高净值私域宣传九宫格。
+请使用 Qieman-VIP-Design Skill 生成一组且慢高净值私域宣传九宫格。
 
 尺寸：
 单张尺寸 360×360，共 9 张。
