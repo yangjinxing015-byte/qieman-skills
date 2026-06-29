@@ -1,9 +1,10 @@
-[qieman-vip-design.md](https://github.com/user-attachments/files/29458547/qieman-vip-design.md)
 ---
 description: "且慢VIP Design Skill。适用于高净值用户私域海报、300万+资产门槛海报、投资圈层邀请图、投研观点传播图、顾问朋友圈转发图、九宫格传播图等 9:16 竖版营销视觉与私域传播物料，并可适配市面主流 AI 生图工具。"
 globs: "**/*.md,**/*.png,**/*.jpg,**/*.jpeg,**/*.webp"
 alwaysApply: false
 ---
+
+[qieman-vip-design.md](./qieman-vip-design.md)
 
 # 且慢VIP Design Skill
 
