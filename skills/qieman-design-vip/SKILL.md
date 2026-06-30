@@ -196,7 +196,7 @@ components:
 | **层级** | L2 |
 | **场景** | VIP 私域海报 |
 | **规范** | 本文件 `SKILL.md` |
-| **依赖** | [`qieman-design-ui`](../qieman-design-ui/SKILL.md) |
+| **依赖** | [`qieman-design-ui`](../qieman-design-ui/qieman-ui-design.md) |
 | **更新日期** | 2026-06-30 |
 
 ## 调用
@@ -209,11 +209,11 @@ npx openskills read qieman-design-vip
 
 ## Overview
 
-qieman vip design 是一个面向 **且慢高净值用户私域传播** 的营销视觉生成规范。它用于把高净值门槛、圈层邀请、投研观点、严选机会、全球视野等私域传播需求，转化为专业、克制、高端、可信的 9:16 竖版海报与九宫格传播物料，并适配市面主流 AI 生图工具。
+qieman-design-vip 是一个面向 **且慢高净值用户私域传播** 的营销视觉生成规范。它用于把高净值门槛、圈层邀请、投研观点、严选机会、全球视野等私域传播需求，转化为专业、克制、高端、可信的 9:16 竖版海报与九宫格传播物料，并适配市面主流 AI 生图工具。
 
-本 Skill **继承并扩展** [qieman-design-ui](../qieman-design-ui/SKILL.md) 的基础品牌 token（如 `{colors.brand-primary}` #1B88EE），在此基础上定义 VIP 私域专属的蓝金 / 黑金视觉体系、海报版式结构、文案逻辑、AI 生图提示词和九宫格传播方法。
+本 Skill **继承并扩展** [qieman-design-ui](../qieman-design-ui/qieman-ui-design.md) 的基础品牌 token（如 `{colors.brand-primary}` #1B88EE），在此基础上定义 VIP 私域专属的蓝金 / 黑金视觉体系、海报版式结构、文案逻辑、AI 生图提示词和九宫格传播方法。
 
-**Version:** V0.1.2
+**Version:** V0.1.3
 
 **核心设计气质：**
 - 门槛感：资产 300万+、准入筛选、席位稀缺，不是普通理财广告。
@@ -1752,7 +1752,7 @@ AI 无字背景图生成
 ### Single Poster Prompt Template
 
 ```txt
-请使用 Qieman-high-net-worth-private-Design Skill 生成一张且慢高净值私域宣传海报。
+请使用 qieman-design-vip Skill 生成一张且慢高净值私域宣传海报。
 
 尺寸：
 1080×1920，比例 9:16。
@@ -1848,7 +1848,7 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, gr
 ### Nine-grid Prompt Template
 
 ```txt
-请使用 Qieman-high-net-worth-private-Design Skill 生成一组且慢高净值私域宣传九宫格。
+请使用 qieman-design-vip Skill 生成一组且慢高净值私域宣传九宫格。
 
 尺寸：
 单张尺寸 360×360，共 9 张。
@@ -1913,4 +1913,5 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, gr
 - 且慢 Logo 图形尚未提供 SVG 资产引用路径；后期叠加须使用官方 Logo 文件。
 - 九宫格局部拼接大标题的跨格对齐规则尚未提供像素级模板；当前为策略级描述。
 - `{extends: qieman-design-ui}` 关系已声明，但跨 Skill token 自动合并尚未在 openskills 运行时验证。
+
 
