@@ -1,17 +1,37 @@
 ---
-description: "且慢 App 内营销 H5 设计 Skill。适用于活动页、策略介绍页、权益页、定投页、诊断页、报告页、功能上线页、投教专题页等 375px 移动端营销页面。"
-globs: "**/*.html,**/*.md"
-alwaysApply: false
+name: qieman-design-h5
+license: Complete terms in LICENSE.txt
+description: >-
+  Qieman in-app marketing H5 design skill for activity pages, strategy introductions,
+  equity pages, DCA, diagnosis, reports, feature launches, and education topics.
+  375px mobile marketing pages with page frameworks, visual rules, pattern library,
+  and generation checklists. Layer on top of qieman-design-ui (L0).
+layer: L2
+extends: qieman-design-ui
 ---
 
-[qieman-h5-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/marketing-h5/qieman-h5-design.md)
+# qieman-design-h5
 
-# 且慢营销 H5 Design Skill
+| 字段 | 值 |
+|------|-----|
+| **ID** | `qieman-design-h5` |
+| **层级** | L2 |
+| **场景** | 营销 H5 |
+| **规范** | 本文件 `SKILL.md` |
+| **依赖** | [`qieman-design-ui`](../qieman-design-ui/SKILL.md) |
+| **更新日期** | 2026-06-30 |
 
-> Version: V0.4.9.4.4  
-> Skill Name: `qieman-h5-design`  
-> 适用于且慢 App 内营销 H5、策略介绍页、活动页、权益页、定投页、诊断页、报告页、功能上线页、内容专题页等移动端页面。  
-> 目标：把真实业务中的营销页面沉淀成一套 **页面框架 + 视觉规范 + Pattern Library + 生成检查清单**。
+## 调用
+
+```bash
+npx openskills read qieman-design-h5
+```
+
+---
+
+## Overview
+
+qieman h5 design 负责营销 H5 的页面逻辑、内容框架、视觉氛围、转化路径与营销 Pattern。生成营销 H5 时，应先遵守 **L0 `qieman-design-ui`**，再叠加本 **L2** 规范（分层说明见 `../qieman-design-ui/SKILL.md`）。
 
 ---
 
@@ -19,7 +39,7 @@ alwaysApply: false
 
 ### 1.1 适用范围
 
-本 Skill 适用于：
+qieman h5 design 适用于：
 
 - 且慢 App 内营销 H5
 - 策略介绍页
@@ -47,11 +67,15 @@ alwaysApply: false
 - PPT / Keynote 报告页
 - 非且慢品牌视觉页面
 
-### 1.3 与 qieman-ui-design 的关系
+### 1.3 与规范分层的关系
 
-- `qieman-ui-design` 负责基础 UI 规范：颜色、字体、按钮、卡片、App 容器、常规交互。
-- 本 Skill 负责营销 H5 的页面逻辑、内容框架、视觉氛围、转化路径与营销 Pattern。
-- 生成营销 H5 时，应先遵守 `qieman-ui-design`，再叠加本 Skill 的营销页面规范。
+本 skill 属于 **L2 独立场景**（见 `../qieman-design-ui/SKILL.md` → Skill Layering）：
+
+- **L0 `qieman-design-ui`**：品牌色、字体、按钮、卡片、App 容器、常规交互。
+- **L2 `qieman-design-h5`（本规范）**：营销 H5 页面逻辑、内容框架、视觉氛围、转化路径与 Pattern。
+- **L1 `qieman-design-sell-popup`**：若 H5 内嵌卖出挽留弹窗，另读 [`../qieman-design-ui/references/qieman-design-sell-popup.md`](../qieman-design-ui/references/qieman-design-sell-popup.md)。
+
+生成营销 H5 时：**先 L0，再本 L2**；含挽留弹窗时 **再叠 L1**。
 
 ---
 
@@ -180,7 +204,6 @@ body {
 - 风险提示可使用 343px 内容宽度，也可作为正文底部弱化文本区
 
 ---
-
 
 ---
 
@@ -1065,7 +1088,6 @@ font-family: "MiSans", "DIN Alternate", "PingFang SC", system-ui, sans-serif;
 - 首卡圆角建议：16px–20px。
 - 首卡与头图之间应是“承接”，不是“断开”。
 
-
 ### 6.4.4 Hero Layered Gradient Rules
 
 为增强首屏视觉层次感，头部氛围图不得只使用单一浅色填充。Hero 需要通过深浅渐变、前中景层次和底部过渡建立空间感。
@@ -1268,7 +1290,6 @@ Hero 底部必须与首张卡片或页面背景自然衔接。
 - 是否存在明显占位感、拼贴感、粗糙感？
 
 ---
-
 
 ---
 
@@ -1512,7 +1533,6 @@ Hero 底部必须和首张内容卡片形成视觉承接。
 
 如果以上检查不通过，应重新生成 Hero，不应继续沿用当前视觉。
 
-
 ---
 
 ### 6.4.10 Strategy Hero Must Not Be Empty
@@ -1588,7 +1608,6 @@ Hero 底部必须和首张内容卡片形成视觉承接。
 - 页面是否避免了“信息卡片页”而不是“营销 H5”的问题？
 
 如果检查不通过，应优先重做 Hero，而不是只调整文字或卡片。
-
 
 ---
 
@@ -1737,7 +1756,6 @@ Hero 中间或底部不允许存在大面积无效空白区域。
 - 同一页面 icon 透视、粗细、色彩必须统一。
 
 ---
-
 
 ---
 
@@ -1917,7 +1935,6 @@ Remix Icon 适合 UI 辅助，不适合作为所有营销主视觉。
 
 ---
 
-
 ---
 
 ## 6.6.1 AI Visual Reference Library Rules
@@ -2042,7 +2059,7 @@ Remix Icon 适合 UI 辅助，不适合作为所有营销主视觉。
 
 当用户没有明确指定其他风格时，营销 H5 视觉生成优先级为：
 
-1. 遵循且慢品牌视觉与本 Skill 规则
+1. 遵循且慢品牌视觉与 qieman h5 design 规范
 2. 参考内部 AI 3D 素材库的风格语言
 3. 参考用户提供的当前设计稿或历史样例
 4. 根据页面 Pattern 生成对应主视觉
@@ -2248,7 +2265,6 @@ Remix Icon 用于常规 UI 辅助，AI 3D / 精细化素材用于营销主视觉
 - 不使用粗糙 CSS 拼接造成锯齿、断层或错位。
 
 ---
-
 
 ## 6.10 Chart System for Marketing H5
 
@@ -3606,7 +3622,7 @@ Hero 首屏
 ## 14. Example Cursor Prompt
 
 ```txt
-请使用 qieman-h5-design skill 生成一个且慢 App 内营销 H5 页面。
+请使用 qieman-design-h5 skill 生成一个且慢 App 内营销 H5 页面。
 
 要求：
 1. 先判断页面类型，并选择最合适的 Pattern。
@@ -3623,7 +3639,6 @@ Hero 首屏
 ```
 
 ---
-
 
 ---
 
@@ -3647,7 +3662,6 @@ Hero 首屏
 5. 不要只保留装饰波浪和背景留白。
 6. 保持且慢浅蓝营销风格，避免变成纯功能详情页。
 ```
-
 
 ---
 
