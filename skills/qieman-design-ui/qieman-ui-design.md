@@ -1,26 +1,6 @@
 ---
-description: "且慢 ui design skill。适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务，统一基础视觉规范、组件规则、页面结构、交互原则和设计检查清单。"
-globs: "**/*.md,**/*.html,**/*.png,**/*.jpg,**/*.jpeg,**/*.webp"
-alwaysApply: false
----
-
-[qieman-ui-design.md](https://raw.githubusercontent.com/yangjinxing015-byte/qieman-skills/main/skills/ui-ux/qieman-ui-design.md)
-
-# qieman-ui-design skill
-
-> Version: alpha  
-> Skill Name: `qieman-ui-design`  
-> 中文名：且慢 ui design skill  
-> 适用于且慢 App、H5、弹窗、表单、卡片、交易流程、账户页面、基金投顾报告、数据可视化看板等 UI/UX 设计任务。  
-> 目标：把且慢产品设计中的基础视觉规范、组件规则、页面结构、交互原则、品牌约束和生成检查清单沉淀成一套可复用的 ui design skill。
-
-## design tokens
-
-以下为 `qieman-ui-design` 的结构化 tokens。为避免 GitHub 将大量 YAML 配置错误渲染，正式 front matter 只保留 `description` / `globs` / `alwaysApply`，完整 tokens 放在本文档代码块中维护。
-
-```yaml
-version: alpha
-name: qieman-ui-design
+name: qieman-design-ui
+layer: L0
 license: Complete terms in LICENSE.txt
 description: >-
   Use this skill to create high-fidelity Qieman / Yingmi financial UI prototypes,
@@ -381,11 +361,29 @@ components:
     typography: "{typography.caption}"
     rounded: "{rounded.none}"
     padding: 24px
+---
+
+# qieman-design-ui
+
+| 字段 | 值 |
+|------|-----|
+| **ID** | `qieman-design-ui` |
+| **层级** | L0 |
+| **规范** | 本文件 `SKILL.md` |
+| **L1 扩展** | [qieman-design-sell-popup.md](./references/qieman-design-sell-popup.md) |
+| **更新日期** | 2026-06-30 |
+
+## 调用
+
+```bash
+npx openskills read qieman-design-ui
 ```
+
+---
 
 ## Overview
 
-且慢 UI Design Agent Skill 是一个面向 **盈米基金 / 且慢** 金融产品设计任务的高保真界面生成规范。它用于把复杂的基金投顾、账户复盘、资产配置、财富规划、策略介绍、优惠券营销和数据可视化需求，转化为清晰、克制、可信、可落地的 HTML 原型或设计稿结构。
+qieman ui design 是一个面向 **盈米基金 / 且慢** 金融产品设计任务的高保真界面生成规范。它用于把复杂的基金投顾、账户复盘、资产配置、财富规划、策略介绍、优惠券营销和数据可视化需求，转化为清晰、克制、可信、可落地的 HTML 原型或设计稿结构。
 
 这个 Skill 采用 **“前置结构化 tokens + 后置执行型说明”** 的格式。前置 YAML 提供 agent 可直接引用的颜色、字体、圆角、间距、阴影和组件键；正文解释这些 token 的使用规则、页面结构、组件语法、响应式策略、风险披露和输出约束。
 
@@ -395,6 +393,43 @@ components:
 - 数据清晰：收益、回撤、仓位、现金流、风险等级必须有口径说明。
 - 移动优先：适合 375px / 750px H5、App 页面、长图和响应式 HTML。
 - Agent 友好：所有视觉决策优先引用 token，而不是临时硬编码。
+
+## Skill Layering（规范分层）
+
+且慢设计 skill 采用 **「L0 基础 → L1 场景扩展 → L2 独立场景」** 三层结构。生成界面时先确定层级，再按需叠加；**下层 token 优先，上层只补充场景差异**。
+
+| 层级 | 标识 | 入口 / 文件 | 职责 |
+|------|------|-------------|------|
+| **L0 基础层** | `qieman-design-ui` | 本目录 `SKILL.md` | 品牌色、字体、间距、圆角、阴影、`components`、Remix Icon、通用页面 Pattern、输出与合规约束 |
+| **L1 场景扩展层** | 同目录扩展规范 | 见下表 | 在 L0 之上定义 **单一高频 App 组件/流程** 的专用 token 与 Pattern；**不单独建 skill 目录** |
+| **L2 独立场景层** | 兄弟 skill 目录 | `../qieman-design-*/SKILL.md` | 完整垂直场景（营销 H5、VIP 海报、PDF、演示文稿 PPT 等） |
+
+### L1 场景扩展（本目录内）
+
+| spec-id | 文件 | 适用任务 |
+|---------|------|----------|
+| `qieman-design-sell-popup` | [qieman-design-sell-popup.md](./references/qieman-design-sell-popup.md) | App 内 **卖出 / 赎回 / 退出策略** 底部全宽挽留弹窗（375×812、无关闭按钮、主题渐变） |
+
+> L1 规范均在 frontmatter 声明 `extends: qieman-design-ui`。与 L0 冲突时：**几何尺寸、弹窗交互以 L1 为准**；品牌主色、字体气质、风险表达以 L0 为准。
+
+### L2 独立场景（兄弟 skill）
+
+| 文件夹（= `name`） | 与 L0 关系 | 典型产出 |
+|--------------------|------------|----------|
+| `qieman-design-h5` | 叠加 L0 | App 内营销 H5、活动页、策略介绍页 |
+| `qieman-design-vip` | `extends` L0 | 9:16 高净值私域海报、九宫格 |
+| `qieman-design-pdf` | 对齐 L0 色板 | A4 / 可打印 PDF 报告 |
+| `qieman-design-ppt` | `extends` L0 | 原生 PowerPoint；**L1** `qieman-design-report` = HTML 16:9 投顾报告幻灯片 |
+| `qieman-design-data` | 图表色可引用 L0 `chart-*` | 独立图表与可视化 |
+
+### 选用流程
+
+1. **标准 App 页 / 看板 / 表单 / 列表** → 仅 **L0** `qieman-design-ui`。
+2. **卖出挽留、赎回确认等底部弹窗** → **L0 + L1** `qieman-design-sell-popup`。
+3. **营销 H5 / 活动长页** → **L0 + L2** `qieman-design-h5`（H5 内若含卖出弹窗，再叠 **L1**）。
+4. **VIP 私域海报** → **L0 + L2** `qieman-design-vip`。
+5. **HTML 投顾报告幻灯片 / 合并 deck** → **L0 + L2** `qieman-design-ppt` **+ L1** `qieman-design-report`（见 `qieman-design-ppt/references/qieman-design-report.md`）。
+6. **可打印 PDF 报告** → **L2** `qieman-design-pdf`；**原生 .pptx** → **L2** `qieman-design-ppt`；品牌色与 L0 对齐。
 
 ## When to Use
 
@@ -420,6 +455,33 @@ components:
 - 所有常用组件优先来自 `components:`。
 - 所有图标优先来自 `icons:` 定义的 [Remix Icon](https://remixicon.com/) 库，通过 CDN 引入。
 - 生成 HTML/CSS 时，将 YAML token 映射为 CSS variables；不要在组件 CSS 中反复硬编码十六进制色值。
+
+### Token 引用语法
+
+正文与生成代码中引用 token 时，**分区名必须与 YAML frontmatter 键名一致**（复数 `components`，不用单数 `component`）：
+
+| YAML 分区 | 引用格式 | 示例 |
+|---|---|---|
+| `colors` | `{colors.<key>}` | `{colors.brand-primary}` |
+| `typography` | `{typography.<key>}` | `{typography.body}` |
+| `rounded` | `{rounded.<key>}` | `{rounded.md}` |
+| `spacing` | `{spacing.<key>}` | `{spacing.md}` |
+| `shadow` | `{shadow.<key>}` | `{shadow.card-soft}` |
+| `components` | `{components.<key>}` | `{components.summary-card}` |
+| `icons` | `{icons.<key>}` | `{icons.cdn}` |
+
+### YAML → CSS 变量映射
+
+生成 HTML 时，将 token 映射为 `:root` CSS 变量。命名规则：
+
+| YAML 分区 | 映射规则 | 示例 |
+|---|---|---|
+| `colors.*` | `--<key>` | `colors.brand-primary` → `--brand-primary` |
+| `spacing.*` | `--space-<key>` | `spacing.md` → `--space-md` |
+| `rounded.*` | `--radius-<key>` | `rounded.sm` → `--radius-sm` |
+| `shadow.*` | `--shadow-<key>` | `shadow.card-soft` → `--shadow-card-soft` |
+| `icons.sizes.*` | `--icon-size-<key>` | `icons.sizes.md` → `--icon-size-md` |
+| 字体族（正文约定） | `--font-sans` / `--font-number` / `--font-mono` | 见 CSS Variable Baseline |
 
 ### 命名原则
 
@@ -452,6 +514,8 @@ components:
 | `{colors.text-tertiary}` | #999999 | 辅助说明、图例、时间、单位 |
 | `{colors.text-disabled}` | #CCCCCC | 禁用态、弱提示 |
 | `{colors.text-inverse}` | #FFFFFF | 蓝色或深色背景反白文字 |
+| `{colors.on-primary}` | #FFFFFF | 主色按钮上的文字与图标 |
+| `{colors.on-dark}` | #FFFFFF | 深色/海报背景上的文字与图标 |
 
 ### Semantic
 
@@ -460,6 +524,8 @@ components:
 | `{colors.semantic-error}` | #FA440C | 风险、异常、亏损、卖出、上涨等需警示状态 |
 | `{colors.semantic-warning}` | #EA9500 | 提醒、待确认、风险说明 |
 | `{colors.semantic-success}` | #07AD8F | 买入、下跌、完成等业务定义为正向的状态 |
+| `{colors.semantic-error-faded}` | #FEEDE9 | 错误/风险浅底提示区 |
+| `{colors.semantic-warning-faded}` | #FFFAEF | 提醒浅底提示区 |
 
 金融红绿语义必须服从业务。不要默认“绿色=赚钱”或“红色=亏损”。在且慢营销视觉中，绿色不作为主视觉色；只有业务语义明确时才使用 `{colors.semantic-success}`。
 
@@ -469,7 +535,7 @@ components:
 
 ### Charts
 
-图表颜色必须按 `chart-01` 到 `chart-12` 顺序取色。主系列优先 `{colors.chart-01}`，对比系列 `{colors.chart-02}`，警示标记 `{colors.chart-03}`，辅助系列依次后推。不要随机生成图表色，也不要让图表色与业务语义冲突。
+图表颜色必须按 `{colors.chart-01}` 到 `{colors.chart-12}` 顺序取色。主系列优先 `{colors.chart-01}`，对比系列 `{colors.chart-02}`，警示标记 `{colors.chart-03}`，辅助系列依次后推。不要随机生成图表色，也不要让图表色与业务语义冲突。
 
 ## Typography
 
@@ -531,21 +597,21 @@ components:
 
 标准金融报告页面使用：
 
-1. `{component.report-hero}`：报告名称、生成时间、核心视觉。
-2. `{component.summary-card}`：核心结论、建议、AI 生成说明。
-3. `{component.metric-card}`：关键指标。
-4. `{component.chart-card}`：趋势、结构、贡献、风险图表。
-5. `{component.content-card}`：解释、明细、建议。
-6. `{component.disclosure-card}`：数据来源和风险提示。
+1. `{components.report-hero}`：报告名称、生成时间、核心视觉。
+2. `{components.summary-card}`：核心结论、建议、AI 生成说明。
+3. `{components.metric-card}`：关键指标。
+4. `{components.chart-card}`：趋势、结构、贡献、风险图表。
+5. `{components.content-card}`：解释、明细、建议。
+6. `{components.disclosure-card}`：数据来源和风险提示。
 
 标准营销 H5 使用：
 
-1. `{component.h5-hero}`：主题标题、副标题、主视觉。
-2. `{component.section-card}`：价值主张。
-3. `{component.metric-card}`：关键利益点或数据证明。
-4. `{component.coupon-card}`：权益或优惠券。
-5. `{component.step-item}`：领取 / 配置 / 使用流程。
-6. `{component.disclosure-card}`：活动规则和风险提示。
+1. `{components.h5-hero}`：主题标题、副标题、主视觉。
+2. `{components.section-card}`：价值主张。
+3. `{components.metric-card}`：关键利益点或数据证明。
+4. `{components.coupon-card}`：权益或优惠券。
+5. `{components.step-item}`：领取 / 配置 / 使用流程。
+6. `{components.disclosure-card}`：活动规则和风险提示。
 
 ## Elevation & Depth
 
@@ -579,47 +645,47 @@ components:
 
 ### Buttons
 
-**`button-primary`**：唯一主操作按钮。用于“立即领取”“生成报告”“确认配置”“查看详情”。最小高度 44px。
+**`{components.button-primary}`**：唯一主操作按钮。用于“立即领取”“生成报告”“确认配置”“查看详情”。最小高度 44px。
 
-**`button-primary-pressed`**：按下状态。使用 `{colors.brand-primary-pressed}`，可配合 `transform: scale(0.98)`。
+**`{components.button-primary-pressed}`**：按下状态。使用 `{colors.brand-primary-pressed}`，可配合 `transform: scale(0.98)`。
 
-**`button-primary-focus`**：键盘或可访问性焦点状态。使用 2px 主色焦点轮廓。
+**`{components.button-primary-focus}`**：键盘或可访问性焦点状态。使用 2px 主色焦点轮廓。
 
-**`button-secondary`**：次级操作按钮。白底、蓝字、蓝边框，不与主按钮争夺层级。
+**`{components.button-secondary}`**：次级操作按钮。白底、蓝字、蓝边框，不与主按钮争夺层级。
 
-**`text-link`**：正文链接。用于协议、规则、详情跳转。不要把大段文字都设置为链接色。
+**`{components.text-link}`**：正文链接。用于协议、规则、详情跳转。不要把大段文字都设置为链接色。
 
 ### Tags
 
-**`tag-primary`**：蓝色标签，用于当前状态、推荐、选中。
+**`{components.tag-primary}`**：蓝色标签，用于当前状态、推荐、选中。
 
-**`tag-warning`**：黄色标签，用于待确认、提醒、风险提示入口。
+**`{components.tag-warning}`**：黄色标签，用于待确认、提醒、风险提示入口。
 
-**`tag-risk`**：红色风险标签，用于异常、风险暴露、亏损提醒。
+**`{components.tag-risk}`**：红色风险标签，用于异常、风险暴露、亏损提醒。
 
 标签必须短，建议 2–6 个中文字。不要用标签承载长句。
 
 ### Cards
 
-**`summary-card`**：先放结论，不放长表格。适合“本周账户收益 -0.8%，权益拖累为主”这类摘要。
+**`{components.summary-card}`**：先放结论，不放长表格。适合“本周账户收益 -0.8%，权益拖累为主”这类摘要。
 
-**`metric-card`**：数值优先，包含：指标名、核心数字、单位、变化、时间口径。
+**`{components.metric-card}`**：数值优先，包含：指标名、核心数字、单位、变化、时间口径。
 
-**`chart-card`**：包含：标题、图例、图表主体、单位、数据来源。图表卡不要只有图，没有解释。
+**`{components.chart-card}`**：包含：标题、图例、图表主体、单位、数据来源。图表卡不要只有图，没有解释。
 
-**`portfolio-card`**：用于投顾组合、资产包、基金组合。必须展示风险等级、配置比例、收益/回撤口径。
+**`{components.portfolio-card}`**：用于投顾组合、资产包、基金组合。必须展示风险等级、配置比例、收益/回撤口径。
 
-**`strategy-card`**：用于策略介绍，如低回撤定投、守正出奇、生生不息等。必须有策略定位、适用人群、风险提示。
+**`{components.strategy-card}`**：用于策略介绍，如低回撤定投、守正出奇、生生不息等。必须有策略定位、适用人群、风险提示。
 
-**`coupon-card`**：用于营销券。必须包含金额、门槛、适用范围、有效期。不要只放大金额不解释规则。
+**`{components.coupon-card}`**：用于营销券。必须包含金额、门槛、适用范围、有效期。不要只放大金额不解释规则。
 
-**`disclosure-card`**：风险和数据来源。必须可读，不可隐藏成过浅灰小字。
+**`{components.disclosure-card}`**：风险和数据来源。必须可读，不可隐藏成过浅灰小字。
 
 ### Inputs
 
-**`input-field`**：输入框，白底、8px 圆角、1px 默认边框、44px 最小高度。
+**`{components.input-field}`**：输入框，白底、8px 圆角、1px 默认边框、44px 最小高度。
 
-**`input-field-focus`**：聚焦时使用主色边框和浅蓝外轮廓。
+**`{components.input-field-focus}`**：聚焦时使用主色边框和浅蓝外轮廓。
 
 错误状态使用 `{colors.semantic-error}` 文案和 `{colors.border-error-subtle}` 边框；必须给出错误原因。
 
@@ -664,7 +730,7 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 | 尺寸 | 用途 | 对应场景 |
 |---:|---|---|
 | 16px | 辅助、内联、表格 | 标签内小图标、脚注、列表次要操作 |
-| 20px | **默认标准** | 卡片标题旁、表单、导航项（`{component.icon-standard}`） |
+| 20px | **默认标准** | 卡片标题旁、表单、导航项（`{components.icon-standard}`） |
 | 24px | 模块强调 | 价值卡图标区、步骤序号、Toast |
 | 32px | 首屏/空状态 | H5 首屏利益点、空状态占位 |
 
@@ -683,8 +749,8 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 | Token / 类名 | 色值 | 用途 |
 |---|---|---|
-| `{component.icon-standard}` / `.icon-standard` | `{colors.text-tertiary}` #999999 | 默认辅助图标 |
-| `{component.icon-primary}` / `.icon-primary` | `{colors.brand-primary}` #1B88EE | 主操作、链接、当前步骤 |
+| `{components.icon-standard}` / `.icon-standard` | `{colors.text-tertiary}` #999999 | 默认辅助图标 |
+| `{components.icon-primary}` / `.icon-primary` | `{colors.brand-primary}` #1B88EE | 主操作、链接、当前步骤 |
 | `.icon-secondary` | `{colors.text-secondary}` #606060 | 正文旁说明图标 |
 | `.icon-inverse` | `{colors.text-inverse}` #FFFFFF | 蓝色/深色背景上的反白图标 |
 | `.icon-success` | `{colors.semantic-success}` #07AD8F | 完成、成功（需业务语义明确） |
@@ -735,10 +801,10 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 ### Chart Palette
 
-- 主系列：`chart-01`。
-- 对比系列：`chart-02`。
-- 警示/目标线：`chart-03` 或语义色。
-- 多系列：按 `chart-01` 到 `chart-12` 顺序取色。
+- 主系列：`{colors.chart-01}`。
+- 对比系列：`{colors.chart-02}`。
+- 警示/目标线：`{colors.chart-03}` 或语义色。
+- 多系列：按 `{colors.chart-01}` 到 `{colors.chart-12}` 顺序取色。
 - 避免绿色作为营销主视觉；若业务中绿色表示特定金融含义，必须明确说明。
 
 ### Required Chart Metadata
@@ -831,6 +897,7 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 ```css
 :root {
+  /* colors → --<key> */
   --brand-primary: #1B88EE;
   --brand-primary-pressed: #0F78D4;
   --brand-primary-focus: #1580E0;
@@ -861,6 +928,9 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
   --border-warning-subtle: #FFDC9E;
   --border-error-subtle: #FAB6A5;
 
+  --on-primary: #FFFFFF;
+  --on-dark: #FFFFFF;
+
   --chart-01: #69B1F4;
   --chart-02: #F88D72;
   --chart-03: #FBCA74;
@@ -878,23 +948,33 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
   --font-number: MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif;
   --font-mono: Courier New, ui-monospace, monospace;
 
+  /* rounded → --radius-<key> */
+  --radius-none: 0px;
+  --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 24px;
   --radius-pill: 9999px;
+  --radius-full: 9999px;
 
+  /* spacing → --space-<key> */
+  --space-xxs: 4px;
   --space-xs: 8px;
   --space-sm: 12px;
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 32px;
+  --space-xxl: 48px;
   --space-section: 64px;
   --space-h5-safe: 16px;
 
+  /* shadow → --shadow-<key> */
+  --shadow-none: none;
   --shadow-card-soft: 0 2px 8px rgba(27, 136, 238, 0.06);
   --shadow-floating: 0 8px 24px rgba(30, 62, 98, 0.08);
 
+  /* icons.sizes → --icon-size-<key> */
   --icon-size-sm: 16px;
   --icon-size-md: 20px;
   --icon-size-lg: 24px;
@@ -909,8 +989,8 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 - 使用 `{colors.brand-primary}` 作为唯一行动色。
 - 先输出结构和信息层级，再做装饰。
 - 金融数据必须有单位、时间口径、数据来源。
-- 重要结论优先放在 `{component.summary-card}`。
-- 图表使用 `chart-*` token，不随机生成颜色。
+- 重要结论优先放在 `{components.summary-card}`。
+- 图表使用 `{colors.chart-*}` token，不随机生成颜色。
 - 使用浅灰页面 + 白色卡片 + 蓝色强调的稳定结构。
 - 图标统一使用 [Remix Icon](https://remixicon.com/) `-line` 风格，颜色与尺寸引用 icon token。
 - 移动端保持 16px 安全边距和 44px 触控目标。
@@ -987,7 +1067,7 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 1. 先判断页面类型：报告、看板、H5、策略页、优惠券页、组件库。
 2. 选择对应 Page Pattern。
-3. 引用 YAML 中的 component token 建立结构。
+3. 引用 YAML 中的 `components` token 建立结构。
 4. 用 typography token 建立标题、正文、数字层级。
 5. 用 chart token 配置数据图表。
 6. 检查风险提示、时间口径、单位、数据来源。
@@ -998,7 +1078,8 @@ Remix Icon 通过 `<i>` 标签 + 类名使用。类名格式为 `ri-{name}-{styl
 
 - 本 Skill 不定义完整品牌 Logo 使用规范；Logo 位置和尺寸需根据实际品牌文件确定。
 - 本 Skill 不包含暗色模式；默认浅色金融界面。
-- 本 Skill 不包含完整弹窗、Toast、Tab、导航栏、复杂表单组件；需要时应在现有 token 基础上扩展。
+- **底部挽留 / 卖出确认弹窗** → 使用 L1 扩展 [qieman-design-sell-popup.md](./references/qieman-design-sell-popup.md)，不要仅在 L0 临时拼凑弹窗样式。
+- 本 Skill 不包含 Toast、Tab、导航栏、复杂表单等其它组件的完整规范；需要时在 L0 token 上扩展或沉淀为新的 L1 文件。
 - 图表参数只定义原则和色板，具体坐标轴、tooltip、legend 需按页面场景补充。
 - 字体族不包含字体文件；若生产环境缺少品牌字体，使用系统 fallback。
 - 金融红绿语义需要结合具体业务确认，不能由 agent 自行推断。
