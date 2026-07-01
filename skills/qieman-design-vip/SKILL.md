@@ -5,8 +5,9 @@ description: >-
   including 9:16 vertical posters, 300万+ asset-threshold invitations, investment
   circle graphics, research-viewpoint spreads, advisor WeChat Moments assets,
   and nine-grid social campaigns. Output must follow blue-gold / black-gold VIP
-  aesthetics, structured design tokens, risk disclosure rules, and AI image
-  prompt workflows compatible with mainstream generative tools.
+  aesthetics, simplified composition rules, strong metaphor-led visual language, copy-led minimal composition, structured
+  design tokens, risk disclosure rules, and AI image prompt workflows compatible with mainstream
+  generative tools.
 extends: qieman-design-ui
 layer: L2
 license: Complete terms in LICENSE.txt
@@ -106,6 +107,10 @@ canvas:
     width: 360
     height: 360
     unit: px
+  grid-cell-master:
+    width: 1080
+    height: 1080
+    unit: px
   grid-layout: "3×3"
 
 spacing:
@@ -163,7 +168,12 @@ components:
     maxItems: 3
   visual-hero:
     zone: "{spacing.zone-visual}"
-    style: "cinematic, restrained, professional"
+    style: "simple, restrained, single-subject, professional"
+    density: "low"
+    maxPrimarySubject: 1
+    maxSupportingObjects: 2
+    maxDataCards: 2
+    emptySpace: "55%–65%"
   footer-curve:
     backgroundColor: "{colors.footer-curve}"
     shape: "blue curved closure"
@@ -178,6 +188,17 @@ components:
   grid-cell:
     canvas: "{canvas.grid-cell}"
     backgroundColor: "{colors.palette-b-bg}"
+  grid-cell-master:
+    canvas: "{canvas.grid-cell-master}"
+    backgroundColor: "{colors.palette-b-bg}"
+  grid-story-card:
+    style: "dark minimal story card"
+    composition: "one proposition, one symbol, one light source"
+    textPlacement: "lower-left / center / right-balanced"
+  grid-center-card:
+    style: "copy-led center statement card"
+    typography: "{typography.title-serif-heavy}"
+    composition: "large title, minimal symbol, strongest contrast"
   threshold-badge:
     typography: "{typography.title-serif-heavy}"
     textColor: "{colors.champagne-gold}"
@@ -186,6 +207,32 @@ components:
     style: "transparent glass panel"
     border: "1px solid rgba(201, 169, 98, 0.3)"
     shadow: "{shadow.card-soft}"
+
+composition:
+  density: "low"
+  core-rule: "one scene + one primary subject + one accent"
+  empty-space-ratio: "55%–65%"
+  max-primary-subjects: 1
+  max-supporting-objects: 2
+  max-data-cards: 2
+  max-people: 2
+  background-detail: "soft, low-contrast, non-distracting"
+  no-combined-sets: "do not combine people, city skyline, sea view, charts, globe, documents, trophy and data panels in one image"
+
+visual_language:
+  principle: "theme-first metaphor, not literal financial decoration"
+  default-expression: "symbolic, spatial, atmospheric, natural or object-based metaphor"
+  direct-finance-limit: "charts, dashboards, candlesticks, currency symbols and trading screens are not default primary visuals"
+  diversity-rule: "for multi-poster output, each image must use a different metaphor family"
+  max-literal-finance-elements: 1
+  preferred-metaphor-families:
+    threshold-seat: "empty seat, private doorway, quiet invitation, reserved table, illuminated threshold"
+    information-source: "lighthouse, window, horizon, telescope, compass shadow, layered light path"
+    alpha-opportunity: "hidden path, constellation, quiet current, sealed envelope, narrow beam of light"
+    same-frequency-circle: "round table, aligned seats, concentric ripples, orbit, quiet salon"
+    research-global-view: "observatory, star map, world texture, navigation chart, globe shadow"
+    long-term-companionship: "sailing route, mountain ridge, tree rings, calm river, sunrise horizon"
+    layout-vs-waiting: "chessboard, split light, early footprints, half-open curtain, distant route"
 ---
 
 # qieman-design-vip
@@ -197,7 +244,7 @@ components:
 | **场景** | VIP 私域海报 |
 | **规范** | 本文件 `SKILL.md` |
 | **依赖** | [`qieman-design-ui`](../qieman-design-ui/qieman-ui-design.md) |
-| **更新日期** | 2026-06-30 |
+| **更新日期** | 2026-07-01 |
 
 ## 调用
 
@@ -213,7 +260,7 @@ qieman-design-vip 是一个面向 **且慢高净值用户私域传播** 的营�
 
 本 Skill **继承并扩展** [qieman-design-ui](../qieman-design-ui/qieman-ui-design.md) 的基础品牌 token（如 `{colors.brand-primary}` #1B88EE），在此基础上定义 VIP 私域专属的蓝金 / 黑金视觉体系、海报版式结构、文案逻辑、AI 生图提示词和九宫格传播方法。
 
-**Version:** V0.1.3
+**Version:** V0.1.8
 
 **核心设计气质：**
 - 门槛感：资产 300万+、准入筛选、席位稀缺，不是普通理财广告。
@@ -234,6 +281,45 @@ Source Han Serif CN 标题
 300万+ 门槛前置
 +
 圈层、信息源、投研能力、长期陪伴的价值表达
++
+低复杂度构图控制：一个场景 + 一个主视觉 + 一个强调点
++
+强视觉语言：一个观点 + 一个符号 + 一处聚光 + 大面积留白
+```
+
+### V0.1.4 简洁化更新重点
+
+本版本针对验证中「AI 生图内容过于复杂」的问题，新增 **低复杂度构图规则**：
+
+* 默认只生成 **无字背景图**，不让 AI 同时处理文字、Logo、风险提示和复杂场景。
+* 每张图只保留 **1 个主视觉**，例如空席位、邀请函、山湖书房、商务对谈、数据中台中的一个。
+* 每张图最多搭配 **2 个辅助物**，例如钢笔、咖啡杯、地球仪、透明数据卡中的两个。
+* 数据卡最多 **1–2 张**，只做氛围点缀，不做报告页展示。
+* 画面留白建议提升到 **55%–65%**，降低背景细节密度。
+* 生图提示词避免使用「可包含 A、B、C、D、E」的开放式长列表，改为「从候选元素中选择 1 个主视觉」。
+
+
+### V0.1.8 Nine-grid Story System 更新重点
+
+本版本针对「画面简洁但视觉语言需要更强、更高级、更主题化」的问题，新增 **极简隐喻式视觉基准**。
+
+核心调整：
+
+* 默认不直白出现金融元素，优先把主题转译为 **认知、门槛、方向、布局、同频、筛选、长期主义** 等抽象语义。
+* 每张图优先采用 **一个观点 + 一个主符号 + 一处聚光 + 大面积留白** 的结构。
+* 金融元素从「主视觉」降级为「弱金融暗示」，可完全不出现。
+* 鼓励使用棋子、光束、门洞、点阵、同心圆、箭头、轨迹、光点、星轨、筛选路径等高级视觉隐喻。
+* 画面应具备观点型传播感，而不是金融场景展示感。
+* 九宫格优先采用「每格一个判断句 + 一个强隐喻符号」的观点卡片结构。
+
+新增默认表达公式：
+
+```txt
+主题判断
+→ 高阶语义
+→ 单一视觉符号
+→ 极简高对比画面
+→ 后期叠加准确文案
 ```
 
 ## When to Use
@@ -285,6 +371,8 @@ Source Han Serif CN 标题
 - 所有常用组件优先来自 `components:`。
 - 生成 HTML/CSS 或设计稿时，将 YAML token 映射为 CSS variables；不要在组件 CSS 中反复硬编码十六进制色值。
 - VIP 海报与九宫格不使用 qieman-design-ui 的 `{rounded.*}` 圆角体系作为核心表达；层级优先通过色彩、留白、光影建立。
+- AI 生图默认采用 `{composition.core-rule}`：一个场景 + 一个主视觉 + 一个强调点，避免多元素堆叠。
+- 若用户未明确要求复杂场景，默认执行 `{composition.density}` 低密度构图，画面留白不低于 `{composition.empty-space-ratio}`。
 
 ### Token 引用语法
 
@@ -714,7 +802,10 @@ VIP 海报通过 **色彩深浅、留白、光影质感** 建立层级，而非�
 
 * 占画布 `{spacing.zone-visual}`（38%–48%）
 * 集中在中下部
-* 风格：cinematic, restrained, professional
+* 风格：simple, restrained, single-subject, professional
+* 默认只使用 1 个主视觉，不同时堆叠人物、建筑、自然远景、数据图表和器物
+* 辅助物最多 2 个，透明数据卡最多 1–2 张
+* 背景细节低对比、低密度，不抢主标题
 * 背景图不能把关键人物、建筑、器物放在标题区域
 
 ### Footer — `{components.footer-curve}` + `{components.brand-slogan}` + `{components.risk-disclosure-block}`
@@ -889,6 +980,315 @@ VIP 海报通过 **色彩深浅、留白、光影质感** 建立层级，而非�
 * 自然隐喻必须服务金融主题
 * 避免变成旅游宣传图
 
+## Semantic Visual Language
+
+### 核心原则：先翻译主题，再选择画面
+
+高净值私域海报不要默认把主题翻译成 **K线、走势图、饼图、金融大屏、金币、钞票、地球仪**。这些是直观金融元素，容易让画面普通、拥挤、广告化。
+
+默认流程应改为：
+
+```txt
+主题文案
+→ 提炼关键词
+→ 转译为高阶语义
+→ 选择一个视觉隐喻家族
+→ 生成一个简洁主画面
+```
+
+### Theme-to-Metaphor Matrix
+
+| 主题关键词 | 高阶语义 | 推荐高级视觉语言 | 避免直给 |
+|---|---|---|---|
+| 300万+ / 门槛 / 不是所有人能进 | 准入、筛选、稀缺、边界 | 半开的私享门廊、被光照亮的空席位、专属邀请函、静置的席卡、阶梯尽头的一束光 | 钱堆、金条、会员卡大特写、夸张豪华会所 |
+| 席位有限 / 短暂开放 | 时间窗口、机会窗口、被保留的位置 | 落地窗前唯一空椅、圆桌上未被打开的邀请函、光线穿过门缝、安静的私享沙龙入口 | 抢购倒计时、红色促销、拥挤人群 |
+| 信息源 / 收益天花板 | 视野高度、信息到达、判断边界 | 灯塔、远处海平线、窗外开阔视野、望远镜剪影、指南针投影、层层展开的光路 | 大屏资讯流、密集数据卡、新闻弹窗 |
+| 对的圈子 / 同频 | 共识、认知圈层、连接质量 | 圆桌留白、同心涟漪、星体轨道、少量座席围合、安静会谈的侧影 | 一群人开会、商务握手大合影、社群头像墙 |
+| Alpha / 私享机会 / 流通 | 隐秘路径、提前抵达、非公开流动 | 暗流、星轨、窄光束、隐约路径、封缄信封、被风掀起一角的地图 | 走势图暴涨、箭头冲天、交易屏幕 |
+| 投研观点 / 严选机会 | 观察、筛选、研判、洞察 | 观测台、星图、玻璃棱镜、筛选光束、少量纸页叠层、研究桌面的局部静物 | 复杂研究报告、满屏图表、金融仪表盘 |
+| 全球视野 / 资产配置 | 坐标、航线、全局观、跨区域 | 航海图纹理、星盘、世界轮廓压纹、地球阴影、远航路线 | 直白地球仪、世界地图大屏、密集国家标签 |
+| 长期陪伴 / 穿越周期 | 时间、耐心、稳定、远方 | 山脊、海面航线、树木年轮、慢河、日出前的远方、长桥 | 收益曲线、保本暗示、过度励志风景 |
+| 有人在布局 / 有人在观望 | 先后、路径、决策差异 | 棋盘一枚棋子已落、两束不同方向的光、窗边一人已起身、桌面上已展开的路线图 | 两个人看盘、红绿涨跌屏、焦虑表情 |
+
+### Direct Finance Element Limiter
+
+默认情况下，直观金融元素只允许作为弱辅助，不作为主视觉：
+
+* 可以使用：低透明度趋势线、抽象数据纹理、无字细线图、极简坐标网格。
+* 谨慎使用：电脑屏幕、资产配置饼图、全球地图、透明数据卡。
+* 默认避免：K线、红绿涨跌、货币符号、密集金融大屏、满屏图表、复杂报告页。
+
+### Multi-visual Diversity Rule
+
+当用户要求生成 4 张、8 张或九宫格时，不能只是换角度重复同一金融场景。必须按不同隐喻家族分配视觉方向：
+
+```txt
+方案 1：空间隐喻，例如空席位 / 门廊 / 圆桌
+方案 2：自然隐喻，例如海平线 / 山脊 / 光线
+方案 3：器物隐喻，例如邀请函 / 指南针 / 封缄信封
+方案 4：抽象隐喻，例如星轨 / 涟漪 / 光路 / 棋盘
+```
+
+每张图仍然遵守低复杂度规则：**一个主场景 + 一个主视觉 + 最多两个辅助物**。
+
+
+### Strong Visual Language Benchmark — 极简隐喻视觉基准
+
+当主题强调 **认知、门槛、圈层、布局、方向、筛选机制、长期主义、Alpha** 时，优先采用极简隐喻式表达，而不是直白金融元素堆叠。
+
+目标气质：
+
+* 极简
+* 克制
+* 强判断感
+* 高级
+* 高对比
+* 高留白
+* 强视觉语言
+* 非字面金融
+
+核心结构：
+
+```txt
+一个观点
++
+一个主符号
++
+一处聚光
++
+大面积留白
++
+少量强调色
+```
+
+#### One Proposition Rule — 一张图只讲一个判断
+
+每张海报 / 九宫格单格只承载一个核心判断，不并列堆砌多个卖点。
+
+正确方向：
+
+```txt
+不是信息差，是认知差
+看行情，不如看结构
+筛掉的是噪音，留下的是同频
+少数人的方向，多数人看不懂
+```
+
+避免方向：
+
+```txt
+门槛 + 圈层 + 投研 + 全球视野 + 权益 + 服务全部放进一张图
+```
+
+#### One Symbol Rule — 一张图只保留一个主符号
+
+主符号必须能独立承载主题，不依赖复杂场景解释。
+
+推荐主符号：
+
+| 主题语义 | 推荐主符号 |
+|---|---|
+| 门槛 / 席位 | 半开的门、唯一空席、封缄邀请函、被照亮的入口 |
+| 信息源 / 认知 | 光点、灯塔、透镜、同心圆、地平线、指南针投影 |
+| 布局 / 先手 | 棋子、一步先手、已点亮路径、单向箭头、分割光影 |
+| 同频 / 筛选 | 点阵筛选、轨道圈层、聚焦节点、波纹、连接路径 |
+| 长期主义 / 复利 | 上扬光轨、远方微光、年轮、星轨、缓慢曲线 |
+| Alpha / 隐秘机会 | 暗流、窄光束、隐约路径、星图、被掀起一角的地图 |
+
+#### Copy-led Composition — 文案主导构图
+
+正式海报中，文案本身应是视觉系统的一部分，而不是后置说明。
+
+要求：
+
+* 文字区必须有清晰舞台，背景不可抢字。
+* 主符号与标题形成二元关系：上 / 下、左 / 右、中心 / 边缘、明 / 暗。
+* 标题区留白应足够强，适合叠加大字重中文标题。
+* 无字背景图也必须预留「强标题位」，而不是只留普通空白。
+
+#### Minimal Dark-card Aesthetic — 深色极简观点卡
+
+适合九宫格和观点型传播图。
+
+视觉公式：
+
+```txt
+90% 深色背景
++
+8% 白色标题
++
+2% 金色主符号 / 高光
+```
+
+画面特征：
+
+* 深黑蓝 / 黑金背景。
+* 微弱纹理、颗粒、雾化光，不做复杂空间。
+* 只有一处金色高光，集中在主符号。
+* 背景接近空，靠光影和符号传达判断。
+* 尽量不用写实金融场景。
+
+#### Advanced Visual Language Do / Don't
+
+Do：
+
+* 用「棋子」表达布局。
+* 用「门缝光」表达准入门槛。
+* 用「光点穿过点阵」表达认知筛选。
+* 用「同心圆」表达结构和圈层。
+* 用「一条上扬光轨」表达复利和长期。
+* 用「远方微光」表达方向和长期陪伴。
+
+Don't：
+
+* 不要为了高级感而堆砌抽象元素。
+* 不要让多个符号同时争抢视觉中心。
+* 不要把城市、人物、会议室、图表、地球仪全部塞进一张图。
+* 不要做成廉价金融广告或奢侈品炫耀图。
+
+### Premium Story Mood Benchmark — 高级感与故事感基准
+
+参考高端观点卡式表达，画面不应只停留在“抽象图形”，还应具备**微叙事、空间感、情绪张力和被保留的含义**。
+
+目标气质：
+
+* 高级感
+* 故事感
+* 克制的戏剧性
+* 被筛选 / 被接近 / 被照亮的感觉
+* 接近答案但不直白揭示
+* 安静但有力量
+
+核心结构：
+
+```txt
+一个主题判断
++
+一个叙事瞬间
++
+一个视觉焦点
++
+一条隐含路径或边界
++
+一处光线揭示
+```
+
+#### Story-first Interpretation — 先有情境，再有符号
+
+当主题允许时，不只生成抽象符号，还要让符号存在于一个简洁但成立的情境里。
+
+推荐方向：
+
+* 门缝中的光 —— 表达准入、筛选、被邀请。
+* 海面尽头的微光 —— 表达方向、长期、接近答案。
+* 山脊或路径通向亮处 —— 表达少数人走的路、靠近答案的路。
+* 圆桌中央的光 —— 表达小范围交流、圈层、私享对话。
+* 黑暗空间里被点亮的节点网络 —— 表达私域不是聚集，而是筛选后的连接。
+
+要求：
+
+* 情境只能服务一个主题，不做复杂剧情。
+* 场景必须简洁、可远读。
+* 主体仍然只有一个视觉焦点。
+
+#### Premium Feel Formula — 高级感公式
+
+高级感不来自元素多，而来自以下因素叠加：
+
+```txt
+大面积深色基底
++
+局部暖金或冷白聚光
++
+克制材质（雾面、金属边线、玻璃微光）
++
+清晰留白
++
+单一明确的主叙事符号
+```
+
+推荐做法：
+
+* 用局部聚光制造仪式感。
+* 用深色空间制造未知与边界感。
+* 用少量金色边线或光轨提升精致度。
+* 用尺度反差提升故事感，例如“小入口 / 大空间”“小光点 / 大黑场”。
+* 允许轻微景深、雾化、空气感，但不要复杂写实。
+
+#### Story-rich Visual Families — 具故事感的视觉家族
+
+| 家族 | 适合主题 | 推荐画面表现 |
+|---|---|---|
+| Threshold Arrival / 准入时刻 | 300万+门槛、席位开放、不是所有人都能进 | 半开的门、门缝光、唯一被照亮的入口、通向门的地面光路 |
+| Scarce Conversation / 稀缺交流 | 进对圈子、少数人的交流、更接近答案 | 圆桌中央光、少量座位、安静会谈空间的远景或俯视 |
+| Hidden Path / 隐秘路径 | 少数人的方向、机会不在公开处、靠近答案的路 | 海面尽头灯光、山路通向微光、单线延伸的光路 |
+| Selective Connection / 筛选连接 | 私域不是聚集，是筛选；认知相近的人找到彼此 | 极简节点网络、被点亮的少量节点、连接到中心的路径 |
+| Signal Emergence / 信号显现 | 不是信息差，是认知差；真正的信号从不在广场上叫卖 | 黑场中的光点、聚焦光束、透镜、局部显影 |
+| Boundary & Circle / 边界与圈层 | 圈层越小，边界越清晰；结构比行情重要 | 同心圆、边线几何、被切开的圆、边界内外对照 |
+
+#### Narrative Diversity Rule — 多元但统一
+
+当生成 4 张、8 张、9 张时，必须体现“表达家族的切换”，而不是同一招反复使用。
+
+推荐搭配：
+
+```txt
+第 1 张：空间叙事（门 / 圆桌 / 会谈空间）
+第 2 张：路径叙事（海面 / 山路 / 光路）
+第 3 张：符号叙事（同心圆 / 棋子 / 光点）
+第 4 张：连接叙事（节点网络 / 筛选结构）
+```
+
+但整体仍需统一：
+
+* 深色基底一致
+* 光线逻辑一致
+* 金色强调比例一致
+* 文案气质一致
+* 构图保持简洁
+
+#### What Creates Story Mood / 什么让画面更有故事感
+
+推荐加入以下微妙线索，而不是复杂剧情：
+
+* 刚被推开的门
+* 正在接近终点的一束光
+* 远处微亮但不完全揭示的目的地
+* 圆桌中心亮起但四周克制安静
+* 一组节点中仅少量被连接
+* 光从画面边缘进入，而不是平均铺满
+
+避免：
+
+* 人物动作戏过多
+* 过度写实的大场景叙事
+* 复杂建筑细节
+* 过多道具堆叠
+* 只是“黑底+金线”但没有主题含义
+
+Don't：
+
+* 不要用 K 线直接表达投资。
+* 不要用金币直接表达财富。
+* 不要用多人会议直接表达圈层。
+* 不要用资讯大屏直接表达信息源。
+* 不要用复杂仪表盘直接表达投研。
+* 不要把海景、人物、城市、图表、数据卡、品牌器物同时放进一张图。
+
+### Strong Metaphor Mapping — 主题到高级视觉语言
+
+| 主题内容 | 高级语义 | 推荐极简视觉 | 禁止直白表现 |
+|---|---|---|---|
+| 资产300万以上才能进的投资圈 | 准入门槛、被保留的位置 | 半开的门、唯一空席、封缄邀请函、门缝光 | 钱堆、金条、豪宅、会所大场景 |
+| 不是所有人都能进 | 筛选、边界、资格 | 点阵中被照亮的一个点、阶梯尽头的光 | 人群排队、夸张会员卡 |
+| 你的投资信息源决定收益天花板 | 视野高度、信息到达 | 灯塔、海平线、透镜、指南针投影 | 新闻流、复杂金融屏幕 |
+| 进对圈子，比选对产品重要 | 同频、连接、圈层质量 | 同心圆、轨道圈层、中心聚合点 | 社交聚会、握手大合影 |
+| 有些投资机会只在对的圈子里流通 | 非公开路径、暗流、提前抵达 | 暗流光线、窄光束、隐约路径、封缄地图 | 暴涨箭头、交易屏幕 |
+| 同样的市场，有人已经在布局 | 先手、路径、判断差 | 棋盘单子、已点亮路线、分割光影 | 两人看盘、红绿涨跌屏 |
+| 看行情，不如看结构 | 结构、秩序、底层逻辑 | 同心圆结构、网格中轴、几何骨架 | K线、走势大屏 |
+| 认知的复利，比资产的复利更快 | 复利、时间、积累 | 上扬光轨、星轨、年轮、远方微光 | 收益率数字、夸张曲线 |
+| 投研观点、严选机会、全球视野 | 观察、筛选、全局 | 观测台、星图、棱镜、航海图纹理 | 复杂研报、地球仪大屏 |
+
 ### Nine-grid: 4 Core Strategies
 
 九宫格采用 4 个核心策略：
@@ -1022,6 +1422,340 @@ VIP 海报通过 **色彩深浅、留白、光影质感** 建立层级，而非�
 * 邀请函 / 会员卡 / 全球配置手册
 * 数据中台 / 透明数据卡
 * 海景露台 / 顶层空间
+
+
+## Nine-grid Dedicated Rules — 九宫格专用规则
+
+九宫格不是 9 张单图的简单集合，也不是竖版海报裁切。它是朋友圈 / 私域环境里的 **观点型传播矩阵**，需要同时满足：
+
+```txt
+单格可读
++
+整体成组
++
+中间有记忆点
++
+九格有节奏
++
+缩小后仍有高级感
+```
+
+### Grid Production Size
+
+对外规范仍使用 `{canvas.grid-cell}`（360×360）作为九宫格单格尺寸；但 AI 生图和设计源文件建议使用 `{canvas.grid-cell-master}`（1080×1080）制作，再导出为 360×360 或组合成 3×3 预览。
+
+原因：
+
+* 360×360 是朋友圈九宫格的结构尺寸。
+* 1080×1080 更适合 AI 生成细节和后期排版。
+* 最终必须通过 3×3 缩略图预览检查，不以单张高清效果为唯一标准。
+
+### Nine-grid Core Formula
+
+推荐使用：
+
+```txt
+中心观点卡
++
+8 张周边故事 / 符号卡
+```
+
+九宫格的中心第 5 格必须承担最强记忆点，周边 8 格负责展开主题语义。
+
+```txt
+第5格 = 核心观点 / 主标题 / 品牌判断
+第1、3、7、9格 = 情绪与故事感
+第2、4、6、8格 = 逻辑、门槛、筛选、连接
+```
+
+### Recommended Grid Structure
+
+#### Structure A: 观点型九宫格
+
+适合认知差、圈层、信息源、布局、筛选机制类主题。
+
+| 位置 | 角色 | 推荐内容 | 推荐视觉 |
+|---|---|---|---|
+| 1 | 开场判断 | 点出问题或反常识 | 黑场光点、远景微光、暗处边界 |
+| 2 | 圈层现象 | 大多数人如何理解 | 同心圆、池塘、广场暗喻 |
+| 3 | 机会入口 | 真正机会在哪里 | 门缝光、被照亮的入口、金色边界 |
+| 4 | 筛选机制 | 为什么不是所有人 | 点阵筛选、少数亮点、窄光束 |
+| 5 | 核心主张 | 最大标题 / 主题金句 | 纯文字 + 单一符号，最强对比 |
+| 6 | 价值解释 | 圈层、边界、结构 | 圆形边界、透镜、切面结构 |
+| 7 | 对话价值 | 一次对话 / 信息抵达 | 一条光线、圆桌光、路径 |
+| 8 | 准入感 | 只邀请符合要求的人 | 半开的门、邀请函、唯一空席 |
+| 9 | 品牌收口 | 同频、长期、谨慎 | 门内暖光、远处微光、品牌收口 |
+
+#### Structure B: 门槛邀请型九宫格
+
+适合“资产300万+”“席位有限”“不是所有人都能进”。
+
+| 位置 | 角色 | 推荐内容 | 推荐视觉 |
+|---|---|---|---|
+| 1 | 稀缺感 | 不是公开招募 | 黑色空间、唯一入口 |
+| 2 | 资产门槛 | 300万+准入 | 极简门槛线、封缄邀请函 |
+| 3 | 席位感 | 位置有限 | 唯一空席、微光桌面 |
+| 4 | 筛选机制 | 筛掉噪音 | 点阵中少数亮点 |
+| 5 | 中心主张 | 资产300万+才能进的投资圈 | 大字标题 + 金色线框 |
+| 6 | 圈层价值 | 留下同频 | 同心圆 / 圆桌 / 连接节点 |
+| 7 | 信息效率 | 更早抵达 | 光路、信号、远方微光 |
+| 8 | 投研陪伴 | 不只信息，更是判断 | 透镜、观测台、桌面一束光 |
+| 9 | 行动收口 | 席位有限，短暂开放 | 半开的门、品牌 slogan |
+
+#### Structure C: 高级故事型九宫格
+
+适合更接近参考图的高级黑金观点卡。
+
+```txt
+第1行：提出矛盾
+第2行：给出核心判断
+第3行：完成邀请和收口
+```
+
+| 行 | 传播任务 | 视觉节奏 |
+|---|---|---|
+| 第一行 | 建立问题：信息噪音、机会难见、方向不明 | 黑场、远光、局部符号 |
+| 第二行 | 给出判断：圈层越小，边界越清晰 | 中心大标题、强符号、边界图形 |
+| 第三行 | 完成转化：筛选、邀请、同频 | 门、路径、连接、品牌收口 |
+
+### Single-cell Copy Rules
+
+九宫格单格必须通过缩略图测试，因此文案比单张海报更短、更硬、更像判断句。
+
+#### 主标题
+
+* 建议 8–18 个汉字。
+* 最多 2 行。
+* 每行 6–10 个汉字最稳。
+* 不使用长句，不写完整说明段。
+* 可以使用顿号和逗号，但避免复杂标点。
+
+示例：
+
+```txt
+不是信息差，
+是认知差
+```
+
+```txt
+圈层越小，
+边界越清晰
+```
+
+```txt
+真正的机会，
+从不在广场上叫卖
+```
+
+#### 副标题
+
+* 建议 10–24 个汉字。
+* 最多 1–2 行。
+* 只解释主标题，不新增第二个卖点。
+
+示例：
+
+```txt
+高净值投资交流圈
+```
+
+```txt
+资产300万+用户加入
+```
+
+```txt
+筛掉噪音，留下同频
+```
+
+#### 小字 / 风险提示
+
+* 九宫格单格内小字应极少。
+* 品牌 slogan 和风险提示可以只在第 5 或第 9 格出现。
+* 若每格都放风险提示，必须保持极低存在感，不影响主标题可读性。
+* 不要把完整合规长段落塞入九宫格。
+
+### Single-cell Layout Rules
+
+每格只允许一种主排版：
+
+| 类型 | 适合位置 | 规则 |
+|---|---|---|
+| 左下标题型 | 1、3、4、6、7、9 | 主标题左下，视觉符号在右上或中上 |
+| 中心观点型 | 5 | 大标题居中，符号极少，最强识别 |
+| 右侧标题型 | 2、8 | 主标题在右侧，左侧放门、路径、光束 |
+| 纯符号型 | 辅助格 | 几乎无字，只做情绪和节奏 |
+
+必须避免：
+
+* 每格都左下角排版，导致节奏单调。
+* 每格都居中大标题，导致没有层级。
+* 文案压住主符号。
+* 主符号与标题竞争视觉中心。
+
+### Visual Family Assignment for 3×3
+
+生成九宫格前，必须先做“九格视觉家族分配表”。
+
+推荐分配：
+
+| 位置 | 视觉家族 | 作用 |
+|---|---|---|
+| 1 | Signal Emergence / 信号显现 | 开场吸引 |
+| 2 | Boundary & Circle / 边界与圈层 | 建立结构 |
+| 3 | Threshold Arrival / 准入时刻 | 制造机会感 |
+| 4 | Selective Connection / 筛选连接 | 解释门槛 |
+| 5 | Center Statement / 中心观点 | 记忆点 |
+| 6 | Lens / Structure / 透镜结构 | 强化判断 |
+| 7 | Hidden Path / 隐秘路径 | 增加故事感 |
+| 8 | Scarce Conversation / 稀缺交流 | 体现私域价值 |
+| 9 | Brand Closure / 品牌收口 | 形成转化 |
+
+限制：
+
+* 同一视觉家族最多连续出现 2 次。
+* 9 格中至少包含 3 种视觉家族。
+* 不要 9 格全是光点 / 全是门 / 全是同心圆。
+* 中心第 5 格不能和周边格视觉权重相同。
+
+### Thumbnail Test
+
+九宫格生成后必须做 3 个检查：
+
+#### 1. 3 秒测试
+
+把九宫格缩小到朋友圈预览尺寸后，3 秒内能看出：
+
+* 主主题是什么。
+* 第 5 格记忆点是什么。
+* 整体是高端观点图，不是普通金融广告。
+
+#### 2. 2 米测试
+
+从远处看，至少有 3 张图的主符号仍然可识别：
+
+* 门
+* 光路
+* 同心圆
+* 棋子
+* 节点网络
+* 圆桌光
+* 远方微光
+
+#### 3. 降噪测试
+
+遮住所有小字后，画面仍能成立；去掉所有图像后，标题仍能成立。图像和文字必须互相增强，而不是互相依赖。
+
+### Nine-grid Visual Avoidance
+
+严格避免：
+
+* 9 格都像单张海报缩小版。
+* 9 格全是会议室、桌面、城市夜景。
+* 每格都放满数据屏、图表、地球仪。
+* 每格都放 Logo，造成品牌噪音。
+* 每格文案超过 3 行。
+* 复杂小字密集堆叠。
+* 中心格不突出。
+* 周边格抢中心格。
+* 缩小后只剩黑成一片，没有可识别符号。
+* 只有黑底金线，没有故事含义。
+
+### Nine-grid Prompt Workflow
+
+生成九宫格时，不要直接一次性要求 AI “生成九宫格”。必须先输出九格分镜表，再生成每格提示词。
+
+流程：
+
+```txt
+1. 提炼主题核心判断
+2. 拆成 9 个单格观点
+3. 为每格选择视觉家族
+4. 为每格定义主符号
+5. 为每格定义标题位置
+6. 逐格生成背景 / 成稿
+7. 组合后做缩略图测试
+```
+
+### Nine-grid Storyboard Template
+
+```txt
+请使用 qieman-design-vip Skill 生成一组高净值私域九宫格。
+
+主题：
+「{主题文案}」
+
+风格目标：
+参考高端黑金观点卡。整体深色、极简、强隐喻、有故事感，不直白使用金融元素。
+每格只表达一个判断，每格只保留一个主符号或一个微叙事情境。
+
+请先输出九格分镜表，字段包括：
+1. 格子编号
+2. 单格观点句
+3. 视觉家族
+4. 主符号 / 微叙事情境
+5. 标题位置
+6. 是否出现品牌 Logo
+7. 是否需要风险提示
+
+结构要求：
+第5格为中心观点卡，主标题最大。
+第1、3、7、9格偏故事感。
+第2、4、6、8格偏结构解释。
+至少使用 3 种视觉家族。
+同一视觉家族最多连续出现 2 次。
+不要 9 格全是同一类黑金抽象符号。
+
+视觉要求：
+黑蓝或深蓝基底，白色大标题，金色只作为 1 处主符号或高光。
+每格留白 45%–65%。
+每格主标题最多 2 行。
+不要复杂金融图表，不要 K 线，不要金币钞票，不要会议室堆叠，不要多人写实场面。
+```
+
+### Single-cell Prompt Template
+
+```txt
+生成一张 1:1 正方形高端观点卡背景图，不要文字，不要 Logo。
+这是且慢高净值私域九宫格的第 {n} 格。
+
+单格观点：
+「{单格观点句}」
+
+视觉家族：
+{视觉家族}
+
+主视觉：
+只使用一个主符号 / 微叙事情境：「{主符号}」。
+
+构图：
+{标题位置} 预留大面积干净留白，便于后期叠加中文大标题。
+主符号放在 {主符号位置}，只保留一处金色高光。
+背景为深黑蓝或黑金色调，画面简洁、高级、有故事感。
+不要直白金融元素，不要 K 线，不要交易屏幕，不要金币钞票，不要复杂图表，不要多人场景，不要拥挤构图。
+```
+
+### Example Nine-grid Brief
+
+主题：
+
+```txt
+不是所有信息，都适合公开
+```
+
+推荐九格：
+
+| 格 | 单格观点 | 视觉家族 | 主符号 |
+|---|---|---|---|
+| 1 | 每天1000条资讯，真正有用的不超过3条 | Signal Emergence | 黑场中少数亮点 |
+| 2 | 大多数人在同一个池子里抢同一条鱼 | Boundary & Circle | 暗色池面同心波纹 |
+| 3 | 你没听说过的标的，才是真正的机会所在 | Threshold Arrival | 半开的金色门缝 |
+| 4 | 圈层，是更有效的风险筛选机制 | Selective Connection | 点阵中少数连接 |
+| 5 | 不是所有信息，都适合公开 | Center Statement | 大标题 + 金色边线 |
+| 6 | 财富最终靠的不是理财顾问，而是同行者 | Scarce Conversation | 圆桌中央一束光 |
+| 7 | 一次对话的价值，有时胜过一份尽调报告 | Hidden Path | 单线光路穿过黑场 |
+| 8 | 我们只邀请符合要求的投资人 | Threshold Arrival | 封缄邀请函 / 门框 |
+| 9 | 边界清晰的圈，只为同频的人而开 | Brand Closure | 门内暖光 + 品牌收口 |
+
 
 ## Copywriting Framework
 
@@ -1197,66 +1931,151 @@ VIP 海报通过 **色彩深浅、留白、光影质感** 建立层级，而非�
 
 ## Visual Element Library
 
-### Space Elements
+### Low-complexity Selection Rule
 
-* 海景露台
-* 山景书房
-* 顶层会客厅
-* 高端会议室
-* 现代别墅
-* 城市夜景
-* 游艇甲板
-* 落地窗办公室
-* 私享沙龙空间
+AI 生图阶段不允许把元素库当作「全部加入」清单使用。每次生成必须遵循：
 
-### Object Elements
+```txt
+1 个视觉隐喻家族
++
+1 个主场景
++
+1 个主视觉
++
+0–2 个辅助物
++
+0–1 个弱金融暗示
+```
 
-* 邀请函
-* 会员卡
-* 全球配置手册
-* 投资报告
-* 资产配置图
-* 平板电脑
-* 透明数据屏
-* 地球仪
-* 水晶数据摆件
+默认不把金融元素作为主视觉。金融元素只作为 **低透明、无字、抽象、局部** 的弱暗示。
+
+### Metaphor Families — 每张图只选 1 类
+
+| 隐喻家族 | 适合主题 | 推荐画面 | 气质 |
+|---|---|---|---|
+| Threshold / 门槛 | 300万+、席位、不是所有人能进 | 半开的门、被光照亮的空席、私享入口、安静门廊 | 稀缺、筛选、专属 |
+| Horizon / 视野 | 信息源、收益天花板、判断力 | 海平线、山脊、落地窗、远望视角 | 开阔、前瞻、认知高度 |
+| Compass / 方向 | 进对圈子、判断方向、长期配置 | 指南针投影、航线、地图局部、光线路径 | 理性、判断、路径感 |
+| Circle / 同频 | 圈层、同频、私域交流 | 圆桌、座席围合、同心涟漪、星体轨道 | 连接、共识、圈层 |
+| Observatory / 投研 | 投研观点、严选机会、全球视野 | 观测台、星图、棱镜、研究桌面局部 | 洞察、筛选、专业 |
+| Time / 长期 | 陪伴、穿越周期、长期主义 | 树木年轮、慢河、日出、长桥、远航 | 耐心、稳定、时间感 |
+| Hidden Path / Alpha | 私享机会、不公开流通、提前布局 | 暗流、窄光束、星轨、封缄信封、隐约路径 | 隐秘、提前、稀缺 |
+| Chess / 布局 | 有人已布局、有人还在观望 | 棋盘、已落一子、半开地图、分割光影 | 策略、先后、判断差异 |
+
+
+### Minimal Symbol Library — 极简主符号库
+
+当用户给出观点型文案，优先从下面选择 **1 个主符号**，而不是生成完整金融场景。
+
+| 符号 | 适合表达 | 视觉处理 |
+|---|---|---|
+| 金色箭头 | 方向、领先、少数人的路径 | 单一箭头，周围留黑，不做多箭头 |
+| 棋子 | 布局、先手、判断力 | 一枚棋子，局部聚光，棋盘弱化 |
+| 光点 | 认知、被发现的机会 | 一个光点穿过暗场或点阵 |
+| 同心圆 | 结构、圈层、共识 | 2–3 圈细线，中心轻微高光 |
+| 门洞 / 门缝 | 门槛、准入、席位 | 一道光，不做复杂建筑 |
+| 点阵 | 筛选、噪音、同频 | 大部分暗点，一个或少数亮点 |
+| 光轨 | 复利、长期、路径 | 一条克制曲线，不做暴涨箭头 |
+| 棱镜 / 透镜 | 洞察、判断、信息过滤 | 小面积玻璃质感，避免复杂科技风 |
+| 星轨 / 星图 | 全球视野、长期周期 | 抽象星点，不加国家标签 |
+| 封缄信封 | 私享机会、邀请制 | 一封信，低饱和金色封蜡 |
+
+符号使用规则：
+
+* 每张图只选一个主符号。
+* 金色只集中在主符号上。
+* 背景只保留弱纹理、弱网格或弱空间感。
+* 不要同时使用箭头、棋子、门、点阵、数据卡等多个符号。
+
+### Primary Scene — 每张图只选 1 个
+
+* 私享门廊 / 安静入口
+* 海平线 / 远山 / 山脊
+* 窗边书房 / 开阔落地窗
+* 简洁圆桌 / 空席位
+* 观测台 / 抽象星图空间
+* 研究桌面局部
+* 长桥 / 远航路线
+* 棋盘局部 / 光影分割空间
+
+### Primary Visual — 每张图只选 1 个
+
+* 空席位
+* 半开的门
+* 邀请函 / 封缄信封
+* 指南针投影
+* 窗外海平线
+* 圆桌局部
+* 同心涟漪
+* 星轨 / 光路
+* 棱镜 / 观测镜头
+* 树木年轮 / 长桥
+* 棋盘已落一子
+
+### Supporting Objects — 最多选 2 个
+
 * 钢笔
+* 书页
 * 咖啡杯
-* 文件夹
-* 腕表
-* 书本
-* 品牌奖杯
+* 席卡
+* 地图局部
+* 金色细线
+* 柔和光束
+* 低透明度纹理
 
-### Data Elements
+### Weak Finance Signals — 最多选 1 个
 
-* 全球地图
-* 资产配置饼图
-* 组合表现走势图
-* 宏观洞察卡
-* 私享机会卡
-* 长期策略卡
-* 全球市场卡
-* 政策动向卡
-* 产业趋势卡
+* 低透明度趋势线
+* 抽象坐标网格
+* 无字数据纹理
+* 极简资产配置轮廓
+* 世界轮廓压纹
+
+禁止把这些弱金融暗示变成主体；不要出现可读数字、密集标签、复杂报表、K线或红绿涨跌。
 
 ### People Elements
 
-* 成熟商务人士
-* 高净值投资者
-* 顾问与客户对谈
-* 单人远眺思考
-* 小范围圈层交流
-* 高端商务精英
+* 默认优先不用人物，通过空间、器物、光线表达高级感。
+* 如需人物，优先使用背影、侧影、远景人物，人数 1–2 人。
+* 人物出现时，不再叠加复杂金融图表、城市夜景、数据中台、地球仪。
+* 避免多人会议、拥挤沙龙、群像合影、夸张精英摆拍。
 
 ### Brand Elements
 
-* 盈米基金｜且慢组合 Logo
-* 且慢圆形图形 Logo
-* QIEMAN 字样
-* 品牌金属装置
-* 品牌奖杯
-* 蓝色弧形底部
-* 安放财富 · 静待花开
+AI 生图阶段默认不生成真实品牌文字和真实 Logo。可使用抽象品牌感元素：
+
+* 蓝色弧形底部区域
+* 柔和品牌蓝光线
+* 金属圆形装置
+* 简洁奖杯轮廓
+* 水晶摆件
+* 蓝金细线
+
+真实「盈米基金｜且慢」Logo、slogan、风险提示必须由设计软件后期叠加。
+
+### Element Combination Examples
+
+推荐组合：
+
+```txt
+门槛席位：私享门廊 + 半开的门 + 一束暖金光
+短暂席位：圆桌局部 + 唯一空席 + 封缄邀请函
+信息源：落地窗 + 远处海平线 + 指南针投影
+对的圈子：极简圆桌 + 4 个座席轮廓 + 同心光晕
+私享机会：深蓝空间 + 一条隐约光路 + 封缄信封
+投研观点：观测台 + 星图纹理 + 棱镜光束
+全球视野：航海图局部 + 远航路线 + 世界轮廓压纹
+长期陪伴：山脊日出 + 长桥剪影 + 柔和蓝金光线
+布局观望：棋盘局部 + 已落一枚棋子 + 分割光影
+```
+
+不推荐组合：
+
+```txt
+会议室 + 商务人士 + 城市夜景 + 电脑大屏 + 全球地图 + 走势图 + 数据卡 + 地球仪
+海景露台 + 多人会谈 + 邀请函 + 奖杯 + 咖啡杯 + 多张金融图表
+数据中台 + 透明大屏环绕 + 人物 + 地球 + 城市天际线 + 密集图表
+```
 
 ## Technical Implementation
 
@@ -1281,7 +2100,8 @@ VIP 海报通过 **色彩深浅、留白、光影质感** 建立层级，而非�
 正式设计交付推荐流程：
 
 ```txt
-AI 生成无字高净值背景图
+先根据主题选择视觉隐喻家族
+→ AI 生成无字、无 Logo、低复杂度背景图
 → 设计软件叠加准确 Logo
 → 设计软件叠加准确标题
 → 设计软件叠加 slogan 和风险提示
@@ -1290,55 +2110,103 @@ AI 生成无字高净值背景图
 
 ### Two Generation Modes
 
-本 Skill 支持两种 AI 生图模式：
-
 #### Mode A: Direct Poster Mode
 
-适合：
-
-* ChatGPT Image
-* 能较好处理中文字和版式的设计型工具
-* 快速生成整体风格参考
-* 方案探索阶段
-
-特点：
-
-* 可要求 AI 生成完整海报结构
-* 可包含标题、Logo、底部 slogan
-* 但必须人工检查文字准确性和 Logo 形态
-
-风险：
-
-* 中文可能乱码
-* Logo 可能变形
-* 风险提示可能错误
-* 字距、层级、排版可能不稳定
+适合快速探索整体调性。可尝试生成完整海报结构，但必须人工检查中文、Logo、风险提示和合规表达。
 
 #### Mode B: Background-only Mode
 
+正式设计交付优先使用。只生成无字、无 Logo 的高净值背景图，文字、Logo、slogan、风险提示全部由设计软件叠加。
+
+#### Mode C: Metaphor-led Poster Mode
+
 适合：
 
-* Midjourney
-* Stable Diffusion
-* 即梦
-* Firefly
-* 通义万相
-* 文心一格
-* 大多数市面 AI 生图工具
+* 高净值观点型九宫格
+* 认知差 / 信息源 / 圈层 / 布局 / Alpha 主题
+* 希望画面像高端观点卡，而不是金融广告时
 
 特点：
 
-* 只生成无文字、无 Logo 的高净值背景图
-* 保留顶部、中上部、底部留白
-* 后期在 Figma / Photoshop / Canva / 即梦编辑器中叠加文字和 Logo
-* 最适合正式交付
+* 先提炼一句核心判断。
+* 再选择一个主视觉符号或一个微叙事情境。
+* 金融元素默认不出现，或仅做极弱暗示。
+* 构图以深色背景、局部聚光、大标题留白为主。
+* 允许出现门、路径、海面、山路、圆桌、节点网络等更有故事感的高级视觉语言。
+* 适合后期叠加大字重中文标题。
 
 推荐优先级：
 
 ```txt
 正式设计交付：优先使用 Background-only Mode
+观点型九宫格 / 高级隐喻表达：优先使用 Metaphor-led Poster Mode
 快速概念探索：可使用 Direct Poster Mode
 ```
+
+### Semantic Translation Rules
+
+所有生图提示词必须先完成语义翻译：
+
+```txt
+不要直接画金融
+先画主题背后的语义
+```
+
+示例：
+
+```txt
+「资产300万+，才能进的投资圈」
+不要默认画钱、走势图、豪华会议室。
+应转译为：门槛 / 被保留的位置 / 安静的准入感。
+推荐画面：半开的私享门廊，门内有一束暖金光，前景留出大面积深蓝空间。
+```
+
+```txt
+「你的投资信息源，决定了你的收益天花板」
+不要默认画金融资讯大屏。
+应转译为：视野高度 / 信息到达 / 判断边界。
+推荐画面：窗边开阔海平线，桌面只有指南针投影和一页纸。
+```
+
+```txt
+「私域不是聚集，是筛选」
+不要默认画人群或社交场面。
+应转译为：被筛选后留下的少量连接、边界、同频感。
+推荐画面：黑暗背景中一个极简节点网络，只有少数节点被点亮并相互连接。
+```
+
+```txt
+「靠近答案的路，从不拥挤」
+不要默认画交易机会或成功学画面。
+应转译为：通向光的少数路径 / 远方微亮的目的地。
+推荐画面：深蓝黑山路或海面路径通向远处微光，画面安静克制。
+```
+
+### Complexity Control Rules
+
+为了避免 AI 把画面生成得过满，所有生图提示词必须执行以下规则：
+
+```txt
+一张图 = 一个隐喻家族 + 一个主场景 + 一个主视觉 + 最多两个辅助物 + 最多一个弱金融暗示
+```
+
+#### 必须执行
+
+* 先选择 1 个隐喻家族：门槛 / 视野 / 方向 / 同频 / 投研 / 长期 / Alpha / 布局。
+* 主场景只选 1 个。
+* 主视觉只选 1 个。
+* 辅助物最多 2 个。
+* 弱金融暗示最多 1 个，且必须低透明、无字、抽象化。
+* 背景细节使用低对比、虚化、柔光处理。
+* 顶部和中上部留白提升到 55%–65%。
+
+#### 禁止执行
+
+* 不要使用「可包含 A、B、C、D、E、F」作为生图提示词。
+* 不要默认使用 K 线、走势图、饼图、金融大屏、交易屏幕、货币符号。
+* 不要同时出现人物、城市、海景、地球仪、数据卡、邀请函、奖杯、走势图。
+* 不要生成满屏透明屏幕、复杂仪表盘、多层数据面板。
+* 不要让金融元素成为画面主体，金融元素只做轻量暗示。
 
 ### Universal Prompt Structure
 
@@ -1347,19 +2215,21 @@ AI 生成无字高净值背景图
 ```txt
 画幅尺寸 / 比例
 +
-主题场景
+主题文案
 +
-高净值金融语义
+高阶语义解释
 +
-主体元素
+唯一视觉隐喻家族
 +
-空间构图
+唯一主场景
++
+唯一主视觉
++
+最多两个辅助物
++
+最多一个弱金融暗示
 +
 色彩风格
-+
-材质光影
-+
-品牌气质
 +
 留白要求
 +
@@ -1370,13 +2240,17 @@ AI 生成无字高净值背景图
 
 ```txt
 生成一张 9:16 竖版高端金融私域海报背景图，画面用于高净值投资圈层宣传。
-主题是高净值用户、资产门槛、投资圈层、专业投研、长期陪伴。
+主题是「{主题文案}」。
+请先把主题转译为「{高阶语义}」，不要直接画金融图表或交易屏幕。
+视觉隐喻选择「{隐喻家族}」。
+画面只选择一个主场景「{主场景}」，只选择一个主视觉「{主视觉}」。
+辅助物最多两个：「{辅助物1}」「{辅助物2}」。
+弱金融暗示最多一个：「{弱金融暗示}」，必须低透明、无字、抽象化。
 画面风格专业、大气、克制、高端、安静、可信。
-色彩以深蓝、黑蓝、香槟金、浅金为主，少量蓝色光效和金色细线。
-主视觉为{具体场景}，体现圈层感、稀缺感、专业判断力和长期主义。
-画面顶部和中上部需要预留大面积干净留白，用于后期添加 Logo 和标题。
+色彩以深蓝、黑蓝、香槟金、浅金为主，少量品牌蓝柔光和金色细线。
+顶部和中上部预留 55%–65% 干净留白，用于后期添加 Logo 和标题。
 底部需要预留蓝色弧形收口区域，用于后期添加 slogan 和风险提示。
-不要出现任何文字，不要出现 Logo，不要出现乱码，不要出现绿色主调，不要低幼卡通，不要电商促销感，不要土豪炫富，不要满屏金币钞票。
+不要出现任何文字，不要出现 Logo，不要出现乱码，不要 K 线，不要交易屏幕，不要复杂金融图表，不要多人物，不要多屏幕，不要绿色主调，不要低幼卡通，不要电商促销感，不要土豪炫富，不要满屏金币钞票。
 ```
 
 ### Negative Prompt Rules
@@ -1384,13 +2258,13 @@ AI 生成无字高净值背景图
 通用 Negative Prompt：
 
 ```txt
-文字、乱码、错误中文、错误英文、变形 Logo、低清 Logo、绿色主调、红色促销、土豪金、满屏金币、钞票堆、豪车、低幼卡通、Q版人物、廉价广告、杂乱背景、过多图表、屏幕乱码、人物比例异常、手部畸形、过曝光效、霓虹赛博、拥挤构图、电商促销风、收益承诺、稳赚不赔、保本暗示
+文字、乱码、错误中文、错误英文、变形 Logo、低清 Logo、绿色主调、红色促销、土豪金、满屏金币、钞票堆、豪车、低幼卡通、Q版人物、廉价广告、杂乱背景、复杂背景、过多图表、复杂仪表盘、金融大屏、交易屏幕、K线、红绿涨跌、货币符号、饼图大屏、满屏数据卡、多层透明屏幕、信息卡环绕、过多人物、多人会议、拥挤构图、复杂城市夜景、器物堆叠、屏幕乱码、人物比例异常、手部畸形、过曝光效、霓虹赛博、电商促销风、收益承诺、稳赚不赔、保本暗示
 ```
 
 英文工具可使用：
 
 ```txt
-text, Chinese characters, garbled text, wrong logo, deformed logo, green color scheme, red promotional style, cheap luxury, piles of cash, gold bars, luxury car, childish cartoon, cute character, messy layout, cluttered charts, screen gibberish, distorted people, deformed hands, overexposed lighting, cyberpunk neon, e-commerce promotion poster, guaranteed returns, risk-free investment
+text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, green color scheme, red promotional style, cheap luxury, piles of cash, gold bars, luxury car, childish cartoon, cute character, messy layout, complex background, cluttered charts, financial dashboard, trading screen, candlestick chart, red and green stock market screen, currency symbol, pie chart dashboard, too many data panels, multiple transparent screens, floating information cards, too many people, group meeting, crowded composition, detailed city clutter, object pile, screen gibberish, distorted people, deformed hands, overexposed lighting, cyberpunk neon, e-commerce promotion poster, guaranteed returns, risk-free investment
 ```
 
 ### Text & Logo Handling Rule
@@ -1400,7 +2274,8 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, green color s
 * AI 生图阶段不要生成中文标题
 * AI 生图阶段不要生成真实 Logo
 * AI 生图阶段不要生成风险提示
-* AI 生图阶段只生成背景、场景、氛围、器物和视觉空间
+* AI 生图阶段只生成背景、场景、氛围、器物、光影和视觉空间
+* AI 生图阶段必须控制元素密度：1 个主视觉 + 最多 2 个辅助物
 * 文字、Logo、slogan、风险提示由设计软件后期准确叠加
 
 只有当用户明确要求「直接生成完整海报成稿」时，才尝试让 AI 生成完整海报。
@@ -1426,49 +2301,49 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, green color s
 
 * 使用英文提示词更稳定
 * 明确 `vertical poster background`
+* 明确 `semantic metaphor, not literal finance`
 * 明确 `no text, no logo`
 * 使用 `--ar 9:16`
-* 避免让工具生成真实品牌文字
 
 示例：
 
 ```txt
-luxury private wealth management poster background, high-net-worth investor circle, deep navy blue and champagne gold color palette, elegant private lounge by the sea, professional business atmosphere, cinematic lighting, refined financial objects, subtle transparent data panels, premium and restrained style, large clean empty space at the top for title, curved blue brand footer area at the bottom, no text, no logo, no letters, no watermark, no green color scheme, no childish cartoon, no piles of cash --ar 9:16
+minimal luxury private wealth management poster background, semantic metaphor for an exclusive high-net-worth investment circle, not literal finance, deep navy blue and champagne gold palette, one quiet private doorway with a half-open door, a narrow warm golden beam of light inside, one subtle sealed invitation envelope on a dark blue surface, spacious premium composition, 60 percent clean empty space at the top and upper middle for title, simple blue curved footer area at the bottom, calm cinematic lighting, restrained premium mood, no text, no logo, no letters, no financial dashboard, no stock chart, no trading screen, no currency symbols, no crowded charts, no green color scheme, no childish cartoon, no piles of cash --ar 9:16
 ```
 
 #### Stable Diffusion / SDXL
 
 重点：
 
-* 正向提示词写清主体、构图、风格
-* 负向提示词必须写清 text、logo、watermark
-* 建议使用 9:16 尺寸，如 1080×1920 或工具支持的等比尺寸
+* 正向提示词写清「隐喻」而不是只写金融场景。
+* 负向提示词必须写清 text、logo、financial dashboard、stock chart、trading screen。
+* 建议使用 9:16 尺寸，如 1080×1920 或工具支持的等比尺寸。
 
 正向提示词示例：
 
 ```txt
-A vertical 9:16 luxury private wealth management poster background, high-net-worth investor circle, elegant deep navy blue and champagne gold color palette, premium private lounge, sea view terrace, refined financial atmosphere, subtle transparent data cards, cinematic lighting, clean composition, large empty space on the top left for title, blue curved footer area at the bottom, professional, restrained, trustworthy, long-term investment mood
+A vertical 9:16 minimal luxury private wealth management poster background. The theme is exclusive access for high-net-worth investors, expressed through a symbolic visual metaphor rather than literal financial elements. Use one quiet private doorway with a half-open door and a narrow warm golden beam of light. Add one sealed invitation envelope as the only supporting object. Deep navy blue, brand blue, champagne gold, calm cinematic lighting, premium restrained atmosphere, large clean empty space in the top and upper-middle area, simple blue curved footer area at the bottom.
 ```
 
 负向提示词示例：
 
 ```txt
-text, logo, watermark, letters, Chinese characters, garbled text, green theme, red promotion, cartoon, cute, low quality, cluttered, cash pile, gold bars, luxury car, deformed people, bad hands, overexposed, cyberpunk, noisy background
+text, logo, watermark, letters, Chinese characters, garbled text, financial dashboard, stock chart, candlestick chart, trading screen, currency symbol, pie chart, green theme, red promotion, cartoon, cute, low quality, cluttered, complex background, too many charts, multiple transparent screens, floating cards, cash pile, gold bars, luxury car, deformed people, bad hands, overexposed, cyberpunk, noisy background
 ```
 
 #### 即梦 / 通义万相 / 文心一格等中文工具
 
 重点：
 
-* 中文提示词可以更具体
-* 必须明确「不要文字、不要 Logo」
-* 明确「顶部留白、中上部留白、底部蓝色弧形收口」
-* 尽量避免复杂文字要求
+* 中文提示词先写清「主题语义」，再写「视觉隐喻」。
+* 必须明确「不要直白金融元素」。
+* 必须明确「不要文字、不要 Logo」。
+* 明确「顶部留白、中上部留白、底部蓝色弧形收口」。
 
 示例：
 
 ```txt
-生成一张9:16竖版高端金融海报背景图，画面用于高净值投资圈层宣传。整体为深蓝金色调，专业、大气、克制、高端。场景为海景露台上的高端商务会谈，远处是城市夜景和海面，画面有轻微金色光效和透明金融数据卡片，体现高净值圈层、私享投资机会、长期陪伴。顶部和中上部预留大面积干净留白，底部预留蓝色弧形收口区域。不要出现文字，不要出现Logo，不要出现乱码，不要绿色主调，不要低幼卡通，不要促销感，不要满屏金币和钞票。
+生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是「资产300万以上才能进的投资圈，短暂开启席位」。不要直观表现钱、走势图、K线、金融大屏。请把主题转译为「准入门槛、被保留的位置、安静的邀请」。画面只选择一个视觉隐喻：半开的私享门廊。主视觉是一扇半开的门，门内有一束柔和香槟金光，前景只有一个封缄邀请函。整体深蓝金色调，专业、大气、克制、高端。顶部和中上部预留约60%干净留白，底部预留蓝色弧形收口区域。不要多人会谈，不要复杂城市夜景，不要多张透明屏幕，不要绿色主调，不要低幼卡通，不要促销感，不要满屏金币和钞票。
 ```
 
 #### ChatGPT Image / DALL·E 类工具
@@ -1483,7 +2358,7 @@ text, logo, watermark, letters, Chinese characters, garbled text, green theme, r
 无字背景图示例：
 
 ```txt
-生成一张 1080×1920 的9:16竖版高端金融海报背景图。不要任何文字，不要任何Logo。画面用于且慢高净值私域宣传，主题是「资产300万以上才能进的投资圈，短暂开启席位」。整体深蓝金色调，专业、大气、克制、高端。主视觉为海景露台中的高端商务会谈，远处有海面、城市天际线和日落光线。画面顶部和中上部需要大面积干净留白，便于后期添加品牌Logo和主标题。底部保留蓝色弧形收口区域，便于后期添加「安放财富 · 静待花开」和风险提示。不要绿色主调，不要低幼卡通，不要电商促销感，不要土豪炫富，不要满屏金币钞票。
+生成一张 1080×1920 的 9:16 竖版高端金融海报背景图。不要任何文字，不要任何 Logo。主题是「你的投资信息源，决定了你的收益天花板」。不要直白画金融资讯大屏、K线、走势图、交易屏幕。请把主题转译为「视野高度、信息到达、判断边界」。画面只选择一个视觉隐喻：窗边远望的海平线。主视觉为一扇大面积落地窗外的开阔海平线，桌面只有一个指南针投影和一页微微翻起的纸。整体浅蓝白与深蓝点缀，专业、克制、高端、安静。顶部和中上部预留约60%干净留白，便于后期添加品牌Logo和主标题。底部保留品牌蓝弧形收口区域，便于后期添加「安放财富 · 静待花开」和风险提示。不要人物群像，不要金融大屏，不要复杂图表，不要绿色主调，不要旅游宣传感，不要低幼卡通。
 ```
 
 ## Do's and Don'ts
@@ -1496,6 +2371,9 @@ text, logo, watermark, letters, Chinese characters, garbled text, green theme, r
 * 底部保留蓝色弧形收口 + slogan + 风险提示
 * 300万+ 门槛信息前置、醒目
 * 保持充足留白和信息层级清晰
+* 默认采用低复杂度构图：一个隐喻家族 + 一个场景 + 一个主视觉 + 最多两个辅助物
+* 默认优先使用高级视觉隐喻，而不是直观金融元素
+* 多张方案必须使用不同隐喻家族，避免重复会议室 / 数据屏 / 金融桌面
 * 正式交付优先使用 Background-only Mode
 * 九宫格第一行做局部拼接大标题
 * 九宫格第4格突出门槛
@@ -1517,6 +2395,9 @@ text, logo, watermark, letters, Chinese characters, garbled text, green theme, r
 * 不要营销促销海报感
 * 不要廉价金融广告感
 * 不要复杂报告页堆砌
+* 不要默认使用 K 线、走势图、交易屏幕、货币符号、金融大屏
+* 不要把金融元素当作主视觉，除非用户明确要求
+* 不要所有方案都使用同一种会议室 / 数据屏 / 商务桌面视觉
 * 不要屏幕乱码
 * 不要图表错误感过强
 * 不要人物比例异常
@@ -1605,7 +2486,13 @@ text, logo, watermark, letters, Chinese characters, garbled text, green theme, r
 
 * 是否使用蓝金 / 黑金 / 蓝白体系？
 * 是否有足够留白？
+* 留白是否达到 55%–65%？
+* 是否只有 1 个明确主视觉？
+* 是否最多只有 2 个辅助物？
+* 数据卡是否控制在 1–2 张以内？
 * 主视觉是否服务主题？
+* 是否做到「一个观点 + 一个主符号」？
+* 是否优先使用隐喻而不是直白金融元素？
 * 图表、数据卡是否简洁专业？
 * 是否避免绿色主调、促销感、低幼感、土豪感？
 
@@ -1631,6 +2518,7 @@ text, logo, watermark, letters, Chinese characters, garbled text, green theme, r
 * 是否避免要求 AI 生成准确中文小字？
 * 是否给出 Negative Prompt？
 * 是否预留了后期排版区域？
+* 是否避免开放式元素长列表？
 * 是否能适配不同 AI 生图工具？
 
 ### Final Acceptance Standard
@@ -1645,6 +2533,7 @@ text, logo, watermark, letters, Chinese characters, garbled text, green theme, r
 * 有长期主义气质
 * 有高级审美
 * 信息不多但有效
+* 画面像高端观点卡，而不是普通金融广告
 * 适合朋友圈传播、私域传播、海报投放和营销触达
 * 符合且慢品牌的专业、宁静、长期主义气质
 
@@ -1662,6 +2551,8 @@ Source Han Serif CN 标题
 圈层、信息源、投研能力、长期陪伴的价值表达
 +
 AI 无字背景图生成
++
+低复杂度构图：一个场景 + 一个主视觉 + 一个强调点
 +
 设计软件后期准确叠加品牌与文字
 ```
@@ -1763,9 +2654,18 @@ AI 无字背景图生成
 设计目标：
 画面用于高净值用户私域传播，体现高净值门槛、圈层稀缺感、专业财富管理能力、信息效率和长期价值陪伴。
 
+主题语义转译：
+先从主题中提炼关键词，再转译为高级视觉隐喻。不要默认直观展示金融图表、K线、交易屏幕、资产配置大屏、金币钞票。
+
+视觉隐喻选择 1 个：
+门槛 / 视野 / 方向 / 同频 / 投研 / 长期 / Alpha / 布局。
+
+观点型构图：
+一张图只讲一个判断，只使用一个主符号。主符号可以是棋子、光点、箭头、同心圆、点阵、门洞、光轨、棱镜、星轨或封缄信封。
+
 整体风格：
 专业、大气、克制、高端、安静、可信，有且慢品牌感。
-色彩以蓝金体系为主，可根据主题选择深蓝金高净值版、黑金高净值版、浅蓝白专业版或蓝金科技展陈版。
+色彩以蓝金体系为主，可根据主题选择深蓝金高净值版、黑金高净值版、浅蓝白专业版。
 
 字体：
 主标题使用 Source Han Serif CN / 思源宋体 CN Bold 或 Heavy 风格，重点词可用浅金色强调。
@@ -1777,14 +2677,14 @@ AI 无字背景图生成
 中下部为主视觉场景。
 底部使用蓝色弧形收口，并放置「安放财富 · 静待花开」和「市场有风险，投资需谨慎」。
 
-视觉方向可选择：
-人物圈层会谈 / 高端空间氛围 / 器物邀请函 / 数据圈层流通 / 投研能力展示 / 信息源判断力 / 自然远景长期主义。
+画面元素控制：
+每张图只选择 1 个隐喻家族、1 个主场景、1 个主视觉、最多 2 个辅助物、最多 1 个弱金融暗示。不要把候选元素全部放进同一张图。
 
-画面元素可包含：
-海景、山景、城市夜景、会客厅、露台、邀请函、全球配置手册、地球仪、透明数据卡、资产配置图、品牌奖杯、钢笔、咖啡杯、单人远眺、商务会谈。
+多方案规则：
+如果生成多张图，每张图必须使用不同的视觉隐喻家族，例如：空席位 / 海平线 / 指南针 / 星轨，不要只重复会议室、数据屏或金融桌面。
 
 禁止：
-不要绿色主调，不要低幼卡通，不要电商促销感，不要土豪炫富，不要满屏金币钞票，不要复杂报告堆砌，不要过多文字，不要杂乱。
+不要绿色主调，不要低幼卡通，不要电商促销感，不要土豪炫富，不要满屏金币钞票，不要复杂报告堆砌，不要 K 线，不要交易屏幕，不要货币符号，不要金融大屏，不要过多文字，不要杂乱。
 ```
 
 ### Background-only AI Prompt Template
@@ -1796,19 +2696,19 @@ AI 无字背景图生成
 
 画面用于且慢高净值私域宣传，主题是「{主题文案}」。
 
-整体风格专业、大气、克制、高端、安静、可信，体现高净值门槛、圈层稀缺感、专业财富管理能力、信息效率和长期价值陪伴。
+不要直白表现钱、走势图、K线、交易屏幕、金融大屏、资产配置饼图。请先把主题转译为「{高阶语义}」，再选择一个高级视觉隐喻「{隐喻家族}」。
 
-色彩以深蓝、黑蓝、品牌蓝、香槟金、浅金为主，画面干净，有高级留白和柔和光影。
+整体风格专业、大气、克制、高端、安静、可信。色彩以深蓝、黑蓝、品牌蓝、香槟金、浅金为主，画面干净，有高级留白和柔和光影。
 
-主视觉为「{视觉方向}」，可包含海景、山景、城市夜景、会客厅、露台、邀请函、全球配置手册、地球仪、透明数据卡、资产配置图、品牌奖杯、钢笔、咖啡杯、单人远眺、商务会谈等元素。
+画面只允许一个主场景「{主场景}」和一个主视觉「{主视觉}」。辅助物最多选择 2 个：「{辅助物1}」「{辅助物2}」。弱金融暗示最多 1 个，例如低透明度趋势线、无字数据纹理或抽象坐标网格；也可以完全不出现金融元素。
 
 构图要求：
-顶部和中上部预留大面积干净留白，便于后期添加「盈米基金｜且慢」Logo 和主标题。
+顶部和中上部预留约 60% 干净留白，形成强标题位，便于后期添加「盈米基金｜且慢」Logo 和大字重主标题。
 中下部放置主视觉场景。
 底部预留蓝色弧形收口区域，便于后期添加「安放财富 · 静待花开」和「市场有风险，投资需谨慎」。
 
 禁止：
-不要出现文字，不要出现 Logo，不要出现乱码，不要绿色主调，不要低幼卡通，不要电商促销感，不要土豪炫富，不要满屏金币钞票，不要复杂报告堆砌，不要过多图表，不要杂乱。
+不要出现文字，不要出现 Logo，不要出现乱码，不要绿色主调，不要低幼卡通，不要电商促销感，不要土豪炫富，不要满屏金币钞票，不要复杂报告堆砌，不要过多图表，不要金融大屏，不要 K 线，不要交易屏幕，不要货币符号，不要杂乱。
 ```
 
 #### English Universal Prompt
@@ -1818,72 +2718,124 @@ Create a vertical 9:16 luxury private wealth management poster background, 1080x
 
 The theme is: "{theme copy}".
 
-The image is for high-net-worth private marketing communication, expressing asset threshold, exclusive investment circle, professional research capability, information advantage, long-term wealth companionship, trust and restraint.
+Do not represent the theme with literal financial charts, candlestick charts, trading screens, money, currency symbols, financial dashboards or dense data panels. Translate the theme into a high-level semantic metaphor: "{semantic meaning}". Use one visual metaphor family: "{metaphor family}".
+
+Use one primary scene: "{primary scene}". Use one primary subject: "{primary subject}". Add at most two supporting objects: "{supporting object 1}", "{supporting object 2}". Add at most one weak financial signal, such as a faint abstract line texture, subtle coordinate grid or low-opacity data texture. It is also acceptable to use no financial element at all.
 
 Use a refined deep navy blue, black blue, brand blue, champagne gold and soft gold color palette. The style should be premium, professional, calm, elegant, restrained, trustworthy and cinematic.
 
-Main visual direction: {visual direction}. Possible elements include sea-view terrace, mountain-view study room, luxury lounge, private meeting room, city skyline at night, sailing boat, compass, investment desk, laptop with financial chart, globe, transparent financial data cards, asset allocation chart, premium brand trophy, invitation card, refined coffee cup, pen, books, and high-end business conversation.
-
 Composition requirements:
-Leave large clean empty space at the top and upper-middle area for later adding brand logo and headline.
+Leave about 60 percent clean empty space at the top and upper-middle area for later adding brand logo and headline.
 Place the main visual in the middle-lower area.
 Keep a blue curved footer area at the bottom for later adding brand slogan and risk disclosure.
 
 Avoid:
-text, letters, Chinese characters, garbled text, logo, watermark, green color scheme, red promotional style, childish cartoon, cute character, cheap luxury, piles of cash, gold bars, luxury car, messy charts, cluttered layout, overexposed neon, e-commerce poster style, guaranteed-return feeling.
+text, letters, Chinese characters, garbled text, logo, watermark, green color scheme, red promotional style, childish cartoon, cute character, cheap luxury, piles of cash, gold bars, luxury car, financial dashboard, trading screen, candlestick chart, stock chart, currency symbols, messy charts, multiple screens, floating card cluster, cluttered layout, complex background, overexposed neon, e-commerce poster style, guaranteed-return feeling.
 ```
 
 #### Negative Prompt
 
 ```txt
-文字、乱码、错误中文、错误英文、变形 Logo、低清 Logo、绿色主调、红色促销、土豪金、满屏金币、钞票堆、豪车、低幼卡通、Q版人物、廉价广告、杂乱背景、过多图表、屏幕乱码、人物比例异常、手部畸形、过曝光效、霓虹赛博、拥挤构图、电商促销风、收益承诺、稳赚不赔、保本暗示
+文字、乱码、错误中文、错误英文、变形 Logo、低清 Logo、绿色主调、红色促销、土豪金、满屏金币、钞票堆、豪车、低幼卡通、Q版人物、廉价广告、杂乱背景、复杂背景、过多图表、复杂仪表盘、金融大屏、交易屏幕、K线、红绿涨跌、货币符号、饼图大屏、满屏数据卡、多层透明屏幕、信息卡环绕、过多人物、多人会议、拥挤构图、复杂城市夜景、器物堆叠、屏幕乱码、人物比例异常、手部畸形、过曝光效、霓虹赛博、电商促销风、收益承诺、稳赚不赔、保本暗示
 ```
 
 English Negative Prompt:
 
 ```txt
-text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, green color scheme, red promotional style, cheap luxury, piles of cash, gold bars, luxury car, childish cartoon, cute character, messy layout, cluttered charts, screen gibberish, distorted people, deformed hands, overexposed lighting, cyberpunk neon, e-commerce promotion poster, guaranteed returns, risk-free investment
+text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, green color scheme, red promotional style, cheap luxury, piles of cash, gold bars, luxury car, childish cartoon, cute character, messy layout, cluttered charts, financial dashboard, trading screen, candlestick chart, stock chart, red and green market screen, currency symbols, pie chart dashboard, screen gibberish, distorted people, deformed hands, overexposed lighting, cyberpunk neon, e-commerce promotion poster, guaranteed returns, risk-free investment
+```
+
+
+### Metaphor-led Poster Prompt Template
+
+适合高净值观点型海报、认知差主题、布局主题、圈层筛选主题。
+
+```txt
+请使用 qieman-design-vip Skill 的 Metaphor-led Poster Mode 生成一张 9:16 竖版高端观点海报背景图。不要文字，不要 Logo。
+
+主题：
+「{主题文案}」
+
+核心判断：
+将主题压缩为一个观点，不并列多个卖点。
+
+视觉转译：
+不要直白表现金融元素，不要 K 线、走势图、交易屏幕、金融大屏、金币、钞票、地球仪、商务会议室。
+请把主题转译为一个高级、克制、抽象的视觉隐喻。
+
+主符号：
+只选择一个主符号，例如：棋子 / 金色箭头 / 光点 / 同心圆 / 门洞 / 点阵 / 光轨 / 棱镜 / 星轨 / 封缄信封。
+
+构图：
+深黑蓝或黑金背景，背景接近空，只有轻微纹理或弱空间感。
+主符号使用一处金色高光或一束聚光，不做满屏装饰。
+画面留白 60%–70%，适合后期叠加大字重中文标题。
+整体克制、高级、有判断感，像高端投资观点卡，而不是金融广告。
+
+禁止：
+不要复杂场景，不要多人会议，不要城市大屏，不要密集数据卡，不要多个主体并存，不要金融仪表盘，不要促销感，不要土豪炫富，不要绿色主调。
 ```
 
 ### Nine-grid Prompt Template
 
 ```txt
-请使用 qieman-design-vip Skill 生成一组且慢高净值私域宣传九宫格。
+请使用 qieman-design-vip Skill 生成一组且慢高净值私域九宫格。
 
 尺寸：
-单张尺寸 360×360，共 9 张。
+设计源文件建议 1080×1080 × 9；
+最终九宫格单张尺寸 360×360，共 9 张。
 
 主题：
 「{主题文案}」
 
-九宫格用于朋友圈和私域传播，不是长图海报缩小版。
-整体需要单图可读、整体成组、主题统一、节奏清晰。
+整体方向：
+参考高端黑金观点卡，不是金融广告，不是长图海报缩小。
+整体需要深色、高级、克制、有故事感、有强视觉语言。
+每格一个判断，每格一个主符号，每格一个清晰标题区。
 
-设计方向：
-1. 局部拼接聚焦：第1/2/3张横向拼接为完整主题大标题，第一眼传递核心服务。
-2. 门槛前置筛选：第4张突出“300万+”或“资产300万以上”准入门槛，精准筛选高净值用户。
-3. 内容分层递进：第一行点明核心主题，第二行用高端商务场景和价值主张唤起认同，第三行拆解核心权益。
-4. 高端质感统一：整体采用黑金或深蓝黑金高级配色，搭配商务精英、城市天际线、会客厅、数据屏、品牌器物等高净值审美元素。
+执行流程：
+1. 先提炼主题核心判断。
+2. 再拆成 9 个单格观点。
+3. 输出九格分镜表：编号 / 观点句 / 视觉家族 / 主符号 / 标题位置 / Logo / 风险提示。
+4. 第5格必须是中心观点卡，主标题最大，视觉最强。
+5. 第1、3、7、9格偏故事感；第2、4、6、8格偏结构解释。
+6. 至少使用 3 种视觉家族，同一视觉家族最多连续出现 2 次。
+7. 再逐格生成单格提示词。
 
-推荐结构：
-第1-3格：拼接主标题，如“高净值投资交流圈”或“资产300万以上才能进的投资圈”。
-第4格：门槛前置，如“300万+资产准入门槛”。
-第5格：核心品牌视觉或高端商务场景。
-第6格：价值主张，如“进对圈子，比选对产品更重要”。
-第7-9格：权益拆解，如“高净值圈层”“优质投资机会”“长期价值陪伴”，第9格可做品牌收口。
+视觉家族可选：
+Threshold Arrival / 准入时刻
+Scarce Conversation / 稀缺交流
+Hidden Path / 隐秘路径
+Selective Connection / 筛选连接
+Signal Emergence / 信号显现
+Boundary & Circle / 边界与圈层
+Chess & Layout / 布局先手
+Long-term Track / 长期光轨
+Brand Closure / 品牌收口
 
-字体：
-主标题使用 Source Han Serif CN Bold / Heavy。
-卖点标题使用 Source Han Serif CN Medium / Bold。
-小字使用 Source Han Sans CN Regular。
+文案规则：
+每格主标题 8–18 个汉字，最多 2 行。
+副标题 10–24 个汉字，最多 1–2 行。
+不要长段落，不要每格都堆满小字。
+品牌 Logo 建议只出现在第1、第5或第9格。
+风险提示可只在第5或第9格出现，避免九格过度拥挤。
 
-品牌：
-第1格、第5格、第9格可放品牌 Logo。
-深色背景使用白色 Logo，浅色背景使用蓝色 Logo。
-第5格可强化且慢圆形 Logo 装置或品牌核心视觉。
+构图规则：
+每格只允许一个主视觉符号或一个微叙事情境。
+每格留白 45%–65%。
+金色只集中在一处主符号 / 光线 / 边界。
+标题与主符号形成左下/右上、中心/边缘、明/暗关系。
+中心第5格必须最醒目，周边格不能抢中心格。
 
 禁止：
-不要把长图直接缩小，不要单格文字过多，不要九格风格割裂，不要促销感，不要低幼，不要绿色主调，不要复杂报告堆砌，不要弱化 300万+ 门槛。
+不要把长图直接缩小。
+不要9格都用同一种符号。
+不要9格全是会议室、桌面、城市夜景。
+不要复杂金融图表、K线、交易屏、金币钞票、地球仪堆叠。
+不要多人写实聚会。
+不要每格都放Logo。
+不要单格文字超过3行。
+不要缩小后只剩一片黑。
 ```
 
 ### Tool-specific Quick Prompt Guide
@@ -1891,19 +2843,56 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, gr
 #### 20.1 门槛席位类背景图
 
 ```txt
-生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是高净值投资圈层、资产300万以上、短暂开启席位。画面采用深蓝金色调，专业、大气、克制、高端。主视觉为海景露台上的高端商务会谈，远处有城市夜景、海面和日落光线，局部有透明金融数据卡片和金色细线光效。顶部和中上部预留大面积干净留白，底部预留蓝色弧形收口区域。不要绿色主调，不要低幼卡通，不要促销感，不要满屏金币钞票。
+生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是高净值投资圈层、资产300万以上、短暂开启席位。不要直接画钱、走势图或金融大屏。请把主题转译为「准入门槛、被保留的位置、安静的邀请」。只选择一个视觉隐喻：半开的私享门廊。主视觉是一扇半开的门，门内有一束柔和香槟金光。辅助物只保留一个封缄邀请函。整体深蓝金色调，专业、大气、克制、高端。顶部和中上部预留约60%干净留白，底部预留蓝色弧形收口区域。不要人物群像，不要复杂城市夜景，不要多张数据卡，不要绿色主调，不要低幼卡通，不要促销感，不要满屏金币钞票。
 ```
 
 #### 20.2 信息源判断类背景图
 
 ```txt
-生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是投资信息源决定收益天花板，进对圈子比选对产品重要。画面采用浅蓝白专业色调，深蓝文字区域留白。主视觉为山湖书房或窗边投资桌面，一位成熟商务人士在窗边思考，桌面有电脑金融走势图、投资书籍、钢笔、咖啡杯、地球仪，远处是山湖和开阔天空。顶部和中上部预留干净留白，底部预留蓝色弧形收口区域。画面专业、克制、长期主义，不要绿色主调，不要旅游宣传感，不要低幼卡通。
+生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是投资信息源决定收益天花板，进对圈子比选对产品重要。不要直接画金融资讯大屏、K线或交易屏幕。请把主题转译为「视野高度、信息到达、判断边界」。只选择一个视觉隐喻：窗边远望的海平线。主视觉为大面积落地窗外的开阔海平线，桌面只保留一个指南针投影和一页微微翻起的纸。整体浅蓝白专业色调，专业、克制、长期主义。顶部和中上部预留约60%干净留白，底部预留蓝色弧形收口区域。不要人物群像，不要地球仪和多屏幕，不要绿色主调，不要旅游宣传感，不要低幼卡通。
 ```
 
 #### 20.3 投研能力类背景图
 
 ```txt
-生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是投研观点、严选机会、全球视野。画面采用深蓝金金融科技色调，主视觉为高端会议室或数据中台，透明数据卡片环绕展示全球地图、资产配置、趋势曲线、宏观洞察等抽象信息，中心可有品牌感的金属圆形装置或高端会议桌。整体专业、克制、可信，有高级光影和空间层次。顶部和中上部预留大面积标题留白，底部预留蓝色弧形收口区域。不要文字，不要乱码，不要绿色，不要赛博霓虹过强，不要复杂报告堆砌。
+生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是投研观点、严选机会、全球视野。不要直接画复杂报告、金融大屏和满屏数据卡。请把主题转译为「观察、筛选、洞察、全局视角」。只选择一个视觉隐喻：观测台与星图。主视觉为深蓝空间中的极简观测台轮廓，背景有低透明度星图纹理，辅助物只保留一道棱镜光束。整体深蓝金色调，专业、克制、可信，有柔和光影和清晰空间层次。顶部和中上部预留约60%标题留白，底部预留蓝色弧形收口区域。不要数据卡环绕，不要满屏透明屏幕，不要会议室人物，不要绿色，不要强赛博霓虹。
+```
+
+#### 20.4 Alpha / 私享机会类背景图
+
+```txt
+生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是有些投资机会不在公开渠道，只在对的圈子里流通。不要画股票走势图、交易屏幕或财富符号。请把主题转译为「隐秘路径、提前抵达、非公开流动」。只选择一个视觉隐喻：深蓝空间中的一条窄光路。主视觉是一条从暗处延展到远方的柔和金色光路，辅助物只保留一个封缄信封或地图一角。整体深蓝、黑蓝、香槟金，克制、高端、安静。顶部和中上部预留约60%干净留白，底部预留蓝色弧形收口区域。不要人物群像，不要复杂图表，不要金融大屏，不要满屏金币钞票。
+```
+
+#### 20.5 布局 / 观望类背景图
+
+```txt
+生成一张9:16竖版高端金融海报背景图，不要文字，不要Logo。主题是同样的市场，有人已经在布局，有人还在观望，区别只是信息效率。不要直接画看盘、K线和交易屏幕。请把主题转译为「先后差异、策略判断、已经落下的一步」。只选择一个视觉隐喻：极简棋盘。主视觉为深蓝桌面上的局部棋盘，一枚香槟金棋子已经落下，光影形成清晰方向感。辅助物最多保留一条低透明度路线光线。顶部和中上部预留约60%干净留白，底部预留蓝色弧形收口区域。不要复杂棋局，不要人物群像，不要股票屏幕，不要绿色主调，不要促销感。
+```
+
+
+#### 20.6 认知差 / 信息源极简观点图
+
+```txt
+生成一张 9:16 竖版高端观点海报背景图，不要文字，不要 Logo。主题是“不是信息差，是认知差”。不要直白出现金融元素，不要 K 线，不要交易屏幕，不要金币。请使用极简隐喻式视觉语言：一个被聚焦的金色光点，置于深黑蓝背景与微弱点阵结构中，形成“认知被点亮”的感觉。画面克制、简洁、高级，局部高光明确，背景细节极少，大面积留白，适合后期叠加大标题。
+```
+
+#### 20.7 布局 / 先手极简观点图
+
+```txt
+生成一张 9:16 竖版高端金融观点海报背景图，不要文字，不要 Logo。主题是“同样的市场，有人已经在布局，有人还在观望”。不要直白金融元素。请使用极简隐喻：深色棋盘上一枚被聚光照亮的棋子，周围空间安静克制，体现先手、布局、判断力。只保留一个主符号，不要多人，不要复杂场景，不要杂乱背景，不要交易屏幕。
+```
+
+#### 20.8 圈层 / 同频极简观点图
+
+```txt
+生成一张 9:16 竖版高端观点海报背景图，不要文字，不要 Logo。主题是“认知相近的人，总会找到彼此”。请用抽象视觉隐喻表达，不要直白社交场景，不要金融图表。主视觉为一个被光照亮的门洞或中心点，周围以极简的轨道或波纹结构向中心聚拢，表达同频、连接与圈层吸引。整体深色背景，金色为唯一强调色，构图简洁，留白充足。
+```
+
+#### 20.9 筛选机制极简观点图
+
+```txt
+生成一张 9:16 竖版高端观点海报背景图，不要文字，不要 Logo。主题是“筛掉的是噪音，留下的是同频”。不要人物聚会，不要金融大屏，不要复杂图表。使用极简点阵隐喻：深色背景中大量低亮度圆点排列成秩序网格，只有少数金色光点被筛选并连成细线，表达筛选、同频、纯净圈层。画面高级、克制、留白充足。
 ```
 
 ## Known Gaps
@@ -1913,5 +2902,6 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, gr
 - 且慢 Logo 图形尚未提供 SVG 资产引用路径；后期叠加须使用官方 Logo 文件。
 - 九宫格局部拼接大标题的跨格对齐规则尚未提供像素级模板；当前为策略级描述。
 - `{extends: qieman-design-ui}` 关系已声明，但跨 Skill token 自动合并尚未在 openskills 运行时验证。
+- V0.1.5 已增加主题语义转译与高级视觉隐喻规则，但不同生图工具仍可能默认补全金融大屏、走势图或商务会议室；验证时建议优先使用 Background-only Mode，并反复强调「不要直白金融元素，只使用一个视觉隐喻」。
 
 
