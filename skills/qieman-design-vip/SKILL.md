@@ -5,9 +5,10 @@ description: >-
   including 9:16 vertical posters, 300万+ asset-threshold invitations, investment
   circle graphics, research-viewpoint spreads, advisor WeChat Moments assets,
   and nine-grid social campaigns. Output must follow blue-gold / black-gold VIP
-  aesthetics, simplified composition rules, strong metaphor-led visual language, copy-led minimal composition, structured
-  design tokens, risk disclosure rules, and AI image prompt workflows compatible with mainstream
-  generative tools.
+  aesthetics, simplified composition rules, strong metaphor-led visual language,
+  copy-led minimal composition, complete-grid-first nine-grid delivery rules,
+  structured design tokens, risk disclosure rules, and AI image prompt workflows
+  compatible with mainstream generative tools.
 extends: qieman-design-ui
 layer: L2
 license: Complete terms in LICENSE.txt
@@ -191,6 +192,11 @@ components:
   grid-cell-master:
     canvas: "{canvas.grid-cell-master}"
     backgroundColor: "{colors.palette-b-bg}"
+  grid-master:
+    canvas: "{canvas.grid-cell-master}"
+    layout: "{canvas.grid-layout}"
+    outputModeDefault: "single complete 3x3 master image"
+    qualityGoal: "high-definition, complete text, complete imagery, no garbled text, no obvious errors"
   grid-story-card:
     style: "dark minimal story card"
     composition: "one proposition, one symbol, one light source"
@@ -218,6 +224,14 @@ composition:
   max-people: 2
   background-detail: "soft, low-contrast, non-distracting"
   no-combined-sets: "do not combine people, city skyline, sea view, charts, globe, documents, trophy and data panels in one image"
+
+nine_grid_delivery:
+  default-output: "single complete 3x3 master image"
+  master-canvas: "1080x1080"
+  cell-logic-size: "360x360"
+  split-output-trigger: "only when user explicitly asks for separate single images"
+  quality-priority: "clarity and correctness before quantity"
+  mandatory-quality: "HD, complete nine cells, complete text, no garbled text, no cropped core imagery, no obvious visual errors"
 
 visual_language:
   principle: "theme-first metaphor, not literal financial decoration"
@@ -260,7 +274,7 @@ qieman-design-vip 是一个面向 **且慢高净值用户私域传播** 的营�
 
 本 Skill **继承并扩展** [qieman-design-ui](../qieman-design-ui/qieman-ui-design.md) 的基础品牌 token（如 `{colors.brand-primary}` #1B88EE），在此基础上定义 VIP 私域专属的蓝金 / 黑金视觉体系、海报版式结构、文案逻辑、AI 生图提示词和九宫格传播方法。
 
-**Version:** V0.1.8
+**Version:** V0.1.11
 
 **核心设计气质：**
 - 门槛感：资产 300万+、准入筛选、席位稀缺，不是普通理财广告。
@@ -285,6 +299,8 @@ Source Han Serif CN 标题
 低复杂度构图控制：一个场景 + 一个主视觉 + 一个强调点
 +
 强视觉语言：一个观点 + 一个符号 + 一处聚光 + 大面积留白
++
+九宫格默认交付：先出 1 张完整 3×3 总图，再按明确指令拆分单张
 ```
 
 ### V0.1.4 简洁化更新重点
@@ -320,6 +336,27 @@ Source Han Serif CN 标题
 → 单一视觉符号
 → 极简高对比画面
 → 后期叠加准确文案
+```
+
+### V0.1.10 Nine-grid Complete-master 更新重点
+
+本版本针对「模型多图输出限制」和「九格分别生成容易风格漂移」的问题，新增 **完整九宫格总图优先** 的交付规则。
+
+核心调整：
+
+* 用户要求「九宫格」「朋友圈九图」「九格观点图」时，默认先输出 **1 张完整九宫格总图**。
+* 完整总图画布默认为 `{canvas.grid-cell-master}`（1080×1080），内部为 `3×3`，每格逻辑尺寸为 `{canvas.grid-cell}`（360×360）。
+* 不默认分别输出 9 张单图，避免模型多次生成导致风格漂移、文字不统一、构图不连续。
+* 只有当用户明确提出「分别输出单张 / 拆成 9 张 / 逐张出图 / 每格单独导出」时，才切换为单张输出模式。
+* 不论完整总图还是单张输出，都必须优先保证：**高清、文字完整、图像完整、无乱码、无明显错误**。
+
+默认工作流：
+
+```txt
+先出 1 张完整九宫格总图
+→ 验证主题、节奏、视觉统一性
+→ 需求稳定后
+→ 再按明确口令拆成 9 张单图
 ```
 
 ## When to Use
@@ -1450,6 +1487,470 @@ Don't：
 * 1080×1080 更适合 AI 生成细节和后期排版。
 * 最终必须通过 3×3 缩略图预览检查，不以单张高清效果为唯一标准。
 
+### Nine-grid Copy Order Rule
+
+当用户为九宫格明确给出 **9 张文案**、**逐格文案**、**按序文案列表** 时，必须严格按照用户提供的顺序生成，**不得调换、重组、合并或擅自重排**。
+
+#### Order-first Principle
+
+```txt
+用户给出顺序 = 最终出图顺序
+```
+
+适用情况：
+
+* 用户直接给出 1-9 的九条文案
+* 用户按换行、编号、列表方式给出逐格文案
+* 用户说明“第一张 / 第二张 / 第三张 …”
+* 用户给出完整九宫格文案顺序并要求生图
+
+执行要求：
+
+* 第1条文案必须对应第1格
+* 第2条文案必须对应第2格
+* 第3条文案必须对应第3格
+* 依此类推，直到第9格
+* 不得因为“更适合排版”或“更适合节奏”而重新排序
+* 不得擅自把中心观点挪到第5格，除非用户原本就这样给出
+* 不得擅自把门槛文案提前、把品牌收口文案后置，除非用户原本顺序就是如此
+
+#### When the User Does Not Provide Per-cell Copy
+
+只有在用户 **没有明确提供每张图文案** 时，才允许根据总主题自由拆分内容。
+
+允许发挥的前提：
+
+* 用户只给一个总主题
+* 用户只给一个主标题
+* 用户没有指定每格文案内容和顺序
+
+此时可以：
+
+* 按主题逻辑拆成 9 格
+* 按中心观点、解释、延伸、品牌收口进行结构化编排
+* 按视觉节奏和传播节奏安排顺序
+
+#### Conflict Resolution Rule
+
+如果用户同时给出：
+
+* 明确的逐格文案顺序
+* 和一个通用九宫格结构模板
+
+则必须优先遵循：
+
+```txt
+用户明确文案顺序 > 默认九宫格模板 > 模型自主发挥
+```
+
+也就是说：
+
+* 默认结构（如第5格中心、第9格收口）只能在用户未指定顺序时使用
+* 一旦用户给了明确顺序，模板必须让位于用户顺序
+
+#### Prompt Execution Requirement
+
+九宫格提示词中必须显式写出：
+
+```txt
+严格按照用户提供的9条文案顺序生成，
+按从左到右、从上到下的九宫格阅读顺序依次对应：
+第1格、第2格、第3格、
+第4格、第5格、第6格、
+第7格、第8格、第9格。
+不要打乱顺序，不要重排文案。
+```
+
+#### Reading Order Mapping
+
+九宫格默认阅读顺序定义为：
+
+```txt
+第1格 第2格 第3格
+第4格 第5格 第6格
+第7格 第8格 第9格
+```
+
+即：
+
+* 从左到右
+* 从上到下
+
+除非用户明确指定特殊顺序，否则所有逐格文案都按此顺序映射。
+
+### Nine-grid Incomplete Copy Fill Rule
+
+当用户提供的九宫格文案 **少于 9 条** 时，不能打乱已给文案，也不能为了补齐九宫格而重写用户已给内容。
+
+#### Partial-copy Principle
+
+```txt
+已给文案保持原顺序
++
+缺失格子按主题补位
+```
+
+适用情况：
+
+* 用户只给出 1–8 条逐格文案
+* 用户明确说“按这些文案做九宫格”，但文案数量不足 9 条
+* 用户给出若干句主题观点，希望补齐为九宫格
+
+执行要求：
+
+* 用户给出的第1条文案仍对应第1格
+* 用户给出的第2条文案仍对应第2格
+* 依此类推，不得插队、调换或重排
+* 缺失格子从用户已给文案之后继续补齐
+* 补位文案必须服务同一主题、同一语气、同一传播目标
+* 不得把补位文案插入到用户已给文案中间
+
+#### Fill Position Rule
+
+如果用户给出 N 条文案，N 小于 9：
+
+```txt
+第1格至第N格：严格使用用户给出的文案
+第N+1格至第9格：根据主题补充文案
+```
+
+示例：
+
+```txt
+用户给出 6 条文案
+→ 第1–6格严格按用户文案顺序
+→ 第7–9格由 Skill 根据主题补齐
+```
+
+#### Fill Content Strategy
+
+补位文案优先承担以下作用：
+
+* 总结主题
+* 强化门槛
+* 补充圈层价值
+* 补充情绪共鸣
+* 做品牌收口
+* 做行动暗示，但不做强促销
+
+推荐补位方向：
+
+```txt
+第7格：补充价值 / 场景认同
+第8格：补充权益 / 情绪共鸣
+第9格：品牌收口 / 席位有限 / 安放财富 · 静待花开
+```
+
+#### When Copy Is More Than 9 Items
+
+如果用户给出的文案超过 9 条：
+
+* 默认只使用前 9 条作为九宫格文案
+* 不得把多余文案强行塞进已有格子
+* 不得缩小文字把所有文案塞满画面
+* 可提示“已按前9条生成，剩余文案可作为下一组九宫格”
+
+#### Ask-or-fill Rule
+
+如果用户明确要求“不要改文案”“只用我给的文案”，但文案不足 9 条：
+
+* 不应擅自补写新文案
+* 应保留空白格、视觉符号格或品牌收口格
+* 空白格也要保持画面完整和高级感
+
+如果用户没有明确禁止补写，则可以按主题自然补齐。
+
+#### Prompt Execution Requirement
+
+当文案不足 9 条时，提示词必须明确写出：
+
+```txt
+严格保留用户已给文案的顺序，
+第1条对应第1格，第2条对应第2格，依此类推。
+缺失格子从后续位置开始补齐，
+不要把补位文案插入到用户文案中间，
+不要打乱用户原始顺序。
+```
+
+### Nine-grid Delivery Priority Rules
+
+由于模型出图限制，九宫格任务默认采用 **完整总图优先** 的交付策略。
+
+#### Default Output Rule
+
+当用户要求生成九宫格时，默认优先输出：
+
+```txt
+1 张完整九宫格总图
+=
+1 个 1080×1080 画布
+包含 3×3 共 9 个格子
+```
+
+而不是默认分别输出 9 张单图。
+
+默认理解规则：
+
+* 用户说「九宫格」「朋友圈九图」「九图传播」「九格观点图」时，默认输出 **1 张完整九宫格总图**。
+* 只有当用户明确提出「分别输出单张」「拆成 9 张单独输出」「每格单独给我」「逐张输出」「我要单张版本」「给我 9 张单独图片」时，才切换为 **9 张单独输出模式**。
+
+#### Why Full-grid First
+
+优先输出完整九宫格总图的原因：
+
+* 更容易先验证整体主题是否成立。
+* 更容易确认九格之间的节奏、层级与统一性。
+* 更符合朋友圈九宫格预览效果。
+* 能降低模型在多次独立生成中产生风格漂移的问题。
+* 更适合需求早期方案确认。
+
+#### Default Canvas Rule
+
+默认完整九宫格总图规格：
+
+```txt
+1080 × 1080
+3 × 3
+每格逻辑尺寸 360 × 360
+```
+
+要求：
+
+* 9 格必须完整展示。
+* 不可裁切边缘格。
+* 不可出现拼接错位。
+* 不可出现格子间距不一致。
+* 不可出现九格比例失真。
+* 需要有清晰的 3×3 结构边界，但边线不宜过重。
+
+### Single-grid Output Trigger Rule
+
+只有在以下情况，才允许从默认“完整九宫格总图”切换为“分别输出单张”。
+
+#### Explicit Trigger
+
+用户明确提出以下任一指令：
+
+* 分别输出单张
+* 拆开给我
+* 每格单独导出
+* 逐张出图
+* 我要单张版本
+* 给我 9 张单独图片
+
+#### Stable-demand Trigger
+
+当完整九宫格方案已经确认，且文案、视觉语言、风格方向稳定后，可以进入单张输出阶段。
+
+推荐工作流：
+
+```txt
+先出 1 张完整九宫格总图
+→ 用户确认主题 / 节奏 / 风格
+→ 再根据明确指令拆分输出单张
+```
+
+#### Consistency Requirement
+
+若后续进入单张输出模式，必须保持：
+
+* 主色系统一致。
+* 字体风格一致。
+* 光影逻辑一致。
+* 视觉语言一致。
+* 主符号表达一致。
+* 文案调性一致。
+
+单张输出不得因为逐张生成而明显风格漂移。
+
+### Nine-grid Quality Requirements
+
+无论输出完整九宫格总图，还是分别输出单张，必须优先满足以下质量要求。
+
+#### Core Quality Goal
+
+```txt
+高清
++
+文字完整
++
+图像完整
++
+没有乱码
++
+没有明显错误
+```
+
+#### 1. High Definition
+
+所有九宫格输出必须高清清晰。
+
+要求：
+
+* 画面清晰，不模糊。
+* 边缘清晰，不糊边。
+* 标题可读。
+* 主视觉符号可辨认。
+* 不得出现低清晰度压缩感。
+
+#### 2. Complete Text
+
+所有格子的标题和副标题必须尽量完整可读。
+
+要求：
+
+* 不缺字。
+* 不断句错乱。
+* 不出现明显乱码。
+* 不出现错误中文。
+* 不出现无意义英文碎片。
+* 不出现残缺字形。
+
+建议：
+
+* 单格文案尽量短句化。
+* 标题优先 8–18 个汉字。
+* 副标题尽量精简。
+* 避免长段落小字。
+
+#### 3. Complete Imagery
+
+所有格子的图像主体必须完整。
+
+要求：
+
+* 主符号不得被裁切一半。
+* 门、圆、路径、光束、节点等核心元素必须完整。
+* 九宫格边缘格不可被错误裁边。
+* 图像主体不得被文字严重遮挡。
+* 视觉中心必须清晰。
+
+#### 4. No Garbled Content
+
+严格避免：
+
+* 中文乱码。
+* 英文乱码。
+* 伪文字。
+* 错误数字。
+* 无意义图标。
+* 结构错误的图形。
+* 人物畸形（如有人物）。
+* 明显透视错误。
+* 拼接错乱。
+
+#### 5. No Obvious Visual Errors
+
+严格避免：
+
+* 九格构图失衡。
+* 图文层级混乱。
+* 中心格不突出。
+* 同一组中风格严重不统一。
+* 光影逻辑前后冲突。
+* 金色高光过量。
+* 背景噪点过多。
+* 元素堆砌。
+
+### Nine-grid Text Safety Rule
+
+由于模型对小字和复杂排版的生成稳定性有限，九宫格文字必须采用 **短句优先、层级简化、可读第一** 的策略。
+
+#### Text Safety Principles
+
+* 标题短于长。
+* 大字优先于小字。
+* 单句优先于段落。
+* 强观点优先于复杂解释。
+* 可读性优先于信息量。
+
+#### Recommended Text Limit
+
+每格建议：
+
+* 主标题：8–18 个汉字。
+* 副标题：10–24 个汉字。
+* 小字：尽量不用，必要时极短。
+
+#### Text Stability Strategy
+
+如果工具对文字生成不稳定，优先采用：
+
+```txt
+完整九宫格总图优先
++
+单格短标题
++
+少量副标题
++
+强标题位留白
+```
+
+必要时可采用：
+
+```txt
+先生成完整九宫格背景结构
+→ 后期在设计软件中叠加准确文字
+```
+
+但在直接成稿模式下，仍应尽量保证文字正确、完整、无乱码。
+
+### Nine-grid Prompt Execution Rule
+
+九宫格生图提示词必须明确输出模式，避免模型误解为 9 张分开图；同时在用户提供逐格文案时，必须明确顺序映射，避免模型自行重排。
+
+#### Default Prompt Instruction
+
+当生成九宫格时，提示词必须明确写出：
+
+```txt
+请优先生成 1 张完整九宫格总图，
+画布为 1080×1080，
+3×3 排列，
+总图中完整包含 9 个格子，
+而不是分别生成 9 张单独图片。
+```
+
+如果用户给出了逐格文案，提示词还必须明确写出：
+
+```txt
+请严格按照用户提供的文案顺序生成，
+按从左到右、从上到下的九宫格阅读顺序映射到第1格至第9格，
+不要打乱顺序，不要重排文案。
+```
+
+如果用户给出的逐格文案不足 9 条，提示词还必须明确写出：
+
+```txt
+请保留已给文案的原始顺序，
+第1条对应第1格，第2条对应第2格，依此类推；
+不足的格子从后续位置开始补齐，
+不要把补位文案插入到用户已给文案中间。
+```
+
+#### Quality Instruction
+
+提示词必须同时写出：
+
+```txt
+确保画面高清，
+确保 9 格完整显示，
+确保每格文字完整可读，
+不要乱码，
+不要缺字，
+不要裁切主体，
+不要出现明显错误。
+```
+
+#### Single-grid Trigger Instruction
+
+只有在用户明确要求单张输出时，提示词才可写为：
+
+```txt
+请分别输出 9 张单独的九宫格单图，
+每张保持与完整九宫格一致的风格与质量。
+```
+
 ### Nine-grid Core Formula
 
 推荐使用：
@@ -2434,15 +2935,23 @@ text, logo, watermark, letters, Chinese characters, garbled text, financial dash
 
 ### Nine-grid Output
 
-当用户要求生成九宫格时：
+当用户要求生成九宫格时，默认优先输出 **1 张完整九宫格总图**，而不是默认分别输出 9 张。
 
-* 每格尺寸为 `{canvas.grid-cell}`（360×360）
-* 共 9 张
-* 第一行优先做局部拼接大标题
-* 第4格优先放 `300万+` 门槛
-* 第5格作为视觉中心
-* 第7–9格拆解权益
-* 九张图必须整体统一
+默认要求：
+
+* 输出 1 张 `{canvas.grid-cell-master}`（1080×1080）的完整九宫格总图。
+* 整体为 `3×3`。
+* 每格逻辑尺寸为 `{canvas.grid-cell}`（360×360）。
+* 第一行优先做局部拼接大标题，或按观点型九宫格结构展开。
+* 第4格优先放 `300万+` 门槛或关键信息。
+* 第5格作为视觉中心。
+* 第7–9格拆解权益 / 价值 / 品牌收口。
+* 9 格必须整体统一。
+* 画面必须高清。
+* 文案必须完整可读。
+* 不得出现乱码、缺字、裁切或明显错误。
+
+只有当用户明确要求「分别输出单张」时，才切换为 9 张单独输出模式。
 
 ### AI Image Tool Output
 
@@ -2520,6 +3029,27 @@ text, logo, watermark, letters, Chinese characters, garbled text, financial dash
 * 是否预留了后期排版区域？
 * 是否避免开放式元素长列表？
 * 是否能适配不同 AI 生图工具？
+
+### Nine-grid Final Principle
+
+九宫格任务的默认原则是：
+
+```txt
+先完整
+再拆分
+先验证整体
+再输出单张
+质量优先于数量
+可读性优先于复杂度
+```
+
+验收时，完整九宫格总图必须先满足：
+
+* 9 格完整，没有边缘裁切。
+* 整体视觉统一，没有明显风格漂移。
+* 中心格或主标题有足够记忆点。
+* 每格文字尽量完整可读，无明显乱码。
+* 图像主体完整，无明显错误。
 
 ### Final Acceptance Standard
 
@@ -2781,9 +3311,12 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, gr
 ```txt
 请使用 qieman-design-vip Skill 生成一组且慢高净值私域九宫格。
 
-尺寸：
-设计源文件建议 1080×1080 × 9；
-最终九宫格单张尺寸 360×360，共 9 张。
+默认输出模式：
+请优先生成 1 张完整九宫格总图，
+画布为 1080×1080，
+3×3 排列，
+总图中完整包含 9 个格子，
+而不是分别生成 9 张单独图片。
 
 主题：
 「{主题文案}」
@@ -2800,7 +3333,7 @@ text, Chinese characters, garbled text, wrong logo, deformed logo, watermark, gr
 4. 第5格必须是中心观点卡，主标题最大，视觉最强。
 5. 第1、3、7、9格偏故事感；第2、4、6、8格偏结构解释。
 6. 至少使用 3 种视觉家族，同一视觉家族最多连续出现 2 次。
-7. 再逐格生成单格提示词。
+7. 最后生成 1 张完整九宫格总图；只有用户明确要求“分别输出单张”时，才逐格生成 9 张单图。
 
 视觉家族可选：
 Threshold Arrival / 准入时刻
@@ -2823,19 +3356,21 @@ Brand Closure / 品牌收口
 构图规则：
 每格只允许一个主视觉符号或一个微叙事情境。
 每格留白 45%–65%。
-金色只集中在一处主符号 / 光线 / 边界。
-标题与主符号形成左下/右上、中心/边缘、明/暗关系。
-中心第5格必须最醒目，周边格不能抢中心格。
+完整总图必须 9 格完整展示，不裁切边缘格，不出现拼接错位。
+格子间距统一，3×3 结构清晰。
+
+质量要求：
+确保画面高清。
+确保 9 格完整显示。
+确保每格文字完整可读。
+不要乱码，不要缺字，不要裁切主体。
+不要明显错误，不要错误中文，不要伪文字，不要图形结构错乱。
 
 禁止：
-不要把长图直接缩小。
-不要9格都用同一种符号。
-不要9格全是会议室、桌面、城市夜景。
-不要复杂金融图表、K线、交易屏、金币钞票、地球仪堆叠。
-不要多人写实聚会。
-不要每格都放Logo。
-不要单格文字超过3行。
-不要缩小后只剩一片黑。
+不要默认分别生成 9 张单独图片。
+不要复杂金融大屏，不要 K 线，不要金币钞票，不要绿色主调。
+不要多人会议，不要复杂数据卡，不要图文层级混乱。
+不要让九格风格割裂，不要中心格失焦。
 ```
 
 ### Tool-specific Quick Prompt Guide
