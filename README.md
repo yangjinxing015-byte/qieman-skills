@@ -1,8 +1,14 @@
 # Qieman Design Skills（且慢 Design Skills）
 
+> **包更新日期**：2026-06-30  
+> 各文件以头部信息栏「更新日期」为准，后续可由 `scripts/sync-updated-at.py` 同步。
+
 面向且慢（Qieman）设计团队的 Skill / Spec / Asset 共享仓库，用于沉淀 UI/UX、营销 H5、VIP 高净值私域、数据图表、PPT、小顾 IP、AI 工作流等设计规范，便于在 Claude / Agent / Cursor / Figma / 设计工作流中按需调用。
 
 每个 Skill 以独立目录组织；正式入口文件优先使用 `SKILL.md`；补充说明文档统一放在 `references/` 目录下；素材与轻量资产统一放在 `assets/` 目录下。
+
+官方约定：**文件夹名 = `SKILL.md` 的 `name` 字段**。  
+当前处于过渡阶段，部分历史主文件仍保留原命名，后续逐步统一为 `SKILL.md`。
 
 ---
 
@@ -18,6 +24,26 @@
 
 ---
 
+## 目录
+
+| 文件夹 | `name` | 层级 | 完整规范 | 更新日期 |
+|--------|--------|------|----------|----------|
+| `qieman-design-ui` | `qieman-design-ui` | L0 | `qieman-ui-design.md` | 2026-06-30 |
+| —（L1 扩展） | `spec-id: qieman-design-sell-popup` | L1 | `qieman-design-ui/references/qieman-design-sell-popup.md` | 2026-06-30 |
+| `qieman-design-h5` | `qieman-design-h5` | L2 | `SKILL.md` | 2026-06-30 |
+| `qieman-design-vip` | `qieman-design-vip` | L2 | `SKILL.md` | 2026-06-30 |
+| `qieman-design-data` | `qieman-design-data` | L2 | `SKILL.md` | 2026-06-30 |
+| `qieman-design-ppt` | `qieman-design-ppt` | L2 | `SKILL.md` | 2026-06-30 |
+| —（L1 扩展） | `spec-id: qieman-design-report` | L1 | `qieman-design-ppt/references/qieman-design-report.md` | 2026-06-30 |
+| `qieman-design-xiaogu-ip` | `qieman-design-xiaogu-ip` | L2 | `SKILL.md` | 2026-06-30 |
+| `qieman-design-ai-workflow` | `qieman-design-ai-workflow` | L2 | `SKILL.md` | 2026-06-30 |
+
+> 说明：`qieman-design-pdf` 可作为后续新增 Skill；如果当前仓库中尚未创建该目录，暂不放入正式目录表，避免产生失效路径。
+
+分层说明见 `qieman-design-ui` 的基础规范；PPT 细分见 `qieman-design-ppt/SKILL.md` 中的 Skill Layering 或相关 references。
+
+---
+
 ## Project structure
 
 ```txt
@@ -30,6 +56,7 @@ qieman-skills/
 │   │   ├── qieman-ui-design.md
 │   │   ├── assets/
 │   │   └── references/
+│   │       └── qieman-design-sell-popup.md
 │   │
 │   ├── qieman-design-h5/
 │   │   ├── SKILL.md
@@ -48,6 +75,7 @@ qieman-skills/
 │   ├── qieman-design-ppt/
 │   │   ├── SKILL.md
 │   │   └── references/
+│   │       └── qieman-design-report.md
 │   │
 │   ├── qieman-design-xiaogu-ip/
 │   │   ├── SKILL.md
@@ -133,6 +161,92 @@ assets/
 
 ---
 
+## 统一布局
+
+### Frontmatter
+
+正式 `SKILL.md` 建议统一使用以下结构，不使用 `version` / `title` 字段。
+
+#### L0 / L2 `SKILL.md`
+
+```yaml
+---
+name: <与文件夹同名>
+layer: L0 | L2
+license: Complete terms in LICENSE.txt
+description: >-
+  ...
+extends: qieman-design-ui   # L2 必填；L0 省略
+# colors / typography …（按需）
+---
+```
+
+#### L1 扩展 `.md`
+
+```yaml
+---
+spec-id: <规范 ID>
+layer: L1
+extends: <父级 skill name>
+license: Complete terms in LICENSE.txt
+description: >-
+  ...
+---
+```
+
+---
+
+### 头部信息栏
+
+#### L0 / L2
+
+```markdown
+# <name>
+
+| 字段 | 值 |
+|------|-----|
+| **ID** | `<name>` |
+| **层级** | L0 / L2 |
+| **场景** | …（L2 可选） |
+| **规范** | 本文件 `SKILL.md` |
+| **L1 扩展** | …（若有） |
+| **依赖** | …（L2） |
+| **更新日期** | YYYY-MM-DD（文件最新修改日，运行 `scripts/sync-updated-at.py` 同步） |
+
+## 调用
+
+```bash
+npx openskills read <name>
+```
+
+---
+```
+
+#### L1
+
+```markdown
+# <spec-id>
+
+| 字段 | 值 |
+|------|-----|
+| **ID** | `<spec-id>` |
+| **层级** | L1 |
+| **规范** | 本文件 |
+| **依赖** | 父级 `SKILL.md` |
+| **更新日期** | YYYY-MM-DD |
+
+## 调用
+
+```bash
+npx openskills read <父级 skill name>
+# 如需 L1 扩展，再读取对应 references 文件
+```
+
+---
+```
+
+---
+
 ## Current maintained Skills
 
 ### 1. Qieman Design UI
@@ -150,6 +264,12 @@ skills/qieman-design-ui/qieman-ui-design.md
 * 字体、颜色、圆角、间距、组件风格
 * 页面基础布局规则
 * 设计系统基础约束
+
+层级：
+
+```txt
+L0
+```
 
 ---
 
@@ -179,6 +299,12 @@ skills/qieman-design-h5/SKILL.md
 页面框架 + 视觉规范 + Pattern Library + HTML 单文件输出规则 + 生成检查清单
 ```
 
+层级：
+
+```txt
+L2，依赖 qieman-design-ui
+```
+
 ---
 
 ### 3. VIP 高净值私域
@@ -206,6 +332,12 @@ skills/qieman-design-vip/SKILL.md
 高净值私域视觉风格 + 版式结构 + 品牌规则 + AI 生图提示词 + 九宫格传播方法
 ```
 
+层级：
+
+```txt
+L2，依赖 qieman-design-ui
+```
+
 ---
 
 ### 4. Data Visualization
@@ -223,6 +355,12 @@ skills/qieman-design-data/SKILL.md
 * 图形化表达
 * 数据分析页面
 * 图表风格规范
+
+层级：
+
+```txt
+L2，依赖 qieman-design-ui
+```
 
 ---
 
@@ -242,6 +380,20 @@ skills/qieman-design-ppt/SKILL.md
 * 方案展示页
 * 商务展示模板
 
+层级：
+
+```txt
+L2，依赖 qieman-design-ui
+```
+
+L1 扩展：
+
+```txt
+skills/qieman-design-ppt/references/qieman-design-report.md
+```
+
+用于 HTML 报告幻灯片、汇报型页面、结构化报告展示等细分场景。
+
 ---
 
 ### 6. Xiaogu IP
@@ -258,6 +410,12 @@ skills/qieman-design-xiaogu-ip/SKILL.md
 * 小顾角色设定
 * 小顾 3D / 插画风格
 * 小顾在营销、产品、AI 场景中的使用规则
+
+层级：
+
+```txt
+L2，依赖 qieman-design-ui
+```
 
 ---
 
@@ -277,6 +435,12 @@ skills/qieman-design-ai-workflow/SKILL.md
 * 设计生产流程
 * Claude / Agent / Figma / Cursor 等工具协作方式
 
+层级：
+
+```txt
+L2，依赖 qieman-design-ui
+```
+
 ---
 
 ## Skill usage guidance
@@ -290,6 +454,7 @@ skills/qieman-design-ai-workflow/SKILL.md
 * 目录结构说明
 * 命名规范
 * 全局使用约定
+* 更新日期维护说明
 
 不建议在根目录 `README.md` 中直接粘贴某个具体 Skill 的完整正文内容。
 
@@ -338,6 +503,8 @@ header-hero-guidelines_zh.md
 marketing-design-spec_zh.md
 vip-poster-guidelines_zh.md
 nine-grid-guidelines_zh.md
+qieman-design-report.md
+qieman-design-sell-popup.md
 ```
 
 ---
@@ -361,6 +528,72 @@ font-mi-sans-regular.ttf
 char-general-analyst-desk-v01.png
 icon-cool-bar-chart-growth-v01.png
 scene-investment-background-v02.png
+```
+
+---
+
+## 更新日期维护
+
+规范文件变更后，在 `qieman-skills` 目录执行：
+
+```bash
+python3 scripts/sync-updated-at.py
+```
+
+脚本按各文件**最新修改时间（mtime）**写入头部信息栏：
+
+```markdown
+| **更新日期** | YYYY-MM-DD |
+```
+
+并刷新本 README 目录表与包更新日期。
+
+如果暂时不运行脚本，也可以手动更新对应文件的头部信息栏和本 README 目录表。
+
+---
+
+## 调用示例
+
+```bash
+npx openskills read qieman-design-ui
+npx openskills read qieman-design-h5
+npx openskills read qieman-design-vip
+npx openskills read qieman-design-data
+npx openskills read qieman-design-ppt
+npx openskills read qieman-design-xiaogu-ip
+npx openskills read qieman-design-ai-workflow
+```
+
+PPT 报告幻灯片细分场景：
+
+```bash
+npx openskills read qieman-design-ppt
+# 再读取 skills/qieman-design-ppt/references/qieman-design-report.md
+```
+
+卖出挽留弹窗细分场景：
+
+```bash
+npx openskills read qieman-design-ui
+# 再读取 skills/qieman-design-ui/references/qieman-design-sell-popup.md
+```
+
+---
+
+## Planned Skills
+
+以下 Skill 可作为后续扩展方向，当前如未创建目录，暂不放入正式入口导航：
+
+```txt
+qieman-design-pdf
+qieman-design-motion
+```
+
+建议未来结构：
+
+```txt
+skills/qieman-design-pdf/SKILL.md
+skills/qieman-design-motion/SKILL.md
 ```
 
 ---
