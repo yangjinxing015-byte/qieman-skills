@@ -1,226 +1,93 @@
-# qieman skills
+# qieman-skills
 
-> 包更新日期：2026-07-02  
-> 各文件以头部信息栏「更新日期」为准，后续可由 `scripts/sync-updated-at.py` 同步。
+且慢设计 Skills 仓库，用于沉淀且慢品牌在 App 设计、营销设计、报告设计、图表设计、AI 工作流等方向的可复用设计规范。
 
-且慢设计 skill 集合。官方约定：**文件夹名 = `SKILL.md` 的 `name` 字段**；完整规范均内嵌于各目录 `SKILL.md`。
+本仓库面向设计团队、产品同学、AI Agent、Cursor、Claude、Figma 等设计工作流使用，帮助团队在不同设计场景下快速调用统一规范、素材和生成规则。
 
 ---
 
-## 框架结构
+## 仓库结构
 
 ```text
 qieman-skills/
-├── app-design/                         App 界面与组件
-│   ├── qieman-ui-design                L0
-│   ├── qieman-sell-popup-design        L1
-│   └── qieman-chart-design             L2
-│
-├── marketing-design/                   营销传播
-│   ├── qieman-h5-design                L2
-│   ├── qieman-vip-design               L2
-│   └── qieman-ip-visual-design         L2
-│
-├── report-design/                      报告与演示
-│   ├── qieman-ppt-design               L2
-│   └── qieman-report-design            L1
-│
-├── workflow-design/                    AI 设计工作流
-│   └── qieman-ai-workflow-design       L1
-│
+├── .claude-plugin/
+├── skills/
+│   ├── app-design/
+│   ├── marketing-design/
+│   ├── report-design/
+│   └── workflow-design/
 └── README.md
 ```
 
-分层说明见 `app-design/qieman-ui-design/SKILL.md` → Skill Layering；  
-`app-design` 调用路由见 `app-design/README.md`；  
-`marketing-design` 调用路由见 `marketing-design/README.md`；  
-`report-design` 调用路由见 `report-design/README.md`。
-
 ---
 
-## app-design 调用路由（摘要）
+## Skills 入口
 
-| 用户意图 / 触发词 | 调用 skill |
-|---|---|
-| UI 界面、UI 设计、且慢 App 设计、Web 页面、组件、交互规范 | `qieman-ui-design` |
-| 弹窗设计、营销弹窗、交易确认弹窗、风险提示弹窗、卖出挽留弹窗 | `qieman-ui-design` + `qieman-sell-popup-design` |
-| 图表设计、曲线、走势图、饼图、数据卡片、App 内数据可视化 | `qieman-ui-design` + `qieman-chart-design` |
-
-完整路由表与组合场景见 `app-design/README.md`。
-
----
-
-## marketing-design 调用路由（摘要）
-
-| 用户意图 / 触发词 | 调用 skill |
-|---|---|
-| H5 页面设计、活动页设计、营销页设计、长图设计 | `qieman-ui-design` + `qieman-h5-design` |
-| 且慢高净值私域宣传海报、VIP 视觉设计、高客营销设计、顾问设计 | `qieman-ui-design` + `qieman-vip-design` |
-| 小顾 IP、IP 视觉设计、内容封面、社群物料、运营图、IP 活动图 | `qieman-ui-design` + `qieman-ip-visual-design` |
-
-完整路由表见 `marketing-design/README.md`。
-
----
-
-## report-design 调用路由（摘要）
-
-| 用户意图 / 触发词 | 调用 skill |
-|---|---|
-| PPT、幻灯片设计、汇报页、方案页、路演材料 | `qieman-ui-design` + `qieman-ppt-design` |
-| 家庭财富报告、财富报告书、客户报告、资产报告、PDF 报告 | `qieman-ui-design` + `qieman-ppt-design` + `qieman-report-design` |
-
-完整路由表见 `report-design/README.md`。
-
----
-
-## workflow-design 调用路由（摘要）
-
-| 用户意图 / 触发词 | 调用 skill |
-|---|---|
-| AI 工作流、Prompt、Claude、Cursor、Figma、HTML 生成、自动化流程、设计提效、工具链 | `qieman-ai-workflow-design` |
-
----
-
-## 目录
-
-| 分类 | 文件夹 | `name` | 层级 | 完整规范 | 更新日期 |
-|---|---|---|---|---|---|
-| `app-design` | `qieman-ui-design` | `qieman-ui-design` | L0 | `SKILL.md` | 2026-07-02 |
-| `app-design` | `qieman-sell-popup-design` | `qieman-sell-popup-design` | L1 | `SKILL.md` | 2026-07-02 |
-| `app-design` | `qieman-chart-design` | `qieman-chart-design` | L2 | `SKILL.md` | 2026-07-02 |
-| `marketing-design` | `qieman-h5-design` | `qieman-h5-design` | L2 | `SKILL.md` | 2026-07-02 |
-| `marketing-design` | `qieman-vip-design` | `qieman-vip-design` | L2 | `SKILL.md` | 2026-07-02 |
-| `marketing-design` | `qieman-ip-visual-design` | `qieman-ip-visual-design` | L2 | `SKILL.md` | 2026-07-02 |
-| `report-design` | `qieman-ppt-design` | `qieman-ppt-design` | L2 | `SKILL.md` | 2026-07-02 |
-| `report-design` | `qieman-report-design` | `qieman-report-design` | L1 | `SKILL.md` | 2026-07-02 |
-| `workflow-design` | `qieman-ai-workflow-design` | `qieman-ai-workflow-design` | L1 | `SKILL.md` | 2026-07-02 |
-
----
-
-## 统一布局
-
-### Frontmatter
-
-#### L0 / L2 `SKILL.md`
-
-```yaml
----
-name: <与文件夹同名>
-layer: L0 | L2
-license: Complete terms in LICENSE.txt
-description: >
-  ...
-extends: qieman-ui-design   # L2 必填；L0 省略
----
-```
-
-#### L1 `SKILL.md`
-
-```yaml
----
-name: <与文件夹同名>
-layer: L1
-extends: <父级 skill name>
-license: Complete terms in LICENSE.txt
-description: >
-  ...
----
-```
-
----
-
-## 头部信息栏
-
-### L0 / L2
-
-```md
-# <name>
-
-| 字段 | 值 |
-|---|---|
-| **ID** | `<name>` |
-| **层级** | L0 / L2 |
-| **分类** | app-design / marketing-design / report-design / workflow-design |
-| **规范** | 本文件 `SKILL.md` |
-| **依赖** | ... |
-| **更新日期** | YYYY-MM-DD |
-
-## 调用
-
-```bash
-npx openskills read <name>
-```
-```
-
----
-
-## 更新日期维护
-
-```bash
-python3 scripts/sync-updated-at.py
-```
-
----
-
-## 调用示例
-
-```bash
-npx openskills read qieman-ui-design
-npx openskills read qieman-sell-popup-design
-npx openskills read qieman-chart-design
-npx openskills read qieman-h5-design
-npx openskills read qieman-vip-design
-npx openskills read qieman-ip-visual-design
-npx openskills read qieman-ppt-design
-npx openskills read qieman-report-design
-npx openskills read qieman-ai-workflow-design
-```
-
-Cursor 报告幻灯片快捷入口：
+完整的 Skills 分层结构、调用路由、Skill index、Frontmatter 规范和调用示例见：
 
 ```text
-.cursor/skills/qieman-report-design/SKILL.md
+skills/README.md
 ```
 
 ---
 
-## 当前重点 Skill
+## 当前 Skill 分类
 
-### `qieman-ip-visual-design`
+| 分类 | 说明 |
+|---|---|
+| `app-design` | App 界面、Web 页面、组件、弹窗、图表、数据卡片等产品设计能力 |
+| `marketing-design` | H5、活动页、VIP 高净值、IP 视觉、社群运营图等营销设计能力 |
+| `report-design` | PPT、汇报页、报告、演示材料等报告与展示设计能力 |
+| `workflow-design` | AI 设计流程、Prompt、Cursor、Claude、Figma、HTML 生成等工作流规范 |
 
-路径：
+---
+
+## 使用说明
+
+每个 Skill 以独立目录组织，正式入口文件为：
 
 ```text
-marketing-design/qieman-ip-visual-design/
+SKILL.md
 ```
 
-用途：
+推荐目录结构：
 
 ```text
-用于生成且慢小顾 IP 相关视觉物料。当前版本主要支持 3:4 内容封面，固定使用且慢 Logo、统一蓝色背景、小顾 IP 与四类封面模板，后续可扩展至社群图、运营图、活动图、App 内 IP 引导等场景。
-```
-
-资产结构：
-
-```text
-qieman-ip-visual-design/
+skill-name/
 ├── SKILL.md
-├── references/
-└── assets/
-    ├── background/
-    ├── examples/
-    ├── ip/
-    └── logo/
+├── README.md          可选，用于补充说明
+├── assets/            可选，放正式素材
+└── references/        可选，放参考资料
 ```
 
 ---
 
-## 历史说明
+## 文件用途说明
 
-历史 skill `qieman-pdf-design` 已移至 `_legacy/`，不在当前分类框架内。
+| 文件 / 目录 | 作用 |
+|---|---|
+| `SKILL.md` | Skill 的正式规范入口，调用时优先读取 |
+| `README.md` | 说明文档，用于解释目录结构、调用方式和维护规则 |
+| `assets/` | 正式素材目录，如 Logo、IP、背景、模板图 |
+| `references/` | 参考资料目录，如需求说明、历史截图、补充规范 |
 
-如后续频繁出现 `.DS_Store`，建议在仓库根目录新增 `.gitignore`：
+---
+
+## 维护说明
+
+- 新增 Skill 时，需要同步更新 `skills/README.md`。
+- 正式规范以各 Skill 目录下的 `SKILL.md` 为准。
+- 素材文件应放入对应 Skill 的 `assets/` 目录。
+- 参考资料、历史截图、需求说明应放入对应 Skill 的 `references/` 目录。
+- 文件夹命名统一使用英文小写和短横线。
+- 不建议提交 `.DS_Store` 等系统文件。
+
+---
+
+## 快速入口
 
 ```text
-.DS_Store
+skills/README.md
 ```
+
+用于查看完整 Skill 分层与调用说明。
