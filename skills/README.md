@@ -31,10 +31,19 @@ qieman-skills/
 └── README.md
 ```
 
-分层说明见 `app-design/qieman-ui-design/SKILL.md` → Skill Layering；  
-`app-design` 调用路由见 `app-design/README.md`；  
-`marketing-design` 调用路由见 `marketing-design/README.md`；  
-`report-design` 调用路由见 `report-design/README.md`。
+分层说明见：
+
+```text
+app-design/qieman-ui-design/SKILL.md
+```
+
+各分类调用路由：
+
+```text
+app-design/README.md
+marketing-design/README.md
+report-design/README.md
+```
 
 ---
 
@@ -46,7 +55,11 @@ qieman-skills/
 | 弹窗设计、营销弹窗、交易确认弹窗、风险提示弹窗、卖出挽留弹窗 | `qieman-ui-design` + `qieman-sell-popup-design` |
 | 图表设计、曲线、走势图、饼图、数据卡片、App 内数据可视化 | `qieman-ui-design` + `qieman-chart-design` |
 
-完整路由表与组合场景见 `app-design/README.md`。
+完整路由表与组合场景见：
+
+```text
+app-design/README.md
+```
 
 ---
 
@@ -58,7 +71,11 @@ qieman-skills/
 | 且慢高净值私域宣传海报、VIP 视觉设计、高客营销设计、顾问设计 | `qieman-ui-design` + `qieman-vip-design` |
 | 小顾 IP、IP 视觉设计、内容封面、社群物料、运营图、IP 活动图 | `qieman-ui-design` + `qieman-ip-visual-design` |
 
-完整路由表见 `marketing-design/README.md`。
+完整路由表见：
+
+```text
+marketing-design/README.md
+```
 
 ---
 
@@ -69,7 +86,11 @@ qieman-skills/
 | PPT、幻灯片设计、汇报页、方案页、路演材料 | `qieman-ui-design` + `qieman-ppt-design` |
 | 家庭财富报告、财富报告书、客户报告、资产报告、PDF 报告 | `qieman-ui-design` + `qieman-ppt-design` + `qieman-report-design` |
 
-完整路由表见 `report-design/README.md`。
+完整路由表见：
+
+```text
+report-design/README.md
+```
 
 ---
 
@@ -205,6 +226,7 @@ marketing-design/qieman-ip-visual-design/
 ```text
 qieman-ip-visual-design/
 ├── SKILL.md
+├── README.md
 ├── references/
 └── assets/
     ├── background/
@@ -215,9 +237,42 @@ qieman-ip-visual-design/
 
 ---
 
-## 历史说明
+## 维护说明
 
-历史 skill `qieman-pdf-design` 已移至 `_legacy/`，不在当前分类框架内。
+### 新增 Skill
+
+新增 Skill 时，需要同步检查：
+
+- 是否归入正确分类。
+- 文件夹名是否符合 `qieman-{scene}-design`。
+- `SKILL.md` 中的 `name` 是否与文件夹名一致。
+- 是否需要补充 `assets/`。
+- 是否需要补充 `references/`。
+- 是否需要更新本 README 的目录与调用路由。
+
+---
+
+### 修改 Skill
+
+修改 Skill 时，需要同步检查：
+
+- `SKILL.md` 是否更新。
+- README 是否需要同步入口说明。
+- `assets/` 路径是否仍然有效。
+- 文件夹名是否与 `name` 字段一致。
+- 示例图、资产图是否命名清晰、可复用。
+- 是否误上传 `.DS_Store` 等系统文件。
+
+---
+
+## 不建议提交的文件
+
+```text
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+```
 
 如后续频繁出现 `.DS_Store`，建议在仓库根目录新增 `.gitignore`：
 
@@ -225,3 +280,18 @@ qieman-ip-visual-design/
 .DS_Store
 ```
 
+---
+
+## 历史说明
+
+历史 skill `qieman-pdf-design` 已移至 `_legacy/`，不在当前分类框架内。
+
+---
+
+## 更新记录
+
+| 日期 | 更新内容 |
+|---|---|
+| 2026-07-02 | 调整 Skills 分层结构，新增 `app-design`、`marketing-design`、`report-design`、`workflow-design` 分类 |
+| 2026-07-02 | 将 `qieman-ip-visual-design` 归入 `marketing-design` |
+| 2026-07-02 | 更新 Skill index 与调用路由 |
