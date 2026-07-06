@@ -30,7 +30,17 @@ description: >
 
 `qieman-ip-visual-design` 用于生成且慢品牌小顾 IP 相关视觉物料。
 
-当前第一阶段主要服务 **内容封面类场景**，包括 Tips 封面、策略介绍封面、投前测评封面、观点型标题封面等。后续可扩展至社群运营图、活动物料、App 内 IP 引导图、节日 IP 物料、视频封面等更多 IP 应用场景。
+当前第一阶段主要服务 **内容封面类场景**，包括：
+
+- 今日小 Tips 封面
+- 策略介绍封面
+- 投前测评封面
+- 观点型标题封面
+- 社群运营图
+- 活动运营图
+- IP 内容视觉物料
+
+后续可扩展至 App 内 IP 引导图、节日 IP 物料、视频封面等更多 IP 应用场景。
 
 ---
 
@@ -96,6 +106,7 @@ qieman-ui-design + qieman-ip-visual-design
 qieman-ip-visual-design/
 ├── SKILL.md
 ├── README.md
+├── LICENSE.txt
 ├── references/
 └── assets/
     ├── background/
@@ -111,13 +122,19 @@ qieman-ip-visual-design/
 | `assets/logo/` | 且慢 Logo PNG / SVG |
 | `assets/ip/` | 小顾 IP 官方 PNG 原图 |
 | `assets/background/` | 统一蓝色背景图 |
-| `assets/examples/` | 四类视觉模板参考图 |
+| `assets/examples/` | 视觉模板参考图 |
 
 ---
 
 ## 5. 固定背景规范
 
 背景必须统一使用官方提供的蓝色渐变波纹背景图。
+
+推荐资产：
+
+```text
+assets/background/qieman-blue-cover-bg.png
+```
 
 ### 强约束
 
@@ -129,17 +146,18 @@ qieman-ip-visual-design/
 - 不得叠加杂乱装饰
 - 不得裁切导致背景比例异常
 
-背景资产建议放置在：
-
-```text
-assets/background/qieman-blue-cover-bg.png
-```
-
 ---
 
 ## 6. Logo 使用规范
 
 Logo 固定放置在画面左上角，使用且慢官方 Logo。
+
+推荐资产：
+
+```text
+assets/logo/qieman-logo.png
+assets/logo/qieman-logo.svg
+```
 
 ### 规则
 
@@ -150,13 +168,6 @@ Logo 固定放置在画面左上角，使用且慢官方 Logo。
 - 不加描边
 - 不加额外阴影
 - 不替换为其他图形
-
-Logo 资产建议放置在：
-
-```text
-assets/logo/qieman-logo.png
-assets/logo/qieman-logo.svg
-```
 
 ---
 
@@ -226,6 +237,8 @@ assets/ip/
 阿里巴巴普惠体 / Alibaba PuHuiTi
 ```
 
+说明：字体文件不随本包分发。使用时请在本地设计环境或生成环境中安装并确认授权。
+
 ### 字号规则
 
 字号不机械固定，应根据 300 × 400 的设计基准和文案长度自适应调整，但必须保持参考图中的视觉层级关系。
@@ -257,7 +270,7 @@ assets/ip/
 - 不抢主视觉
 
 风险提示适用于视觉二、视觉三、视觉四。  
-视觉一是否出现风险提示，可根据内容类型决定。
+视觉一是否出现风险提示，可根据内容类型决定；如用户未明确要求，视觉一默认不添加风险提示。
 
 ---
 
@@ -290,18 +303,8 @@ assets/ip/
 参考图：
 
 ```text
-assets/examples/visual-01-logo-title-content-ip.png
-```
-
-内容结构示例：
-
-```text
-今日小Tips
-
-【7】买入多少天开始有收益？
-
-• 花好月圆
-• 债基优等生
+assets/examples/visual-01-tips-question-ip.png
+assets/examples/visual-01-tips-lightbulb-ip.png
 ```
 
 规则：
@@ -311,6 +314,68 @@ assets/examples/visual-01-logo-title-content-ip.png
 - 可使用 bullet 或编号
 - IP 固定右下，不露脚
 - 内容区不得压到 IP
+- 默认不添加风险提示，除非用户明确要求
+
+---
+
+### 视觉一内容区换行规则
+
+视觉一中的内容文案应优先保持自然阅读完整性。
+
+#### 单句内容优先单行展示
+
+当内容为单句，且长度不超过 18 个中文字符时，应优先完整展示为一行。
+
+推荐：
+
+```text
+【7】买入多少天开始有收益？
+```
+
+不推荐：
+
+```text
+【7】买入多少天
+开始有收益？
+```
+
+#### 编号与正文之间不加多余空格
+
+推荐：
+
+```text
+【7】买入多少天开始有收益？
+```
+
+不推荐：
+
+```text
+【7】 买入多少天开始有收益？
+```
+
+#### 一行放不下时的处理优先级
+
+如果内容一行展示空间不足，应按以下优先级处理：
+
+```text
+1. 适当缩小内容字号
+2. 适当增加内容区宽度
+3. 调整内容区位置
+4. 最后才考虑换行
+```
+
+不得为了平均排版或视觉居中，强行拆断完整句子。
+
+#### 换行原则
+
+只有在以下情况才允许换行：
+
+- 内容明显超过一行承载范围
+- 文案本身包含多个语义段
+- 用户明确要求分行
+- 单行会严重挤压 IP 或破坏画面留白
+
+换行时必须按自然语义断句，不得拆散固定词组、问题句或完整表达。
 
 ---
 
@@ -337,14 +402,6 @@ assets/examples/visual-01-logo-title-content-ip.png
 
 ```text
 assets/examples/visual-02-logo-strategy-ip-risk.png
-```
-
-内容结构示例：
-
-```text
-花好月圆
-—
-短期稳健
 ```
 
 规则：
@@ -380,15 +437,9 @@ assets/examples/visual-02-logo-strategy-ip-risk.png
 参考图：
 
 ```text
-assets/examples/visual-03-logo-title-subtitle-risk.png
-```
-
-内容结构示例：
-
-```text
-且慢投前小测评3
-
-「债基优等生」（R2）不适合什么样的投资者？
+assets/examples/visual-03-pretest-r2-no-ip.png
+assets/examples/visual-03-pretest-question-no-ip-01.png
+assets/examples/visual-03-pretest-question-no-ip-02.png
 ```
 
 规则：
@@ -422,21 +473,8 @@ assets/examples/visual-03-logo-title-subtitle-risk.png
 参考图：
 
 ```text
-assets/examples/visual-04-logo-title-risk-ip.png
-```
-
-内容结构示例：
-
-```text
-不要让波动打败
-你的投资计划
-```
-
-或：
-
-```text
-什么叫
-“黎明前的黑暗”？
+assets/examples/visual-04-title-risk-ip.png
+assets/examples/visual-04-title-question-ip.png
 ```
 
 规则：
@@ -451,15 +489,9 @@ assets/examples/visual-04-logo-title-risk-ip.png
 
 ## 11. 标题断句规则
 
-视觉四尤其需要控制标题断句。
-
-### 总原则
-
 标题文本必须按自然阅读习惯断句，优先依据语义结构、固定搭配和完整概念进行换行，不得为了平均字数而生硬拆分文案。
 
-### 规则
-
-#### 1. 按语义块断句
+### 1. 按语义块断句
 
 推荐：
 
@@ -475,7 +507,7 @@ assets/examples/visual-04-logo-title-risk-ip.png
 投资计划
 ```
 
-#### 2. 不打断引号内完整表达
+### 2. 不打断引号内完整表达
 
 推荐：
 
@@ -491,7 +523,7 @@ assets/examples/visual-04-logo-title-risk-ip.png
 黑暗”？
 ```
 
-#### 3. 不拆散固定搭配
+### 3. 不拆散固定搭配
 
 不要拆散：
 
@@ -504,7 +536,7 @@ assets/examples/visual-04-logo-title-risk-ip.png
 活钱管理
 ```
 
-#### 4. 标点跟随句尾
+### 4. 标点跟随句尾
 
 不允许：
 
@@ -546,6 +578,8 @@ assets/examples/visual-04-logo-title-risk-ip.png
 - 禁止打断引号内完整表达
 - 禁止标点单独成行
 - 禁止风险提示抢主视觉
+- 禁止在编号与正文之间加入多余空格
+- 禁止将短句内容强行拆成两行
 
 ### 画面
 
@@ -564,11 +598,27 @@ assets/examples/visual-04-logo-title-risk-ip.png
 请基于 qieman-ip-visual-design 生成一张 3:4 内容封面。
 设计基准为 300×400，最终输出 900×1200。
 使用官方统一蓝色背景，Logo 固定左上，小顾 IP 固定右下，底部靠右且不露脚。
+
 模板使用视觉一：Logo + 主标题 + 内容 + IP。
+
 主标题为：{主标题}
 内容为：{内容}
+
 文字使用阿里巴巴普惠体，字号和比例参考样图。
+主标题是第一视觉重点，内容区是第二视觉层级。
+
+内容文案如为单句，且长度不超过 18 个中文字符，必须优先完整展示为一行。
+不要在编号与正文之间加入多余空格。
+不要为了排版平均而强行换行。
+如果一行空间不足，优先适当缩小内容字号或增加内容区宽度，而不是直接拆成两行。
+
+示例：
+推荐：{内容}
+不推荐：将完整问题句拆成两行。
+
 不得更改背景、Logo 和小顾 IP 形象。
+不得新增无关文字。
+不得添加风险提示，除非用户明确要求。
 ```
 
 ### 视觉二 Prompt
@@ -577,12 +627,17 @@ assets/examples/visual-04-logo-title-risk-ip.png
 请基于 qieman-ip-visual-design 生成一张 3:4 策略介绍封面。
 设计基准为 300×400，最终输出 900×1200。
 使用官方统一蓝色背景，Logo 固定左上，小顾 IP 固定右下，底部靠右且不露脚。
+
 模板使用视觉二：Logo + 策略名称 + IP + 风险提示。
+
 策略名称为：{策略名称}
 策略定位为：{策略定位}
 风险提示为：投资有风险 风险自担
+
 文字使用阿里巴巴普惠体，字号和比例参考样图。
+策略名称是第一视觉重点，策略定位为第二视觉层级。
 不得更改背景、Logo 和小顾 IP 形象。
+不得新增无关文字。
 ```
 
 ### 视觉三 Prompt
@@ -591,12 +646,17 @@ assets/examples/visual-04-logo-title-risk-ip.png
 请基于 qieman-ip-visual-design 生成一张 3:4 投前测评封面。
 设计基准为 300×400，最终输出 900×1200。
 使用官方统一蓝色背景，Logo 固定左上，不出现小顾 IP。
+
 模板使用视觉三：Logo + 标题文本 + 副文本 + 风险提示。
+
 标题文本为：{标题文本}
 副文本为：{副文本}
 风险提示为：投资有风险 风险自担
+
 文字使用阿里巴巴普惠体，字号和比例参考样图。
 画面保持简洁、留白、纯净。
+不得更改背景和 Logo。
+不得新增无关文字。
 ```
 
 ### 视觉四 Prompt
@@ -605,12 +665,16 @@ assets/examples/visual-04-logo-title-risk-ip.png
 请基于 qieman-ip-visual-design 生成一张 3:4 观点型标题封面。
 设计基准为 300×400，最终输出 900×1200。
 使用官方统一蓝色背景，Logo 固定左上，小顾 IP 固定右下，底部靠右且不露脚。
+
 模板使用视觉四：Logo + 标题文本 + 风险提示 + IP。
+
 标题为：{标题文本}
 风险提示为：投资有风险 风险自担
+
 标题断句必须符合自然阅读习惯，不得打断引号内完整表达，不得拆散固定词组，标点不得单独成行。
 文字使用阿里巴巴普惠体，字号和比例参考样图。
 不得更改背景、Logo 和小顾 IP 形象。
+不得新增无关文字。
 ```
 
 ---
@@ -628,12 +692,14 @@ assets/examples/visual-04-logo-title-risk-ip.png
 - [ ] 小顾 IP 如出现，固定右下且不露脚
 - [ ] 小顾 IP 未变形、未改脸、未改色、未低幼化
 - [ ] 字体使用阿里巴巴普惠体
-- [ ] 标题为第一视觉重点
+- [ ] 主标题为第一视觉重点
 - [ ] 内容区清晰可读
 - [ ] 风险提示位置正确且弱化
 - [ ] 标题断句自然
 - [ ] 引号内完整表达未被拆开
 - [ ] 标点未单独成行
+- [ ] 编号与正文之间没有多余空格
+- [ ] 视觉一短句内容优先单行展示
 - [ ] 画面无杂乱装饰
 - [ ] 整体风格与参考图一致
 
@@ -646,4 +712,16 @@ assets/examples/visual-04-logo-title-risk-ip.png
 - 新增 IP 动作素材时，放入 `assets/ip/`。
 - 新增背景素材时，放入 `assets/background/`。
 - 新增 Logo 版本时，放入 `assets/logo/`。
+- 更新素材命名时，需要同步更新本文件中的资产路径。
 - 不要提交 `.DS_Store` 等系统文件。
+
+---
+
+## 16. 当前版本更新记录
+
+| 日期 | 更新内容 |
+|---|---|
+| 2026-07-02 | 新增 `qieman-ip-visual-design`，归入 `marketing-design` |
+| 2026-07-02 | 明确 3:4 内容封面输出规格：300×400 设计基准，900×1200 最终输出 |
+| 2026-07-02 | 新增四类视觉模板：视觉一、视觉二、视觉三、视觉四 |
+| 2026-07-02 | 新增视觉一内容区换行规则，短句内容优先单行展示 |
