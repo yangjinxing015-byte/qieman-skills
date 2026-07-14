@@ -2,15 +2,7 @@
 
 本目录用于存放 `qieman-ip-visual-design` 的正式调用素材。
 
-这些素材会直接参与且慢小顾 IP 相关视觉物料的生成，包括固定背景、品牌 Logo、小顾 IP 原图和四类视觉模板参考图。
-
----
-
-## 目录定位
-
-`assets/` 是正式素材目录。
-
-当需要生成、复刻、还原、延展 `qieman-ip-visual-design` 相关视觉时，应优先调用本目录中的素材。
+这些素材会直接参与且慢小顾 IP 相关视觉物料的生成，包括固定背景、品牌 Logo、拟人版小顾 IP 素材和视觉模板参考图。
 
 与 `references/` 的区别：
 
@@ -21,528 +13,306 @@
 
 简单理解：
 
-```text
-assets = 正式调用素材
-references = 参考说明资料
-```
+    assets = 正式调用素材
+    references = 参考说明资料
+
+---
+
+## 目录定位
+
+`assets/` 是正式素材目录。  
+当需要生成、复刻、还原、延展 `qieman-ip-visual-design` 相关视觉时，应优先调用本目录中的素材。
+
+正式设计规范以 `SKILL.md` 为准。  
+正式素材以 `assets/` 目录为准。
 
 ---
 
 ## 当前目录结构
 
-```text
-assets/
-├── background/
-├── examples/
-├── ip/
-└── logo/
-```
+    assets/
+    ├── README.md
+    ├── background/
+    │   └── qieman-blue-cover-bg.png
+    ├── examples/
+    │   └── visual-01-xiaohongshu-cover-layout-reference.png
+    ├── ip/
+    │   └── humanoid/
+    │       ├── xiaogu-humanoid-01-standing-front.png
+    │       ├── xiaogu-humanoid-02-walking-side.png
+    │       ├── xiaogu-humanoid-03-holding-report-chart.png
+    │       ├── xiaogu-humanoid-04-holding-star.png
+    │       ├── xiaogu-humanoid-05-holding-trophy.png
+    │       ├── xiaogu-humanoid-06-waving.png
+    │       ├── xiaogu-humanoid-07-pointing.png
+    │       ├── xiaogu-humanoid-08-holding-laptop.png
+    │       ├── xiaogu-humanoid-09-cheering.png
+    │       └── xiaogu-humanoid-10-walking-front.png
+    └── logo/
+        ├── qieman-logo.png
+        └── qieman-logo.svg
 
 ---
 
 ## 子目录说明
 
-| 目录 | 内容 | 作用 |
-|---|---|---|
-| `background/` | 统一蓝色背景图 | 作为封面固定背景使用 |
-| `examples/` | 四类视觉模板参考图 | 用于参考版式、字号、比例、信息层级 |
-| `ip/` | 小顾 IP PNG 原图 | 用于封面右下角 IP 形象展示 |
-| `logo/` | 且慢 Logo PNG / SVG | 用于封面左上角品牌标识 |
+| 目录 | 内容 | 作用 | 是否默认调用 |
+|---|---|---|---|
+| `background/` | 统一蓝色背景图 | 作为封面固定背景使用 | 是 |
+| `examples/` | 视觉模板、结构参考图 | 用于参考版式、字号、比例、信息层级 | 作为参考 |
+| `ip/humanoid/` | 拟人版小顾 IP 单个 PNG 素材 | 用于小红书封面、营销封面、运营传播图的右下角 IP 展示 | 是 |
+| `logo/` | 且慢 Logo PNG / SVG | 用于封面左上角品牌标识 | 是 |
 
 ---
 
-# 什么时候调用 assets
+## background/
 
-## 1. 生成正式视觉物料时，必须调用
+### 目录作用
 
-当用户要求生成以下内容时，应调用 `assets/` 中的正式素材：
+`background/` 用于存放封面固定背景图。
 
-- 小顾 IP 内容封面
+当前默认背景素材为：
+
+    assets/background/qieman-blue-cover-bg.png
+
+### 使用规则
+
+- 生成 3:4 内容封面时，默认直接调用该背景素材。
+- 背景不得重新生成。
+- 背景不得改色。
+- 背景不得重绘。
+- 背景不得叠加复杂装饰。
+- 背景波纹形态不得随意改变。
+- 背景需保持与参考封面一致的蓝色渐变质感。
+
+### 命名规范
+
+推荐命名：
+
+    qieman-blue-cover-bg.png
+
+不建议使用：
+
+    background.png
+    bg.png
+    blue.png
+    qieman-blue-cover-bg.png.png
+
+---
+
+## examples/
+
+### 目录作用
+
+`examples/` 用于存放视觉模板、结构参考图和版式参考图。
+
+当前关键结构参考图：
+
+    assets/examples/visual-01-xiaohongshu-cover-layout-reference.png
+
+### 使用规则
+
+该图用于约束视觉一封面的基础结构，包括：
+
+- Logo 位置
+- 内容区位置
+- 主标题与正文层级
+- IP 右下角位置
+- IP 大小比例
+- IP 底部基线
+- 3:4 封面整体结构
+
+`examples/` 中的文件主要作为结构参考，不一定作为最终画面图层直接调用。
+
+---
+
+## ip/humanoid/
+
+### 目录作用
+
+`ip/humanoid/` 是当前 Skill 默认正式调用的 IP 素材目录。
+
+该目录仅存放 **拟人版小顾 IP 的单个透明 PNG 素材**，用于：
+
+- 小红书封面
+- 营销内容封面
+- 运营传播图
+- 社群引导图
 - 今日小 Tips 封面
-- 策略介绍封面
-- 投前测评封面
-- 观点型标题封面
-- 社群运营图
+- 金融知识内容封面
 - 活动运营图
-- IP 内容视觉物料
-- 与示例图风格一致的 3:4 封面图
 
-典型触发词：
+### 默认调用规则
 
-```text
-小顾 IP、IP 视觉、内容封面、社群物料、运营图、Tips 封面、投前测评封面、策略介绍封面、观点型标题、按照这个模板生成
-```
+当前默认正式调用目录为：
+
+    assets/ip/humanoid/
+
+生成小红书封面、营销封面、运营传播图时，默认从该目录中选择拟人版小顾 IP 素材。
+
+原版小顾素材不放在本目录中，已归档至：
+
+    references/ip/core-legacy/
+
+原版小顾仅作为历史归档和特殊场景参考，不进入默认调用池。
 
 ---
 
-## 2. 生成 3:4 内容封面时，必须调用
+## 拟人版小顾 IP 素材命名
 
-当前 Skill 的核心输出是：
+`assets/ip/humanoid/` 下推荐使用以下命名：
 
-```text
-设计基准：300 × 400
-最终输出：900 × 1200
-比例：3:4
-```
+    xiaogu-humanoid-01-standing-front.png
+    xiaogu-humanoid-02-walking-side.png
+    xiaogu-humanoid-03-holding-report-chart.png
+    xiaogu-humanoid-04-holding-star.png
+    xiaogu-humanoid-05-holding-trophy.png
+    xiaogu-humanoid-06-waving.png
+    xiaogu-humanoid-07-pointing.png
+    xiaogu-humanoid-08-holding-laptop.png
+    xiaogu-humanoid-09-cheering.png
+    xiaogu-humanoid-10-walking-front.png
 
-只要用户要求生成这类封面，应默认调用：
+### 素材说明
 
-```text
-assets/background/
-assets/logo/
-assets/ip/
-assets/examples/
-```
+| 文件名 | 中文说明 | 适用场景 |
+|---|---|---|
+| `xiaogu-humanoid-01-standing-front.png` | 正面站立 | 通用封面、稳重信息 |
+| `xiaogu-humanoid-02-walking-side.png` | 侧身行走 | 流程、行动、引导 |
+| `xiaogu-humanoid-03-holding-report-chart.png` | 手持数据报告 / 图表 | 金融数据、收益说明、策略分析 |
+| `xiaogu-humanoid-04-holding-star.png` | 手持星星 | 亮点、权益、推荐 |
+| `xiaogu-humanoid-05-holding-trophy.png` | 手持奖杯 | 成就、榜单、活动奖励 |
+| `xiaogu-humanoid-06-waving.png` | 挥手欢迎 | 加群、欢迎、入口引导 |
+| `xiaogu-humanoid-07-pointing.png` | 指向说明 | 步骤说明、重点提示 |
+| `xiaogu-humanoid-08-holding-laptop.png` | 手持电脑 / 屏幕 | 工具、数据看板、智能分析 |
+| `xiaogu-humanoid-09-cheering.png` | 开心欢呼 | 活动、福利、正向反馈 |
+| `xiaogu-humanoid-10-walking-front.png` | 正向行走 | 引导、陪伴、行动入口 |
+
+### 场景推荐
+
+社群 / 加群 / 欢迎类优先调用：
+
+    xiaogu-humanoid-06-waving.png
+    xiaogu-humanoid-07-pointing.png
+    xiaogu-humanoid-01-standing-front.png
+    xiaogu-humanoid-09-cheering.png
+
+金融知识 / 策略 / 收益说明类优先调用：
+
+    xiaogu-humanoid-03-holding-report-chart.png
+    xiaogu-humanoid-08-holding-laptop.png
+    xiaogu-humanoid-07-pointing.png
+    xiaogu-humanoid-01-standing-front.png
+
+活动 / 权益 / 榜单类优先调用：
+
+    xiaogu-humanoid-04-holding-star.png
+    xiaogu-humanoid-05-holding-trophy.png
+    xiaogu-humanoid-09-cheering.png
+    xiaogu-humanoid-06-waving.png
+
+---
+
+## IP 使用约束
+
+使用 `assets/ip/humanoid/` 下的拟人版小顾素材时，必须遵守：
+
+- 必须等比缩放。
+- 不得横向压扁。
+- 不得纵向拉伸。
+- 不得改变头身比例。
+- 不得改变五官比例。
+- 不得改色。
+- 不得低幼化。
+- 不得夸张化。
+- 不得变成其他机器人、动物、真人或泛卡通形象。
+- 不得遮挡标题和正文。
+- 不得在同一组候选图中忽大忽小、忽高忽低。
+- 同一组 4 张候选图中，IP 的视觉高度和底部基线应保持一致。
+- IP 默认固定在画面右下角。
+- IP 大小比例应参考 `assets/examples/visual-01-xiaohongshu-cover-layout-reference.png`。
+
+---
+
+## logo/
+
+### 目录作用
+
+`logo/` 用于存放且慢 Logo 正式素材。
+
+推荐文件：
+
+    assets/logo/qieman-logo.png
+    assets/logo/qieman-logo.svg
+
+### 使用规则
+
+- Logo 固定放置在画面左上角。
+- Logo 必须直接调用本目录中的正式素材。
+- 不得重新生成 Logo。
+- 不得改色。
+- 不得拉伸变形。
+- 不得加描边。
+- 不得加复杂阴影。
+- 不得替换为非官方 Logo。
+
+---
+
+## 不建议放入 assets 的内容
+
+以下内容不建议放在 `assets/` 中，应放入 `references/`：
+
+| 内容 | 推荐位置 |
+|---|---|
+| 需求说明文档 | `references/` |
+| 历史封面截图 | `references/` |
+| 原版小顾归档素材 | `references/ip/core-legacy/` |
+| 拟人版小顾合集参考图 | `references/ip/humanoid-reference/` |
+| 临时补充规则 | `references/` |
+| 设计讨论截图 | `references/` |
+
+---
+
+## 与 references/ 的关系
+
+当前 references 目录主要用于保存：
+
+    references/ip/core-legacy/
+    references/ip/humanoid-reference/
 
 其中：
 
-- `background/` 用于固定背景
-- `logo/` 用于左上角 Logo
-- `ip/` 用于右下角小顾 IP
-- `examples/` 用于参考版式和信息层级
+- `references/ip/core-legacy/`：原版小顾历史归档，不进入默认调用池。
+- `references/ip/humanoid-reference/`：拟人版小顾比例、动作、姿态参考图，不作为正式拼版素材直接调用。
+
+正式生成时，应优先调用 `assets/` 中的素材，而不是 `references/` 中的参考图。
 
 ---
 
-## 3. 用户要求“保持且慢 IP 风格”时，应调用
+## 维护说明
 
-当用户说：
+新增或调整 assets 素材时，请确保：
 
-```text
-保持且慢风格
-保持小顾IP一致
-按照这组视觉生成
-参考小顾封面
-不要改变IP
-不要改变背景
-```
-
-应调用 `assets/` 里的正式素材，而不是重新生成新的背景、Logo 或 IP。
+- 文件命名清晰。
+- 文件名使用英文小写、数字和短横线。
+- 不使用中文文件名。
+- 不使用空格。
+- 不使用重复后缀，如 `.png.png`。
+- 不提交 `.DS_Store` 等系统文件。
+- 正式可调用 IP 素材放入 `assets/ip/humanoid/`。
+- 原版小顾归档素材放入 `references/ip/core-legacy/`。
+- 拟人版小顾合集参考图放入 `references/ip/humanoid-reference/`。
+- 新增素材后，如影响正式生成规则，需要同步更新 `SKILL.md`。
+- 新增结构参考图后，需要同步更新 `SKILL.md` 中的路径说明。
 
 ---
 
-## 4. 需要保证品牌一致性时，应调用
+## 更新记录
 
-只要视觉中包含以下品牌元素，就应调用对应 assets：
-
-| 需要的品牌元素 | 调用目录 |
+| 日期 | 更新内容 |
 |---|---|
-| 且慢 Logo | `assets/logo/` |
-| 小顾 IP | `assets/ip/` |
-| 蓝色封面背景 | `assets/background/` |
-| 四类模板样式 | `assets/examples/` |
-
----
-
-# 什么时候不调用 assets
-
-## 1. 只做文字分析时，不需要调用
-
-如果用户只是让你：
-
-- 分析设计思路
-- 总结规范
-- 整理命名
-- 修改 README
-- 写 Skill 文档
-- 讨论目录结构
-- 规划分层结构
-
-则不需要调用 `assets/` 中的图片素材。
-
-这类任务主要参考：
-
-```text
-SKILL.md
-README.md
-references/
-```
-
----
-
-## 2. 用户明确要求不使用现有素材时，不调用
-
-如果用户明确说：
-
-```text
-不要用现有IP
-重新设计一个新形象
-换一个背景
-不使用原Logo
-做一个完全不同风格
-```
-
-则不应强制调用本目录素材。
-
-但需要注意：  
-如果任务仍属于且慢正式视觉物料，应提醒用户这会偏离当前 Skill 的规范。
-
----
-
-## 3. 非小顾 IP 相关场景，不默认调用
-
-以下场景不默认调用本目录：
-
-- 高净值营销海报
-- 普通 H5 页面
-- App UI 页面
-- PPT 页面
-- 报告设计
-- 交易弹窗
-- 图表组件
-- 与小顾 IP 无关的营销图
-
-这些场景应优先调用对应 Skill：
-
-```text
-marketing-design/qieman-h5-design
-marketing-design/qieman-vip-design
-app-design/qieman-ui-design
-app-design/qieman-chart-design
-report-design/qieman-ppt-design
-```
-
----
-
-## 4. 用户已提供新的正式素材时，应优先使用用户素材
-
-如果用户上传了新的 Logo、IP、背景或模板，并明确说明：
-
-```text
-以这个为准
-用这版素材
-替换原来的IP
-替换背景
-替换Logo
-```
-
-则应优先使用用户提供的新素材。
-
-但需要确认：
-
-- 是否仍符合且慢品牌规范
-- 是否允许替换原有素材
-- 是否会影响 Skill 的统一风格
-
----
-
-# 各类 assets 的调用规则
-
----
-
-## 1. background/
-
-### 内容
-
-```text
-background/
-└── qieman-blue-cover-bg.png
-```
-
-### 什么时候调用
-
-生成以下封面时必须调用：
-
-- 视觉一
-- 视觉二
-- 视觉三
-- 视觉四
-- 其他基于小顾 IP 的 3:4 内容封面
-
-### 使用规则
-
-- 作为整张画面的固定底图
-- 不得替换
-- 不得改色
-- 不得重绘
-- 不得扭曲
-- 不得随意裁切
-- 不得增加复杂金融元素
-- 不得叠加杂乱装饰
-
-### 不调用的情况
-
-- 用户只需要文字规范
-- 用户明确要求换背景
-- 用户要求做非小顾 IP 场景
-- 用户提供了新的官方背景并声明替换
-
----
-
-## 2. logo/
-
-### 内容
-
-```text
-logo/
-├── qieman-logo.png
-└── qieman-logo.svg
-```
-
-### 什么时候调用
-
-当画面中需要出现且慢 Logo 时必须调用。
-
-典型场景：
-
-- 内容封面
-- Tips 封面
-- 策略封面
-- 投前测评封面
-- IP 运营物料
-
-### 使用规则
-
-- 固定左上角
-- 尺寸参考模板图
-- 保持清晰
-- 不变形
-- 不改色
-- 不加描边
-- 不加额外阴影
-- 不替换为其他图形
-
-### PNG / SVG 使用建议
-
-| 格式 | 适合场景 |
-|---|---|
-| PNG | 直接排版、快速生成、图片合成 |
-| SVG | 需要高清矢量、代码还原、HTML / Figma 重建设计 |
-
-### 不调用的情况
-
-- 用户要求不出现 Logo
-- 用户仅需生成无品牌背景
-- 用户提供了新的官方 Logo 文件
-- 用户任务不是且慢品牌视觉
-
----
-
-## 3. ip/
-
-### 内容
-
-```text
-ip/
-├── xiaogu-happy-confetti.png
-├── xiaogu-data-card.png
-├── xiaogu-question.png
-├── xiaogu-thinking.png
-├── xiaogu-cute-hands.png
-├── xiaogu-data-laptop.png
-├── xiaogu-idea-bulb.png
-└── xiaogu-celebration.png
-```
-
-### 什么时候调用
-
-当视觉中需要出现小顾 IP 时，必须调用 `assets/ip/` 中的官方 PNG 原图。
-
-适用场景：
-
-- 视觉一
-- 视觉二
-- 视觉四
-- 小顾 IP 运营图
-- 社群图
-- 活动物料
-- 带小顾形象的封面图
-
-### 什么时候不调用
-
-视觉三不包含 IP，因此默认不调用 `assets/ip/`。
-
-也就是说：
-
-```text
-视觉一：调用 IP
-视觉二：调用 IP
-视觉三：不调用 IP
-视觉四：调用 IP
-```
-
-### IP 位置规则
-
-- 固定右下角
-- 底部靠右
-- 不露脚
-- 不遮挡标题
-- 不遮挡内容区
-- 不遮挡风险提示
-- 不放左侧
-- 不放顶部
-- 不居中
-
-### IP 禁止项
-
-- 不要变形
-- 不要改脸
-- 不要变低幼
-- 不要改颜色
-- 不要增加表情夸张度
-- 不要重新生成一个类似 IP 替代官方 PNG
-- 不要改变小顾的官方气质
-
-### IP 选择建议
-
-| 内容类型 | 推荐素材 |
-|---|---|
-| 疑问 / 问答类 | `xiaogu-question.png` |
-| 投前测评 / 思考类 | `xiaogu-thinking.png` |
-| 数据分析 / 收益说明 | `xiaogu-data-card.png` 或 `xiaogu-data-laptop.png` |
-| 灵感 / 小知识 | `xiaogu-idea-bulb.png` |
-| 轻松提示 / 活动 / 正向反馈 | `xiaogu-happy-confetti.png` 或 `xiaogu-celebration.png` |
-| 亲和陪伴 / 内容提醒 | `xiaogu-cute-hands.png` |
-
----
-
-## 4. examples/
-
-### 内容
-
-```text
-examples/
-├── visual-01-logo-title-content-ip.png
-├── visual-02-logo-strategy-ip-risk.png
-├── visual-03-logo-title-subtitle-risk.png
-└── visual-04-logo-title-risk-ip.png
-```
-
-### 什么时候调用
-
-当需要确定以下内容时，应参考 `examples/`：
-
-- 版式结构
-- Logo 位置
-- 标题字号
-- 内容区位置
-- IP 比例
-- IP 裁切关系
-- 风险提示位置
-- 信息层级
-- 留白关系
-- 标题断句方式
-
-### 重要说明
-
-`examples/` 是**模板参考图**，不是每次都直接复制图中文字。
-
-调用方式是：
-
-```text
-参考 examples 的版式、比例、层级和位置关系
-使用用户提供的新文案重新排版
-```
-
-不要直接复用示例图里的旧文案，除非用户明确要求。
-
-### 四类模板说明
-
-| 文件 | 模板 | 是否调用 IP | 适用场景 |
-|---|---|---|---|
-| `visual-01-logo-title-content-ip.png` | Logo + 主标题 + 内容 + IP | 是 | Tips、问答合集、加群说明、列表类内容 |
-| `visual-02-logo-strategy-ip-risk.png` | Logo + 策略名称 + IP + 风险提示 | 是 | 策略介绍、产品认知、资产管理类封面 |
-| `visual-03-logo-title-subtitle-risk.png` | Logo + 标题文本 + 副文本 + 风险提示 | 否 | 投前测评、知识判断题、一问一答 |
-| `visual-04-logo-title-risk-ip.png` | Logo + 标题文本 + 风险提示 + IP | 是 | 观点型标题、市场认知、情绪型标题 |
-
-### 不调用 examples 的情况
-
-- 用户只是问素材命名
-- 用户只要整理文档
-- 用户不需要视觉生成
-- 用户明确指定了新的模板
-- 用户提供了新的参考图并要求以新图为准
-
----
-
-# 调用优先级
-
-当用户要求生成正式视觉时，优先级如下：
-
-```text
-1. 用户明确指定的素材
-2. assets/ 中的正式素材
-3. SKILL.md 中的规范
-4. README.md 中的说明
-5. references/ 中的补充资料
-```
-
-如果用户没有指定新素材，则默认使用 `assets/`。
-
-如果用户指定的素材与 `SKILL.md` 冲突，应优先遵循用户明确要求，但需要提醒可能偏离当前 Skill 规范。
-
----
-
-# 典型调用组合
-
-## 视觉一：Logo + 主标题 + 内容 + IP
-
-调用：
-
-```text
-assets/background/
-assets/logo/
-assets/ip/
-assets/examples/visual-01-logo-title-content-ip.png
-```
-
-不调用：
-
-```text
-assets/examples/visual-03-logo-title-subtitle-risk.png
-```
-
----
-
-## 视觉二：Logo + 策略名称 + IP + 风险提示
-
-调用：
-
-```text
-assets/background/
-assets/logo/
-assets/ip/
-assets/examples/visual-02-logo-strategy-ip-risk.png
-```
-
----
-
-## 视觉三：Logo + 标题文本 + 副文本 + 风险提示，不包含 IP
-
-调用：
-
-```text
-assets/background/
-assets/logo/
-assets/examples/visual-03-logo-title-subtitle-risk.png
-```
-
-不调用：
-
-```text
-assets/ip/
-```
-
----
-
-## 视觉四：Logo + 标题文本 + 风险提示 + IP
-
-调用：
-
-```text
-assets/background/
-assets/logo/
-assets/ip/
-assets/examples/visual-04-logo-title-risk-ip.png
-```
-
----
-
-# 使用注意事项
-
-- 生成正式视觉时，优先使用 `assets/`。
-- 不要把 `references/` 当作正式素材库。
-- 不要把示例图当成最终图直接复用。
-- 不要重复上传同一素材。
-- 新增素材时使用英文小写和短横线命名。
-- 不要提交 `.DS_Store` 等系统文件。
-- 如果更新了素材命名，需要同步更新 `SKILL.md` 和相关 README。
+| 2026-07-02 | 新增 `qieman-ip-visual-design` assets 说明 |
+| 2026-07-02 | 明确正式背景目录为 `assets/background/` |
+| 2026-07-02 | 明确默认正式 IP 调用目录为 `assets/ip/humanoid/` |
+| 2026-07-02 | 明确原版小顾归档至 `references/ip/core-legacy/` |
+| 2026-07-02 | 新增视觉一结构参考图目录 `assets/examples/` |
