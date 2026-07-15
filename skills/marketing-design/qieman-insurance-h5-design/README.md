@@ -1,34 +1,16 @@
-# marketing-design
+# qieman-insurance-h5-design
 
-且慢营销设计类 Skills，用于沉淀品牌营销传播、活动页、长图、高净值私域、IP 视觉等场景的设计规范。
+> 状态：WIP / 整理中，暂不可调用。
 
----
+且慢保险类 H5 设计 Skill，用于医疗险、重疾险、意外险等保险产品介绍、保障场景营销和投保引导页面。
 
-## Skills
+## 计划覆盖
 
-| Skill | 中文名 | 层级 | 适用场景 |
-|---|---|---|---|
-| `qieman-h5-design` | 且慢 H5 设计 | L2 | 营销 H5、活动页、长图、信息流页面 |
-| `qieman-vip-design` | 且慢 VIP 设计 | L2 | 高净值私域、VIP 圈层、专属权益、私域营销视觉 |
-| `qieman-ip-visual-design` | 且慢 IP 视觉设计 | L2 | 小顾 IP 内容封面、运营图、社群图、活动物料、IP 内容视觉 |
+- 保险类插画与图标规范
+- 医疗、家庭、保障、理赔等场景元素
+- 保额、保费、赔付金额的强信息层级
+- 产品责任、适用人群和理赔流程
+- 保险合规文案与风险提示
+- 保险 H5 页面结构与视觉模板
 
----
-
-## 调用路由
-
-| 用户意图 / 触发词 | 推荐调用 |
-|---|---|
-| H5 页面设计、活动页设计、营销页设计、长图设计 | `qieman-ui-design` + `qieman-h5-design` |
-| 且慢高净值私域宣传海报、VIP 视觉设计、高客营销设计、顾问设计 | `qieman-ui-design` + `qieman-vip-design` |
-| 小顾 IP、IP 视觉设计、内容封面、社群物料、运营图、IP 活动图 | `qieman-ui-design` + `qieman-ip-visual-design` |
-
----
-
-## 目录结构
-
-```text
-marketing-design/
-├── qieman-h5-design/
-├── qieman-vip-design/
-├── qieman-ip-visual-design/
-└── README.md
+待规则整理完成后补充 `SKILL.md`，正式开放调用。
