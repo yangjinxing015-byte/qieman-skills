@@ -1,84 +1,84 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>设计内容核查报告</title>
 <style>
 :root{
-  --bg:#f5f7fb;--panel:#fff;--line:#e5e7eb;--text:#172033;--muted:#667085;
-  --p0:#e5484d;--p0-bg:rgba(229,72,77,.14);
-  --p1:#f59e0b;--p1-bg:rgba(245,158,11,.14);
-  --p2:#3b82f6;--p2-bg:rgba(59,130,246,.12);
+  --bg:#f5f7fb;--panel:#fff;--line:#e5e7eb;--text:#182230;--muted:#667085;
+  --p0:#e5484d;--p0bg:rgba(229,72,77,.14);
+  --p1:#f59e0b;--p1bg:rgba(245,158,11,.14);
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg)}
+html,body{height:100%;margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg)}
 button,input,select{font:inherit}
-.topbar{height:64px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 18px;position:sticky;top:0;z-index:50}
-.title{font-weight:700;white-space:nowrap}.meta{color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.spacer{flex:1}.stat{font-size:12px;background:#f2f4f7;border-radius:999px;padding:6px 10px;white-space:nowrap}
-.control{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 9px}
-.layout{height:calc(100% - 64px);display:grid;grid-template-columns:minmax(520px,1fr) 400px}
-.preview-shell{overflow:auto;padding:24px;position:relative}
-.preview-toolbar{position:sticky;top:0;z-index:20;display:flex;gap:8px;margin-bottom:12px;pointer-events:none}
-.preview-toolbar>*{pointer-events:auto}
-.page-host{margin:0 auto;background:white;box-shadow:0 8px 30px rgba(20,30,55,.12);transform-origin:top center;position:relative;min-height:720px}
-.page-host iframe{width:100%;height:100%;min-height:720px;border:0;display:block;background:white}
-.image-page{position:relative;display:inline-block;width:100%}
-.image-page img{display:block;width:100%;height:auto}
-.coordinate-mark{position:absolute;border:3px solid var(--p0);background:var(--p0-bg);border-radius:4px;cursor:pointer;z-index:5}
-.coordinate-mark.p1{border-color:var(--p1);background:var(--p1-bg);border-style:dashed}
-.coordinate-mark.p2{border-color:var(--p2);background:var(--p2-bg);border-style:dotted}
-.mark-badge{position:absolute;right:-11px;top:-13px;min-width:24px;height:24px;padding:0 5px;border-radius:12px;background:var(--p0);color:white;font-size:11px;font-weight:700;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.18)}
-.coordinate-mark.p1 .mark-badge{background:var(--p1)}
-.coordinate-mark.p2 .mark-badge{background:var(--p2)}
-.coordinate-mark.active{animation:pulse 1s ease 2}
-.sidebar{background:var(--panel);border-left:1px solid var(--line);overflow:auto}
-.sidebar-head{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:14px;z-index:10}
+.topbar{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 18px;position:sticky;top:0;z-index:20}
+.title{font-weight:700}.meta{font-size:12px;color:var(--muted)}.spacer{flex:1}
+.stat{font-size:12px;background:#f2f4f7;padding:6px 10px;border-radius:999px}
+.layout{height:calc(100% - 64px);display:grid;grid-template-columns:minmax(480px,1fr) 420px}
+.viewer{overflow:auto;padding:24px}
+.canvas{position:relative;width:min(680px,100%);margin:0 auto;background:#fff;box-shadow:0 8px 30px rgba(16,24,40,.12)}
+.canvas img{display:block;width:100%;height:auto}
+.mark{position:absolute;border:3px solid var(--p0);background:var(--p0bg);border-radius:5px;cursor:pointer;z-index:4}
+.mark.p1{border-color:var(--p1);background:var(--p1bg);border-style:dashed}
+.mark.missing{border-style:dashed}
+.mark span{position:absolute;right:-12px;top:-13px;min-width:24px;height:24px;padding:0 5px;border-radius:12px;background:var(--p0);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:700}
+.mark.p1 span{background:var(--p1)}
+.mark.active{animation:pulse .8s ease 2}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(229,72,77,.22)}}
+.sidebar{background:#fff;border-left:1px solid var(--line);overflow:auto}
+.controls{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:14px;z-index:8}
 .search{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px}
-.filters{display:flex;gap:6px;margin-top:10px}.filter{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 9px;cursor:pointer}.filter.active{background:#172033;color:white}
+.filters{display:flex;gap:6px;margin-top:9px}
+.filter{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 9px;cursor:pointer}
+.filter.active{background:#182230;color:#fff}
 .issue-list{padding:12px}
-.issue{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;cursor:pointer;transition:.15s;background:white}
-.issue:hover,.issue.active{box-shadow:0 4px 16px rgba(20,30,55,.10);border-color:#9aa4b2}
-.issue-top{display:flex;align-items:center;gap:8px}.priority{color:white;border-radius:5px;padding:2px 6px;font-size:11px;font-weight:700}.priority.p0{background:var(--p0)}.priority.p1{background:var(--p1)}.priority.p2{background:var(--p2)}
-.issue-id{font-weight:700}.count{margin-left:auto;color:var(--muted);font-size:12px}
+.issue{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;background:#fff;cursor:pointer}
+.issue.active{border-color:#98a2b3;box-shadow:0 4px 16px rgba(16,24,40,.10)}
+.issue-head{display:flex;align-items:center;gap:7px}
+.badge{color:#fff;border-radius:5px;padding:2px 6px;font-size:11px;font-weight:700}
+.badge.p0{background:var(--p0)}.badge.p1{background:var(--p1)}
+.count{margin-left:auto;color:var(--muted);font-size:12px}
 .dimension{font-size:12px;color:var(--muted);margin-top:6px}
 .desc{font-size:13px;line-height:1.55;margin-top:8px}
-.compare{margin-top:9px;font-size:12px;background:#f8fafc;border-radius:8px;padding:8px}
-.compare b{display:inline-block;width:52px}.source{color:#157347}.target{color:#b42318}.fix{color:#175cd3}
-.locations{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}.loc{border:1px solid var(--line);background:white;border-radius:6px;padding:4px 7px;font-size:11px;cursor:pointer}
+.compare{font-size:12px;padding:7px 8px;border-radius:7px;margin-top:6px;line-height:1.45}
+.compare b{display:inline-block;width:52px}
+.source{background:#eefbf3;color:#067647}.target{background:#fff1f0;color:#b42318}.fix{background:#eff8ff;color:#175cd3}
+.locations{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.loc{border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 7px;font-size:11px;cursor:pointer}
 .empty{padding:48px 20px;text-align:center;color:var(--muted)}
-.audit-inline-mark{position:relative;background:var(--p0-bg)!important;outline:2px solid var(--p0)!important;border-radius:2px;cursor:pointer}
-.audit-inline-mark.p1{background:var(--p1-bg)!important;outline-color:var(--p1)!important;outline-style:dashed!important}
-.audit-inline-mark.p2{background:var(--p2-bg)!important;outline-color:var(--p2)!important;outline-style:dotted!important}
-.audit-inline-mark::after{content:attr(data-badge);position:absolute;right:-9px;top:-13px;min-width:22px;height:22px;padding:0 4px;border-radius:11px;background:var(--p0);color:white;font:700 10px/22px sans-serif;text-align:center;z-index:99999;box-shadow:0 2px 7px rgba(0,0,0,.2)}
-.audit-inline-mark.p1::after{background:var(--p1)}.audit-inline-mark.p2::after{background:var(--p2)}
-.audit-inline-mark.active{animation:pulse 1s ease 2}
-@keyframes pulse{0%,100%{filter:none}50%{filter:drop-shadow(0 0 7px currentColor);transform:scale(1.015)}}
-@media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:fixed;right:0;top:64px;bottom:0;width:min(400px,94vw);z-index:60;box-shadow:-8px 0 24px rgba(0,0,0,.15)}}
+.hidden{display:none!important}
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr;height:auto}
+  .sidebar{border-left:0;border-top:1px solid var(--line)}
+}
 </style>
 </head>
 <body>
 <header class="topbar">
-  <div><div class="title" id="projectTitle">设计内容核查报告</div><div class="meta" id="metaLine"></div></div>
+  <div>
+    <div class="title" id="reportTitle">设计内容核查报告</div>
+    <div class="meta" id="reportMeta"></div>
+  </div>
   <div class="spacer"></div>
-  <span class="stat" id="issueStat">问题项 0</span>
-  <span class="stat" id="occStat">标记 0</span>
-  <select class="control" id="pageSelect"></select>
-  <select class="control" id="zoomSelect"><option value="1">100%</option><option value=".75">75%</option><option value=".5">50%</option></select>
+  <span class="stat" id="issueCount">问题 0</span>
+  <span class="stat" id="markCount">标记 0</span>
 </header>
+
 <main class="layout">
-  <section class="preview-shell">
-    <div class="page-host" id="pageHost"></div>
+  <section class="viewer">
+    <div class="canvas" id="canvas"></div>
   </section>
+
   <aside class="sidebar">
-    <div class="sidebar-head">
-      <input class="search" id="searchInput" placeholder="搜索编号、位置、文案或问题…" />
+    <div class="controls">
+      <input class="search" id="search" placeholder="搜索编号、位置或文案">
       <div class="filters">
         <button class="filter active" data-filter="all">全部</button>
         <button class="filter" data-filter="P0">P0</button>
         <button class="filter" data-filter="P1">P1</button>
-        <button class="filter" data-filter="P2">P2</button>
       </div>
     </div>
     <div class="issue-list" id="issueList"></div>
@@ -87,234 +87,172 @@ button,input,select{font:inherit}
 
 <script>
 /*
-  Replace AUDIT_DATA with generated project data.
-  page.type: "html" or "image"
-  HTML issues may use match: {type:"text", value:"...", matchAll:true}
-  Image issues use occurrences with normalized x/y/width/height.
+替换为真实核查数据。
+页面截图可使用 Base64 或相对路径。
+坐标采用 0–1 归一化比例。
 */
 const AUDIT_DATA = {
   meta:{
-    project:"示例项目",
-    source:"业务需求文档",
-    target:"设计页面",
-    generatedAt:"2026-07-15"
+    project:"项目名称",
+    source:"需求文档",
+    target:"设计稿"
   },
-  pages:[
-    {
-      id:"page-1",
-      name:"示例页面",
-      type:"html",
-      html:`<!doctype html><html><head><style>
-        body{margin:0;background:#eef5ff;color:#183153;font-family:Arial,"PingFang SC",sans-serif}
-        .hero{padding:70px 60px;min-height:720px}
-        h1{font-size:48px;margin:0 0 28px}.card{background:#fff;border-radius:20px;padding:28px;margin:18px 0}
-        .tag{display:inline-block;background:#dceaff;padding:8px 12px;border-radius:20px;margin-right:8px}
-        button{padding:14px 28px;border:0;border-radius:10px;background:#1b88ee;color:white}
-      </style></head><body><section class="hero">
-        <h1>守正出奇策略介绍</h1>
-        <div class="card"><b>资产30万+准入</b><p>统计周期：近一年</p></div>
-        <div class="card"><span class="tag">近一年</span><span class="tag">近一年</span><p>历史表现不代表未来收益。</p></div>
-        <button>立即购买</button>
-      </section></body></html>`
-    }
-  ],
+  image:{
+    src:"",
+    alt:"待核查设计稿"
+  },
   issues:[
+    /*
     {
-      id:"AUD-001",priority:"P0",dimension:"数据与数字",location:"首屏 / 门槛卡片",
-      sourceText:"资产300万+准入",targetText:"资产30万+准入",
-      description:"资产门槛少了一个“0”。",suggestedFix:"修改为“资产300万+准入”。",
-      match:{type:"text",value:"资产30万+准入",matchAll:true,caseSensitive:true}
-    },
-    {
-      id:"AUD-002",priority:"P0",dimension:"时间周期表述",location:"页面多个位置",
-      sourceText:"近1年",targetText:"近一年",
-      description:"周期格式与需求文档不一致。",suggestedFix:"页面内全部统一为“近1年”。",
-      match:{type:"text",value:"近一年",matchAll:true,caseSensitive:true}
-    },
-    {
-      id:"AUD-003",priority:"P0",dimension:"合规文案",location:"历史表现说明",
-      sourceText:"历史业绩不代表未来表现",targetText:"历史表现不代表未来收益。",
-      description:"风险提示文本与确认版本不一致。",suggestedFix:"使用确认后的完整风险提示。",
-      match:{type:"text",value:"历史表现不代表未来收益。",matchAll:true,caseSensitive:true}
-    },
-    {
-      id:"AUD-004",priority:"P0",dimension:"文字内容",location:"底部主按钮",
-      sourceText:"立即了解",targetText:"立即购买",
-      description:"CTA 动词与需求不一致。",suggestedFix:"修改为“立即了解”。",
-      match:{type:"text",value:"立即购买",matchAll:true,caseSensitive:true}
+      id:"AUD-001",
+      priority:"P0",
+      dimension:"数据与数字",
+      location:"第1屏 / 业绩卡片",
+      sourceText:"13.25%",
+      targetText:"12.38%",
+      description:"年化收益率与需求文档不一致。",
+      suggestedFix:"修改为13.25%。",
+      occurrences:[
+        {x:0.10,y:0.08,width:0.30,height:0.03,label:"第1处"}
+      ]
     }
+    */
   ]
 };
 
-const state={pageId:AUDIT_DATA.pages[0]?.id,filter:"all",query:"",occurrences:[],activeIssue:null};
+const state={filter:"all",query:"",active:null};
 const $=s=>document.querySelector(s);
-const pageHost=$("#pageHost"),issueList=$("#issueList"),pageSelect=$("#pageSelect");
-
-function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-function issueNumber(issue){return AUDIT_DATA.issues.indexOf(issue)+1}
-function priorityClass(p){return String(p||"P2").toLowerCase()}
+const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 
 function init(){
-  $("#projectTitle").textContent=AUDIT_DATA.meta.project+" · 内容核查";
-  $("#metaLine").textContent=`Source：${AUDIT_DATA.meta.source} ｜ Target：${AUDIT_DATA.meta.target} ｜ ${AUDIT_DATA.meta.generatedAt}`;
-  pageSelect.innerHTML=AUDIT_DATA.pages.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join("");
-  pageSelect.onchange=()=>{state.pageId=pageSelect.value;renderPage()};
-  $("#zoomSelect").onchange=e=>{pageHost.style.transform=`scale(${e.target.value})`;pageHost.parentElement.scrollTop=0};
-  $("#searchInput").oninput=e=>{state.query=e.target.value.trim().toLowerCase();renderIssues()};
-  document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{
-    document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");
-    state.filter=b.dataset.filter;renderIssues()
+  $("#reportTitle").textContent=AUDIT_DATA.meta.project+" · 内容核查";
+  $("#reportMeta").textContent=`Source：${AUDIT_DATA.meta.source} ｜ Target：${AUDIT_DATA.meta.target}`;
+  renderCanvas();
+  renderIssues();
+  updateStats();
+
+  $("#search").addEventListener("input",e=>{
+    state.query=e.target.value.trim().toLowerCase();
+    renderIssues();
+    updateMarks();
   });
-  renderPage();
-}
 
-function renderPage(){
-  state.occurrences=state.occurrences.filter(o=>o.pageId!==state.pageId);
-  const page=AUDIT_DATA.pages.find(p=>p.id===state.pageId);
-  pageHost.innerHTML="";
-  pageHost.style.width=(page.width?`${page.width}px`:"100%");
-  if(page.type==="html"){
-    const iframe=document.createElement("iframe");
-    iframe.srcdoc=page.html;
-    pageHost.appendChild(iframe);
-    iframe.onload=()=>{
-      const doc=iframe.contentDocument;
-      injectFrameStyles(doc);
-      annotateDom(doc,page);
-      iframe.style.height=Math.max(720,doc.documentElement.scrollHeight)+"px";
-      renderIssues();updateStats()
-    };
-  }else{
-    const wrap=document.createElement("div");wrap.className="image-page";
-    const img=document.createElement("img");img.src=page.src;img.alt=page.name;
-    wrap.appendChild(img);pageHost.appendChild(wrap);
-    img.onload=()=>{annotateCoordinates(wrap,page);renderIssues();updateStats()};
-  }
-}
-
-function injectFrameStyles(doc){
-  const style=doc.createElement("style");
-  style.textContent=document.querySelector("style").textContent.match(/\.audit-inline-mark[\s\S]*?@keyframes pulse\{[\s\S]*?\}/)?.[0]||"";
-  doc.head.appendChild(style);
-}
-
-function annotateDom(doc,page){
-  const issues=AUDIT_DATA.issues.filter(i=>!i.occurrences?.length && i.match?.type==="text");
-  issues.forEach(issue=>{
-    const value=issue.match.value;
-    if(!value)return;
-    const walker=doc.createTreeWalker(doc.body,NodeFilter.SHOW_TEXT,{
-      acceptNode(node){
-        const p=node.parentElement;
-        if(!p||p.closest("script,style,noscript,.audit-inline-mark"))return NodeFilter.FILTER_REJECT;
-        if(!node.nodeValue.includes(value))return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
-      }
-    });
-    const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
-    let localIndex=0;
-    nodes.forEach(node=>{
-      let text=node.nodeValue,start=0,parts=[],idx;
-      const flags=issue.match.caseSensitive===false?"gi":"g";
-      const rx=new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),flags);
-      while((idx=rx.exec(text))!==null){
-        parts.push(doc.createTextNode(text.slice(start,idx.index)));
-        localIndex++;
-        const mark=doc.createElement("span");
-        mark.className=`audit-inline-mark ${priorityClass(issue.priority)}`;
-        mark.dataset.issueId=issue.id;
-        mark.dataset.badge=`${issueNumber(issue)}.${localIndex}`;
-        mark.textContent=text.slice(idx.index,idx.index+idx[0].length);
-        mark.onclick=()=>activate(issue.id,`${issue.id}-${localIndex}`,mark);
-        parts.push(mark);
-        state.occurrences.push({
-          issueId:issue.id,occurrenceId:`${issue.id}-${localIndex}`,pageId:page.id,
-          label:`${page.name} · 第${localIndex}处`,element:mark
-        });
-        start=idx.index+idx[0].length;
-        if(issue.match.matchAll===false)break;
-        if(idx[0].length===0)rx.lastIndex++;
-      }
-      parts.push(doc.createTextNode(text.slice(start)));
-      if(parts.length>1)node.replaceWith(...parts);
+  document.querySelectorAll(".filter").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
+      btn.classList.add("active");
+      state.filter=btn.dataset.filter;
+      renderIssues();
+      updateMarks();
     });
   });
 }
 
-function annotateCoordinates(wrap,page){
-  AUDIT_DATA.issues.forEach(issue=>{
-    (issue.occurrences||[]).filter(o=>o.pageId===page.id).forEach((o,k)=>{
-      const div=document.createElement("div");
-      div.className=`coordinate-mark ${priorityClass(issue.priority)}`;
-      div.style.left=(o.x*100)+"%";div.style.top=(o.y*100)+"%";
-      div.style.width=(o.width*100)+"%";div.style.height=(o.height*100)+"%";
-      const badge=document.createElement("span");badge.className="mark-badge";badge.textContent=`${issueNumber(issue)}.${k+1}`;
-      div.appendChild(badge);wrap.appendChild(div);
-      const occId=o.occurrenceId||`${issue.id}-${k+1}`;
-      div.onclick=()=>activate(issue.id,occId,div);
-      state.occurrences.push({issueId:issue.id,occurrenceId:occId,pageId:page.id,label:o.locationLabel||`${page.name} · 第${k+1}处`,element:div});
-    })
-  })
+function renderCanvas(){
+  const canvas=$("#canvas");
+  canvas.innerHTML="";
+  const img=document.createElement("img");
+  img.src=AUDIT_DATA.image.src;
+  img.alt=AUDIT_DATA.image.alt||"设计稿";
+  canvas.appendChild(img);
+
+  AUDIT_DATA.issues.forEach((issue,issueIndex)=>{
+    (issue.occurrences||[]).forEach((occ,occIndex)=>{
+      const mark=document.createElement("button");
+      mark.className=`mark ${issue.priority.toLowerCase()} ${occ.type==="missing"?"missing":""}`;
+      mark.dataset.issue=issue.id;
+      mark.dataset.occ=String(occIndex);
+      mark.style.left=(occ.x*100)+"%";
+      mark.style.top=(occ.y*100)+"%";
+      mark.style.width=(occ.width*100)+"%";
+      mark.style.height=(occ.height*100)+"%";
+      mark.innerHTML=`<span>${issueIndex+1}.${occIndex+1}</span>`;
+      mark.title=issue.description;
+      mark.addEventListener("click",()=>activate(issue.id,occIndex,true));
+      canvas.appendChild(mark);
+    });
+  });
 }
 
-function filteredIssues(){
-  return AUDIT_DATA.issues.filter(i=>{
-    if(state.filter!=="all"&&i.priority!==state.filter)return false;
-    const hay=[i.id,i.dimension,i.location,i.sourceText,i.targetText,i.description,i.suggestedFix].join(" ").toLowerCase();
-    return !state.query||hay.includes(state.query);
-  })
+function visibleIssues(){
+  return AUDIT_DATA.issues.filter(issue=>{
+    if(state.filter!=="all"&&issue.priority!==state.filter)return false;
+    const text=[issue.id,issue.dimension,issue.location,issue.sourceText,issue.targetText,issue.description,issue.suggestedFix].join(" ").toLowerCase();
+    return !state.query||text.includes(state.query);
+  });
 }
 
 function renderIssues(){
-  const arr=filteredIssues();
-  if(!arr.length){issueList.innerHTML='<div class="empty">没有符合条件的问题</div>';return}
-  issueList.innerHTML=arr.map(issue=>{
-    const occs=state.occurrences.filter(o=>o.issueId===issue.id);
-    return `<article class="issue ${state.activeIssue===issue.id?"active":""}" data-id="${esc(issue.id)}">
-      <div class="issue-top"><span class="priority ${priorityClass(issue.priority)}">${esc(issue.priority)}</span>
-      <span class="issue-id">${esc(issue.id)}</span><span class="count">共 ${occs.length || issue.occurrences?.length || 0} 处</span></div>
+  const list=$("#issueList");
+  const issues=visibleIssues();
+  if(!issues.length){
+    list.innerHTML='<div class="empty">没有符合条件的问题</div>';
+    return;
+  }
+  list.innerHTML=issues.map(issue=>{
+    const locations=(issue.occurrences||[]).map((occ,index)=>
+      `<button class="loc" data-issue="${esc(issue.id)}" data-occ="${index}">${index+1}. ${esc(occ.label||"位置"+(index+1))}</button>`
+    ).join("");
+    return `<article class="issue ${state.active===issue.id?"active":""}" id="card-${esc(issue.id)}" data-id="${esc(issue.id)}">
+      <div class="issue-head">
+        <span class="badge ${issue.priority.toLowerCase()}">${esc(issue.priority)}</span>
+        <b>${esc(issue.id)}</b>
+        <span class="count">共 ${(issue.occurrences||[]).length} 处</span>
+      </div>
       <div class="dimension">${esc(issue.dimension)} · ${esc(issue.location)}</div>
       <div class="desc">${esc(issue.description)}</div>
-      <div class="compare">
-        <div class="source"><b>Source</b>${esc(issue.sourceText)}</div>
-        <div class="target"><b>Target</b>${esc(issue.targetText)}</div>
-        <div class="fix"><b>建议</b>${esc(issue.suggestedFix)}</div>
-      </div>
-      <div class="locations">${occs.map((o,k)=>`<button class="loc" data-occ="${esc(o.occurrenceId)}">${k+1}. ${esc(o.label)}</button>`).join("")}</div>
-    </article>`
+      <div class="compare source"><b>Source</b>${esc(issue.sourceText)}</div>
+      <div class="compare target"><b>Target</b>${esc(issue.targetText)}</div>
+      <div class="compare fix"><b>建议</b>${esc(issue.suggestedFix)}</div>
+      <div class="locations">${locations}</div>
+    </article>`;
   }).join("");
-  issueList.querySelectorAll(".issue").forEach(el=>el.onclick=e=>{
-    if(e.target.classList.contains("loc"))return;
-    const issueId=el.dataset.id;const occ=state.occurrences.find(o=>o.issueId===issueId);if(occ)jumpTo(occ)
+
+  list.querySelectorAll(".issue").forEach(card=>{
+    card.addEventListener("click",e=>{
+      if(e.target.classList.contains("loc"))return;
+      const issue=AUDIT_DATA.issues.find(x=>x.id===card.dataset.id);
+      if(issue?.occurrences?.length)activate(issue.id,0,false);
+    });
   });
-  issueList.querySelectorAll(".loc").forEach(el=>el.onclick=e=>{
-    e.stopPropagation();const occ=state.occurrences.find(o=>o.occurrenceId===el.dataset.occ);if(occ)jumpTo(occ)
-  })
+
+  list.querySelectorAll(".loc").forEach(btn=>{
+    btn.addEventListener("click",e=>{
+      e.stopPropagation();
+      activate(btn.dataset.issue,Number(btn.dataset.occ),false);
+    });
+  });
 }
 
-function activate(issueId,occId,element){
-  state.activeIssue=issueId;renderIssues();
-  document.querySelector(`.issue[data-id="${CSS.escape(issueId)}"]`)?.scrollIntoView({behavior:"smooth",block:"center"});
-  flash(element)
-}
+function activate(issueId,occIndex,fromMark){
+  state.active=issueId;
+  renderIssues();
 
-function jumpTo(occ){
-  if(occ.pageId!==state.pageId){
-    state.pageId=occ.pageId;pageSelect.value=occ.pageId;renderPage();
-    setTimeout(()=>{const newer=state.occurrences.find(o=>o.occurrenceId===occ.occurrenceId);if(newer)jumpTo(newer)},350);
-    return
+  document.querySelectorAll(".mark").forEach(x=>x.classList.remove("active"));
+  const mark=document.querySelector(`.mark[data-issue="${CSS.escape(issueId)}"][data-occ="${occIndex}"]`);
+  if(mark){
+    mark.classList.add("active");
+    mark.scrollIntoView({behavior:"smooth",block:"center",inline:"center"});
   }
-  state.activeIssue=occ.issueId;renderIssues();
-  occ.element.scrollIntoView({behavior:"smooth",block:"center",inline:"center"});flash(occ.element)
+
+  if(fromMark){
+    document.getElementById("card-"+issueId)?.scrollIntoView({behavior:"smooth",block:"center"});
+  }
 }
 
-function flash(el){el.classList.remove("active");void el.offsetWidth;el.classList.add("active")}
-function updateStats(){
-  $("#issueStat").textContent=`问题项 ${AUDIT_DATA.issues.length}`;
-  const explicit=AUDIT_DATA.issues.flatMap(i=>i.occurrences||[]).length;
-  const dom=state.occurrences.filter(o=>!AUDIT_DATA.issues.find(i=>i.id===o.issueId)?.occurrences?.length).length;
-  $("#occStat").textContent=`标记 ${Math.max(state.occurrences.length,explicit+dom)}`;
+function updateMarks(){
+  const visible=new Set(visibleIssues().map(x=>x.id));
+  document.querySelectorAll(".mark").forEach(mark=>{
+    mark.classList.toggle("hidden",!visible.has(mark.dataset.issue));
+  });
 }
+
+function updateStats(){
+  $("#issueCount").textContent=`问题 ${AUDIT_DATA.issues.length}`;
+  const count=AUDIT_DATA.issues.reduce((sum,x)=>sum+(x.occurrences||[]).length,0);
+  $("#markCount").textContent=`标记 ${count}`;
+}
+
 init();
 </script>
 </body>
