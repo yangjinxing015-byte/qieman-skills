@@ -1,0 +1,10 @@
+Copyright © 2026 Yingmi Fund.
+
+This skill and all bundled references, templates, schemas, and other resources are
+proprietary materials intended for authorized internal use only.
+
+Redistribution, public publication, resale, sublicensing, or external commercial use
+requires prior written authorization from the rights holder.
+
+The skill provides design-content auditing assistance and does not replace formal legal,
+regulatory, financial-compliance, or production-acceptance review.
