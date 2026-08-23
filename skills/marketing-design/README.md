@@ -10,7 +10,7 @@
 |---|---|---:|---|---|
 | `qieman-advisor-h5-design` | 且慢顾问类 H5 设计 | L2 | 顾问服务、策略介绍、投资教育、账户分析、资产配置类 H5 | 可用 |
 | `qieman-insurance-h5-design` | 且慢保险类 H5 设计 | L2 | 医疗险、重疾险、意外险、保障方案、投保引导类 H5 | 整理中 |
-| `qieman-vip-design` | 且慢 VIP 设计 | L2 | 高净值私域、VIP 圈层、专属权益、九宫格、私域海报 | 可用 |
+| `qieman-vip-design` | 且慢 VIP 设计 | L2 | 高净值私域、VIP 圈层、专属权益、九宫格（Style 0 / 1 / 2）、私域海报 | 可用 |
 | `qieman-ip-visual-design` | 且慢 IP 视觉设计 | L2 | 小顾 IP 内容封面、运营图、社群图、活动物料 | 可用 |
 
 > `qieman-insurance-h5-design` 当前为 WIP 占位目录。  
@@ -44,7 +44,7 @@ qieman-insurance-h5-design
 |---|---|
 | 顾问服务、策略介绍、投资教育、账户分析、资产配置 H5 | `qieman-advisor-h5-design` |
 | 医疗险、重疾险、意外险、保险产品、保障方案、投保引导 H5 | `qieman-insurance-h5-design`（整理中，暂不可调用） |
-| 高净值私域、VIP 圈层、九宫格、专属权益、私域海报 | `qieman-vip-design` |
+| 高净值私域、VIP 圈层、专属权益、私域海报、3×3 九宫格、一大三小独立图、一大三小连续图 | `qieman-vip-design` |
 | 小顾 IP、内容封面、社群图、运营图、活动物料 | `qieman-ip-visual-design` |
 
 ---
@@ -155,28 +155,253 @@ qieman-insurance-h5-design
 - 高净值私域
 - VIP 用户圈层
 - 专属权益
-- 九宫格
 - 系列海报
 - 私域邀请页
 - 高端金融营销视觉
+- 基础 3×3 九宫格
+- 一大三小独立图
+- 一大三小连续图
+
+### 九宫格 Style
+
+`qieman-vip-design` 当前支持三种九宫格 / 朋友圈组合视觉 Style：
+
+| Style | 名称 | 输出结构 |
+|---|---|---|
+| Style 0 | 基础 3×3 九宫格 | 9 张独立 1:1 方图 |
+| Style 1 | 一大三小独立图 | 1 张 `1280×720` 横图 + 3 张独立 `800×800` 小图 |
+| Style 2 | 一大三小连续图 | 1 张 `1280×720` 横图 + 1 张连续 `2400×800` 长图 |
+
+#### Style 0 — 基础 3×3 九宫格
+
+用于传统朋友圈九宫格 Campaign。
+
+默认输出：
+
+```text
+9 张独立 1:1 方图
+3 × 3 排列
+```
+
+如果用户只说“九宫格”且未提供其它足够信息判断 Style，默认使用 Style 0，以保持旧调用兼容。
+
+#### Style 1 — 一大三小独立图
+
+用于：
+
+```text
+1 张横版主视觉
++
+3 张独立小图
+```
+
+固定尺寸：
+
+```text
+横图：1280 × 720
+小图：800 × 800 × 3
+```
+
+核心要求：
+
+- 横图必须严格为 `1280×720`
+- 横图标题位于左侧
+- 核心视觉主体主要位于右侧
+- 下方 3 张小图彼此独立
+- 三张小图均需能够单独成立
+- 三张保持统一色调、材质、光影与 Campaign 感
+- 不得把三张设计成同一张连续长图
+- 不得只复制同一构图后更换 icon
+
+#### Style 2 — 一大三小连续图
+
+用于：
+
+```text
+1 张横版主视觉
++
+1 张完整连续长图
+```
+
+固定尺寸：
+
+```text
+横图：1280 × 720
+长图：2400 × 800
+```
+
+长图后续可等分切成：
+
+```text
+800 × 800
++
+800 × 800
++
+800 × 800
+```
+
+核心要求：
+
+- 下方必须从一开始按完整 `2400×800` 构图
+- 必须是一张完整连续场景 / 连续空间 / 连续视觉母题
+- 禁止提前设计成三栏
+- 禁止三张独立卡片
+- 禁止三个独立场景
+- 禁止明显分割线
+- 禁止三个不同底色区域
+- 左、中、右三段只是后续裁切安全区，不是视觉结构
+- 即使后续切成 3 张，整体仍应保持统一背景、统一光影和连续关系
+
+### Style 自动识别
+
+以下表达默认识别为 Style 1：
+
+```text
+一大三小独立图
+横图 + 三张独立小图
+1 张横图 + 3 张 icon 图
+三张小图分别生成
+四张独立图片
+```
+
+以下表达默认识别为 Style 2：
+
+```text
+一大三小连续图
+下方是一整张横图
+2400×800
+后续自己切成三张
+连续场景
+三张拼起来是一张完整画面
+不要三栏
+不要三个独立卡片
+```
+
+用户明确指定 Style 时，必须优先执行指定 Style。
 
 ### 视觉关键词
 
 ```text
-高端
+高净值
 克制
 圈层感
 专业
-蓝金
 尊享感
+稀缺感
+金融属性
+高品质
 ```
+
+### 色彩方向
+
+不固定为单一“深蓝黑金”。
+
+根据任务在以下方向中轮换：
+
+```text
+品牌蓝
+浅蓝金
+暖金蓝
+明亮蓝金
+米白浅金
+浅蓝白
+```
+
+高净值视觉应保持：
+
+- 明亮或克制
+- 通透
+- 专业
+- 高品质
+- 金色低占比
+- 避免低幼和廉价营销感
+
+### 高频禁用方向
+
+除非用户明确指定，否则不主动使用：
+
+- 城市天际线
+- 沙发
+- 高端会所空间
+- 会议室
+- 地球仪
+- 书本
+- 邀请卡
+- 会员卡
+- 腕表
+- 钢笔
+- 花瓶
+- 普通桌面静物
+- 大型玻璃装置
+- 巨型圆环
+- 放大镜
+- 钻石
+- 巨型上涨箭头
+- 上涨柱状图
+- 人物群组
+- 商务握手
+- 多人会议
+- 豪车
+- 豪宅
+
+金融视觉不得依赖：
+
+- 金币
+- 金条
+- 元宝
+- 红绿 K 线
+- 密集交易盘面
+- 廉价科技 HUD
+- 暴富符号
+
+### 去同质化原则
+
+系列保持统一，但不得重复。
+
+```text
+统一
+≠
+重复
+```
+
+每一轮新方案至少需要改变以下两项：
+
+```text
+核心主体
+视觉隐喻
+空间关系
+```
+
+不得只通过换颜色、换人物、换角度或换 icon 制造“新方案”。
 
 ### 调用示例
 
+#### Style 0
+
 ```text
-调用 qieman-vip-design，
-生成一组高净值用户私域九宫格。
-只使用 VIP 圈层、高净值营销和且慢蓝金视觉规则。
+调用 GitHub main 分支最新版本的 qieman-vip-design，
+本次九宫格使用 Style 0 — 基础 3×3 九宫格。
+```
+
+#### Style 1
+
+```text
+调用 GitHub main 分支最新版本的 qieman-vip-design，
+本次九宫格明确使用 Style 1 — 一大三小独立图：
+上方横图 1280×720，
+下方 3 张独立小图，每张 800×800，
+非连续长图。
+```
+
+#### Style 2
+
+```text
+调用 GitHub main 分支最新版本的 qieman-vip-design，
+本次九宫格明确使用 Style 2 — 一大三小连续图：
+上方横图 1280×720，
+下方生成一张完整连续的 2400×800 长图，
+后续等分切成 3 张 800×800，
+不得设计成三个独立模块。
 ```
 
 ---
@@ -276,6 +501,15 @@ name: qieman-advisor-h5-design
 name: qieman-insurance-h5-design
 ```
 
+```yaml
+name: qieman-design-vip
+```
+
+> 注意：如果 VIP Skill 的 `SKILL.md` 已正式使用 `name: qieman-design-vip`，
+> 则建议后续同步评估目录名 `qieman-vip-design` 是否需要迁移，
+> 以满足“文件夹名与 SKILL.md 中的 name 完全一致”的仓库规范。
+> 在未完成迁移前，不要只改目录名或只改 `name`，避免引用路径失效。
+
 ---
 
 ## 改名与迁移检查
@@ -297,19 +531,58 @@ name: qieman-insurance-h5-design
 qieman-h5-design
 ```
 
+如果后续决定将：
+
+```text
+qieman-vip-design
+```
+
+迁移为：
+
+```text
+qieman-design-vip
+```
+
+同样需要同步检查：
+
+- 文件夹名称
+- `SKILL.md` 的 `name`
+- README 中的调用名称
+- references / assets 引用路径
+- 仓库索引
+- 历史 Prompt
+- 自动调用配置
+
+迁移应一次性完成，不建议长期保留目录名与 Skill name 不一致的状态。
+
 ---
 
 ## Git 提交建议
 
-本次拆分推荐提交信息：
+本次 VIP Style 更新推荐提交信息：
 
 ```text
 Summary:
-Split H5 design skills by business scenario
+Update qieman VIP visual skill routing
+
+Description:
+- Add Style 0 / Style 1 / Style 2 documentation
+- Add one-hero-three-independent layout rules
+- Add one-hero-continuous-triptych layout rules
+- Update VIP routing keywords and usage examples
+- Update VIP visual and de-duplication guidance
+```
+
+如与 H5 拆分一起提交，可使用：
+
+```text
+Summary:
+Update marketing design skill routing
 
 Description:
 - Rename qieman-h5-design to qieman-advisor-h5-design
 - Add qieman-insurance-h5-design placeholder
+- Update VIP Style 0 / 1 / 2 routing
 - Update marketing-design README and skill routing
 - Separate advisor, insurance, VIP and IP visual scenarios
 ```
