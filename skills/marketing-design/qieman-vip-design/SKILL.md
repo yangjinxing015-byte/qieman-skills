@@ -1,6 +1,14 @@
 ---
 name: qieman-design-vip
-description: Create Qieman high-net-worth private-domain visuals, including complete 9:16 VIP posters, poster backgrounds, H5 hero sections, multi-poster campaigns, investment-circle invitations, research-viewpoint visuals, standard 3×3 nine-grid campaigns, and two high-net-worth social campaign styles: one hero plus three independent square visuals, or one hero plus a continuous 2400×800 triptych. Preserve Qieman brand, financial professionalism, high-net-worth atmosphere, exact copy, layout, size, and compliance requirements.
+description: >-
+  Create Qieman high-net-worth private-domain visuals, including complete 9:16
+  VIP posters, poster backgrounds, H5 hero sections, multi-poster campaigns,
+  investment-circle invitations, research-viewpoint visuals, standard 3×3
+  nine-grid campaigns, and two high-net-worth social campaign styles: one hero
+  plus three independent square visuals, or one hero plus a continuous
+  2400×800 triptych. Preserve Qieman brand, financial professionalism,
+  high-net-worth atmosphere, exact copy, layout, size, and compliance
+  requirements.
 version: 0.3.0
 layer: L2
 ---
