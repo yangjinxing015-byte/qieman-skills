@@ -1,6 +1,6 @@
 # qieman skills
 
-> 包更新日期：2026-07-15  
+> 包更新日期：2026-09-03  
 > 各文件以头部信息栏中的更新时间为准，后续可由 `scripts/sync-updated-at.py` 同步。
 
 且慢设计 Skill 集合。
@@ -28,7 +28,7 @@ qieman-skills/
     │
     ├── marketing-design/                           营销传播
     │   ├── qieman-advisor-h5-design/               L2
-    │   ├── qieman-insurance-h5-design/             L2 · WIP
+    │   ├── qieman-insurance-design/                L2
     │   ├── qieman-vip-design/                      L2
     │   └── qieman-ip-visual-design/                L2
     │
@@ -45,8 +45,8 @@ qieman-skills/
     └── README.md
 ```
 
-> `qieman-insurance-h5-design` 当前为占位目录。  
-> 在正式补充 `SKILL.md` 前，不应被识别为可调用 Skill。
+> `qieman-insurance-design` 已完成基础版，可正式调用。  
+> 当前基础验证标准以保险产品介绍页 V8（Hero 融合 + 内嵌 Icon）为参考基准。
 
 ---
 
@@ -104,26 +104,37 @@ report-design/qieman-ppt-design/SKILL.md
 | Skill | 中文名 | 层级 | 适用场景 | 状态 |
 |---|---|---:|---|---|
 | `qieman-advisor-h5-design` | 且慢顾问类 H5 设计 | L2 | 顾问服务、策略介绍、投资教育、账户分析、资产配置类 H5 | 可用 |
-| `qieman-insurance-h5-design` | 且慢保险类 H5 设计 | L2 | 医疗险、重疾险、意外险、保障方案、投保引导 | 整理中 |
+| `qieman-insurance-design` | 且慢保险设计 | L2 | 保险产品 H5 / App、Hero、Icon、插画、人物、信息可视化、内容审核 | 可用 |
 | `qieman-vip-design` | 且慢 VIP 设计 | L2 | 高净值私域、VIP 圈层、专属权益、九宫格、私域海报 | 可用 |
 | `qieman-ip-visual-design` | 且慢 IP 视觉设计 | L2 | 小顾 IP 内容封面、运营图、社群图、活动物料 | 可用 |
 
 #### H5 拆分说明
 
-原 `qieman-h5-design` 已拆分为：
+原 `qieman-h5-design` 已按业务场景拆分为：
 
 ```text
 qieman-advisor-h5-design
-qieman-insurance-h5-design
+qieman-insurance-design
 ```
 
 拆分原因：
 
 - 顾问类 H5 强调专业、克制、可信、策略逻辑与顾问陪伴
-- 保险类 H5 强调保险插画、保障图标、保额保费、赔付金额与保险合规
+- 保险设计强调保险产品信息架构、Hero、保障图标、人物/家庭插画、关键信息可视化与保险内容保护
 - 两类页面的视觉语言、图标、插画、信息层级和合规要求不同
 
 `qieman-vip-design` 继续负责高净值私域和 VIP 营销，不并入普通 H5 Skill。
+
+
+`qieman-insurance-design` 当前基础版已验证以下规则：
+
+- Hero 左侧文案、右侧人物，二者垂直居中并保持视觉平衡
+- 人物优先使用透明底资产，与主蓝色背景自然融合
+- Hero 与正文之间使用柔和渐变过渡，避免明显断层
+- 避免人物过小或出现大面积无效留白
+- HTML 本地预览时，基础 Icon 优先使用可离线显示的内嵌 SVG
+- 已有设计稿优化时优先保留原尺寸、结构与页面节奏
+- 保险产品事实、关键数据、责任范围和限制条件不得因视觉优化被改写
 
 ### report-design
 
@@ -162,7 +173,7 @@ qieman-insurance-h5-design
 | 弹窗、吸底弹窗、确认弹窗、规则弹窗 | `qieman-sell-popup-design` |
 | 收益图、资产配置图、柱状图、饼图、金融图表 | `qieman-chart-design` |
 | 顾问服务、策略介绍、投教、账户分析、资产配置 H5 | `qieman-advisor-h5-design` |
-| 医疗险、重疾险、意外险、保险产品、投保引导 H5 | `qieman-insurance-h5-design`（整理中，暂不可调用） |
+| 医疗险、重疾险、意外险、保险产品、保障方案、投保引导、保险 Hero / Icon / 插画 | `qieman-insurance-design` |
 | 高净值私域、VIP 圈层、九宫格、专属权益 | `qieman-vip-design` |
 | 小顾 IP、内容封面、社群图、运营图、活动物料 | `qieman-ip-visual-design` |
 | PPT、路演、汇报、客户提案 | `qieman-ppt-design` |
@@ -183,16 +194,18 @@ qieman-insurance-h5-design
 强调专业、克制、可信和清晰的信息表达。
 ```
 
-### 保险类 H5
+### 保险设计
 
-> 当前 Skill 正在整理中，暂不建议正式调用。
-
-正式完成后可使用：
+`qieman-insurance-design` 当前已完成基础版，可正式调用。
 
 ```text
-调用 qieman-insurance-h5-design，
-根据保险需求文档生成医疗险 H5。
-突出保险场景插画、保障责任、保额、保费和理赔信息。
+调用 qieman-insurance-design，
+根据保险需求文档生成医疗险 H5 / App 产品介绍页。
+严格继承 qieman-ui-design；
+不得新增、删减或改写保障责任和关键数据。
+Hero 默认采用左文右图，人物与文字垂直居中，
+人物优先透明底并与主背景自然融合；
+关键卖点、保障责任和流程模块需补充明确 Icon。
 ```
 
 ### VIP 私域设计
@@ -223,21 +236,16 @@ qieman-insurance-h5-design
 
 ## WIP Skill 管理规则
 
-尚未完成的 Skill 建议只保留：
-
-```text
-qieman-insurance-h5-design/
-└── README.md
-```
-
-占位 `README.md` 需要明确：
+未完成的 Skill 仍只保留占位 `README.md`，并明确：
 
 - 当前状态：WIP / 整理中
 - 计划覆盖的业务场景
 - 暂不可调用
 - 完成后再增加 `SKILL.md`
 
-在 `SKILL.md` 正式加入前，不应：
+当前 `qieman-insurance-design` **不再属于 WIP**，因为已经包含正式 `SKILL.md`，并通过基础保险产品介绍页验证。
+
+在 `SKILL.md` 正式加入前，其他 WIP Skill 不应：
 
 - 在调用路由中标记为“可用”
 - 对外提供正式调用提示词
@@ -267,6 +275,16 @@ qieman-insurance-h5-design/
 - `skills/README.md`
 - 团队 Skill 索引表
 - 调用示例与历史提示词
+
+本次保险 Skill 已完成正式迁移：
+
+```text
+qieman-insurance-h5-design
+→
+qieman-insurance-design
+```
+
+仓库中应优先使用新名称 `qieman-insurance-design`，并逐步清理旧名称引用。
 
 ### 删除或合并 Skill
 
@@ -299,13 +317,14 @@ qieman-insurance-h5-design/
 
 ```text
 Summary:
-Split H5 design skills by business scenario
+Update insurance design skill routing
 
 Description:
-- Rename qieman-h5-design to qieman-advisor-h5-design
-- Add qieman-insurance-h5-design placeholder
-- Update marketing-design README and skill routing
-- Separate advisor, insurance, VIP and IP visual scenarios
+- Replace qieman-insurance-h5-design with qieman-insurance-design
+- Mark insurance design skill as available
+- Update skills framework, routing and invocation examples
+- Add insurance Hero, Icon, persona and content-protection scope
+- Remove obsolete insurance WIP references
 ```
 
 ---
@@ -314,7 +333,7 @@ Description:
 
 ```text
 qieman-advisor-h5-design      可用
-qieman-insurance-h5-design    整理中
+qieman-insurance-design       可用
 qieman-vip-design             可用
 qieman-ip-visual-design       可用
 qieman-design-content-audit   可用
