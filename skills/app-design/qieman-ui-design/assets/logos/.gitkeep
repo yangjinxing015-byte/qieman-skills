@@ -1,0 +1,18 @@
+# Logo文件目录
+
+请将logo文件放置在此目录中。
+
+## 推荐的文件格式和命名
+
+- `logo.svg` - 主logo（SVG格式，推荐）
+- `logo.png` - 主logo（PNG格式，透明背景）
+- `logo-white.svg` - 白色版本（用于深色背景）
+- `logo-dark.svg` - 深色版本（用于浅色背景）
+- `favicon.ico` - 网站图标
+
+## 使用示例
+
+在生成的HTML代码中，logo会这样使用：
+```html
+<img src="assets/logos/logo.svg" alt="Logo" class="logo" />
+```
