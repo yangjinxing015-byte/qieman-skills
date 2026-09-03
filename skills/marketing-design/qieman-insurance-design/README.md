@@ -48,3 +48,4 @@ https://github.com/Remix-Design/RemixIcon/releases/tag/v4.6.0
 5. Hero 必须左文右图、自然融合、上下过渡自然。
 6. 本地 HTML 预览优先保证 Icon 可见性与稳定性。
 7. 不为了画面好看修改保险事实。
+更新
