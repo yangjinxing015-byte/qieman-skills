@@ -135,3 +135,38 @@ Requirement Source
 根据附件重新设计。
 内容不变，视觉重做，输出 HTML。
 ```
+
+
+## 2026-09-11：V9 Transition Layer Stable
+
+本次重点解决 Hero / KV 与正文衔接不自然的问题，并修正固定吸底 CTA 圆角。
+
+### 顶部承接规则
+
+- `overlay-card`
+  - 营销 / 策略 / 产品默认
+  - Transition Zone：56–88px
+  - 首张核心卡上移：20–28px
+  - 正文主 Surface 顶部圆角：20px
+  - 首卡圆角：16px
+
+- `soft-gradient`
+  - 保险 / 医疗 / 家庭保障默认
+  - 渐变过渡区：48–72px
+
+- `flat-spacing`
+  - 投教 / 报告 / 内容页默认
+
+禁止 Hero → 正文硬切、纯空白过渡层、首卡与 Hero 完全脱节。
+
+### Sticky CTA 修正
+
+固定吸底 CTA：
+- 50px 高
+- 左右 16px
+- `border-radius: 999px`
+- `17px / 25px / Regular`
+- 品牌蓝 `#1B88EE`
+- 按下态 `#0F78D4`
+
+固定吸底 CTA 不得继承普通卡片圆角。

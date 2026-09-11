@@ -25,7 +25,7 @@ standalone: true
 | **默认载体** | 移动端业务长页 / App WebView / 单文件 HTML |
 | **资源依赖** | 运行可独立；规范层默认继承 `qieman-ui-design` 与 `qieman-chart-design`，品牌素材存在时增强，不存在时自动降级 |
 | **核心原则** | 内容锁定、按钮锁定、视觉重做、金融可信、数据优先、品牌克制、移动端可读 |
-| **版本** | V8 Visual Isolation Stable · Successor of qieman-advisor-h5-design |
+| **版本** | V9 Transition Layer Stable · Successor of qieman-advisor-h5-design |
 | **更新日期** | 2026-09-11 |
 
 ---
@@ -1128,7 +1128,7 @@ Dense Data Mode 仅允许用于**表格、图表内部**，不得扩散到正文
 
 ## 8.6 Page Surface & Hero Transition｜页面背景与 KV 衔接
 
-这是**通用业务页面基础表面规则**，不是某一个策略页模板。
+这是**通用业务页面基础表面与顶部承接规则**，不是某一个策略页模板。
 
 - 页面基础背景：优先使用 `#F9FAFB` / `{colors.surface-page}`。
 - 内容卡片：优先使用 `#FFFFFF` / `{colors.surface-card}`。
@@ -1141,53 +1141,73 @@ Dense Data Mode 仅允许用于**表格、图表内部**，不得扩散到正文
 
 **Hero / KV 与正文如何衔接，由 `qieman-business-content-design` 负责。**
 
-`qieman-marketing-visual-design` 负责生成可兼容该衔接方式的 KV / Hero 视觉资产，但**不得自行决定正文容器结构**。
+`qieman-marketing-visual-design` 只负责生成可兼容承接方式的 KV / Hero 视觉资产，不拥有正文容器结构的最终解释权。
 
-`qieman-insurance-design` 等垂类 Skill 可以提供业务默认值，但最终页面结构仍由本 Skill 执行。
+`qieman-insurance-design` 等垂类 Skill 可以提供默认建议，但最终页面承接结构仍由本 Skill 执行。
 
 ### 8.6.2 Transition Mode｜承接模式
 
-页面采用“顶部 Hero / KV + 下方正文”结构时，必须选择一个明确的 `transition_mode`：
+页面采用“顶部 Hero / KV + 下方正文”结构时，必须选择明确的 `transition_mode`：
 
 ```txt
 auto
-rounded-surface
+overlay-card
 soft-gradient
 flat-spacing
 ```
 
-#### A. `rounded-surface`｜圆角内容面承接
+#### A. `overlay-card`｜卡片压接式承接
 
 默认用于：
+- 营销活动页
 - 策略介绍页
 - 产品介绍页
-- 普通营销活动页
-- 大多数结构化业务内容页
+- 首屏需要承接核心说明卡 / 数据卡 / 亮点卡的页面
 
-规则：
-- 正文内容面在 Hero 下方形成清晰但克制的 Surface。
-- 正文内容面顶部默认可使用 **20px（1倍图）圆角**。
-- 允许轻微上移形成自然覆盖，但不得出现深度悬浮、过度负 margin 或多层套卡。
-- 圆角是“内容面”属性，不是要求每一张白卡都做大圆角。
-- Hero 底部不得留下大面积无效空白。
+核心规则：
+- Hero / KV 底部与正文之间必须存在**独立的承接区**。
+- 承接区默认高度：**56–88px**。
+- 默认推荐值：**64px**。
+- 当 Hero 信息密度较高或首卡内容较重时，可扩展到 **80–88px**。
+- 首张核心白卡必须**部分压在承接区上**，不能完全掉入正文区域。
+- 首卡推荐上移：**20–28px**，默认 **24px**。
+- 正文主 Surface 顶部圆角默认：**20px（1倍图）**。
+- 首张核心白卡默认圆角：**16px**。
+- 承接区不可只是空白，至少应由以下两种关系共同形成：
+  - Hero 底部渐变 / 雾化
+  - 正文 Surface 圆角
+  - 首卡压接
+- 视觉目标：像“内容从 Hero 中自然承接下来”，而不是 Hero 结束后重新起一张页面。
 
-#### B. `soft-gradient`｜渐变柔和承接
+推荐结构：
+
+```txt
+Hero / KV
+↓
+56–88px Transition Zone
+↓
+首张核心卡上移 20–28px，压入 Transition Zone
+↓
+正文 Surface / 后续 Section
+```
+
+#### B. `soft-gradient`｜柔和渐变式承接
 
 默认用于：
 - 保险页
 - 医疗 / 家庭保障页
 - 服务陪伴型页面
-- 需要更柔和信任感的页面
+- 强阅读型内容页
 
-规则：
-- Hero 底部通过浅蓝 / 浅白 / 极浅灰 / 低饱和暖白自然过渡到正文背景。
-- 不强制使用“整体上浮大白卡 + 明显切口”的结构。
-- 允许局部轻圆角，但圆角不是主承接语义。
-- 过渡区应低对比、低噪音，不出现重边线、脏灰色带或明显色块断层。
-- 正文仍遵循 `#F9FAFB` 页面底 + 白卡体系，不因渐变承接而改变后续卡片规则。
-- 保险页面优先表达“安心、专业、可信赖、连续”，避免强营销切割感。
+核心规则：
+- Hero 底部通过浅蓝 / 浅白 / 极浅灰 / 低饱和暖白自然过渡到正文。
+- 过渡区默认高度：**48–72px**。
+- 正文主 Surface 可使用顶部 **20px** 圆角，但圆角不是唯一主语义。
+- 首张核心卡可以轻压接，也可以紧随 Surface 顶部进入，但不得完全与 Hero 脱节。
+- 不使用明显色带、重边线、脏灰过渡或突然变白。
+- 保险页面优先表达“安心、专业、可信赖、连续”。
 
-#### C. `flat-spacing`｜平接留白承接
+#### C. `flat-spacing`｜平接留白式承接
 
 默认用于：
 - 投教
@@ -1195,24 +1215,24 @@ flat-spacing
 - 偏内容型专题
 - 信息密度较高、强调阅读性的页面
 
-规则：
+核心规则：
 - 不要求圆角，也不要求大面积渐变。
 - 通过 Surface 切换、24px 模块节奏、轻分割或留白完成过渡。
-- 可以是清晰平接，但必须有明确设计目的；禁止无设计的突兀硬切。
-- 不额外增加装饰层抢夺正文注意力。
+- 可以是清晰平接，但必须有明确设计目的。
+- 禁止“无设计的硬切”。
 
 ### 8.6.3 Auto Routing｜自动路由
 
 当用户没有指定 `transition_mode` 时：
 
 ```txt
-策略 / 产品 / 普通营销  → rounded-surface
-保险 / 医疗 / 家庭保障 → soft-gradient
-投教 / 报告 / 内容专题 → flat-spacing
-无法判断               → rounded-surface
+营销 / 策略 / 产品       → overlay-card
+保险 / 医疗 / 家庭保障   → soft-gradient
+投教 / 报告 / 内容专题   → flat-spacing
+无法判断                 → overlay-card
 ```
 
-这里的默认路由不是不可覆盖的模板。
+注意：自动路由是默认建议，不是死模板。
 
 ### 8.6.4 Transition Priority｜冲突优先级
 
@@ -1221,26 +1241,32 @@ flat-spacing
 ```txt
 用户明确指定
 >
-当前任务已确认 / 已锁定的参考样式
+当前任务已确认 / Locked Transition
 >
 垂类 Skill 默认值
 >
 Page Type 自动路由
 ```
 
-如果用户已经确认“这个衔接样式正确”，则视为 **Locked Transition**，后续局部迭代不得随机从圆角切换到渐变，或从渐变切换到平接。
+一旦用户确认“这个衔接样式正确”，则视为 **Locked Transition**，后续局部迭代不得随机切换承接方式。
 
-### 8.6.5 Universal Transition Guard｜通用承接约束
+### 8.6.5 Transition Composition Guard｜承接构图强约束
 
 无论选择哪种模式：
 
-- 不修改原始业务文案、数据、CTA、风险提示来适配视觉。
-- 不为了做过渡而重构下方正文模块。
-- 不出现大空洞、过度负 margin、内容压住 Hero、圆角互相穿插、多层浮卡。
-- 不允许 Hero 底部高权重元素被正文遮住。
-- Hero 底部留白只保留舒适感，优先压缩 Hero 自身 padding，而不是制造空白区。
-- 页面第一张内容卡与后续白卡仍遵循固定 spacing tokens。
-- `qieman-marketing-visual-design` 只负责视觉资产兼容，不拥有页面承接结构的最终解释权。
+- 不允许 Hero 结束后直接切换正文白底，没有承接层。
+- 不允许承接区过短，造成明显断层。
+- 不允许承接区只是纯空白。
+- 不允许首张核心卡完全落入正文区，与 Hero 视觉脱节。
+- 不允许大空洞、过度负 margin、正文内容压住 Hero 高权重主体。
+- 不允许多层浮卡、圆角互相穿插或“卡片套卡片”制造复杂层级。
+- 不为了做承接而改变原始业务文案、数据、CTA、风险提示。
+- 不为了过渡效果重构下方正文业务模块。
+- Hero 底部高权重主体必须避开可被首卡覆盖的区域。
+- 同层级连续白卡仍遵循 **16px**。
+- 模块组仍遵循 **24px**。
+
+> **承接层是页面结构的一部分，不是额外装饰。**
 
 
 ## 8.7 Semantic Layout Rules｜业务关系决定视觉结构
@@ -1798,25 +1824,49 @@ prototype         轻交互原型
 
 - 吸底区域只保留 **1 个整行大按钮**。
 - 按钮横向占满页面安全区，左右安全边距默认 `16px`。
-- 按钮高度默认 `50px`，不得变成半宽按钮、小胶囊按钮、左右信息 + 按钮组合或双按钮。
-- 按钮文字使用已确认的基础排版：**17px / 25px line-height / Regular**。
-- 主按钮使用且慢品牌蓝 `#1B88EE`，按压态 `#0F78D4`。
-- 吸底容器应考虑 `safe-area-inset-bottom`，并保持白色 / 半透明白色底，不制造复杂浮层。
+- 按钮高度固定为 `50px`。
+- 按钮必须使用**胶囊全圆角**：`border-radius: 999px`。
+- 按钮文字：**17px / 25px line-height / Regular / 400**。
+- 主按钮：`#1B88EE`。
+- 按压态：`#0F78D4`。
+- 吸底容器考虑 `safe-area-inset-bottom`，使用白色 / 半透明白色底，不制造复杂浮层。
 
-### 与输入原型冲突时
+推荐 CSS：
 
-即使输入 HTML / 原型中已经存在：
-- 左侧产品信息 + 右侧 CTA；
+```css
+.sticky-cta {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  border-radius: 999px;
+  background: #1B88EE;
+  color: #FFFFFF;
+  font-size: 17px;
+  line-height: 25px;
+  font-weight: 400;
+}
+.sticky-cta:active {
+  background: #0F78D4;
+}
+```
+
+### Radius Lock｜圆角锁定
+
+固定吸底 CTA 的圆角属于**系统组件强约束**，不得继承页面通用 Radius Token。
+
+禁止：
+- `8px / 12px / 16px / 20px` 等普通卡片圆角；
+- 普通圆角矩形；
+- 半宽按钮；
 - 双按钮；
+- 左侧产品信息 + 右侧 CTA；
 - 小尺寸胶囊按钮；
-- 非整行按钮；
-- 其它旧样式；
-
-也**不得继承**。统一转换为本强约定的单个整行大按钮。
+- 输入原型中的旧按钮样式。
 
 只有用户明确说“本页不要吸底按钮”或“修改全局吸底规范”时，才允许例外。
 
 > **吸底 CTA 是系统级强约定，不属于 Requirement Source 的可继承视觉。**
+
 
 ## 13.3 Risk Disclosure｜风险提示与 Footer 锁定
 
@@ -2233,6 +2283,13 @@ STEP 18 按用户要求输出 HTML / H5 / 视觉方案
 - [ ] 原型的 Hero、卡片数量、DOM、图表类型、背景分区是否没有被机械继承？
 - [ ] `requirement-only` 模式是否至少有 4 个核心视觉维度发生明显重设计？
 - [ ] 是否避免“只换色 / 圆角 / 阴影 / 间距”的伪重设计？
+
+
+- [ ] Hero / KV 与正文之间是否存在明确 Transition Zone，而不是直接硬切？
+- [ ] `overlay-card` 模式下，Transition Zone 是否约 56–88px？
+- [ ] 首张核心卡是否上移约 20–28px，真实压在过渡层上？
+- [ ] 承接区是否避免“只有空白、没有结构作用”？
+- [ ] 固定吸底 CTA 是否为 50px 高、`999px` 胶囊圆角、17/25 Regular？
 
 ## 16.6 Data
 

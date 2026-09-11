@@ -55,3 +55,12 @@ Strong contracts added:
 - Clarified that source prototype is NOT automatically Locked Layout.
 - Replaced long invocation prompt with concise invocation templates.
 - Existing stable contracts retained: 16px white-card gap, 24px module groups, equal-weight KPI, transition routing, qieman-chart-design dependency, single full-width sticky CTA.
+
+
+2026-09-11 V9 update:
+- Added Transition Zone contract for Hero/KV → content.
+- Added overlay-card mode: 56–88px transition zone, first card overlaps by 20–28px.
+- Kept soft-gradient and flat-spacing as alternate routing modes.
+- Added strong guards against hard cuts and empty transition gaps.
+- Fixed Sticky CTA radius as system-level pill: border-radius 999px.
+- Existing Visual Isolation / Semantic Reconstruction / Visual Divergence Gate remain unchanged.
