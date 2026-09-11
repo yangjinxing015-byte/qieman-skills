@@ -64,3 +64,12 @@ Strong contracts added:
 - Added strong guards against hard cuts and empty transition gaps.
 - Fixed Sticky CTA radius as system-level pill: border-radius 999px.
 - Existing Visual Isolation / Semantic Reconstruction / Visual Divergence Gate remain unchanged.
+
+
+2026-09-11 V9.1 CTA Role Fix:
+- Sticky CTA contract remains unchanged: single full-width 50px pill, 999px radius, 17/25 Regular.
+- Added explicit In-flow / Contextual CTA preservation rule.
+- Existing product-card / quote-card / benefit-card CTA in Requirement Source must not be removed.
+- Hero / KV CTA must not be invented unless explicitly present in Requirement Source or user instruction.
+- V9 transition routing, visual isolation, spacing, content lock, KPI rules remain unchanged.
+- Marked as Frozen Baseline for normal production use.

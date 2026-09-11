@@ -25,7 +25,7 @@ standalone: true
 | **默认载体** | 移动端业务长页 / App WebView / 单文件 HTML |
 | **资源依赖** | 运行可独立；规范层默认继承 `qieman-ui-design` 与 `qieman-chart-design`，品牌素材存在时增强，不存在时自动降级 |
 | **核心原则** | 内容锁定、按钮锁定、视觉重做、金融可信、数据优先、品牌克制、移动端可读 |
-| **版本** | V9 Transition Layer Stable · Successor of qieman-advisor-h5-design |
+| **版本** | V9.1 CTA Role Fix · Frozen Baseline |
 | **更新日期** | 2026-09-11 |
 
 ---
@@ -1818,18 +1818,20 @@ prototype         轻交互原型
 
 ## 13.2.1 Sticky CTA Strong Contract｜吸底 CTA 强约定
 
-移动端业务内容页的固定吸底 CTA 属于**全局强锁定组件**，其优先级高于输入原型中的按钮样式。
+移动端业务内容页的固定吸底 CTA 属于**系统级强锁定组件**。它约束的是“吸底区域本身”，**不等于全页只能出现一个按钮**。
 
-### 默认唯一形态
+### A. Sticky CTA｜固定吸底主操作
 
-- 吸底区域只保留 **1 个整行大按钮**。
-- 按钮横向占满页面安全区，左右安全边距默认 `16px`。
-- 按钮高度固定为 `50px`。
-- 按钮必须使用**胶囊全圆角**：`border-radius: 999px`。
-- 按钮文字：**17px / 25px line-height / Regular / 400**。
-- 主按钮：`#1B88EE`。
-- 按压态：`#0F78D4`。
-- 吸底容器考虑 `safe-area-inset-bottom`，使用白色 / 半透明白色底，不制造复杂浮层。
+吸底区域默认只允许 **1 个整行主 CTA**：
+
+- 左右安全边距：`16px`
+- 高度：`50px`
+- 圆角：`border-radius: 999px`
+- 文案：`17px / 25px / Regular / 400`
+- 主色：`#1B88EE`
+- 按下态：`#0F78D4`
+- 吸底容器考虑 `safe-area-inset-bottom`
+- 不允许双按钮、半宽按钮、小按钮、左信息 + 右 CTA 等旧形态
 
 推荐 CSS：
 
@@ -1850,22 +1852,69 @@ prototype         轻交互原型
 }
 ```
 
-### Radius Lock｜圆角锁定
+### B. In-flow / Contextual CTA｜正文业务模块内按钮
 
-固定吸底 CTA 的圆角属于**系统组件强约束**，不得继承页面通用 Radius Token。
+**Sticky CTA 的存在，不排斥正文业务模块中的 CTA。**
+
+当 Requirement Source 中已经存在以下业务模块按钮时，必须保留其业务动作：
+
+- 产品卡按钮
+- 报价卡按钮
+- 权益卡按钮
+- 方案卡按钮
+- 购买 / 投保 / 领取 / 查看详情等模块内操作
+
+这类按钮属于 **In-flow / Contextual CTA**，作用是让用户在阅读到对应业务信息时立即操作；与底部 Sticky CTA 的“全程可达”职责不同。
+
+规则：
+
+- 不得因为页面已有 Sticky CTA 而删除原需求中的模块内按钮。
+- 不得把原本存在的模块内 CTA 擅自改成纯展示。
+- 可以与 Sticky CTA 使用相同操作文案，例如产品卡「立即投保」 + 底部「立即投保」。
+- 模块内按钮样式可以根据其业务模块设计，但不得冒充 Sticky CTA 系统组件。
+
+### C. Hero / KV CTA｜头图按钮
+
+Hero / KV 区域**不得擅自新增 CTA**。
+
+只有以下情况允许出现：
+
+1. Requirement Source 明确包含 Hero CTA；
+2. 用户明确要求 Hero 中保留 / 新增 CTA；
+3. 当前任务已确认该 Hero CTA 为 Locked Component。
+
+否则：
+
+- Hero 只负责标题、卖点、主视觉、必要的价格或状态信息；
+- 不因为“强化转化”擅自增加「立即购买 / 立即投保 / 立即领取」等按钮。
+
+### D. CTA Role Priority｜角色优先级
+
+```txt
+Requirement Source 中已有模块内 CTA
+→ 必须保留
+
+Hero CTA
+→ 仅在原需求明确存在或用户明确要求时出现
+
+Sticky CTA
+→ 始终执行系统级吸底样式强约束
+```
+
+### E. Radius Lock｜圆角锁定
+
+固定吸底 CTA 的圆角属于系统组件强约束，不得继承普通页面 Radius Token。
 
 禁止：
+
 - `8px / 12px / 16px / 20px` 等普通卡片圆角；
-- 普通圆角矩形；
-- 半宽按钮；
-- 双按钮；
-- 左侧产品信息 + 右侧 CTA；
-- 小尺寸胶囊按钮；
-- 输入原型中的旧按钮样式。
+- 普通圆角矩形吸底按钮；
+- 双吸底按钮；
+- 半宽吸底按钮；
+- 左侧产品信息 + 右侧吸底按钮；
+- 输入原型中的旧吸底样式。
 
-只有用户明确说“本页不要吸底按钮”或“修改全局吸底规范”时，才允许例外。
-
-> **吸底 CTA 是系统级强约定，不属于 Requirement Source 的可继承视觉。**
+> **Sticky CTA 只锁定吸底组件本身；不得以此为理由删除 Requirement Source 中已有的正文业务 CTA。**
 
 
 ## 13.3 Risk Disclosure｜风险提示与 Footer 锁定
@@ -2290,6 +2339,11 @@ STEP 18 按用户要求输出 HTML / H5 / 视觉方案
 - [ ] 首张核心卡是否上移约 20–28px，真实压在过渡层上？
 - [ ] 承接区是否避免“只有空白、没有结构作用”？
 - [ ] 固定吸底 CTA 是否为 50px 高、`999px` 胶囊圆角、17/25 Regular？
+
+
+- [ ] Requirement Source 中已有的产品卡 / 报价卡 / 权益卡 CTA 是否完整保留？
+- [ ] 是否避免因为 Sticky CTA 存在而误删正文模块内按钮？
+- [ ] Hero / KV 是否只在原需求明确存在 CTA 时才保留按钮，未擅自新增？
 
 ## 16.6 Data
 

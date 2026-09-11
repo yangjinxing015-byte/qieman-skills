@@ -170,3 +170,28 @@ Requirement Source
 - 按下态 `#0F78D4`
 
 固定吸底 CTA 不得继承普通卡片圆角。
+
+
+## 2026-09-11：V9.1 CTA Role Fix（冻结基线）
+
+本次只修正 CTA 角色边界，不改 V9 其它规则。
+
+### CTA 三类角色
+
+1. **Sticky CTA**
+   - 系统级固定吸底主按钮
+   - 50px
+   - `border-radius: 999px`
+   - `17px / 25px / Regular`
+
+2. **In-flow / Contextual CTA**
+   - 产品卡 / 报价卡 / 权益卡 / 方案卡内按钮
+   - Requirement Source 已存在时必须保留
+   - 可以与 Sticky CTA 使用相同动作文案
+
+3. **Hero / KV CTA**
+   - 不得擅自新增
+   - 只有原需求明确存在或用户明确要求时才保留
+
+核心修正：
+> Sticky CTA 只约束吸底区域本身，不代表全页只能出现一个主操作按钮。
