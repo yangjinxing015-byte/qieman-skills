@@ -36,3 +36,22 @@ Strong contracts added:
 - equal-weight KPI typography for same-level metrics
 - sticky CTA is always one full-width large button
 - sticky CTA contract overrides prototype button styling
+
+
+2026-09-11 update:
+- Hero/KV → content transition is now a routed system, not a single rounded-card rule.
+- Modes: auto / rounded-surface / soft-gradient / flat-spacing.
+- qieman-business-content-design is the source of truth for page transition structure.
+- Insurance defaults to soft-gradient.
+- Sticky CTA strong contract retained and clarified in invocation template.
+
+
+2026-09-11 V8 update:
+- Added source_mode: requirement-only / visual-continuation.
+- Added Requirement Source Isolation.
+- Added unstyled Requirement Model before visual generation.
+- Added Semantic Reconstruction and Visual Recomposition.
+- Added Visual Divergence Gate: requirement-only outputs should visibly redesign at least 4 core visual dimensions.
+- Clarified that source prototype is NOT automatically Locked Layout.
+- Replaced long invocation prompt with concise invocation templates.
+- Existing stable contracts retained: 16px white-card gap, 24px module groups, equal-weight KPI, transition routing, qieman-chart-design dependency, single full-width sticky CTA.

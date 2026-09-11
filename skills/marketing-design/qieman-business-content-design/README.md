@@ -72,3 +72,66 @@ HTML / H5 是默认输出方式之一，不是 Skill 的唯一定位。
 
 ### 吸底 CTA
 移动端固定吸底按钮统一为单个整行大按钮。输入原型中的左右信息 + 按钮、双按钮、半宽按钮、小胶囊按钮等样式不得继承。默认左右安全边距 16px、高度 50px、文字 17px/25px Regular、品牌蓝 #1B88EE。
+
+
+## 2026-09-11：Hero / KV → 正文承接模式升级
+
+顶部承接不再固定为单一圆角样式，统一由 `qieman-business-content-design` 作为 Source of Truth 管理。
+
+支持：
+- `rounded-surface`：策略 / 产品 / 普通营销默认
+- `soft-gradient`：保险 / 医疗 / 家庭保障默认
+- `flat-spacing`：投教 / 报告 / 内容页默认
+- `auto`：按 Page Type 自动路由
+
+优先级：用户明确指定 > 当前任务已确认样式 > 垂类默认 > 自动路由。
+
+固定吸底 CTA 规则保持不变：仅 1 个整行大按钮。
+
+
+## 2026-09-11：V8 Visual Isolation Stable
+
+这版重点解决“根据需求 HTML 生成时，设计结果仍然太像原型”的问题。
+
+### 默认行为
+
+输入 HTML / PM 原型 / Cursor 页面默认：
+
+`source_mode = requirement-only`
+
+执行路径：
+
+```text
+Requirement Source
+→ 无样式 Requirement Model
+→ Semantic Reconstruction
+→ Visual Recomposition
+→ Visual Divergence Gate
+→ Output
+```
+
+### 新的硬规则
+
+- 继承需求关系，不继承视觉关系。
+- 输入原型第一次进入任务时，不自动成为 Locked Layout。
+- 默认不继承 Hero、卡片数量 / 嵌套、DOM、背景分区、图表类型、视觉层级和承接方式。
+- `requirement-only` 模式下，最终页面至少 4 个核心视觉维度应明显重新设计。
+- 只换色、圆角、shadow、字号、spacing 不算重新设计。
+- 用户确认后的局部迭代继续使用 Regression Guard，避免越改越错。
+
+## 推荐日常调用
+
+```text
+调用 qieman-business-content-design，
+根据附件重新设计移动端业务页面。
+内容不变，原型仅作为 Requirement Source，视觉重做。
+输出完整可运行 HTML。
+```
+
+上下文明确时甚至可以：
+
+```text
+调用 qieman-business-content-design，
+根据附件重新设计。
+内容不变，视觉重做，输出 HTML。
+```

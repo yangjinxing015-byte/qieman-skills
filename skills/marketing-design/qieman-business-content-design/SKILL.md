@@ -25,8 +25,8 @@ standalone: true
 | **默认载体** | 移动端业务长页 / App WebView / 单文件 HTML |
 | **资源依赖** | 运行可独立；规范层默认继承 `qieman-ui-design` 与 `qieman-chart-design`，品牌素材存在时增强，不存在时自动降级 |
 | **核心原则** | 内容锁定、按钮锁定、视觉重做、金融可信、数据优先、品牌克制、移动端可读 |
-| **版本** | V6 General Stable · Successor of qieman-advisor-h5-design |
-| **更新日期** | 2026-09-10 |
+| **版本** | V8 Visual Isolation Stable · Successor of qieman-advisor-h5-design |
+| **更新日期** | 2026-09-11 |
 
 ---
 
@@ -1137,14 +1137,111 @@ Dense Data Mode 仅允许用于**表格、图表内部**，不得扩散到正文
 - 不使用每个模块一套大面积底色来制造层级。
 - 不用厚重阴影代替间距和层级。
 
-当页面包含 Hero / KV 时：
+### 8.6.1 Transition Source of Truth｜顶部承接的唯一规则源
 
-- Hero 的具体风格根据业务主题决定，不在本 Skill 中固定成某一张策略图。
-- Hero 与正文应自然衔接，允许正文区域顶部使用 **20px** 圆角承接。
-- Hero 底部留白只保留适度舒适感，避免为了“呼吸感”制造过高空白；优先压缩 Hero 自身底部 padding，而不是在 Hero 与首张卡之间留下大块无效高度。
-- 不出现硬切、大空洞、过度负 margin、内容压住 Hero、圆角互相穿插或多层浮卡。
-- 首屏数据卡、正文卡的具体结构由内容语义决定，但必须遵循固定页面背景、白卡和 spacing tokens。
-- 如果用户提供的参考图已经确认某种 Hero→正文衔接正确，则该衔接在当前任务后续迭代中视为 Locked Layout，不得随机重构。
+**Hero / KV 与正文如何衔接，由 `qieman-business-content-design` 负责。**
+
+`qieman-marketing-visual-design` 负责生成可兼容该衔接方式的 KV / Hero 视觉资产，但**不得自行决定正文容器结构**。
+
+`qieman-insurance-design` 等垂类 Skill 可以提供业务默认值，但最终页面结构仍由本 Skill 执行。
+
+### 8.6.2 Transition Mode｜承接模式
+
+页面采用“顶部 Hero / KV + 下方正文”结构时，必须选择一个明确的 `transition_mode`：
+
+```txt
+auto
+rounded-surface
+soft-gradient
+flat-spacing
+```
+
+#### A. `rounded-surface`｜圆角内容面承接
+
+默认用于：
+- 策略介绍页
+- 产品介绍页
+- 普通营销活动页
+- 大多数结构化业务内容页
+
+规则：
+- 正文内容面在 Hero 下方形成清晰但克制的 Surface。
+- 正文内容面顶部默认可使用 **20px（1倍图）圆角**。
+- 允许轻微上移形成自然覆盖，但不得出现深度悬浮、过度负 margin 或多层套卡。
+- 圆角是“内容面”属性，不是要求每一张白卡都做大圆角。
+- Hero 底部不得留下大面积无效空白。
+
+#### B. `soft-gradient`｜渐变柔和承接
+
+默认用于：
+- 保险页
+- 医疗 / 家庭保障页
+- 服务陪伴型页面
+- 需要更柔和信任感的页面
+
+规则：
+- Hero 底部通过浅蓝 / 浅白 / 极浅灰 / 低饱和暖白自然过渡到正文背景。
+- 不强制使用“整体上浮大白卡 + 明显切口”的结构。
+- 允许局部轻圆角，但圆角不是主承接语义。
+- 过渡区应低对比、低噪音，不出现重边线、脏灰色带或明显色块断层。
+- 正文仍遵循 `#F9FAFB` 页面底 + 白卡体系，不因渐变承接而改变后续卡片规则。
+- 保险页面优先表达“安心、专业、可信赖、连续”，避免强营销切割感。
+
+#### C. `flat-spacing`｜平接留白承接
+
+默认用于：
+- 投教
+- 报告
+- 偏内容型专题
+- 信息密度较高、强调阅读性的页面
+
+规则：
+- 不要求圆角，也不要求大面积渐变。
+- 通过 Surface 切换、24px 模块节奏、轻分割或留白完成过渡。
+- 可以是清晰平接，但必须有明确设计目的；禁止无设计的突兀硬切。
+- 不额外增加装饰层抢夺正文注意力。
+
+### 8.6.3 Auto Routing｜自动路由
+
+当用户没有指定 `transition_mode` 时：
+
+```txt
+策略 / 产品 / 普通营销  → rounded-surface
+保险 / 医疗 / 家庭保障 → soft-gradient
+投教 / 报告 / 内容专题 → flat-spacing
+无法判断               → rounded-surface
+```
+
+这里的默认路由不是不可覆盖的模板。
+
+### 8.6.4 Transition Priority｜冲突优先级
+
+承接方式冲突时按以下顺序执行：
+
+```txt
+用户明确指定
+>
+当前任务已确认 / 已锁定的参考样式
+>
+垂类 Skill 默认值
+>
+Page Type 自动路由
+```
+
+如果用户已经确认“这个衔接样式正确”，则视为 **Locked Transition**，后续局部迭代不得随机从圆角切换到渐变，或从渐变切换到平接。
+
+### 8.6.5 Universal Transition Guard｜通用承接约束
+
+无论选择哪种模式：
+
+- 不修改原始业务文案、数据、CTA、风险提示来适配视觉。
+- 不为了做过渡而重构下方正文模块。
+- 不出现大空洞、过度负 margin、内容压住 Hero、圆角互相穿插、多层浮卡。
+- 不允许 Hero 底部高权重元素被正文遮住。
+- Hero 底部留白只保留舒适感，优先压缩 Hero 自身 padding，而不是制造空白区。
+- 页面第一张内容卡与后续白卡仍遵循固定 spacing tokens。
+- `qieman-marketing-visual-design` 只负责视觉资产兼容，不拥有页面承接结构的最终解释权。
+
 
 ## 8.7 Semantic Layout Rules｜业务关系决定视觉结构
 
@@ -1209,6 +1306,21 @@ Dense Data Mode 仅允许用于**表格、图表内部**，不得扩散到正文
 - 金融涨跌语义；
 - 对齐、正文可读宽度、移动端安全边距；
 - 已经由用户明确确认的当前任务局部组件与布局。
+
+
+### Source Prototype ≠ Locked Layout｜原型不自动成为锁定布局
+
+`Locked Layout` 只在以下情况成立：
+
+- 用户明确说“这个样式可以”；
+- 用户明确说“这里是对的 / 保持这个版本”；
+- 当前任务已经进入基于已确认设计稿的局部迭代；
+- 用户明确要求沿用当前布局、视觉或构图。
+
+**第一次读取需求 HTML / PM 原型 / Cursor 页面时，输入本身不得自动成为 Locked Layout。**
+
+> 用户上传 HTML ≠ 用户认可其视觉。  
+> Requirement Source 只锁定业务事实，不锁定视觉表现。
 
 ### 当前任务内的 Locked Layout / Locked Component
 
@@ -1729,99 +1841,259 @@ prototype         轻交互原型
 
 ---
 
-# 14. Reference Fidelity｜参考稿与原型处理
+# 14. Source Interpretation｜输入材料身份与视觉隔离
 
-当用户提供原型、设计稿或参考图时，先判断用户要求的是：
+用户提供 PRD、需求 HTML、低保真原型、业务方页面、Cursor / 其他 AI 生成页面、截图或现有页面时，必须先判断其身份。
+
+## 14.0 Source Mode｜输入模式
+
+默认支持两种模式：
 
 ```txt
-A. 内容参考
-B. 结构参考
-C. 视觉风格参考
-D. 构图参考
-E. 完整复刻
+requirement-only
+visual-continuation
 ```
 
-不得把“参考视觉风格”理解成“照抄原设计”。
+### A. `requirement-only`｜默认
 
-如果用户说：
+除非用户明确要求保留视觉，否则：
 
-> “不改变原型框架和文案，但重新设计视觉”
+> **输入文件默认只是 Requirement Source，不是 Visual Reference。**
 
-则必须：
-
-- 保留原信息结构与文案。
-- 重新设计配色、排版、卡片、图表、插画、层级。
-- 不原封不动复制原型视觉。
-
-## 14.1 Requirement HTML ≠ Visual Template｜需求 HTML 反照抄硬规则
-
-当用户输入的是由业务方、运营、顾问、Cursor、其他 AI 工具或低保真原型生成的 HTML 时，除非用户明确说明“保留现有视觉 / 按当前设计继续优化”，否则必须默认将该 HTML 视为：
-
-> **需求载体（Requirement Source），而不是视觉模板（Visual Template）。**
-
-该 HTML 的默认作用仅用于提取和锁定：
+只继承：
 
 - 原始文案；
-- 数据与单位；
+- 数据、金额、百分比、日期、单位；
 - 业务规则；
-- 模块清单；
-- 信息关系；
+- 风险提示与合规文案；
+- 模块所表达的业务主题；
+- 真实的业务关系；
 - 必要交互与状态；
-- 风险提示、活动规则及其他不可丢失内容。
+- 必须保持的业务顺序。
 
-### 强制重新设计
+默认**不继承**：
 
-调用本 Skill 的目标是重新完成信息表达和视觉设计，而不是美化已有 HTML。除非用户明确要求保留，**不得直接继承或照搬**原 HTML 的：
+- Hero 高度与构图；
+- Hero → 正文承接方式；
+- 原卡片数量；
+- 原卡片嵌套关系；
+- 原 DOM / Grid / Flex 结构；
+- 原背景分区；
+- 原圆角、阴影、边框；
+- 原字号层级；
+- 原 spacing；
+- 原 Icon / Illustration 位置与形式；
+- 原数据图表类型；
+- 原信息可视化方式；
+- 原 CSS class 与视觉代码。
 
-- CSS 与视觉 token；
-- 色彩方案；
-- 字号体系与文字层级；
-- 卡片样式、边框、圆角、阴影；
-- 页面栅格、模块内部布局与对齐方式；
-- Hero 构图；
-- Icon / Illustration 选择；
-- 装饰元素；
-- 数据图表类型与图表样式；
-- 信息可视化形式；
-- 组件组合方式。
+核心原则：
 
-不得以“原 HTML 已经完整”为理由直接复用其视觉代码。
+> **继承需求关系，不继承视觉关系。**
 
-**只修改颜色、圆角、字体、间距、阴影，仍属于照搬，不视为重新设计。**
+### B. `visual-continuation`｜明确触发
 
-在 Content Fidelity = STRICT 时：
+仅当用户明确表达：
 
-- 文案、数据、业务逻辑、一级模块框架保持不变；
-- 但每个模块内部的视觉层级、信息编排、组件表达、数据可视化和装饰系统仍必须重新设计；
-- “框架不变”不等于“DOM / CSS / 卡片结构不变”。
+- “沿用当前样式”
+- “保持这个布局”
+- “基于现有设计优化”
+- “参考这个视觉继续做”
+- “不要改结构 / 构图”
 
-### Data Visualization Re-evaluation Gate｜数据可视化重判
-
-如果需求 HTML 中已经包含图表、数字卡片、进度条、饼图或其他数据表达，**不得默认沿用原形式**。必须重新判断：
-
-1. 数据之间是什么关系：趋势 / 比较 / 构成 / 流程 / 阶段 / 现金流 / 配置 / 风险收益 / 信号；
-2. 原有图表是否是最清晰的表达；
-3. 是否应该改成折线、柱状、堆叠、环形、时间轴、配置图、矩阵、现金流图、Diagram 或其他更适合移动端阅读的形式；
-4. 是否存在“能可视化却仍然只堆文字或 KPI 卡”的问题。
-
-原 HTML 的图表只能作为“已有需求表达”，不能作为最终图表设计依据。
-
-### Production Rule｜快速生产规则
-
-本 Skill 负责快速重新设计，不承担完整验收。
-
-只需遵守以下生产底线：
-
-- 输入 HTML / 原型首先作为需求与内容来源；
-- 保留 Locked Content，不照搬原视觉表现；
-- 模块内部版式、组件、Hero 和数据可视化应根据业务语义重新设计；
-- 不得仅通过换色、圆角、阴影、字号或间距将原需求 HTML 直接作为最终设计输出。
-
-详细的内容、品牌、视觉和数据验收由独立 Audit Skill 完成。
-
-> **调用本 Skill = 重新设计。除非用户明确要求保留或复刻现有视觉。**
+才允许把输入升级为 Visual Reference，并继承用户明确要求保留的视觉关系。
 
 ---
+
+## 14.1 Requirement Source Isolation｜原型视觉隔离
+
+在 `requirement-only` 模式下，不允许：
+
+```txt
+输入 HTML
+→ 直接改 CSS
+→ 输出新 HTML
+```
+
+必须经过中间隔离层：
+
+```txt
+输入 HTML / 原型
+↓
+Requirement Model
+↓
+Semantic Reconstruction
+↓
+Visual Recomposition
+↓
+新页面
+↓
+再回到 Source 做内容完整性核对
+```
+
+### Requirement Model｜无样式需求模型
+
+先从输入材料抽取：
+
+```txt
+Page Goal
+Module Topics
+Locked Copy
+Locked Data
+Business Relations
+Required Order
+Interaction / State
+Risk / Compliance
+```
+
+此阶段**不携带原 CSS、原卡片形式、原 Hero 构图、原图表形式**。
+
+### Semantic Reconstruction｜语义重建
+
+根据业务语义重新判断：
+
+- 哪些内容是并列；
+- 哪些是流程；
+- 哪些是因果；
+- 哪些是“问题 → 原因 → 解法”；
+- 哪些是核心结论；
+- 哪些数据适合趋势 / 比较 / 构成 / 时间 / 配置 / 现金流表达；
+- 哪些模块应合并为一个更完整的视觉主题；
+- 哪些原型卡片只是排版容器，不代表真实业务层级。
+
+**业务关系必须保留，视觉容器关系可以重建。**
+
+例如输入原型为：
+
+```txt
+Hero
+↓
+3 个纵向白卡
+↓
+数字卡
+↓
+2 个对比卡
+```
+
+抽取后可能只是：
+
+```txt
+主题
+3 个平行卖点
+一组趋势数据
+两组业务差异
+```
+
+最终可重新设计为：
+
+```txt
+Hero + 核心结论
+↓
+平行卖点信息区
+↓
+趋势图
+↓
+对比矩阵
+```
+
+只要业务事实与业务关系没有改变，就属于正确重设计。
+
+---
+
+## 14.2 Visual Recomposition｜视觉重组
+
+在默认重设计任务中，应主动重新判断：
+
+- Hero / KV 构图；
+- Hero → 正文 `transition_mode`；
+- Section 分组；
+- 卡片架构；
+- 数据可视化；
+- Icon / Illustration；
+- 信息强调方式；
+- 阅读节奏。
+
+不得为了“忠实原型”机械保留原始视觉骨架。
+
+但是：
+
+> **视觉重组不能改写业务逻辑。**
+
+若原内容存在明确因果、时间顺序、流程顺序，则必须保留其真实关系；并列内容则可以自由选择更合适的视觉组合。
+
+---
+
+## 14.3 Data Visualization Re-evaluation Gate｜数据可视化重判
+
+如果 Requirement Source 已包含图表、数字卡、进度条、饼图或其他数据表达，不得默认沿用原形式。
+
+必须重新判断：
+
+1. 数据关系：趋势 / 比较 / 构成 / 流程 / 阶段 / 现金流 / 配置 / 风险收益 / 信号；
+2. 原表达是否是移动端最清晰的表达；
+3. 是否应切换为折线、柱状、堆叠、环形、时间轴、配置图、矩阵、现金流图、Diagram 等；
+4. 是否存在“能图形化但仍只堆 KPI / 文本卡”的问题。
+
+图表内容遵循 Locked Content，图表表现遵循 `qieman-chart-design`。
+
+---
+
+## 14.4 Visual Divergence Gate｜视觉差异门
+
+当 `source_mode = requirement-only` 时，最终输出必须证明自己是真正的视觉重设计。
+
+以下维度中，**至少 4 项**应相较 Requirement Source 发生明显重新设计：
+
+- Hero / KV 构图；
+- Hero → 正文承接方式；
+- Section 分组方式；
+- 卡片架构；
+- 数据可视化形式；
+- Icon / Illustration 表达；
+- 信息强调方式；
+- 页面阅读节奏。
+
+以下变化**不计入**有效视觉差异：
+
+- 只换品牌色；
+- 只改圆角；
+- 只改 shadow；
+- 只调字号；
+- 只调 margin / padding；
+- 原 DOM / 卡片结构基本不变，只做 CSS 美化。
+
+如果 Source 与 Output 在核心视觉骨架上仍高度相似：
+
+> **Visual Redesign Failed → 必须重新进行 Semantic Reconstruction / Visual Recomposition。**
+
+### 例外
+
+若用户明确要求：
+- 保留结构；
+- 保持构图；
+- 只做局部美化；
+- visual-continuation；
+
+则不执行“至少 4 项差异”的硬要求，只执行用户指定范围。
+
+---
+
+## 14.5 Production Rule｜快速生产规则
+
+本 Skill 是生产 Skill，不承担完整 Audit，但必须保证：
+
+- Locked Content 不被改动；
+- Requirement Source 与视觉参考身份不混淆；
+- 默认先抽取需求模型，再做视觉重组；
+- 不把输入 HTML 当作可直接美化的页面底稿；
+- 图表重新判断；
+- Page Type / transition_mode 重新判断；
+- 输出前通过 Visual Divergence Gate；
+- 已经被用户确认的当前版本继续执行 Regression Gate。
+
+> **第一次根据需求 HTML 生成 = 重设计。**  
+> **用户确认后的下一轮 = 稳定迭代。**
+
 
 # 15. Generation Workflow｜标准生产工作流
 
@@ -1849,39 +2121,54 @@ qieman-design-content-audit
 页面内部执行顺序：
 
 ```txt
-STEP 0 读取当前任务中已确认的 Locked Content / Locked Layout / Locked Component
+STEP 0 读取当前任务是否已有用户确认的 Locked Layout / Locked Component
+       - 第一次读取需求原型时，不自动建立 Locked Layout
 ↓
 STEP 1 读取输入材料
 ↓
-STEP 2 判断输入是 Requirement Source 还是 Visual Reference
-       - 业务方 / Cursor / 其他 AI 生成的需求 HTML 默认 = Requirement Source
+STEP 2 判断 source_mode
+       - 默认 requirement-only
+       - 用户明确要求沿用视觉时才 visual-continuation
 ↓
-STEP 3 锁定原始内容（Locked Content）
+STEP 3 锁定 Locked Content
 ↓
-STEP 4 判断 Page Type
+STEP 4 建立无样式 Requirement Model
+       - Page Goal / Module Topics / Copy / Data / Business Relations / Order / Risk
 ↓
-STEP 5 定义 Primary Communication Goal
+STEP 5 执行 Semantic Reconstruction
+       - 只保留真实业务关系，不保留原视觉容器关系
 ↓
-STEP 6 选择合适 Pattern，但不把 Pattern 当固定模板
+STEP 6 判断 Page Type 与 Primary Communication Goal
 ↓
-STEP 7 调用 qieman-ui-design Foundation Tokens
-       - 背景、卡片、spacing、字体、圆角、金融语义色
+STEP 7 重新选择 Hero / KV → 正文 transition_mode
+       - auto / rounded-surface / soft-gradient / flat-spacing
 ↓
-STEP 8 重新建立视觉信息架构与模块内部表达
+STEP 8 选择合适 Pattern，但不把原型 Pattern 当模板
 ↓
-STEP 9 判断文字 / 图表 / Diagram / Icon / Illustration 的最佳表达
+STEP 9 调用 qieman-ui-design Foundation Tokens
 ↓
-STEP 10 检测 Assets：Brand Mode / Portable Mode
+STEP 10 重新建立视觉信息架构与模块内部表达
 ↓
-STEP 11 生成页面；如果是迭代任务，只修改用户明确指出的目标区域
+STEP 11 判断文字 / 图表 / Diagram / Icon / Illustration 的最佳表达
+        - 数据可视化遵循 qieman-chart-design
 ↓
-STEP 12 执行 Visual Redesign Gate + Data Visualization Gate
+STEP 12 检测 Assets：Brand Mode / Portable Mode
 ↓
-STEP 13 执行 Regression Gate，确认已正确模块没有退化
+STEP 13 生成页面
+        - 首次重设计：允许视觉重组
+        - 已确认版本迭代：只修改用户明确指出区域
 ↓
-STEP 14 内容、数据、风险、视觉、移动端验收
+STEP 14 Visual Divergence Gate
+        - requirement-only 模式至少 4 个视觉维度明显重设计
 ↓
-STEP 15 按用户要求输出 HTML / H5 / 视觉方案
+STEP 15 Data Visualization Gate
+↓
+STEP 16 Regression Gate
+        - 仅针对用户已经确认 / 锁定的区域
+↓
+STEP 17 内容、数据、风险、视觉、移动端验收
+↓
+STEP 18 按用户要求输出 HTML / H5 / 视觉方案
 ```
 
 ---
@@ -1939,6 +2226,14 @@ STEP 15 按用户要求输出 HTML / H5 / 视觉方案
 - [ ] 同页 icon / illustration 是否风格统一？
 - [ ] 是否避免低幼、电商促销感、暴富符号堆叠？
 
+
+- [ ] 是否明确判断 `source_mode`？
+- [ ] 默认 Requirement Source 是否先被抽取成无样式 Requirement Model？
+- [ ] 是否做到“继承需求关系，不继承视觉关系”？
+- [ ] 原型的 Hero、卡片数量、DOM、图表类型、背景分区是否没有被机械继承？
+- [ ] `requirement-only` 模式是否至少有 4 个核心视觉维度发生明显重设计？
+- [ ] 是否避免“只换色 / 圆角 / 阴影 / 间距”的伪重设计？
+
 ## 16.6 Data
 
 - [ ] 金融涨跌是否为“涨红 #FA440C / 跌绿 #07AD8F”，且整页一致？
@@ -1980,6 +2275,9 @@ STEP 15 按用户要求输出 HTML / H5 / 视觉方案
 - [ ] 本轮是否只修改了用户明确指出的目标模块？
 - [ ] 已确认正确的背景、卡片、间距、图标、Footer、按钮是否保持不变？
 - [ ] Hero 与首张卡之间是否没有过高空白？是否避免了独立编号拉高 section 高度？
+- [ ] 是否明确选择了 `transition_mode`，且与页面业务语境一致？
+- [ ] 保险页在未指定时是否优先使用 `soft-gradient`，而不是机械套用圆角大白卡？
+- [ ] 已确认的顶部承接方式是否作为 Locked Transition 保持稳定？
 - [ ] 是否避免“每张白卡都统一描边”导致的视觉噪音？
 - [ ] 是否没有因为重写全局 CSS 导致新的错位或间距变化？
 - [ ] 是否对比上一版检查过首屏、连续卡片、适合/不适合、Footer 等高风险区域？
@@ -2018,46 +2316,107 @@ STEP 15 按用户要求输出 HTML / H5 / 视觉方案
 
 ---
 
-# 18. Default Invocation Prompt｜默认调用模板
+# 18. Invocation Templates｜精简调用模板
+
+本 Skill 的详细规则已经内置，业务方日常调用**不需要重复写 spacing、CTA、KPI、transition、chart、Regression 等规则**。
+
+## 18.1 默认重设计｜推荐
 
 ```txt
-请使用 qieman-business-content-design 设计以下且慢业务内容。
+调用 qieman-business-content-design，
+根据附件重新设计移动端业务页面。
+内容不变，原型仅作为 Requirement Source，视觉重做。
+输出完整可运行 HTML。
+```
 
-执行要求：
-1. 先识别页面类型与核心沟通目标。
-2. 若我没有要求改文案，默认锁定原始文案、数据、规则、风险提示与业务逻辑。
-3. 输入 HTML / 原型默认作为 Requirement Source，不照搬原 CSS / 卡片 / 图表视觉。
-4. 基础颜色、页面背景、白卡、字体、圆角、间距、金融涨跌语义必须继承 qieman-ui-design。
-5. 金融语义固定：涨 / 正收益 = 红 #FA440C；跌 / 负收益 / 回撤 = 绿 #07AD8F。
-6. 页面间距只使用 qieman-ui-design spacing tokens，不在局部随机写 margin / padding。
-7. 有明确数据关系时优先做合理可视化，不只堆 KPI 卡。
-8. 并列就并列，流程才用流程；不存在进阶关系时不要画进度线。
-9. 如果输入中已有明确按钮 / 吸底操作区，默认锁定并原样继承。
-10. 用户确认过“这个样式正确”的结构、图标、Footer、按钮等，在当前任务后续迭代中不得随机变化。
-11. 每轮局部优化后执行 Regression Gate，禁止优化 A 导致已确认 B 退化。
-12. 默认适配移动端长页；如无其他格式要求，输出完整可运行单文件 HTML。
-13. 不编造任何金融数据、收益、规则或产品事实。
-14. AI KV / 背景插画不是本 Skill 的固定模板能力；需要时由独立视觉增强 Skill 按需叠加。
+这 4 句默认等价于：
+
+- Locked Content；
+- `source_mode=requirement-only`；
+- Requirement Source Isolation；
+- Semantic Reconstruction；
+- qieman-ui-design；
+- qieman-chart-design；
+- Transition Routing；
+- Visual Divergence Gate；
+- Sticky CTA Strong Contract；
+- Regression / Mobile / Risk 基础检查。
+
+## 18.2 更短调用｜上下文明确时
+
+```txt
+调用 qieman-business-content-design，
+根据附件重新设计。
+内容不变，视觉重做，输出 HTML。
+```
+
+若输入为需求 HTML，本 Skill 仍自动按 Requirement Source 处理。
+
+## 18.3 营销页面
+
+```txt
+调用 qieman-business-content-design，
+根据附件重新设计营销业务页面。
+需求内容保持不变，视觉重新设计，输出移动端 HTML。
+```
+
+## 18.4 局部迭代
+
+```txt
+调用 qieman-business-content-design，
+基于当前版本只优化我指出的部分，其余保持不变。
+```
+
+局部迭代自动进入：
+- Locked Layout；
+- Locked Component；
+- Regression Guard。
+
+## 18.5 视觉延续｜仅用户明确需要时
+
+```txt
+调用 qieman-business-content-design，
+沿用当前视觉和布局，只优化我指出的部分。
+```
+
+此时：
+
+```txt
+source_mode = visual-continuation
 ```
 
 ---
 
-# 19. Strict Prototype Invocation｜原型忠实调用模板
+# 19. Invocation Interpretation｜调用语义
+
+只要用户出现以下表达：
+
+- “重新设计”
+- “不要照搬原型”
+- “内容不变，视觉重做”
+- “根据附件重新生成”
+
+默认：
 
 ```txt
-请使用 qieman-business-content-design 重新设计该页面。
-
-内容忠实度：STRICT。
-- 不改变原始文案。
-- 不改变数据。
-- 不改变原始业务逻辑和模块框架。
-- 允许且必须重新设计视觉层级、模块内部版式、卡片体系、图表、插画和交互表现。
-- 如果输入是已有 HTML，只将其视为需求载体，不继承原 CSS、组件样式、图表类型或视觉结构。
-- “框架不变”只约束业务信息框架，不等于 DOM / CSS / 卡片结构不变。
-- 不要照搬原型视觉；仅换色、圆角、间距属于失败。
-- 如果品牌资源包不存在，自动进入 Portable Mode，不影响最终输出。
-- 输出完整移动端 HTML 单文件。
+source_mode = requirement-only
 ```
+
+只要用户明确出现：
+
+- “沿用当前样式”
+- “保持这个布局”
+- “参考现在这版继续”
+- “不要改结构”
+- “只优化这里”
+
+才切换为：
+
+```txt
+source_mode = visual-continuation
+```
+
+**不要要求业务方每次重新填写完整设计规范。Skill 自己负责执行规范。**
 
 ---
 
@@ -2069,14 +2428,16 @@ STEP 15 按用户要求输出 HTML / H5 / 视觉方案
 1. 用户明确指令
 2. 原始业务事实 / 数据 / 合规要求
 3. Locked Content / 已确认 Locked Component
-4. 当前任务已确认的 Stable Layout / Regression Guard
-5. Content Fidelity
-6. 信息理解与可读性
-7. Page Type / Pattern
-8. qieman-ui-design 品牌与 Token 一致性
-9. 视觉完整度
-10. 素材复用
-11. 装饰效果
+4. 用户已确认的 Locked Layout / Locked Transition / Regression Guard
+5. source_mode 与 Requirement Source Isolation
+6. Content Fidelity
+7. 信息理解与业务关系
+8. Page Type / Pattern / transition_mode
+9. qieman-ui-design / qieman-chart-design
+10. Visual Divergence Gate
+11. 视觉完整度
+12. 素材复用
+13. 装饰效果
 ```
 
 其中：
