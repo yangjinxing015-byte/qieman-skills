@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Qieman UI Component Sample</title>
+<style>
+:root{
+  --qm-primary:#1B88EE;
+  --qm-primary-faded:#F0F6FF;
+  --qm-bg:#F9FAFB;
+  --qm-card:#FFFFFF;
+  --qm-text:#333333;
+  --qm-text-subtle:#606060;
+  --qm-text-muted:#999999;
+  --qm-border:#F0F2F5;
+  --qm-error:#FA440C;
+  --qm-warning:#EA9500;
+  --qm-success:#07AD8F;
+  --qm-radius-sm:4px;
+  --qm-radius-md:8px;
+  --qm-radius-lg:12px;
+  --qm-radius-xl:16px;
+  --qm-space-4:4px;
+  --qm-space-8:8px;
+  --qm-space-12:12px;
+  --qm-space-16:16px;
+  --qm-space-20:20px;
+  --qm-space-24:24px;
+  --qm-shadow-card:0 8px 24px rgba(15, 61, 115, .06);
+}
+*{box-sizing:border-box} body{margin:0;background:var(--qm-bg);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--qm-text)}
+.phone{width:375px;min-height:812px;margin:24px auto;background:linear-gradient(180deg,#F6FAFF 0%,#F9FAFB 36%);border-radius:32px;box-shadow:0 24px 60px rgba(0,0,0,.14);overflow:hidden;border:1px solid rgba(0,0,0,.06)}
+.nav{height:56px;display:flex;align-items:center;justify-content:center;font-weight:600;position:relative}.back{position:absolute;left:16px;color:var(--qm-text-subtle)}
+.page{padding:16px 20px 96px}.card{background:var(--qm-card);border-radius:var(--qm-radius-xl);padding:16px;box-shadow:var(--qm-shadow-card);border:1px solid rgba(27,136,238,.06);margin-bottom:12px}.eyebrow{font-size:12px;color:var(--qm-primary);font-weight:600;margin-bottom:6px}.title{font-size:20px;line-height:28px;font-weight:700}.body{font-size:14px;line-height:22px;color:var(--qm-text-subtle);margin-top:8px}.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--qm-border)}.row:first-of-type{border-top:0}.label{font-size:14px;color:var(--qm-text-subtle)}.value{font-size:15px;font-weight:600}.tag{font-size:12px;color:var(--qm-primary);background:var(--qm-primary-faded);border-radius:999px;padding:4px 8px}.input{height:48px;border:1px solid var(--qm-border);border-radius:12px;padding:0 14px;font-size:18px;font-weight:600;background:white;display:flex;align-items:center}.helper{font-size:12px;color:var(--qm-text-muted);margin-top:8px}.notice{background:#FFF8ED;border-radius:12px;padding:12px;color:#8A5A00;font-size:13px;line-height:20px}.bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;width:375px;padding:12px 20px 20px;background:linear-gradient(180deg,rgba(249,250,251,0),#F9FAFB 28%)}.btn{height:48px;border-radius:24px;background:var(--qm-primary);color:white;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;box-shadow:0 8px 18px rgba(27,136,238,.28)}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="nav"><span class="back">‹</span>组件示例</div>
+  <div class="page">
+    <div class="card">
+      <div class="eyebrow">AI 小顾</div>
+      <div class="title">账户配置诊断</div>
+      <div class="body">基于你的账户状态，小顾会先给出结论，再解释原因和风险边界。</div>
+    </div>
+    <div class="card">
+      <div class="row"><span class="label">策略名称</span><span class="value">我要稳稳的幸福</span></div>
+      <div class="row"><span class="label">服务状态</span><span class="tag">监测中</span></div>
+      <div class="row"><span class="label">预估手续费</span><span class="value">1.50 元</span></div>
+    </div>
+    <div class="card">
+      <div class="label">买入金额</div>
+      <div class="input" style="margin-top:10px">¥ 1,000</div>
+      <div class="helper">最低买入 100 元，实际费用以基金公司确认结果为准。</div>
+    </div>
+    <div class="notice">风险提示：投顾服务不承诺收益，市场有波动，请结合你的风险承受能力审慎决策。</div>
+  </div>
+  <div class="bottom"><div class="btn">确认提交</div></div>
+</div>
+</body>
+</html>

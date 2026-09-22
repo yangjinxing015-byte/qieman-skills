@@ -1,5 +1,8 @@
 # Color Palettes
 
+系列色真源：`qieman-chart-design` · [Figma 7、chart 图表色](https://www.figma.com/design/jflpIzZBUNd9HbH70guNFV/%F0%9F%8C%9FQieman-Design-Mobile?node-id=29238-3379) · 数值以 `references/tokens.yaml` 为准。  
+`chart-05` = `#ADAFE8`（紫），`chart-06` = `#68E0F3`（青），勿对调。另有 `chart-13` `#BBC4CE`、`cash` `#DBEBFF`、`wallet` `#EA9500`。
+
 ## Default Chart Palette (Recommended)
 
 This is the primary color palette for data visualizations. Use this palette as the default choice for all charts.
@@ -13,14 +16,17 @@ chart_colors = [
     '#F88D72',  # chart02 - Coral
     '#FBCA74',  # chart03 - Yellow
     '#7DD4C4',  # chart04 - Turquoise
-    '#68E0F3',  # chart05 - Cyan
-    '#ADAFE8',  # chart06 - Lavender
+    '#ADAFE8',  # chart05 - Lavender
+    '#68E0F3',  # chart06 - Cyan
     '#3A7BB8',  # chart07 - Blue
     '#FAB6A5',  # chart08 - Peach
     '#EDC273',  # chart09 - Gold
     '#9CCBF8',  # chart10 - Sky Blue
     '#C8CAEF',  # chart11 - Light Purple
-    '#6B9CCA'   # chart12 - Steel Blue
+    '#6B9CCA',  # chart12 - Steel Blue
+    '#BBC4CE',  # chart13 - Cool Gray
+    '#DBEBFF',  # cash
+    '#EA9500',  # wallet
 ]
 
 # Usage examples:
@@ -44,14 +50,17 @@ const chartColors = [
     '#F88D72',  // chart02 - Coral
     '#FBCA74',  // chart03 - Yellow
     '#7DD4C4',  // chart04 - Turquoise
-    '#68E0F3',  // chart05 - Cyan
-    '#ADAFE8',  // chart06 - Lavender
+    '#ADAFE8',  // chart05 - Lavender
+    '#68E0F3',  // chart06 - Cyan
     '#3A7BB8',  // chart07 - Blue
     '#FAB6A5',  // chart08 - Peach
     '#EDC273',  // chart09 - Gold
     '#9CCBF8',  // chart10 - Sky Blue
     '#C8CAEF',  // chart11 - Light Purple
-    '#6B9CCA'   // chart12 - Steel Blue
+    '#6B9CCA',  // chart12 - Steel Blue
+    '#BBC4CE',  // chart13 - Cool Gray
+    '#DBEBFF',  // cash
+    '#EA9500',  // wallet
 ];
 
 // Chart.js usage
@@ -73,14 +82,17 @@ const color = d3.scaleOrdinal()
     --chart-02: #F88D72;  /* Coral */
     --chart-03: #FBCA74;  /* Yellow */
     --chart-04: #7DD4C4;  /* Turquoise */
-    --chart-05: #68E0F3;  /* Cyan */
-    --chart-06: #ADAFE8;  /* Lavender */
+    --chart-05: #ADAFE8;  /* Lavender */
+    --chart-06: #68E0F3;  /* Cyan */
     --chart-07: #3A7BB8;  /* Blue */
     --chart-08: #FAB6A5;  /* Peach */
     --chart-09: #EDC273;  /* Gold */
     --chart-10: #9CCBF8;  /* Sky Blue */
     --chart-11: #C8CAEF;  /* Light Purple */
     --chart-12: #6B9CCA;  /* Steel Blue */
+    --chart-13: #BBC4CE;  /* Cool Gray */
+    --chart-cash: #DBEBFF;
+    --chart-wallet: #EA9500;
 }
 ```
 

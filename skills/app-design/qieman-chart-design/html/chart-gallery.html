@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>且慢图表组件 · Qieman Design Charts</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" />
+  <link rel="stylesheet" href="../assets/qieman-charts.css?v=20260915m" />
+  <style>
+    :root {
+      --brand-primary: #1B88EE;
+      --brand-primary-faded: #F0F6FF;
+      --text-primary: #333333;
+      --text-secondary: #606060;
+      --text-tertiary: #999999;
+      --text-inverse: #FFFFFF;
+      --semantic-success: #07AD8F;
+      --semantic-error: #FA440C;
+      --semantic-error-faded: #FEEDE9;
+      --corr-neg-soft: #DBEBFF;
+      --corr-neg-strong: #9CCBF8;
+      --chart-card-dark: #2B2B2B;
+      --surface-page: #F9FAFB;
+      --surface-card: #FFFFFF;
+      --surface-card-muted: #F7F7F7;
+      --surface-summary: #DBEBFF;
+      --chart-01: #69B1F4;
+      --chart-02: #F88D72;
+      --chart-03: #FBCA74;
+      --chart-04: #7DD4C4;
+      --chart-05: #ADAFE8;
+      --chart-06: #68E0F3;
+      --chart-07: #3A7BB8;
+      --chart-08: #FAB6A5;
+      --chart-09: #EDC273;
+      --chart-10: #9CCBF8;
+      --chart-11: #C8CAEF;
+      --chart-12: #6B9CCA;
+      --chart-13: #BBC4CE;
+      --chart-cash: #DBEBFF;
+      --chart-wallet: #EA9500;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-pill: 9999px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --shadow-card-soft: 0 2px 8px rgba(27, 136, 238, 0.06);
+      --font-sans: PingFang SC, MiSans, system-ui, -apple-system, sans-serif;
+      --font-number: MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    button { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background: var(--surface-page);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 20px 72px;
+    }
+
+    .hero {
+      background: var(--surface-summary);
+      border: none;
+      border-radius: 16px;
+      padding: 24px 24px 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--brand-primary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .hero-kicker i { font-size: 16px; }
+
+    .hero h1 {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-card);
+      border-radius: var(--radius-pill);
+      padding: 4px 10px 4px 6px;
+    }
+
+    .swatch i {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      display: block;
+      box-shadow: inset 0 0 0 1px rgba(51, 51, 51, 0.08);
+    }
+
+    .swatch span {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 36px;
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      padding: 10px 0;
+      background: color-mix(in srgb, var(--surface-page) 88%, transparent);
+      backdrop-filter: blur(10px);
+    }
+
+    .toc a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-card);
+      color: var(--text-secondary);
+      font-size: 13px;
+      box-shadow: var(--shadow-card-soft);
+    }
+
+    .toc a:hover,
+    .toc a:focus-visible,
+    .toc a.is-on {
+      color: var(--brand-primary);
+      outline: none;
+    }
+
+    .toc a.is-on {
+      background: var(--brand-primary-faded);
+    }
+
+    .section {
+      margin-bottom: 40px;
+      scroll-margin-top: 56px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section h2 i {
+      color: var(--brand-primary);
+      font-size: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: var(--radius-pill);
+      background: var(--brand-primary-faded);
+      color: var(--brand-primary);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .chart-item {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chart-item figcaption {
+      width: 343px;
+      max-width: 100%;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-tertiary);
+    }
+
+    .chart-item figcaption code {
+      font-size: 11px;
+      background: var(--surface-card);
+      color: var(--brand-primary);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .qdm-chart-host {
+      width: 343px;
+    }
+
+    .qdm-chart-host.is-narrow {
+      width: 158px;
+    }
+
+    .chart-item.is-narrow figcaption {
+      width: 158px;
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 20px 16px 56px; }
+      .hero { padding: 20px 16px; }
+      .qdm-chart-host,
+      .qdm-chart-host.is-narrow,
+      .chart-item figcaption,
+      .chart-item.is-narrow figcaption { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="hero-kicker"><i class="ri-bar-chart-2-line" aria-hidden="true"></i>Qieman Design Charts</p>
+      <h1>且慢图表 UI 组件</h1>
+      <div class="swatches" aria-label="图表色带">
+        <div class="swatch"><i style="background:var(--chart-01)"></i><span>chart-01</span></div>
+        <div class="swatch"><i style="background:var(--chart-02)"></i><span>chart-02</span></div>
+        <div class="swatch"><i style="background:var(--chart-03)"></i><span>chart-03</span></div>
+        <div class="swatch"><i style="background:var(--chart-04)"></i><span>chart-04</span></div>
+        <div class="swatch"><i style="background:var(--chart-05)"></i><span>chart-05</span></div>
+        <div class="swatch"><i style="background:var(--chart-06)"></i><span>chart-06</span></div>
+        <div class="swatch"><i style="background:var(--chart-07)"></i><span>chart-07</span></div>
+        <div class="swatch"><i style="background:var(--chart-08)"></i><span>chart-08</span></div>
+        <div class="swatch"><i style="background:var(--chart-09)"></i><span>chart-09</span></div>
+        <div class="swatch"><i style="background:var(--chart-10)"></i><span>chart-10</span></div>
+        <div class="swatch"><i style="background:var(--chart-11)"></i><span>chart-11</span></div>
+        <div class="swatch"><i style="background:var(--chart-12)"></i><span>chart-12</span></div>
+        <div class="swatch"><i style="background:var(--chart-13)"></i><span>chart-13</span></div>
+        <div class="swatch"><i style="background:var(--chart-cash)"></i><span>cash</span></div>
+        <div class="swatch"><i style="background:var(--chart-wallet)"></i><span>wallet</span></div>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="图表类型">
+      <a href="#sec-bi"><i class="ri-align-vertically" aria-hidden="true"></i>双向图</a>
+      <a href="#sec-col"><i class="ri-bar-chart-fill" aria-hidden="true"></i>柱状图</a>
+      <a href="#sec-bar"><i class="ri-align-left" aria-hidden="true"></i>横向柱</a>
+      <a href="#sec-line"><i class="ri-line-chart-line" aria-hidden="true"></i>折线图</a>
+      <a href="#sec-area"><i class="ri-line-chart-fill" aria-hidden="true"></i>区域折线</a>
+      <a href="#sec-scale"><i class="ri-swap-2-line" aria-hidden="true"></i>规模变动</a>
+      <a href="#sec-pie"><i class="ri-pie-chart-2-line" aria-hidden="true"></i>饼图</a>
+      <a href="#sec-donut"><i class="ri-donut-chart-line" aria-hidden="true"></i>环图</a>
+      <a href="#sec-sunburst"><i class="ri-pie-chart-fill" aria-hidden="true"></i>旭日图</a>
+      <a href="#sec-flow"><i class="ri-node-tree" aria-hidden="true"></i>资金流</a>
+      <a href="#sec-sankey"><i class="ri-git-branch-line" aria-hidden="true"></i>桑基图</a>
+      <a href="#sec-progress"><i class="ri-equalizer-line" aria-hidden="true"></i>进度占比</a>
+      <a href="#sec-share"><i class="ri-layout-row-line" aria-hidden="true"></i>横向占比</a>
+      <a href="#sec-tree"><i class="ri-layout-masonry-line" aria-hidden="true"></i>树图</a>
+      <a href="#sec-gauge"><i class="ri-dashboard-3-line" aria-hidden="true"></i>仪表盘</a>
+      <a href="#sec-radar"><i class="ri-hexagon-line" aria-hidden="true"></i>网状图</a>
+      <a href="#sec-corr"><i class="ri-grid-line" aria-hidden="true"></i>相关性</a>
+    </nav>
+
+    <section class="section" id="sec-bi">
+      <div class="section-head">
+        <h2><i class="ri-align-vertically" aria-hidden="true"></i>双向图表 <span class="pill">bidirectional</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="bi-neg" class="qdm-chart-host"></div>
+          <figcaption><code>negative</code> 回撤 / 负收益，柱从 0 向下</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="bi-pos" class="qdm-chart-host"></div>
+          <figcaption><code>positive</code> 达标率 / 正收益，柱从 0 向上</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="bi-band" class="qdm-chart-host"></div>
+          <figcaption><code>band-line</code> 五色温度带 + 平滑折线</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-col">
+      <div class="section-head">
+        <h2><i class="ri-bar-chart-fill" aria-hidden="true"></i>柱状图 <span class="pill">column</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="col-1" class="qdm-chart-host"></div>
+          <figcaption><code>single</code> 单系列，柱落在灰轨道上，Y 轴按刻度对齐</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="col-2" class="qdm-chart-host"></div>
+          <figcaption><code>compare</code> 双系列谁大谁占槽，不是并排双柱</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-bar">
+      <div class="section-head">
+        <h2><i class="ri-align-left" aria-hidden="true"></i>横向柱状图 <span class="pill">bar</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="bar-1" class="qdm-chart-host"></div>
+          <figcaption>5 行占比 · 柱高 12px · 右列 13px Medium</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-line">
+      <div class="section-head">
+        <h2><i class="ri-line-chart-line" aria-hidden="true"></i>折线图 <span class="pill">line</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="line-1" class="qdm-chart-host"></div>
+          <figcaption>1 条线 · 净值 / 收益率走势</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="line-2" class="qdm-chart-host"></div>
+          <figcaption>2 条线 · 组合对比基准</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="line-3" class="qdm-chart-host"></div>
+          <figcaption>3 条线 · 最多 5 条</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-area">
+      <div class="section-head">
+        <h2><i class="ri-line-chart-fill" aria-hidden="true"></i>区域折线图 <span class="pill">area</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="area-1" class="qdm-chart-host"></div>
+          <figcaption>1 条线 · 主系列线下渐变填充</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="area-2" class="qdm-chart-host"></div>
+          <figcaption>2 条线 · 仅第一条铺色带</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="area-3" class="qdm-chart-host"></div>
+          <figcaption>3 条线 · 最多 5 条</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-scale">
+      <div class="section-head">
+        <h2><i class="ri-swap-2-line" aria-hidden="true"></i>规模变动 <span class="pill">scale</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="sc-1" class="qdm-chart-host"></div>
+          <figcaption>1 根柱，居中</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="sc-2" class="qdm-chart-host"></div>
+          <figcaption>2 根柱，左右撑开</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="sc-3" class="qdm-chart-host"></div>
+          <figcaption>3 根柱</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="sc-4" class="qdm-chart-host"></div>
+          <figcaption>4 根柱，柱顶金额 13px Semibold</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-pie">
+      <div class="section-head">
+        <h2><i class="ri-pie-chart-2-line" aria-hidden="true"></i>饼图 <span class="pill">pie</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="pie-2" class="qdm-chart-host"></div>
+          <figcaption>2 项</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pie-3" class="qdm-chart-host"></div>
+          <figcaption>3 项</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pie-4" class="qdm-chart-host"></div>
+          <figcaption>4 项</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pie-5" class="qdm-chart-host"></div>
+          <figcaption>5 项</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pie-6" class="qdm-chart-host"></div>
+          <figcaption>6 项（上限，再多合并「其他」）</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-donut">
+      <div class="section-head">
+        <h2><i class="ri-donut-chart-line" aria-hidden="true"></i>环图 <span class="pill">donut</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="donut-2" class="qdm-chart-host"></div>
+          <figcaption>2 项</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="donut-3" class="qdm-chart-host"></div>
+          <figcaption>3 项</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="donut-4" class="qdm-chart-host"></div>
+          <figcaption>4 项</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-sunburst">
+      <div class="section-head">
+        <h2><i class="ri-pie-chart-fill" aria-hidden="true"></i>旭日图 <span class="pill">sunburst</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="sun-1" class="qdm-chart-host"></div>
+          <figcaption>大类 → 细类 → 风格 / 品种</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-flow">
+      <div class="section-head">
+        <h2><i class="ri-node-tree" aria-hidden="true"></i>资金流分析 <span class="pill">flow</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="flow-1" class="qdm-chart-host"></div>
+          <figcaption><code>asset</code> 转入转出 → 月末资产</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="flow-2" class="qdm-chart-host"></div>
+          <figcaption><code>fee</code> 综合费率拆显隐性</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-sankey">
+      <div class="section-head">
+        <h2><i class="ri-git-branch-line" aria-hidden="true"></i>桑基图 <span class="pill">sankey</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="sankey-1" class="qdm-chart-host"></div>
+          <figcaption><code>asset</code> 总资产 → 负债 + 净资产</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="sankey-2" class="qdm-chart-host"></div>
+          <figcaption><code>income</code> 多源收入 → 结余 / 支出</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-progress">
+      <div class="section-head">
+        <h2><i class="ri-equalizer-line" aria-hidden="true"></i>进度占比 <span class="pill">progress</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="pg-s0" class="qdm-chart-host"></div>
+          <figcaption><code>slider</code> 0</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pg-s60" class="qdm-chart-host"></div>
+          <figcaption><code>slider</code> 60</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pg-s100" class="qdm-chart-host"></div>
+          <figcaption><code>slider</code> 100</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pg-r1" class="qdm-chart-host"></div>
+          <figcaption><code>range</code> 3–6</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pg-r2" class="qdm-chart-host"></div>
+          <figcaption><code>range</code> 10–20</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="pg-r3" class="qdm-chart-host"></div>
+          <figcaption><code>range</code> 90–95</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-share">
+      <div class="section-head">
+        <h2><i class="ri-layout-row-line" aria-hidden="true"></i>横向占比图 <span class="pill">share</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="share-1" class="qdm-chart-host"></div>
+          <figcaption>活钱 / 稳钱 / 长钱 / 保障</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-tree">
+      <div class="section-head">
+        <h2><i class="ri-layout-masonry-line" aria-hidden="true"></i>矩形树图 <span class="pill">treemap</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="tree-1" class="qdm-chart-host"></div>
+          <figcaption>涨红跌绿底 · 过小格子可只留名称</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-gauge">
+      <div class="section-head">
+        <h2><i class="ri-dashboard-3-line" aria-hidden="true"></i>仪表盘 <span class="pill">gauge</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item is-narrow">
+          <div id="g-1" class="qdm-chart-host is-narrow"></div>
+          <figcaption><code>percent</code> 半环 + 外侧三角</figcaption>
+        </figure>
+        <figure class="chart-item is-narrow">
+          <div id="g-2" class="qdm-chart-host is-narrow"></div>
+          <figcaption><code>score</code> 蓝→黄渐变</figcaption>
+        </figure>
+        <figure class="chart-item is-narrow">
+          <div id="g-3" class="qdm-chart-host is-narrow"></div>
+          <figcaption><code>split</code> 合理 / 偏高</figcaption>
+        </figure>
+        <figure class="chart-item is-narrow">
+          <div id="g-4" class="qdm-chart-host is-narrow"></div>
+          <figcaption><code>split</code> 偏低 / 合理</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-radar">
+      <div class="section-head">
+        <h2><i class="ri-hexagon-line" aria-hidden="true"></i>网状图 <span class="pill">radar</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="radar-1" class="qdm-chart-host"></div>
+          <figcaption>六轴 · 填充 chart-01 28%</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sec-corr">
+      <div class="section-head">
+        <h2><i class="ri-grid-line" aria-hidden="true"></i>相关性 <span class="pill">correlation</span></h2>
+      </div>
+      <div class="grid">
+        <figure class="chart-item">
+          <div id="corr-1" class="qdm-chart-host"></div>
+          <figcaption><code>light</code> ≥0 红底 · −0.6～0 浅蓝 · ≤−0.6 蓝</figcaption>
+        </figure>
+        <figure class="chart-item">
+          <div id="corr-2" class="qdm-chart-host"></div>
+          <figcaption><code>dark</code> 整卡 #2B2B2B</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="../assets/qieman-charts.js?v=20260915m"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      QiemanChart.render("#bi-neg", {
+        type: "bidirectional",
+        variant: "negative",
+        title: "区间收益",
+        items: [
+          { label: "近1月", value: -0.75 },
+          { label: "近3月", value: -5.75 },
+          { label: "近6月", value: -7.75 },
+          { label: "近1年", value: -20.75 },
+          { label: "成立来", value: -25.6 }
+        ],
+      });
+      QiemanChart.render("#bi-pos", {
+        type: "bidirectional",
+        variant: "positive",
+        title: "达标率分布",
+        items: [
+          { label: "近1月", value: 70.75, text: "70.75%" },
+          { label: "近3月", value: 55.75, text: ">55.75%" },
+          { label: "近6月", value: 40.75, text: ">40.75%" },
+          { label: "近1年", value: 20.75, text: ">20.75%" },
+          { label: "成立来", value: 0.75, text: ">0.75%" }
+        ],
+      });
+      QiemanChart.render("#bi-band", {
+        type: "bidirectional",
+        variant: "band-line",
+        title: "市场温度",
+        legends: [
+          { label: "偏冷", color: "var(--chart-band-01)" },
+          { label: "偏暖", color: "var(--chart-band-02)" },
+          { label: "适中", color: "var(--chart-band-03)" },
+          { label: "偏热", color: "var(--chart-band-04)" },
+          { label: "过热", color: "var(--chart-band-05)" }
+        ],
+        yLabels: ["100°C", "80°C", "40°C", "20°C", "0°C"],
+        xLabels: ["2023-10", "2024-11", "2025-01", "2026-01", "2027-03"],
+        line: [14, 28, 16, 20, 46, 58, 72],
+      });
+
+      QiemanChart.render("#col-1", {
+        type: "column",
+        variant: "single",
+        title: "组合区间收益",
+        yLabels: ["50%", "40%", "20%", "10%", "0%"],
+        xLabels: ["近1月", "近3月", "近6月", "近1年", "成立来"],
+        series: [{ name: "本组合", color: "var(--brand-primary)", data: [12, 20, 45, 22, 42] }],
+      });
+      QiemanChart.render("#col-2", {
+        type: "column",
+        variant: "compare",
+        title: "收益率对比",
+        yLabels: ["50%", "40%", "20%", "10%", "0%"],
+        xLabels: ["近1月", "近3月", "近6月", "近1年", "成立来"],
+        series: [
+          { name: "本组合", color: "var(--brand-primary)", data: [12, 0, 0, 45, 20] },
+          { name: "沪深300", color: "var(--semantic-success)", data: [0, 20, 45, 0, 42] }
+        ],
+      });
+
+      var lineX = ["2023-10", "2024-11", "2025-01", "2026-01", "2027-03"];
+      var lineY = ["50%", "40%", "20%", "10%", "0%"];
+      QiemanChart.render("#line-1", {
+        type: "line",
+        title: "区间收益率",
+        yLabels: lineY,
+        xLabels: lineX,
+        series: [{ name: "本组合", color: "var(--brand-primary)", data: [32, 38, 26, 50, 36, 18, 42] }],
+      });
+      QiemanChart.render("#line-2", {
+        type: "line",
+        title: "收益率对比",
+        yLabels: lineY,
+        xLabels: lineX,
+        series: [
+          { name: "本组合", color: "var(--brand-primary)", data: [32, 38, 26, 36, 46, 18, 43] },
+          { name: "沪深300", color: "var(--chart-03)", data: [32, 38, 26, 45, 45, 18, 43] }
+        ],
+      });
+      QiemanChart.render("#line-3", {
+        type: "line",
+        title: "多组合走势",
+        yLabels: lineY,
+        xLabels: lineX,
+        series: [
+          { name: "本组合", color: "var(--brand-primary)", data: [22, 28, 32, 50, 38, 32, 48] },
+          { name: "沪深300", color: "var(--chart-03)", data: [20, 26, 22, 28, 22, 18, 32] },
+          { name: "中证500", color: "var(--chart-02)", data: [24, 30, 26, 34, 28, 22, 30] }
+        ],
+      });
+
+      QiemanChart.render("#area-1", {
+        type: "area",
+        title: "区间收益率",
+        yLabels: lineY,
+        xLabels: lineX,
+        series: [{ name: "本组合", color: "var(--brand-primary)", data: [32, 38, 18, 45, 50, 18, 42] }],
+      });
+      QiemanChart.render("#area-2", {
+        type: "area",
+        title: "收益率对比",
+        yLabels: lineY,
+        xLabels: lineX,
+        series: [
+          { name: "本组合", color: "var(--brand-primary)", data: [32, 38, 18, 45, 50, 18, 42] },
+          { name: "沪深300", color: "var(--chart-03)", data: [20, 38, 36, 44, 42, 18, 36] }
+        ],
+      });
+      QiemanChart.render("#area-3", {
+        type: "area",
+        title: "多组合走势",
+        yLabels: lineY,
+        xLabels: lineX,
+        series: [
+          { name: "本组合", color: "var(--brand-primary)", data: [22, 28, 18, 36, 50, 32, 28] },
+          { name: "沪深300", color: "var(--chart-03)", data: [20, 26, 22, 28, 38, 22, 32] },
+          { name: "中证500", color: "var(--chart-02)", data: [24, 30, 26, 34, 28, 22, 40] }
+        ],
+      });
+
+      var q = [
+        { value: "314.63亿", label: "21年Q3", ratio: 0.42 },
+        { value: "280.10亿", label: "21年Q4", ratio: 0.36 },
+        { value: "256.80亿", label: "22年Q1", ratio: 0.30 },
+        { value: "198.40亿", label: "22年Q2", ratio: 0.22 }
+      ];
+      [1, 2, 3, 4].forEach(function (n) {
+        QiemanChart.render("#sc-" + n, {
+          type: "scale",
+          tabs: ["资产配置", "行业占比", "规模变动"],
+          activeTab: 2,
+          date: "2021-03-31",
+          items: q.slice(0, n),
+        });
+      });
+
+      var pieSets = [
+        [{ name: "权益", value: 62 }, { name: "固收", value: 38 }],
+        [{ name: "股票型", value: 40 }, { name: "债券型", value: 35 }, { name: "货币型", value: 25 }],
+        [{ name: "股票型", value: 34.5 }, { name: "债券型", value: 28 }, { name: "货币型", value: 18.5 }, { name: "混合型", value: 19 }],
+        [{ name: "股票型", value: 28 }, { name: "债券型", value: 22 }, { name: "货币型", value: 16 }, { name: "混合型", value: 18 }, { name: "另类", value: 16 }],
+        [{ name: "股票型", value: 24 }, { name: "债券型", value: 20 }, { name: "货币型", value: 14 }, { name: "混合型", value: 16 }, { name: "QDII", value: 14 }, { name: "其他", value: 12 }]
+      ];
+      pieSets.forEach(function (items, i) {
+        QiemanChart.render("#pie-" + (i + 2), {
+          type: "pie",
+          title: "持仓分布",
+          items: items,
+        });
+      });
+      [2, 3, 4].forEach(function (n) {
+        QiemanChart.render("#donut-" + n, {
+          type: "donut",
+          title: "持仓分布",
+          items: pieSets[n - 2],
+        });
+      });
+
+      QiemanChart.render("#bar-1", {
+        type: "bar",
+        title: "持仓占比",
+        items: [
+          { label: "股票型", value: 66.55 },
+          { label: "债券型", value: 52.4 },
+          { label: "混合型", value: 41.2 },
+          { label: "货币型", value: 28.8 },
+          { label: "其他", value: 16.5 }
+        ],
+      });
+
+      QiemanChart.render("#sun-1", {
+        type: "sunburst",
+        title: "资产配置",
+        subtitle: "穿透至三级",
+      });
+
+      QiemanChart.render("#flow-1", {
+        type: "flow",
+        variant: "asset",
+        title: "资金流分析",
+        subtitle: "本月",
+      });
+      QiemanChart.render("#flow-2", {
+        type: "flow",
+        variant: "fee",
+        title: "综合费率",
+        subtitle: "持有成本",
+      });
+      QiemanChart.render("#sankey-1", {
+        type: "sankey",
+        title: "资产负债",
+        subtitle: "家庭资产负债表",
+      });
+      QiemanChart.render("#sankey-2", {
+        type: "sankey",
+        variant: "income",
+        title: "年收支",
+        subtitle: "收入与支出流向",
+        total: { name: "年收入", value: "134.90 万" },
+      });
+
+      [0, 60, 100].forEach(function (v) {
+        QiemanChart.render("#pg-s" + (v === 0 ? "0" : v), {
+          type: "progress",
+          variant: "slider",
+          title: "风险评分",
+          subtitle: "当前",
+          value: v,
+        });
+      });
+      QiemanChart.render("#pg-r1", {
+        type: "progress",
+        variant: "range",
+        title: "风险舒适范围",
+        subtitle: "建议区间",
+        from: 3,
+        to: 6,
+      });
+      QiemanChart.render("#pg-r2", {
+        type: "progress",
+        variant: "range",
+        title: "风险舒适范围",
+        subtitle: "建议区间",
+        from: 10,
+        to: 20,
+      });
+      QiemanChart.render("#pg-r3", {
+        type: "progress",
+        variant: "range",
+        title: "风险舒适范围",
+        subtitle: "建议区间",
+        from: 90,
+        to: 95,
+      });
+
+      QiemanChart.render("#share-1", {
+        type: "share",
+        title: "四笔钱持仓",
+        hint: true,
+        action: "切换账户模式",
+        items: [
+          { name: "活钱", value: 20, color: "var(--chart-02)" },
+          { name: "稳钱", value: 10, color: "var(--chart-03)" },
+          { name: "长钱", value: 10, color: "var(--chart-04)" },
+          { name: "保障", value: 0, color: "var(--chart-01)" }
+        ],
+        tip: "您的投资规划书完成进度为60%，继续执行",
+      });
+
+      QiemanChart.render("#tree-1", {
+        type: "treemap",
+        title: "收益贡献",
+        subtitle: "近1月 · 单位：元",
+        items: [
+          { name: "货币现金", value: 3753.21 },
+          { name: "短债", value: 3344.21 },
+          { name: "中国纯债", value: 353.21 },
+          { name: "权益增强", value: -333.21 },
+          { name: "海外债券", value: -353.21 },
+          { name: "黄金", value: 233.21 },
+          { name: "货币", value: null },
+          { name: "纯债", value: null },
+          { name: "商品", value: -14.21 }
+        ],
+      });
+      QiemanChart.render("#g-1", {
+        type: "gauge",
+        variant: "percent",
+        title: "权益仓位",
+        subtitle: "当前组合",
+        value: 50.52,
+        hint: "合理范围: ≤60%",
+      });
+      QiemanChart.render("#g-2", {
+        type: "gauge",
+        variant: "score",
+        title: "市场温度",
+        subtitle: "估值分位",
+        value: 65,
+        hint: "舒适区间:56～78",
+      });
+      QiemanChart.render("#g-3", {
+        type: "gauge",
+        variant: "split",
+        title: "仓位判断",
+        subtitle: "当前组合",
+        left: { label: "合理", color: "var(--brand-primary)" },
+        right: { label: "偏高", color: "var(--chart-02)" },
+      });
+      QiemanChart.render("#g-4", {
+        type: "gauge",
+        variant: "split",
+        title: "估值区间",
+        subtitle: "市场温度",
+        left: { label: "偏低", color: "#B4C8F5", labelColor: "#333" },
+        right: { label: "合理", color: "var(--brand-primary)" },
+      });
+      QiemanChart.render("#radar-1", {
+        type: "radar",
+        title: "家庭财务能力",
+        subtitle: "诊断摘要",
+      });
+      var corrLabels = [
+        { name: "创金合信恒利超短债", code: "006076" },
+        { name: "易方达中短债债券", code: "110008" },
+        { name: "广发纯债债券A", code: "270048" },
+        { name: "南方天天利货币B", code: "003474" },
+        { name: "华夏沪深300ETF联接", code: "000051" },
+        { name: "嘉实新兴产业股票", code: "000751" },
+        { name: "富国天惠成长混合", code: "161005" },
+        { name: "工银瑞信全球精选", code: "486002" },
+        { name: "华安黄金易ETF联接", code: "000216" },
+        { name: "招商中证白酒指数", code: "161725" }
+      ];
+      QiemanChart.render("#corr-1", {
+        type: "correlation",
+        variant: "light",
+        title: "基金相关性",
+        subtitle: "近1年",
+        labels: corrLabels,
+      });
+      QiemanChart.render("#corr-2", {
+        type: "correlation",
+        variant: "dark",
+        title: "基金相关性",
+        subtitle: "近1年 · 深色",
+        labels: corrLabels,
+      });
+
+      var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+      var secMap = tocLinks.map(function (a) {
+        return { a: a, el: document.querySelector(a.getAttribute("href")) };
+      }).filter(function (x) { return x.el; });
+      if ("IntersectionObserver" in window && secMap.length) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            tocLinks.forEach(function (a) { a.classList.remove("is-on"); });
+            var hit = secMap.filter(function (x) { return x.el === entry.target; })[0];
+            if (hit) hit.a.classList.add("is-on");
+          });
+        }, { rootMargin: "-20% 0px -70% 0px", threshold: 0 });
+        secMap.forEach(function (x) { io.observe(x.el); });
+      }
+    });
+  </script>
+</body>
+</html>

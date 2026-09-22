@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>且慢字号规范 · Typography Specimen</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    :root {
+      --brand-primary: #1B88EE;
+      --brand-primary-pressed: #0F78D4;
+      --brand-poster: #3180EC;
+      --brand-primary-faded: #F0F6FF;
+
+      --text-primary: #333333;
+      --text-secondary: #606060;
+      --text-tertiary: #999999;
+      --text-disabled: #CCCCCC;
+      --text-inverse: #FFFFFF;
+
+      --surface-page: #F9FAFB;
+      --surface-card: #FFFFFF;
+      --surface-card-muted: #F7F7F7;
+      --surface-summary: #DBEBFF;
+
+      --border-default: #D8D8D8;
+      --border-primary-subtle: #9CCBF8;
+
+      --font-sans: PingFang SC, MiSans, system-ui, -apple-system, sans-serif;
+      --font-number: MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+      --radius-pill: 9999px;
+
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+
+      --shadow-card-soft: 0 2px 8px rgba(27, 136, 238, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background:
+        radial-gradient(ellipse 70% 40% at 10% 0%, rgba(27, 136, 238, 0.1), transparent 55%),
+        radial-gradient(ellipse 50% 35% at 95% 80%, rgba(49, 128, 236, 0.07), transparent 50%),
+        var(--surface-page);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(145deg, #3A8FF0 0%, var(--brand-poster) 50%, #1A6FD0 100%);
+      border-radius: var(--radius-xl);
+      padding: 36px 32px;
+      color: var(--text-inverse);
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(49, 128, 236, 0.22);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: -40px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -0.1px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      font-size: 15px;
+      line-height: 1.55;
+      opacity: 0.92;
+      max-width: 560px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-chip {
+      height: 28px;
+      padding: 0 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(249, 250, 251, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 12px 0;
+      margin-left: -4px;
+      margin-right: -4px;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+
+    .tab {
+      height: 36px;
+      padding: 0 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      background: var(--surface-card-muted);
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab.is-active {
+      background: var(--brand-primary-faded);
+      color: var(--brand-primary);
+      border-color: var(--border-primary-subtle);
+      font-weight: 600;
+    }
+
+    .tab:hover:not(.is-active) {
+      background: #EEEEEE;
+    }
+
+    /* Section */
+    .section {
+      display: none;
+      animation: fadeIn 0.28s ease;
+    }
+
+    .section.is-active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .section-head .hint {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .card {
+      background: var(--surface-card);
+      border-radius: var(--radius-lg);
+      border: none;
+      box-shadow: var(--shadow-card-soft);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    /* Spec row */
+    .spec-row {
+      display: grid;
+      grid-template-columns: 168px 1fr;
+      border-bottom: 1px solid rgba(216, 216, 216, 0.55);
+      min-height: 88px;
+    }
+
+    .spec-row:last-child { border-bottom: none; }
+
+    .spec-meta {
+      padding: 20px 16px;
+      background: var(--surface-card-muted);
+      border-right: 1px solid rgba(216, 216, 216, 0.55);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .spec-token {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand-primary);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      word-break: break-all;
+    }
+
+    .spec-attrs {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      line-height: 1.45;
+    }
+
+    .spec-attrs strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-family: var(--font-number);
+    }
+
+    .spec-sample {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .spec-sample .sample-text {
+      color: var(--text-primary);
+      word-break: break-word;
+    }
+
+    .spec-sample .sample-usage {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      line-height: 1.45;
+    }
+
+    /* Scale ruler */
+    .ruler {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 28px 24px 24px;
+      overflow-x: auto;
+      background: linear-gradient(180deg, #fff 0%, #F7FAFE 100%);
+    }
+
+    .ruler-item {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: var(--radius-md);
+      transition: background 0.15s ease;
+      min-width: 56px;
+    }
+
+    .ruler-item:hover,
+    .ruler-item.is-active {
+      background: var(--brand-primary-faded);
+    }
+
+    .ruler-bar {
+      width: 28px;
+      border-radius: 6px 6px 2px 2px;
+      background: linear-gradient(180deg, var(--brand-primary) 0%, #69B1F4 100%);
+      transition: height 0.2s ease;
+    }
+
+    .ruler-label {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      text-align: center;
+      line-height: 1.3;
+      font-family: var(--font-number);
+    }
+
+    .ruler-label em {
+      display: block;
+      font-style: normal;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    /* Compare / principles */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .mini-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      border: none;
+      padding: 20px;
+      box-shadow: var(--shadow-card-soft);
+    }
+
+    .mini-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mini-card h3 i { color: var(--brand-primary); font-size: 18px; }
+
+    .mini-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mini-card li {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .mini-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand-primary);
+    }
+
+    .phone-demo {
+      background: var(--surface-page);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      border: 1px dashed var(--border-primary-subtle);
+    }
+
+    .phone-demo .d-title { margin-bottom: 8px; }
+    .phone-demo .d-body { margin-bottom: 10px; color: var(--text-secondary); }
+    .phone-demo .d-meta { color: var(--text-tertiary); margin-bottom: 12px; }
+    .phone-demo .d-num {
+      font-family: var(--font-number);
+      color: var(--brand-primary);
+      margin-bottom: 4px;
+    }
+    .phone-demo .d-legal { color: var(--text-tertiary); }
+
+    .tag {
+      display: inline-flex;
+      height: 22px;
+      padding: 0 8px;
+      align-items: center;
+      border-radius: var(--radius-pill);
+      background: var(--brand-primary-faded);
+      color: var(--brand-primary);
+      border: 1px solid var(--border-primary-subtle);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .summary-bar {
+      background: var(--surface-summary);
+      border: 1px solid var(--border-primary-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .summary-bar strong { color: var(--text-primary); font-weight: 600; }
+
+    .footer-note {
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Preview tooltip on ruler click */
+    .preview-banner {
+      display: none;
+      margin-bottom: 16px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-primary-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-card-soft);
+    }
+
+    .preview-banner.is-show { display: block; animation: fadeIn 0.2s ease; }
+
+    .preview-banner .pv-label {
+      font-size: 12px;
+      color: var(--brand-primary);
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 24px 16px 64px; }
+      .hero { padding: 28px 20px; }
+      .hero h1 { font-size: 26px; }
+      .spec-row { grid-template-columns: 1fr; }
+      .spec-meta {
+        border-right: none;
+        border-bottom: 1px solid rgba(216, 216, 216, 0.55);
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 16px;
+        padding: 12px 16px;
+      }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-eyebrow">
+        <i class="ri-font-size-2"></i>
+        qieman-ui-design · L0 Token
+      </div>
+      <h1>且慢字号规范</h1>
+      <p>可视化对照样张。按展示 / 标题 / 正文 / 说明 / 数字分组，点击色条可预览该层级。</p>
+      <div class="hero-meta">
+        <span class="hero-chip"><i class="ri-text"></i> PingFang SC / MiSans</span>
+        <span class="hero-chip"><i class="ri-hashtag"></i> 数字：MiSans / DIN</span>
+        <span class="hero-chip"><i class="ri-ruler-line"></i> 11px – 40px</span>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="字号分组">
+      <button class="tab is-active" type="button" data-tab="scale">字号色阶</button>
+      <button class="tab" type="button" data-tab="display">展示 / 标题</button>
+      <button class="tab" type="button" data-tab="body">正文 / 按钮</button>
+      <button class="tab" type="button" data-tab="caption">说明 / 合规</button>
+      <button class="tab" type="button" data-tab="number">金融数字</button>
+      <button class="tab" type="button" data-tab="scene">场景示例</button>
+    </nav>
+
+    <!-- Scale -->
+    <section class="section is-active" id="sec-scale">
+      <div class="summary-bar">
+        <strong>速览：</strong>同一卡片建议不超过 3 个字号层级；风险披露不低于 11px；行动色仅强调层级，不改变正文字号。
+      </div>
+      <div class="preview-banner" id="previewBanner">
+        <div class="pv-label" id="pvLabel">typography.body</div>
+        <div id="pvText">标准正文示例：账户复盘、策略说明与配置建议。</div>
+      </div>
+      <div class="card">
+        <div class="ruler" id="ruler" role="list"></div>
+      </div>
+      <div class="section-head" style="margin-top:8px">
+        <h2>完整对照表</h2>
+        <span class="hint">点击色条或行项查看样张</span>
+      </div>
+      <div class="card" id="allRows"></div>
+    </section>
+
+    <!-- Display -->
+    <section class="section" id="sec-display">
+      <div class="section-head">
+        <h2>展示 / 标题</h2>
+        <span class="hint">hero → title-sm</span>
+      </div>
+      <div class="card" data-group="display"></div>
+    </section>
+
+    <!-- Body -->
+    <section class="section" id="sec-body">
+      <div class="section-head">
+        <h2>正文 / 按钮</h2>
+        <span class="hint">body-lg → button</span>
+      </div>
+      <div class="card" data-group="body"></div>
+    </section>
+
+    <!-- Caption -->
+    <section class="section" id="sec-caption">
+      <div class="section-head">
+        <h2>说明 / 合规</h2>
+        <span class="hint">caption → micro-legal</span>
+      </div>
+      <div class="card" data-group="caption"></div>
+    </section>
+
+    <!-- Number -->
+    <section class="section" id="sec-number">
+      <div class="section-head">
+        <h2>金融数字</h2>
+        <span class="hint">优先数字字体栈</span>
+      </div>
+      <div class="card" data-group="number"></div>
+    </section>
+
+    <!-- Scene -->
+    <section class="section" id="sec-scene">
+      <div class="section-head">
+        <h2>场景组合示例</h2>
+        <span class="hint">控制在 3 个字号层级内</span>
+      </div>
+      <div class="grid-2">
+        <div class="mini-card">
+          <h3><i class="ri-smartphone-line"></i>圈子帖子卡</h3>
+          <div class="phone-demo">
+            <div class="tag" style="font-size:12px">某策略主理人</div>
+            <div class="d-title" style="font-size:17px;font-weight:600;line-height:1.45">波动进一步加大了怎么办？</div>
+            <div class="d-body" style="font-size:15px;line-height:1.55">市场又到了波动加剧的阶段，不少朋友最近开始焦虑……</div>
+            <div class="d-meta" style="font-size:12px">更新于 2 个月前 · 广东省广州市</div>
+            <div class="d-legal" style="font-size:11px;line-height:1.45">风险提示：内容仅供交流，不构成投资建议。</div>
+          </div>
+          <ul style="margin-top:14px">
+            <li>标题 title 气质 → 17px / 600</li>
+            <li>正文 body-sm → 15px</li>
+            <li>时间 caption-sm → 12px · 合规 11px</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h3><i class="ri-line-chart-line"></i>指标卡</h3>
+          <div class="phone-demo">
+            <div style="font-size:14px;color:var(--text-tertiary);margin-bottom:6px">近一年收益率</div>
+            <div class="d-num" style="font-size:28px;font-weight:700;line-height:1.12">+12.86%</div>
+            <div class="d-meta" style="font-size:12px;margin-bottom:0">数据截至 2026-07-01 · 历史不预示未来</div>
+          </div>
+          <ul style="margin-top:14px">
+            <li>指标名 caption → 14px</li>
+            <li>核心数 number-lg → 28px / 700</li>
+            <li>口径 caption-sm → 12px</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h3><i class="ri-checkbox-circle-line"></i>使用原则</h3>
+          <ul>
+            <li>单卡片字号层级 ≤ 3</li>
+            <li>风险提示 ≥ 11px 且对比度可读</li>
+            <li>数字配单位、时间口径、来源</li>
+            <li>标题建立判断，正文解释原因</li>
+            <li>不混用多个无关字体家族</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h3><i class="ri-close-circle-line"></i>避免</h3>
+          <ul>
+            <li>同屏堆叠 5+ 字号</li>
+            <li>把风险藏成过浅灰 / 过小字</li>
+            <li>用超大装饰字抢过核心数据</li>
+            <li>正文低于 15px 做长段落</li>
+            <li>硬编码与 token 不一致的字号</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      来源：qieman-ui-design SKILL.md typography tokens · 本页仅作设计对照，不构成产品交付规范变更
+    </p>
+  </div>
+
+  <script>
+    const TOKENS = [
+      {
+        id: "hero-display", group: "display",
+        size: 40, weight: 700, lh: 1.18, ls: "-0.2px",
+        font: "sans",
+        sample: "长期主义财富规划",
+        usage: "H5 首屏、报告封面主标题"
+      },
+      {
+        id: "display-lg", group: "display",
+        size: 32, weight: 700, lh: 1.22, ls: "-0.1px",
+        font: "sans",
+        sample: "思远定投全球好资产",
+        usage: "页面主标题、大模块标题"
+      },
+      {
+        id: "display-md", group: "display",
+        size: 26, weight: 600, lh: 1.28, ls: "0",
+        font: "sans",
+        sample: "账户配置诊断",
+        usage: "二级分区标题"
+      },
+      {
+        id: "title-lg", group: "display",
+        size: 24, weight: 600, lh: 1.3, ls: "0",
+        font: "sans",
+        sample: "本周收益表现",
+        usage: "模块标题、图表组标题"
+      },
+      {
+        id: "title-md", group: "display",
+        size: 20, weight: 600, lh: 1.35, ls: "0",
+        font: "sans",
+        sample: "波动进一步加大了怎么办？",
+        usage: "卡片标题"
+      },
+      {
+        id: "title-sm", group: "display",
+        size: 18, weight: 600, lh: 1.4, ls: "0",
+        font: "sans",
+        sample: "投资闲聊话题",
+        usage: "小卡片标题、列表标题"
+      },
+      {
+        id: "body-lg", group: "body",
+        size: 17, weight: 400, lh: 1.55, ls: "0",
+        font: "sans",
+        sample: "市场又到了波动加剧的阶段，不少朋友最近开始焦虑了起来，这完全没必要。",
+        usage: "主要正文、摘要段落"
+      },
+      {
+        id: "body", group: "body",
+        size: 16, weight: 400, lh: 1.55, ls: "0",
+        font: "sans",
+        sample: "我们看的是长期资产配置节奏，而不是短期涨跌本身。",
+        usage: "标准正文、表格正文"
+      },
+      {
+        id: "body-sm", group: "body",
+        size: 15, weight: 400, lh: 1.5, ls: "0",
+        font: "sans",
+        sample: "若定投计划匹配现金流与风险偏好，短期波动更像纪律考验。",
+        usage: "次级正文"
+      },
+      {
+        id: "button", group: "body",
+        size: 16, weight: 600, lh: 1, ls: "0",
+        font: "sans",
+        sample: "联系助理",
+        usage: "主/次按钮文字"
+      },
+      {
+        id: "caption", group: "caption",
+        size: 14, weight: 400, lh: 1.45, ls: "0",
+        font: "sans",
+        sample: "策略陪伴圈 · 89,999+ 用户",
+        usage: "图例、说明、标签"
+      },
+      {
+        id: "caption-sm", group: "caption",
+        size: 12, weight: 400, lh: 1.45, ls: "0",
+        font: "sans",
+        sample: "更新于 2 个月前 · 广东省广州市",
+        usage: "时间、数据来源、补充说明"
+      },
+      {
+        id: "micro-legal", group: "caption",
+        size: 11, weight: 400, lh: 1.45, ls: "0",
+        font: "sans",
+        sample: "风险提示：圈子内容仅供交流讨论，不构成投资建议。历史表现不预示未来收益。",
+        usage: "风险披露、法律声明（下限）"
+      },
+      {
+        id: "number-xl", group: "number",
+        size: 36, weight: 700, lh: 1.1, ls: "-0.2px",
+        font: "number",
+        sample: "¥1,286,450.00",
+        usage: "关键金额、总资产"
+      },
+      {
+        id: "number-lg", group: "number",
+        size: 28, weight: 700, lh: 1.12, ls: "-0.1px",
+        font: "number",
+        sample: "+12.86%",
+        usage: "指标卡核心数字"
+      },
+      {
+        id: "number-md", group: "number",
+        size: 22, weight: 600, lh: 1.2, ls: "0",
+        font: "number",
+        sample: "3.25%",
+        usage: "小指标数字"
+      }
+    ];
+
+    const maxSize = Math.max(...TOKENS.map((t) => t.size));
+
+    function styleSample(t) {
+      const family = t.font === "number" ? "var(--font-number)" : "var(--font-sans)";
+      return `font-size:${t.size}px;font-weight:${t.weight};line-height:${t.lh};letter-spacing:${t.ls};font-family:${family};`;
+    }
+
+    function rowHTML(t) {
+      return `
+        <div class="spec-row" data-id="${t.id}" role="button" tabindex="0">
+          <div class="spec-meta">
+            <div class="spec-token">typography.${t.id}</div>
+            <div class="spec-attrs">
+              <strong>${t.size}px</strong> · w${t.weight} · lh ${t.lh}
+            </div>
+          </div>
+          <div class="spec-sample">
+            <div class="sample-text" style="${styleSample(t)}">${t.sample}</div>
+            <div class="sample-usage">${t.usage}</div>
+          </div>
+        </div>`;
+    }
+
+    function fillGroup(group) {
+      const host = document.querySelector(`[data-group="${group}"]`);
+      if (!host) return;
+      host.innerHTML = TOKENS.filter((t) => t.group === group).map(rowHTML).join("");
+    }
+
+    function buildRuler() {
+      const ruler = document.getElementById("ruler");
+      ruler.innerHTML = TOKENS.map((t) => {
+        const h = Math.round(12 + (t.size / maxSize) * 72);
+        return `
+          <div class="ruler-item" data-id="${t.id}" role="listitem" title="typography.${t.id}">
+            <div class="ruler-bar" style="height:${h}px"></div>
+            <div class="ruler-label"><em>${t.size}</em>${t.id.replace(/-/g, "­")}</div>
+          </div>`;
+      }).join("");
+    }
+
+    function buildAllRows() {
+      document.getElementById("allRows").innerHTML = TOKENS.map(rowHTML).join("");
+    }
+
+    function showPreview(id) {
+      const t = TOKENS.find((x) => x.id === id);
+      if (!t) return;
+      const banner = document.getElementById("previewBanner");
+      document.getElementById("pvLabel").textContent = `typography.${t.id} · ${t.size}px / ${t.weight}`;
+      const pv = document.getElementById("pvText");
+      pv.style.cssText = styleSample(t);
+      pv.textContent = t.sample;
+      banner.classList.add("is-show");
+
+      document.querySelectorAll(".ruler-item").forEach((el) => {
+        el.classList.toggle("is-active", el.dataset.id === id);
+      });
+    }
+
+    // Init
+    buildRuler();
+    buildAllRows();
+    ["display", "body", "caption", "number"].forEach(fillGroup);
+
+    // Tabs
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((t) => t.classList.remove("is-active"));
+        tab.classList.add("is-active");
+        const name = tab.dataset.tab;
+        document.querySelectorAll(".section").forEach((s) => s.classList.remove("is-active"));
+        document.getElementById("sec-" + name).classList.add("is-active");
+      });
+    });
+
+    // Ruler + row click
+    document.getElementById("ruler").addEventListener("click", (e) => {
+      const item = e.target.closest(".ruler-item");
+      if (item) showPreview(item.dataset.id);
+    });
+
+    document.addEventListener("click", (e) => {
+      const row = e.target.closest(".spec-row");
+      if (row && row.dataset.id) showPreview(row.dataset.id);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const row = e.target.closest(".spec-row");
+      if (row && row.dataset.id) {
+        e.preventDefault();
+        showPreview(row.dataset.id);
+      }
+    });
+
+    // Default preview
+    showPreview("body");
+  </script>
+</body>
+</html>

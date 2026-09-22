@@ -14,9 +14,9 @@ extends: qieman-ui-design
 |------|-----|
 | **ID** | `qieman-ppt-design` |
 | **层级** | L2 |
-| **场景** | 演示文稿（原生 PPT + HTML 报告） |
+| **场景** | 演示文稿（原生 PPT） |
 | **规范** | 本文件 `SKILL.md` |
-| **L1 扩展** | [qieman-report-design.md](../qieman-report-design/SKILL.md) |
+| **L1 扩展** | [qieman-report-swipe-design](../qieman-report-swipe-design/SKILL.md) |
 | **依赖** | [`qieman-ui-design`](../../app-design/qieman-ui-design/SKILL.md) |
 | **更新日期** | 2026-07-02 |
 
@@ -37,25 +37,25 @@ npx openskills read qieman-ppt-design
 - **幻灯片设计、幻灯片、演示页、汇报 PPT**
 - 且慢品牌 PPT、金融演示文稿、投顾汇报、原生 `.pptx` 编辑
 
-若需 **HTML 16:9 财富报告 deck**（家庭财富报告、财富报告书），再叠 **L1** `qieman-report-design`。
+若需 **HTML 横向翻页财富报告**（家庭财富报告、财富报告书），再叠 **L1** `qieman-report-swipe-design`。
 
 ## Skill Layering（PPT 细分场景）
 
 | 层级 | spec-id / 标识 | 文件 | 适用任务 |
 |------|----------------|------|----------|
 | **L2** | `qieman-ppt-design` | 本文件 `SKILL.md` | 原生 `.pptx` 创建/编辑、品牌母版、VIP 投顾报告 PPT 附录规范 |
-| **L1** | `qieman-report-design` | [qieman-report-design.md](../qieman-report-design/SKILL.md) | HTML 16:9 投顾报告幻灯片（720pt×405pt）、合并 deck、导出 PDF/PPT 还原 |
+| **L1** | `qieman-report-swipe-design` | [qieman-report-swipe-design](../qieman-report-swipe-design/SKILL.md) | HTML 全屏横向翻页报告 deck（100vw×100vh） |
 
 **选用：**
 1. **原生 PowerPoint / .pptx** → 仅读本 L2 `SKILL.md`（及 `claude/skills/pptx/` 脚本）。
-2. **HTML 报告幻灯片 / 合并 deck** → **L2 + L1**：先 `qieman-ppt-design`，再 `../qieman-report-design/SKILL.md`。
-3. 品牌色与风险表达与 **L0 `qieman-ui-design`** 对齐；画布与卡片规则以 L1 报告规范为准。
+2. **HTML 报告翻页演示** → **L2 + L1**：先 `qieman-ppt-design`，再 `../qieman-report-swipe-design/SKILL.md`。
+3. 品牌色与风险表达与 **L0 `qieman-ui-design`** 对齐。
 
 ---
 
 ## 概述
 
-本技能是且慢体系下的 **演示文稿 L2 入口**：覆盖原生 PowerPoint 与 HTML 16:9 投顾报告两类产出；后者通过 L1 扩展 [qieman-report-design.md](../qieman-report-design/SKILL.md) 定义版式与 token。
+本技能是且慢体系下的 **演示文稿 L2 入口**：覆盖原生 PowerPoint；HTML 横向翻页报告通过 L1 扩展 [qieman-report-swipe-design](../qieman-report-swipe-design/SKILL.md) 定义版式与交互。
 
 **关键词**：且慢PPT、Qieman演示文稿、品牌演示、金融报告、数据可视化、且慢设计规范、盈米基金
 

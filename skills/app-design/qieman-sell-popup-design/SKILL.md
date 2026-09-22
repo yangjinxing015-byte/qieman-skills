@@ -278,7 +278,7 @@ npx openskills read qieman-sell-popup-design
 
 视觉核心是：**375 × 812px App 画布、底部全宽弹窗、顶部圆角 24px、高度自适应、24pt 居中标题、15pt 左对齐正文、11pt 左对齐辅助说明**。弹窗要像一次专业投顾提醒，语气克制、可信、温和，不做强营销、不制造焦虑。
 
-本规范采用 **「前置结构化 tokens + 后置执行型说明」** 格式；**必须先满足 L0** [`../SKILL.md`](../SKILL.md)，再应用本章弹窗专用 token。
+本规范采用 **「前置结构化 tokens + 后置执行型说明」** 格式；**必须先满足 L0** [`../qieman-ui-design/SKILL.md`](../qieman-ui-design/SKILL.md)（token：[`../qieman-ui-design/references/tokens.yaml`](../qieman-ui-design/references/tokens.yaml)），再应用本章弹窗专用 token。
 
 **核心设计气质：**
 - 专业可信：用具体影响解释挽留，不恐吓、不承诺收益。

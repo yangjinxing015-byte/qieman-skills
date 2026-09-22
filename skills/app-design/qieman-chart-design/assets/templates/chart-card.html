@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>且慢图表卡 · 复制后改 spec</title>
+  <link rel="stylesheet" href="../qieman-charts.css" />
+  <style>
+    /* 系列色在 qieman-charts.css；页面色从 L0 复制。勿手写 chart-05/06 */
+    :root {
+      --brand-primary: #1B88EE;
+      --text-primary: #333333;
+      --text-secondary: #606060;
+      --text-tertiary: #999999;
+      --semantic-success: #07AD8F;
+      --surface-page: #F9FAFB;
+      --surface-card: #FFFFFF;
+      --chart-01: #69B1F4;
+      --chart-02: #F88D72;
+      --chart-03: #FBCA74;
+      --chart-04: #7DD4C4;
+      --chart-05: #ADAFE8;
+      --chart-06: #68E0F3;
+      --chart-13: #BBC4CE;
+      --chart-cash: #DBEBFF;
+      --chart-wallet: #EA9500;
+      --radius-md: 12px;
+      --phone-w: 375px;
+      --font-sans: PingFang SC, MiSans, system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background: var(--surface-page);
+      -webkit-font-smoothing: antialiased;
+    }
+    .phone {
+      width: var(--phone-w);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 16px;
+      background: var(--surface-page);
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <section id="chart" class="qdm-chart-host"></section>
+  </div>
+  <script src="../qieman-charts.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      QiemanChart.render(document.getElementById("chart"), {
+        type: "bidirectional",
+        variant: "negative",
+        title: "区间收益",
+        items: [
+          { label: "近1月", value: -0.75 },
+          { label: "近3月", value: -5.75 },
+          { label: "近6月", value: -7.75 },
+          { label: "近1年", value: -20.75 },
+          { label: "成立来", value: -25.6 }
+        ],
+        source: "数据来源：且慢",
+        disclaimer: "历史数据不预示未来表现"
+      });
+    });
+  </script>
+</body>
+</html>

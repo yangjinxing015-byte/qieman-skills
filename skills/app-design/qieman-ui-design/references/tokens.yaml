@@ -1,0 +1,387 @@
+# 且慢 L0 token 真源。生成 HTML 前必须读取本文件，映射为 :root（规则见 SKILL.md）。
+# 引用语法：{colors.brand-primary} / {typography.body} / {rounded.md} / {spacing.md} / {shadow.card-soft} / {components.summary-card}
+
+colors:
+  brand-primary: "#1B88EE"
+  brand-primary-pressed: "#0F78D4"
+  brand-primary-focus: "#1580E0"
+  brand-poster: "#3180EC"
+  brand-primary-faded: "#F0F6FF"
+
+  text-primary: "#333333"
+  text-secondary: "#606060"
+  text-tertiary: "#999999"
+  text-disabled: "#CCCCCC"
+  text-inverse: "#FFFFFF"
+
+  semantic-error: "#FA440C"
+  semantic-warning: "#EA9500"
+  semantic-success: "#07AD8F"
+  semantic-error-faded: "#FEEDE9"
+  semantic-warning-faded: "#FFFAEF"
+
+  surface-page: "#F9FAFB"
+  surface-card: "#FFFFFF"
+  surface-card-subtle: "#F9FAFB"
+  surface-card-muted: "#F7F7F7"
+  surface-summary: "#DBEBFF"
+
+  border-default: "#D8D8D8"
+  border-primary: "#1B88EE"
+  border-primary-subtle: "#9CCBF8"
+  border-warning-subtle: "#FFDC9E"
+  border-error-subtle: "#FAB6A5"
+
+  chart-01: "#69B1F4"
+  chart-02: "#F88D72"
+  chart-03: "#FBCA74"
+  chart-04: "#7DD4C4"
+  chart-05: "#ADAFE8"
+  chart-06: "#68E0F3"
+  chart-07: "#3A7BB8"
+  chart-08: "#FAB6A5"
+  chart-09: "#EDC273"
+  chart-10: "#9CCBF8"
+  chart-11: "#C8CAEF"
+  chart-12: "#6B9CCA"
+  chart-13: "#BBC4CE"
+  chart-cash: "#DBEBFF"
+  chart-wallet: "#EA9500"
+
+  on-primary: "#FFFFFF"
+  on-dark: "#FFFFFF"
+
+typography:
+  font-sans: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+  font-number: "MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif"
+  font-mono: "Courier New, ui-monospace, monospace"
+  hero-display:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 40px
+    fontWeight: 700
+    lineHeight: 1.18
+    letterSpacing: -0.2px
+  display-lg:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 32px
+    fontWeight: 700
+    lineHeight: 1.22
+    letterSpacing: -0.1px
+  display-md:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 26px
+    fontWeight: 600
+    lineHeight: 1.28
+    letterSpacing: 0
+  title-lg:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 24px
+    fontWeight: 600
+    lineHeight: 1.3
+    letterSpacing: 0
+  title-md:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 20px
+    fontWeight: 600
+    lineHeight: 1.35
+    letterSpacing: 0
+  title-sm:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 18px
+    fontWeight: 600
+    lineHeight: 1.4
+    letterSpacing: 0
+  body-lg:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 17px
+    fontWeight: 400
+    lineHeight: 1.55
+    letterSpacing: 0
+  body:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.55
+    letterSpacing: 0
+  body-sm:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 15px
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: 0
+  caption:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.45
+    letterSpacing: 0
+  caption-sm:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: 1.45
+    letterSpacing: 0
+  micro-legal:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 11px
+    fontWeight: 400
+    lineHeight: 1.45
+    letterSpacing: 0
+  button:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 16px
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: 0
+  number-xl:
+    fontFamily: "MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif"
+    fontSize: 36px
+    fontWeight: 700
+    lineHeight: 1.1
+    letterSpacing: -0.2px
+  number-lg:
+    fontFamily: "MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif"
+    fontSize: 28px
+    fontWeight: 700
+    lineHeight: 1.12
+    letterSpacing: -0.1px
+  number-md:
+    fontFamily: "MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif"
+    fontSize: 22px
+    fontWeight: 600
+    lineHeight: 1.2
+    letterSpacing: 0
+  mono:
+    fontFamily: "Courier New, ui-monospace, monospace"
+    fontSize: 13px
+    fontWeight: 400
+    lineHeight: 1.45
+    letterSpacing: 0
+
+rounded:
+  none: 0px
+  xs: 4px
+  sm: 8px
+  md: 12px
+  lg: 20px
+  xl: 24px
+  pill: 9999px   # 胶囊标签
+  full: 9999px   # 正圆（宽高相等）
+
+spacing:
+  xxs: 4px
+  xs: 8px
+  sm: 12px
+  md: 16px
+  lg: 24px
+  xl: 32px
+  xxl: 48px
+  section: 64px
+  h5-safe: 16px
+
+shadow:
+  none: "none"
+  card-soft: "0 2px 8px rgba(27, 136, 238, 0.06)"
+  floating: "0 8px 24px rgba(30, 62, 98, 0.08)"
+
+icons:
+  library: "Remix Icon"
+  libraryUrl: "https://remixicon.com/"
+  cdn: "https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+  defaultStyle: "line"
+  sizes:
+    sm: 16px
+    md: 20px
+    lg: 24px
+    xl: 32px
+
+components:
+  button-primary:
+    backgroundColor: "{colors.brand-primary}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.button}"
+    rounded: "{rounded.sm}"
+    padding: "12px 24px"
+    minHeight: 44px
+  button-primary-pressed:
+    backgroundColor: "{colors.brand-primary-pressed}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.sm}"
+    transform: "scale(0.98)"
+  button-primary-focus:
+    backgroundColor: "{colors.brand-primary}"
+    textColor: "{colors.on-primary}"
+    outline: "2px solid {colors.brand-primary-focus}"
+    outlineOffset: 2px
+  button-primary-disabled:
+    backgroundColor: "{colors.text-disabled}"
+    textColor: "{colors.text-inverse}"
+    rounded: "{rounded.sm}"
+  button-secondary:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.brand-primary}"
+    border: "1px solid {colors.border-primary}"
+    typography: "{typography.button}"
+    rounded: "{rounded.sm}"
+    padding: "12px 24px"
+    minHeight: 44px
+  text-link:
+    backgroundColor: transparent
+    textColor: "{colors.brand-primary}"
+    typography: "{typography.body}"
+  tag-primary:
+    backgroundColor: "{colors.brand-primary-faded}"
+    textColor: "{colors.brand-primary}"
+    border: "1px solid {colors.border-primary-subtle}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.pill}"
+    padding: "4px 10px"
+  tag-warning:
+    backgroundColor: "{colors.semantic-warning-faded}"
+    textColor: "{colors.semantic-warning}"
+    border: "1px solid {colors.border-warning-subtle}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.pill}"
+    padding: "4px 10px"
+  tag-risk:
+    backgroundColor: "{colors.semantic-error-faded}"
+    textColor: "{colors.semantic-error}"
+    border: "1px solid {colors.border-error-subtle}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.pill}"
+    padding: "4px 10px"
+  page-shell:
+    backgroundColor: "{colors.surface-page}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.body}"
+  report-hero:
+    backgroundColor: "{colors.brand-poster}"
+    textColor: "{colors.text-inverse}"
+    typography: "{typography.hero-display}"
+    rounded: "{rounded.xl}"
+    padding: 32px
+    minHeight: 280px
+  h5-hero:
+    backgroundColor: "{colors.brand-primary-faded}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.display-lg}"
+    rounded: "{rounded.xl}"
+    padding: "40px 16px"
+  summary-card:
+    backgroundColor: "{colors.surface-summary}"
+    textColor: "{colors.text-primary}"
+    border: none
+    typography: "{typography.body}"
+    rounded: "{rounded.md}"
+    padding: 16px
+  content-card:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    border: none
+    typography: "{typography.body}"
+    rounded: "{rounded.md}"
+    padding: 16px
+    shadow: "{shadow.card-soft}"
+  section-card:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.body}"
+    rounded: "{rounded.lg}"
+    padding: 24px
+    shadow: "{shadow.card-soft}"
+  metric-card:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.number-lg}"
+    rounded: "{rounded.md}"
+    padding: 16px
+    shadow: "{shadow.card-soft}"
+  chart-card:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.body}"
+    rounded: "{rounded.lg}"
+    padding: 20px
+    shadow: "{shadow.card-soft}"
+  portfolio-card:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    border: none
+    typography: "{typography.body}"
+    rounded: "{rounded.lg}"
+    padding: 20px
+    shadow: "{shadow.card-soft}"
+  strategy-card:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.body}"
+    rounded: "{rounded.xl}"
+    padding: 24px
+  coupon-card:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    border: none
+    typography: "{typography.number-lg}"
+    rounded: "{rounded.lg}"
+    padding: 20px
+    shadow: "{shadow.card-soft}"
+  disclosure-card:
+    backgroundColor: "{colors.surface-card-muted}"
+    textColor: "{colors.text-tertiary}"
+    typography: "{typography.micro-legal}"
+    rounded: "{rounded.sm}"
+    padding: 12px
+  step-item:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    typography: "{typography.body}"
+    rounded: "{rounded.md}"
+    padding: 16px
+  input-field:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    border: "1px solid {colors.border-default}"
+    typography: "{typography.body}"
+    rounded: "{rounded.sm}"
+    padding: "11px 12px"
+    minHeight: 44px
+  input-field-focus:
+    border: "1px solid {colors.border-primary}"
+    outline: "2px solid rgba(27, 136, 238, 0.12)"
+  icon-standard:
+    color: "{colors.text-tertiary}"
+    size: 20px
+  icon-primary:
+    color: "{colors.brand-primary}"
+    size: 20px
+  nav-bar:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-primary}"
+    border: "1px solid {colors.border-default}"
+    minHeight: 44px
+  tab-item:
+    textColor: "{colors.text-secondary}"
+    activeColor: "{colors.brand-primary}"
+    typography: "{typography.body-sm}"
+    minHeight: 44px
+    indicator: "2px solid {colors.brand-primary}"
+  tab-bar:
+    backgroundColor: "{colors.surface-card}"
+    textColor: "{colors.text-tertiary}"
+    activeColor: "{colors.brand-primary}"
+    border: "1px solid {colors.border-default}"
+    typography: "{typography.caption-sm}"
+    iconSize: 24px
+    minHeight: 56px
+  toast:
+    backgroundColor: "rgba(51, 51, 51, 0.92)"
+    textColor: "{colors.text-inverse}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.sm}"
+    padding: "10px 18px"
+  footer-brand:
+    backgroundColor: "{colors.brand-poster}"
+    textColor: "{colors.text-inverse}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.none}"
+    padding: 24px

@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>市场看板 · 且慢 PC</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../../qieman-chart-design/assets/qieman-charts.css" />
+  <style>
+    /* token 真源：L0 tokens.yaml + L2 chart tokens；:root 从 app-shell 复制后叠色带 */
+    :root {
+      --brand-primary: #1B88EE;
+      --brand-primary-pressed: #0F78D4;
+      --brand-primary-focus: #1580E0;
+      --brand-poster: #3180EC;
+      --brand-primary-faded: #F0F6FF;
+
+      --text-primary: #333333;
+      --text-secondary: #606060;
+      --text-tertiary: #999999;
+      --text-disabled: #CCCCCC;
+      --text-inverse: #FFFFFF;
+
+      --semantic-error: #FA440C;
+      --semantic-warning: #EA9500;
+      --semantic-success: #07AD8F;
+      --semantic-error-faded: #FEEDE9;
+      --semantic-warning-faded: #FFFAEF;
+
+      --surface-page: #F9FAFB;
+      --surface-card: #FFFFFF;
+      --surface-card-subtle: #F9FAFB;
+      --surface-card-muted: #F7F7F7;
+      --surface-summary: #DBEBFF;
+
+      --border-default: #D8D8D8;
+      --border-primary: #1B88EE;
+      --border-primary-subtle: #9CCBF8;
+      --border-warning-subtle: #FFDC9E;
+      --border-error-subtle: #FAB6A5;
+
+      --on-primary: #FFFFFF;
+      --on-dark: #FFFFFF;
+
+      --chart-01: #69B1F4;
+      --chart-02: #F88D72;
+      --chart-03: #FBCA74;
+      --chart-04: #7DD4C4;
+      --chart-05: #ADAFE8;
+      --chart-06: #68E0F3;
+      --chart-07: #3A7BB8;
+      --chart-08: #FAB6A5;
+      --chart-09: #EDC273;
+      --chart-10: #9CCBF8;
+      --chart-11: #C8CAEF;
+      --chart-12: #6B9CCA;
+      --chart-13: #BBC4CE;
+      --chart-cash: #DBEBFF;
+      --chart-wallet: #EA9500;
+      --chart-band-01: #E6F7F4;
+      --chart-band-02: #CDEFE9;
+      --chart-band-03: #FFF0D6;
+      --chart-band-04: #FEEDE9;
+      --chart-band-05: #FDDBD3;
+      --chart-track: #F7F7F7;
+      --chart-line: #3A7BB8;
+      --chart-tooltip: #3B4145;
+      --chart-card-w: 100%;
+
+      --font-sans: PingFang SC, MiSans, system-ui, -apple-system, sans-serif;
+      --font-number: MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif;
+      --font-mono: Courier New, ui-monospace, monospace;
+
+      --radius-none: 0px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+      --radius-pill: 9999px;
+      --radius-full: 9999px;
+
+      --space-xxs: 4px;
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-xxl: 48px;
+      --space-section: 64px;
+      --space-h5-safe: 16px;
+
+      --shadow-none: none;
+      --shadow-card-soft: 0 2px 8px rgba(27, 136, 238, 0.06);
+      --shadow-floating: 0 8px 24px rgba(30, 62, 98, 0.08);
+
+      --icon-size-sm: 16px;
+      --icon-size-md: 20px;
+      --icon-size-lg: 24px;
+      --icon-size-xl: 32px;
+
+      --page-max: 1440px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background: var(--surface-page);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--surface-card);
+      border-bottom: 1px solid var(--border-default);
+    }
+    .topbar-inner {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      height: 64px;
+      padding: 0 var(--space-xl);
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-shrink: 0;
+    }
+    .brand img { height: 22px; width: auto; }
+    .brand h1 {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .top-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      padding: 0 14px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+    }
+    .top-nav a i { font-size: var(--icon-size-md); }
+    .top-nav a.is-active {
+      color: var(--brand-primary);
+      font-weight: 600;
+      background: var(--brand-primary-faded);
+    }
+    .top-nav a:hover { color: var(--brand-primary); }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+    }
+    .icon-btn:hover { background: var(--surface-card-muted); }
+    .icon-btn:focus-visible {
+      outline: 2px solid var(--brand-primary-focus);
+      outline-offset: 2px;
+    }
+
+    .page {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: var(--space-lg) var(--space-xl) var(--space-xxl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .summary-card {
+      background: var(--surface-summary);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg) var(--space-xl);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-xl);
+    }
+    .summary-card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+    .summary-card p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      max-width: 760px;
+    }
+    .summary-meta {
+      flex-shrink: 0;
+      text-align: right;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--text-tertiary);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+    .section-head h2 {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+    .section-link i { font-size: var(--icon-size-md); }
+    .section-link:hover { color: var(--brand-primary); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+    .grid-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .index-tabs,
+    .period-chips {
+      display: flex;
+      gap: 4px;
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      box-shadow: var(--shadow-card-soft);
+      margin-bottom: var(--space-sm);
+    }
+    .index-tab,
+    .period-chips button {
+      flex: 1;
+      min-height: 40px;
+      padding: 0 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+    }
+    .index-tab.is-active,
+    .period-chips button.is-active {
+      color: var(--brand-primary);
+      font-weight: 600;
+      background: var(--brand-primary-faded);
+    }
+    .index-tab:hover,
+    .period-chips button:hover { color: var(--brand-primary); }
+
+    .qdm-chart-host { width: 100%; }
+    .qdm-chart-card { width: 100%; max-width: none; }
+    .temp-card .qdm-chart-title { display: none; }
+    .qdm-line-plot,
+    .qdm-line-svg,
+    .qdm-tracks { height: 220px; max-height: none; }
+
+    .temp-now {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .temp-now strong {
+      font-family: var(--font-number);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.1px;
+    }
+    .temp-now span {
+      margin-left: 6px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+    .temp-tag {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--brand-primary-faded);
+      color: var(--brand-primary);
+      border: 1px solid var(--border-primary-subtle);
+      font-size: 14px;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+    .metric-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      box-shadow: var(--shadow-card-soft);
+    }
+    .metric-card .label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+    }
+    .metric-card .value {
+      font-family: var(--font-number);
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.12;
+    }
+    .metric-card .chg {
+      margin-top: 4px;
+      font-family: var(--font-number);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .metric-card .meta {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    .chg-up { color: var(--semantic-error); }
+    .chg-down { color: var(--semantic-success); }
+
+    .portfolio-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-card-soft);
+      display: flex;
+      flex-direction: column;
+    }
+    .portfolio-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-sm);
+    }
+    .portfolio-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .portfolio-card .code {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    .tag {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .tag-primary {
+      background: var(--brand-primary-faded);
+      color: var(--brand-primary);
+      border: 1px solid var(--border-primary-subtle);
+    }
+    .tag-warning {
+      background: var(--semantic-warning-faded);
+      color: var(--semantic-warning);
+      border: 1px solid var(--border-warning-subtle);
+    }
+    .tag-risk {
+      background: var(--semantic-error-faded);
+      color: var(--semantic-error);
+      border: 1px solid var(--border-error-subtle);
+    }
+    .alloc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+    }
+    .fund-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+    .fund-metrics .k {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+    .fund-metrics .v {
+      font-family: var(--font-number);
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .fund-note {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      line-height: 1.45;
+      margin-bottom: var(--space-xs);
+    }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      margin-top: auto;
+      color: var(--brand-primary);
+      font-size: 16px;
+    }
+    .text-link:hover { text-decoration: underline; }
+    .text-link i { font-size: var(--icon-size-md); }
+
+    .news-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+    }
+    .news-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 88px;
+      padding: var(--space-md);
+      text-align: left;
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card-soft);
+    }
+    .news-row:hover { background: var(--brand-primary-faded); }
+    .news-body { flex: 1; min-width: 0; }
+    .news-row h3 {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .news-row p {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    .news-row i {
+      color: var(--text-tertiary);
+      font-size: var(--icon-size-md);
+    }
+
+    .disclosure {
+      background: var(--surface-card-muted);
+      color: var(--text-tertiary);
+      font-size: 11px;
+      line-height: 1.45;
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .icon-standard { color: var(--text-tertiary); font-size: var(--icon-size-md); line-height: 1; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      background: rgba(51, 51, 51, 0.92);
+      color: var(--text-inverse);
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      z-index: 60;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .toast.is-show { opacity: 1; }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 37, 64, 0.42);
+      z-index: 40;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .overlay.is-open { opacity: 1; visibility: visible; }
+    .dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 480px;
+      max-width: calc(100vw - 48px);
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg) var(--space-xl);
+      z-index: 50;
+      box-shadow: var(--shadow-floating);
+      transform: translate(-50%, -46%);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+    .dialog.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%);
+    }
+    .dialog h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+    }
+    .dialog p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+    }
+    .dialog-cancel {
+      width: 100%;
+      min-height: 44px;
+      margin-top: 8px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-card-muted);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .dialog-cancel:hover { color: var(--text-primary); }
+
+    @media (max-width: 1199px) {
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .metric-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 1024px) {
+      .grid-2,
+      .grid-charts,
+      .news-list,
+      .grid-3,
+      .metric-row { grid-template-columns: 1fr 1fr; }
+      .topbar-inner { padding: 0 var(--space-md); gap: var(--space-md); }
+      .page { padding: var(--space-md); }
+      .top-nav a span { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="../assets/logos/且慢logo/且慢logo-Regular.svg" alt="且慢" height="22" />
+        <h1>市场看板</h1>
+      </div>
+      <nav class="top-nav" aria-label="主导航">
+        <a href="#"><i class="ri-home-5-line" aria-hidden="true"></i><span>首页</span></a>
+        <a href="#" class="is-active"><i class="ri-line-chart-line" aria-hidden="true"></i><span>市场</span></a>
+        <a href="#"><i class="ri-exchange-funds-line" aria-hidden="true"></i><span>资产</span></a>
+        <a href="#"><i class="ri-group-line" aria-hidden="true"></i><span>圈子</span></a>
+        <a href="#"><i class="ri-user-line" aria-hidden="true"></i><span>我的</span></a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="icon-btn" type="button" id="btnInfo" aria-label="口径说明">
+          <i class="ri-information-line icon-standard" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="summary-card">
+      <div>
+        <h2>全 A 估值偏低，先看波动与配置</h2>
+        <p>截至 2026-09-15 15:00（示例），全 A 温度约 38°C，处在近 10 年偏低区间。短线涨跌仍不确定，本页数据为占位，仅供理解市场位置，不构成买卖建议。</p>
+      </div>
+      <p class="summary-meta">示例数据<br />口径：近 10 年估值分位</p>
+    </section>
+
+    <section aria-labelledby="quoteTitle">
+      <div class="section-head">
+        <h2 id="quoteTitle">市场行情</h2>
+        <span class="section-link">当日涨跌 · 示例</span>
+      </div>
+      <div class="metric-row" aria-label="主要指数">
+        <article class="metric-card">
+          <div class="label">沪深300</div>
+          <div class="value">3,856.21</div>
+          <div class="chg chg-up">+31.48 · +0.82%</div>
+          <div class="meta">点位 · 2026-09-15</div>
+        </article>
+        <article class="metric-card">
+          <div class="label">中证500</div>
+          <div class="value">5,621.08</div>
+          <div class="chg chg-down">-26.02 · -0.46%</div>
+          <div class="meta">点位 · 2026-09-15</div>
+        </article>
+        <article class="metric-card">
+          <div class="label">创业板指</div>
+          <div class="value">2,145.60</div>
+          <div class="chg chg-up">+26.28 · +1.24%</div>
+          <div class="meta">点位 · 2026-09-15</div>
+        </article>
+        <article class="metric-card">
+          <div class="label">恒生指数</div>
+          <div class="value">17,892.30</div>
+          <div class="chg chg-down">-55.62 · -0.31%</div>
+          <div class="meta">点位 · 2026-09-15</div>
+        </article>
+      </div>
+    </section>
+
+    <div class="grid-2">
+      <section aria-labelledby="tempTitle">
+        <div class="section-head">
+          <h2 id="tempTitle">市场温度计</h2>
+          <button class="section-link" type="button" id="btnTempRule">
+            近10年估值分位<i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+          </button>
+        </div>
+        <nav class="index-tabs" aria-label="指数温度">
+          <button class="index-tab is-active" type="button" data-index="allA">全A指数</button>
+          <button class="index-tab" type="button" data-index="hs300">沪深300</button>
+          <button class="index-tab" type="button" data-index="zz500">中证500</button>
+        </nav>
+        <div class="qdm-chart-host temp-card" id="tempChart"></div>
+      </section>
+      <section aria-labelledby="sectorTitle">
+        <div class="section-head">
+          <h2 id="sectorTitle">板块行情</h2>
+          <span class="section-link">当日贡献 · %</span>
+        </div>
+        <div class="qdm-chart-host" id="sectorChart"></div>
+      </section>
+    </div>
+
+    <section aria-labelledby="fundTrendTitle">
+      <div class="section-head">
+        <h2 id="fundTrendTitle">热门基金走势</h2>
+        <span class="section-link">累计收益 · %</span>
+      </div>
+      <div class="period-chips" role="tablist" aria-label="走势区间">
+        <button type="button" data-period="1m">近1月</button>
+        <button type="button" data-period="3m" class="is-active">近3月</button>
+        <button type="button" data-period="1y">近1年</button>
+        <button type="button" data-period="ytd">今年以来</button>
+      </div>
+      <div class="qdm-chart-host" id="fundChart"></div>
+    </section>
+
+    <section aria-labelledby="recoTitle">
+      <div class="section-head">
+        <h2 id="recoTitle">基金关注</h2>
+        <span class="section-link">结合风险承受能力判断</span>
+      </div>
+      <div class="grid-3">
+        <article class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <h3>示例·均衡配置组合</h3>
+              <p class="code">组合代码 QM-EX-01 · 公募基金组合</p>
+            </div>
+            <span class="tag tag-warning">中风险</span>
+          </div>
+          <p class="alloc">股票型 45% · 债券型 40% · 货币现金 15%</p>
+          <div class="fund-metrics">
+            <div>
+              <div class="k">近 1 年收益</div>
+              <div class="v chg-down">-2.40%</div>
+            </div>
+            <div>
+              <div class="k">最大回撤</div>
+              <div class="v">-12.80%</div>
+            </div>
+          </div>
+          <p class="fund-note">区间 2025-09-15 至 2026-09-15 · 未扣投顾费 · 示例数据</p>
+          <button class="text-link" type="button" data-toast="可先查看产品文件">
+            了解详情<i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+          </button>
+        </article>
+        <article class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <h3>示例·宽基指数计划</h3>
+              <p class="code">组合代码 QM-EX-02 · 指数定投示例</p>
+            </div>
+            <span class="tag tag-risk">中高风险</span>
+          </div>
+          <p class="alloc">股票型 88% · 货币现金 12%</p>
+          <div class="fund-metrics">
+            <div>
+              <div class="k">近 1 年收益</div>
+              <div class="v chg-up">+4.16%</div>
+            </div>
+            <div>
+              <div class="k">最大回撤</div>
+              <div class="v">-18.60%</div>
+            </div>
+          </div>
+          <p class="fund-note">区间 2025-09-15 至 2026-09-15 · 权益波动较大 · 示例数据</p>
+          <button class="text-link" type="button" data-toast="请先核对风险等级">
+            了解详情<i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+          </button>
+        </article>
+        <article class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <h3>示例·短债现金包</h3>
+              <p class="code">组合代码 QM-EX-03 · 波动相对较小</p>
+            </div>
+            <span class="tag tag-primary">较低风险</span>
+          </div>
+          <p class="alloc">债券型 72% · 货币现金 28%</p>
+          <div class="fund-metrics">
+            <div>
+              <div class="k">近 1 年收益</div>
+              <div class="v">+1.86%</div>
+            </div>
+            <div>
+              <div class="k">最大回撤</div>
+              <div class="v">-0.92%</div>
+            </div>
+          </div>
+          <p class="fund-note">区间 2025-09-15 至 2026-09-15 · 仍存在本金损失风险</p>
+          <button class="text-link" type="button" data-toast="不保证本金不受损失">
+            了解详情<i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="newsTitle">
+      <div class="section-head">
+        <h2 id="newsTitle">财经新闻</h2>
+        <span class="section-link">资讯摘要 · 示例</span>
+      </div>
+      <div class="news-list">
+        <button class="news-row" type="button" data-toast="原型演示，无正文页">
+          <div class="news-body">
+            <h3>主要宽基指数日内分化，成交额维持中性</h3>
+            <p>且慢资讯 · 2026-09-15 14:32</p>
+          </div>
+          <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+        </button>
+        <button class="news-row" type="button" data-toast="原型演示，无正文页">
+          <div class="news-body">
+            <h3>公开市场操作保持净投放，资金面整体平稳</h3>
+            <p>市场观察 · 2026-09-15 11:08</p>
+          </div>
+          <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+        </button>
+        <button class="news-row" type="button" data-toast="原型演示，无正文页">
+          <div class="news-body">
+            <h3>多家基金披露中报持仓，制造业与红利风格并存</h3>
+            <p>基金观察 · 2026-09-14 18:20</p>
+          </div>
+          <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+        </button>
+        <button class="news-row" type="button" data-toast="原型演示，无正文页">
+          <div class="news-body">
+            <h3>海外主要市场隔夜涨跌互现，汇率波动需关注</h3>
+            <p>全球市场 · 2026-09-15 08:15</p>
+          </div>
+          <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+        </button>
+      </div>
+    </section>
+
+    <aside class="disclosure">
+      基金有风险，投资需谨慎。以上指数、温度、收益与新闻均为界面原型占位数据，不代表真实行情或产品业绩，也不构成投资建议或收益承诺。过往业绩不预示未来表现。投资前请仔细阅读基金合同、招募说明书、产品资料概要等法律文件，并结合自身风险承受能力判断。数据来源：且慢（示例）/ Wind 资讯口径示意。统计时点：2026-09-15。
+    </aside>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+  <div class="overlay" id="overlay"></div>
+  <div class="dialog" id="sheetInfo" role="dialog" aria-modal="true" aria-labelledby="sheetInfoTitle">
+    <h3 id="sheetInfoTitle">本页怎么看</h3>
+    <p>市场温度用近 10 年估值分位映射到 0–100°C。温度越低，表示相对历史区间越便宜；越高表示越贵。温度只描述位置，不判断短期涨跌。</p>
+    <p>行情涨跌按 A 股习惯：红色表示上涨，绿色表示下跌。热门基金走势为累计收益率示意。基金关注列表需对照风险等级与回撤，不能保证本金不受损失。</p>
+    <p>本页为界面原型，所有数字、新闻标题均为示例，不构成对未来收益的保证。</p>
+    <button class="dialog-cancel" type="button" data-close>我知道了</button>
+  </div>
+
+  <script src="../../qieman-chart-design/assets/qieman-charts.js"></script>
+  <script>
+    (function () {
+      var BANDS = [
+        "var(--chart-band-01)",
+        "var(--chart-band-02)",
+        "var(--chart-band-03)",
+        "var(--chart-band-04)",
+        "var(--chart-band-05)"
+      ];
+      var TEMP = {
+        allA: {
+          name: "全A指数", temp: 38, tag: "偏低", date: "2026-09-15",
+          line: [62, 54, 46, 41, 38, 40, 39],
+          x: ["25-09", "25-12", "26-03", "26-06", "26-09"]
+        },
+        hs300: {
+          name: "沪深300", temp: 44, tag: "偏低", date: "2026-09-15",
+          line: [68, 59, 51, 47, 44, 46, 45],
+          x: ["25-09", "25-12", "26-03", "26-06", "26-09"]
+        },
+        zz500: {
+          name: "中证500", temp: 31, tag: "较低估", date: "2026-09-15",
+          line: [55, 48, 40, 34, 31, 33, 32],
+          x: ["25-09", "25-12", "26-03", "26-06", "26-09"]
+        }
+      };
+      var FUND = {
+        "1m": {
+          y: ["8%", "4%", "0%", "-4%", "-8%"],
+          x: ["08-15", "08-25", "09-05", "09-10", "09-15"],
+          series: [
+            { name: "均衡配置", color: "var(--brand-primary)", data: [0, 0.6, -0.4, 0.8, 1.2, 0.4, 0.9] },
+            { name: "宽基计划", color: "var(--chart-03)", data: [0, 1.1, -0.8, 1.6, 2.1, 0.2, 1.4] },
+            { name: "沪深300", color: "var(--chart-02)", data: [0, 0.8, -0.6, 1.2, 1.5, 0.1, 0.8] }
+          ]
+        },
+        "3m": {
+          y: ["12%", "6%", "0%", "-6%", "-12%"],
+          x: ["06-15", "07-15", "08-15", "09-01", "09-15"],
+          series: [
+            { name: "均衡配置", color: "var(--brand-primary)", data: [0, 1.4, 0.2, 2.6, 1.8, 0.6, 2.1] },
+            { name: "宽基计划", color: "var(--chart-03)", data: [0, 2.2, -1.1, 3.4, 2.8, 1.2, 3.6] },
+            { name: "沪深300", color: "var(--chart-02)", data: [0, 1.6, -0.8, 2.4, 1.9, 0.4, 2.2] }
+          ]
+        },
+        "1y": {
+          y: ["20%", "10%", "0%", "-10%", "-20%"],
+          x: ["25-09", "25-12", "26-03", "26-06", "26-09"],
+          series: [
+            { name: "均衡配置", color: "var(--brand-primary)", data: [0, 3.2, -4.6, -1.2, 1.4, -3.1, -2.4] },
+            { name: "宽基计划", color: "var(--chart-03)", data: [0, 5.1, -8.4, -2.6, 3.8, -1.2, 4.16] },
+            { name: "沪深300", color: "var(--chart-02)", data: [0, 4.2, -7.1, -1.8, 2.6, -0.6, 3.1] }
+          ]
+        },
+        ytd: {
+          y: ["16%", "8%", "0%", "-8%", "-16%"],
+          x: ["01-01", "03-01", "05-01", "07-01", "09-15"],
+          series: [
+            { name: "均衡配置", color: "var(--brand-primary)", data: [0, 1.1, -2.4, 0.6, 1.8, 0.2, 1.3] },
+            { name: "宽基计划", color: "var(--chart-03)", data: [0, 2.4, -3.8, 1.2, 3.1, 0.8, 2.6] },
+            { name: "沪深300", color: "var(--chart-02)", data: [0, 1.8, -3.2, 0.8, 2.2, 0.3, 1.7] }
+          ]
+        }
+      };
+
+      var state = { index: "allA", period: "3m" };
+      var toastTimer = null;
+      var overlay = document.getElementById("overlay");
+      var dialog = document.getElementById("sheetInfo");
+      var toastEl = document.getElementById("toast");
+
+      function showToast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add("is-show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.remove("is-show"); }, 1800);
+      }
+      function closeDialog() {
+        overlay.classList.remove("is-open");
+        dialog.classList.remove("is-open");
+      }
+      function openDialog() {
+        overlay.classList.add("is-open");
+        dialog.classList.add("is-open");
+      }
+
+      function renderTemp() {
+        var data = TEMP[state.index];
+        QiemanChart.render(document.getElementById("tempChart"), {
+          type: "bidirectional",
+          variant: "band-line",
+          title: "历史温度",
+          legends: [
+            { label: "低估", color: BANDS[0] },
+            { label: "较低估", color: BANDS[1] },
+            { label: "合适", color: BANDS[2] },
+            { label: "较高估", color: BANDS[3] },
+            { label: "高估", color: BANDS[4] }
+          ],
+          yLabels: ["100°C", "80°C", "60°C", "40°C", "20°C", "0°C"],
+          xLabels: data.x,
+          line: data.line,
+          source: "数据来源：且慢估值（示例）· 近10年分位",
+          disclaimer: "历史温度不预示未来涨跌，不构成投资建议"
+        });
+        var card = document.querySelector("#tempChart .qdm-chart-card");
+        var head = card.querySelector(".qdm-chart-head");
+        var now = document.createElement("div");
+        now.className = "temp-now";
+        now.innerHTML =
+          "<div><strong>" + data.temp + "°C</strong><span>（" + data.date + " · " + data.name + "）</span></div>" +
+          '<span class="temp-tag">' + data.tag + "</span>";
+        card.insertBefore(now, head);
+      }
+
+      function renderSector() {
+        QiemanChart.render(document.getElementById("sectorChart"), {
+          type: "treemap",
+          title: "板块涨跌贡献",
+          subtitle: "当日 · 单位：%",
+          items: [
+            { name: "新能源", value: 1.82 },
+            { name: "科技", value: 2.14 },
+            { name: "消费", value: 0.63 },
+            { name: "军工", value: 1.08 },
+            { name: "煤炭", value: 0.31 },
+            { name: "银行", value: -0.42 },
+            { name: "医药", value: -1.16 },
+            { name: "地产", value: -0.78 },
+            { name: "传媒", value: -0.24 }
+          ],
+          source: "数据来源：且慢（示例）· 2026-09-15",
+          disclaimer: "板块涨跌为示意，不代表个股或基金表现"
+        });
+      }
+
+      function renderFund() {
+        var pack = FUND[state.period];
+        QiemanChart.render(document.getElementById("fundChart"), {
+          type: "line",
+          title: "累计收益率对比",
+          yLabels: pack.y,
+          xLabels: pack.x,
+          series: pack.series,
+          source: "数据来源：且慢（示例）· 单位 %",
+          disclaimer: "过往业绩不预示未来表现，未扣投顾服务费"
+        });
+      }
+
+      function renderAll() {
+        renderTemp();
+        renderSector();
+        renderFund();
+      }
+
+      document.querySelector(".index-tabs").addEventListener("click", function (e) {
+        var btn = e.target.closest("[data-index]");
+        if (!btn) return;
+        state.index = btn.getAttribute("data-index");
+        document.querySelectorAll(".index-tab").forEach(function (t) {
+          t.classList.toggle("is-active", t === btn);
+        });
+        renderTemp();
+      });
+      document.querySelector(".period-chips").addEventListener("click", function (e) {
+        var btn = e.target.closest("[data-period]");
+        if (!btn) return;
+        state.period = btn.getAttribute("data-period");
+        document.querySelectorAll(".period-chips button").forEach(function (t) {
+          t.classList.toggle("is-active", t === btn);
+        });
+        renderFund();
+      });
+      document.getElementById("btnInfo").addEventListener("click", openDialog);
+      document.getElementById("btnTempRule").addEventListener("click", openDialog);
+      overlay.addEventListener("click", closeDialog);
+      document.querySelectorAll("[data-close]").forEach(function (btn) {
+        btn.addEventListener("click", closeDialog);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeDialog();
+      });
+      document.addEventListener("click", function (e) {
+        var hit = e.target.closest("[data-toast]");
+        if (hit) showToast(hit.getAttribute("data-toast"));
+      });
+      document.querySelector(".top-nav").addEventListener("click", function (e) {
+        var link = e.target.closest("a");
+        if (link && !link.classList.contains("is-active")) {
+          e.preventDefault();
+          showToast("原型演示，无跳转");
+        }
+      });
+      window.addEventListener("resize", renderAll);
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+      } else {
+        renderAll();
+      }
+    })();
+  </script>
+</body>
+</html>

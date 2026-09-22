@@ -1,0 +1,26 @@
+{
+  "name": "qieman-financial-compliance-guidelines",
+  "description": "Qieman financial compliance boundary skill for design, copy, AI assistant, marketing, performance display, private fund and investment expression scenarios.",
+  "structure": [
+    "SKILL.md",
+    "README.md",
+    "references/marketing-compliance.md",
+    "references/investment-expression.md",
+    "references/risk-disclosure.md",
+    "references/performance-display.md",
+    "references/private-fund-rules.md",
+    "references/ai-investment-guidelines.md",
+    "references/forbidden-words.md",
+    "assets/compliance-example/README.md",
+    "assets/good-case/README.md",
+    "assets/good-case/good-copy-examples.md",
+    "assets/bad-case/README.md",
+    "assets/bad-case/bad-copy-examples.md"
+  ],
+  "official_reference_sources": [
+    "https://www.csrc.gov.cn/csrc/c106256/c1653806/content.shtml",
+    "https://www.sse.com.cn/lawandrules/regulations/csrcannoun/c/10117187/files/04b9e28a0bf54d3a9ca5253dc4a11042.pdf",
+    "https://www.csrc.gov.cn/xizang/c105485/c1304169/1304169/files/%E6%8A%95%E8%B5%84%E8%80%85%E9%97%AE%E7%AD%94.pdf"
+  ],
+  "note": "This package is a design-generation compliance aid and does not replace formal legal or compliance review."
+}

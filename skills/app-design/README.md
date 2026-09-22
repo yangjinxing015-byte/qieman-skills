@@ -78,4 +78,4 @@ qieman-ui-design (L0)
 └── qieman-chart-design (L2, extends L0)
 ```
 
-详细 token 与 Pattern 见各 skill 目录下的 `SKILL.md`；全局分层说明见 `qieman-ui-design/SKILL.md` → **Skill Layering**。
+L0 token / 组件 / 页面壳见 `qieman-ui-design/SKILL.md` 与 `qieman-ui-design/references/`。全库目录与分层见 [`../README.md`](../README.md)。

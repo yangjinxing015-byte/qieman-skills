@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>且慢 App 页面壳 · 复制后改内容</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    /* token 真源：../references/tokens.yaml → 映射规则见 SKILL.md */
+    :root {
+      --brand-primary: #1B88EE;
+      --brand-primary-pressed: #0F78D4;
+      --brand-primary-focus: #1580E0;
+      --brand-poster: #3180EC;
+      --brand-primary-faded: #F0F6FF;
+
+      --text-primary: #333333;
+      --text-secondary: #606060;
+      --text-tertiary: #999999;
+      --text-disabled: #CCCCCC;
+      --text-inverse: #FFFFFF;
+
+      --semantic-error: #FA440C;
+      --semantic-warning: #EA9500;
+      --semantic-success: #07AD8F;
+      --semantic-error-faded: #FEEDE9;
+      --semantic-warning-faded: #FFFAEF;
+
+      --surface-page: #F9FAFB;
+      --surface-card: #FFFFFF;
+      --surface-card-subtle: #F9FAFB;
+      --surface-card-muted: #F7F7F7;
+      --surface-summary: #DBEBFF;
+
+      --border-default: #D8D8D8;
+      --border-primary: #1B88EE;
+      --border-primary-subtle: #9CCBF8;
+      --border-warning-subtle: #FFDC9E;
+      --border-error-subtle: #FAB6A5;
+
+      --on-primary: #FFFFFF;
+      --on-dark: #FFFFFF;
+
+      --chart-01: #69B1F4;
+      --chart-02: #F88D72;
+      --chart-03: #FBCA74;
+      --chart-04: #7DD4C4;
+      --chart-05: #ADAFE8;
+      --chart-06: #68E0F3;
+      --chart-07: #3A7BB8;
+      --chart-08: #FAB6A5;
+      --chart-09: #EDC273;
+      --chart-10: #9CCBF8;
+      --chart-11: #C8CAEF;
+      --chart-12: #6B9CCA;
+      --chart-13: #BBC4CE;
+      --chart-cash: #DBEBFF;
+      --chart-wallet: #EA9500;
+
+      --font-sans: PingFang SC, MiSans, system-ui, -apple-system, sans-serif;
+      --font-number: MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif;
+      --font-mono: Courier New, ui-monospace, monospace;
+
+      --radius-none: 0px;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+      --radius-pill: 9999px;
+      --radius-full: 9999px;
+
+      --space-xxs: 4px;
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-xxl: 48px;
+      --space-section: 64px;
+      --space-h5-safe: 16px;
+
+      --shadow-none: none;
+      --shadow-card-soft: 0 2px 8px rgba(27, 136, 238, 0.06);
+      --shadow-floating: 0 8px 24px rgba(30, 62, 98, 0.08);
+
+      --icon-size-sm: 16px;
+      --icon-size-md: 20px;
+      --icon-size-lg: 24px;
+      --icon-size-xl: 32px;
+
+      --phone-w: 375px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background: var(--surface-page);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .phone {
+      width: var(--phone-w);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: var(--surface-page);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 44px;
+      padding: 0 var(--space-h5-safe);
+      background: var(--surface-card);
+      border-bottom: 1px solid var(--border-default);
+      flex-shrink: 0;
+    }
+
+    .nav img { height: 20px; width: auto; }
+    .nav-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .scroll {
+      flex: 1;
+      padding: var(--space-md) var(--space-h5-safe) 32px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .summary-card {
+      background: var(--surface-summary);
+      border: none;
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    .summary-card h1 {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .summary-card p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+    }
+
+    .metric-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      box-shadow: var(--shadow-card-soft);
+    }
+
+    .metric-card .label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+    }
+
+    .metric-card .value {
+      font-family: var(--font-number);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.1px;
+    }
+
+    .metric-card .meta {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--text-tertiary);
+    }
+
+    .content-card {
+      background: var(--surface-card);
+      border: none;
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      box-shadow: var(--shadow-card-soft);
+    }
+
+    .content-card h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .content-card p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 12px 24px;
+      background: var(--brand-primary);
+      color: var(--on-primary);
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-primary:active {
+      background: var(--brand-primary-pressed);
+      transform: scale(0.98);
+    }
+
+    .disclosure {
+      background: var(--surface-card-muted);
+      color: var(--text-tertiary);
+      font-size: 11px;
+      line-height: 1.45;
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm);
+    }
+
+    .icon-standard { color: var(--text-tertiary); font-size: var(--icon-size-md); line-height: 1; }
+    .icon-primary { color: var(--brand-primary); font-size: var(--icon-size-md); line-height: 1; }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: 0 4px;
+    }
+    .tab {
+      flex: 1;
+      min-height: 44px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      border-bottom: 2px solid transparent;
+    }
+    .tab.is-active {
+      color: var(--brand-primary);
+      font-weight: 600;
+      border-bottom-color: var(--brand-primary);
+    }
+
+    .tab-bar {
+      display: flex;
+      height: calc(56px + env(safe-area-inset-bottom, 0px));
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      background: var(--surface-card);
+      border-top: 1px solid var(--border-default);
+      flex-shrink: 0;
+    }
+    .tab-bar a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      text-decoration: none;
+      color: var(--text-tertiary);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .tab-bar a i { font-size: 24px; line-height: 1; }
+    .tab-bar a.is-active { color: var(--brand-primary); }
+
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 16px);
+      transform: translateX(-50%);
+      background: rgba(51, 51, 51, 0.92);
+      color: var(--text-inverse);
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      z-index: 20;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 产出放到项目目录时，把 logo 路径改成可访问的 SVG；源文件在 assets/logos/ -->
+  <div class="phone">
+    <header class="nav">
+      <img src="../logos/且慢logo/且慢logo-Regular.svg" alt="且慢" height="20" />
+      <span class="nav-title">页面标题</span>
+      <i class="ri-information-line icon-standard" aria-hidden="true"></i>
+    </header>
+    <main class="scroll">
+      <section class="summary-card">
+        <h1>先写结论，再解释原因</h1>
+        <p>用一句话说明本页判断。数字须带单位与时间口径。</p>
+      </section>
+      <section class="metric-row" aria-label="关键指标">
+        <article class="metric-card">
+          <div class="label">示例指标</div>
+          <div class="value">12.86%</div>
+          <div class="meta">近 1 年 · 示例数据</div>
+        </article>
+        <article class="metric-card">
+          <div class="label">示例回撤</div>
+          <div class="value">-8.2%</div>
+          <div class="meta">截至示例日</div>
+        </article>
+      </section>
+      <section class="content-card">
+        <h2>说明</h2>
+        <p>替换为本页解释、明细或建议。不要承诺收益。</p>
+      </section>
+      <nav class="tabs" aria-label="分段">
+        <button class="tab is-active" type="button">持有中</button>
+        <button class="tab" type="button">交易中</button>
+        <button class="tab" type="button">历史</button>
+      </nav>
+      <button class="btn-primary" type="button">主操作</button>
+      <aside class="disclosure">
+        历史数据不预示未来表现。本页为界面原型，数据均为占位，不构成投资建议。
+      </aside>
+    </main>
+    <nav class="tab-bar" aria-label="主导航">
+      <a href="#" class="is-active"><i class="ri-home-5-fill" aria-hidden="true"></i>首页</a>
+      <a href="#"><i class="ri-exchange-funds-line" aria-hidden="true"></i>资产</a>
+      <a href="#"><i class="ri-group-line" aria-hidden="true"></i>圈子</a>
+      <a href="#"><i class="ri-user-line" aria-hidden="true"></i>我的</a>
+    </nav>
+    <div class="toast" role="status">已保存</div>
+  </div>
+</body>
+</html>

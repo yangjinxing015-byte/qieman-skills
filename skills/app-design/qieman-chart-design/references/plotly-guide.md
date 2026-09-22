@@ -11,8 +11,8 @@ chart_colors = [
     '#F88D72',  # chart02 - Coral
     '#FBCA74',  # chart03 - Yellow
     '#7DD4C4',  # chart04 - Turquoise
-    '#68E0F3',  # chart05 - Cyan
-    '#ADAFE8',  # chart06 - Lavender
+    '#ADAFE8',  # chart05 - Lavender
+    '#68E0F3',  # chart06 - Cyan
     '#3A7BB8',  # chart07 - Blue
     '#FAB6A5',  # chart08 - Peach
     '#EDC273',  # chart09 - Gold
@@ -30,8 +30,8 @@ chart_colors = [
 import plotly.express as px
 
 # Default chart color palette
-chart_colors = ['#69B1F4', '#F88D72', '#FBCA74', '#7DD4C4', '#68E0F3', 
-                '#ADAFE8', '#3A7BB8', '#FAB6A5', '#EDC273', '#9CCBF8', 
+chart_colors = ['#69B1F4', '#F88D72', '#FBCA74', '#7DD4C4', '#ADAFE8', 
+                '#68E0F3', '#3A7BB8', '#FAB6A5', '#EDC273', '#9CCBF8', 
                 '#C8CAEF', '#6B9CCA']
 
 fig = px.bar(df, x='category', y='value', 
@@ -80,8 +80,8 @@ fig.write_html('pie_chart.html')
 import plotly.graph_objects as go
 
 # Default chart color palette
-chart_colors = ['#69B1F4', '#F88D72', '#FBCA74', '#7DD4C4', '#68E0F3', 
-                '#ADAFE8', '#3A7BB8', '#FAB6A5', '#EDC273', '#9CCBF8', 
+chart_colors = ['#69B1F4', '#F88D72', '#FBCA74', '#7DD4C4', '#ADAFE8', 
+                '#68E0F3', '#3A7BB8', '#FAB6A5', '#EDC273', '#9CCBF8', 
                 '#C8CAEF', '#6B9CCA']
 
 fig = go.Figure(data=[

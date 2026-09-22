@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>思远定投全球好资产 · 且慢圈子</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    :root {
+      --brand-primary: #1B88EE;
+      --brand-primary-pressed: #0F78D4;
+      --brand-primary-focus: #1580E0;
+      --brand-poster: #3180EC;
+      --brand-primary-faded: #F0F6FF;
+      --text-primary: #333333;
+      --text-secondary: #606060;
+      --text-tertiary: #999999;
+      --text-disabled: #CCCCCC;
+      --text-inverse: #FFFFFF;
+      --semantic-warning: #EA9500;
+      --semantic-error: #FA440C;
+      --surface-page: #F9FAFB;
+      --surface-card: #FFFFFF;
+      --surface-card-muted: #F7F7F7;
+      --border-default: #D8D8D8;
+      --border-primary: #1B88EE;
+      --border-primary-subtle: #9CCBF8;
+      --font-sans: PingFang SC, MiSans, system-ui, -apple-system, sans-serif;
+      --font-number: MiSans, DIN Alternate, PingFang SC, system-ui, sans-serif;
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+      --radius-pill: 9999px;
+      --radius-full: 9999px;
+      --space-h5-safe: 16px;
+      --shadow-card-soft: 0 2px 8px rgba(27, 136, 238, 0.06);
+      --shadow-floating: 0 8px 24px rgba(30, 62, 98, 0.08);
+      --phone-w: 375px;
+      --phone-h: 812px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 0%, rgba(27, 136, 238, 0.12), transparent 55%),
+        #E8EEF5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .stage-label { font-size: 13px; color: var(--text-tertiary); }
+    .stage-switch {
+      display: flex; gap: 8px; padding: 4px;
+      background: rgba(255,255,255,0.72); border-radius: var(--radius-pill);
+      border: 1px solid rgba(156, 203, 248, 0.55);
+    }
+    .stage-switch button {
+      height: 32px; padding: 0 14px; border-radius: var(--radius-pill);
+      font-size: 13px; color: var(--text-secondary);
+    }
+    .stage-switch button.is-active {
+      background: var(--brand-primary); color: #fff; font-weight: 600;
+    }
+
+    .phone {
+      width: var(--phone-w); height: var(--phone-h);
+      background: var(--surface-page);
+      border-radius: 40px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 24px 64px rgba(30,62,98,0.18);
+      overflow: hidden; position: relative;
+      display: flex; flex-direction: column;
+    }
+
+    .view { display: none; flex-direction: column; flex: 1; min-height: 0; }
+    .view.is-active { display: flex; }
+
+    .status-bar {
+      height: 44px; padding: 12px 24px 0;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 14px; font-weight: 600; font-family: var(--font-number);
+      flex-shrink: 0; z-index: 5;
+    }
+    .status-bar.on-blue { color: #fff; background: transparent; position: absolute; left: 0; right: 0; top: 0; }
+    .status-bar.on-white { color: var(--text-primary); background: var(--surface-card); }
+    .status-icons { display: flex; gap: 6px; align-items: center; }
+
+    .scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .scroll::-webkit-scrollbar { width: 0; }
+
+    /* —— Guest —— */
+    .guest-hero {
+      background: linear-gradient(165deg, #3A8FF0 0%, var(--brand-poster) 48%, #1A6FD0 100%);
+      padding: 44px 20px 28px;
+      color: var(--text-inverse);
+      position: relative;
+    }
+    .guest-back {
+      position: absolute; left: 8px; top: 44px;
+      width: 40px; height: 40px; border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 28px; z-index: 2;
+    }
+    .guest-back:active { background: rgba(255,255,255,0.15); }
+
+    .guest-brand { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .guest-avatar {
+      width: 64px; height: 64px; border-radius: 14px;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.45);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px; overflow: hidden;
+    }
+    .guest-avatar i { font-size: 32px; color: #fff; }
+    .guest-name {
+      font-size: 20px; font-weight: 600; line-height: 1.35; margin-bottom: 8px;
+      padding: 0 12px;
+    }
+    .guest-desc {
+      font-size: 12px; line-height: 1.5; opacity: 0.92;
+      max-width: 300px; display: flex; align-items: flex-start; gap: 2px;
+    }
+    .guest-desc i { font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+
+    .guest-metrics {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      margin-top: 20px; gap: 4px;
+    }
+    .guest-metric { text-align: center; }
+    .guest-metric .num {
+      font-family: var(--font-number); font-size: 18px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+    }
+    .guest-metric .num i { font-size: 15px; opacity: 0.9; }
+    .guest-metric .label { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+
+    .guest-body {
+      background: var(--surface-page);
+      border-radius: 20px 20px 0 0;
+      margin-top: -16px;
+      position: relative;
+      padding: 20px 16px 100px;
+      min-height: 420px;
+    }
+
+    .section-title {
+      font-size: 16px; font-weight: 600; margin-bottom: 10px;
+    }
+
+    .info-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: var(--shadow-card-soft);
+      border: 1px solid rgba(216,216,216,0.45);
+      margin-bottom: 16px;
+    }
+
+    .leader-row { display: flex; align-items: center; gap: 12px; }
+    .leader-avatar {
+      width: 44px; height: 44px; border-radius: var(--radius-full);
+      background: linear-gradient(135deg, #A8D4F8, #1B88EE);
+      color: #fff; font-size: 16px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; flex-shrink: 0;
+    }
+    .leader-avatar .badge {
+      position: absolute; right: -2px; bottom: -2px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--brand-primary); color: #fff;
+      font-size: 10px; display: flex; align-items: center; justify-content: center;
+      border: 2px solid #fff;
+    }
+    .leader-meta { flex: 1; min-width: 0; }
+    .leader-name-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .leader-name { font-size: 15px; font-weight: 600; }
+    .days-tag {
+      height: 18px; padding: 0 6px; border-radius: var(--radius-xs);
+      background: #FFFAEF; color: var(--semantic-warning);
+      border: 1px solid #FFDC9E; font-size: 11px; font-family: var(--font-number);
+      display: inline-flex; align-items: center;
+    }
+    .leader-bio { font-size: 13px; color: var(--text-tertiary); margin-top: 4px; }
+
+    .notice-body {
+      font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .notice-body.is-expanded {
+      display: block; -webkit-line-clamp: unset;
+    }
+    .notice-more {
+      display: inline-flex; align-items: center; gap: 2px;
+      margin-top: 8px; font-size: 14px; color: var(--brand-primary); font-weight: 500;
+    }
+
+    .preview-chips {
+      display: flex; gap: 8px; overflow-x: auto; margin-bottom: 12px;
+      scrollbar-width: none;
+    }
+    .preview-chips::-webkit-scrollbar { display: none; }
+    .preview-chip {
+      flex-shrink: 0; height: 30px; padding: 0 14px;
+      border-radius: var(--radius-pill); font-size: 13px;
+      color: var(--text-secondary); background: var(--surface-card);
+      border: 1px solid rgba(216,216,216,0.7);
+    }
+    .preview-chip.is-active {
+      color: var(--brand-primary); background: var(--brand-primary-faded);
+      border-color: var(--border-primary-subtle); font-weight: 600;
+    }
+
+    .preview-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: var(--shadow-card-soft);
+      border: 1px solid rgba(216,216,216,0.45);
+      position: relative; overflow: hidden;
+    }
+    .preview-title {
+      font-size: 16px; font-weight: 600; line-height: 1.4; margin: 10px 0 8px;
+    }
+    .preview-text {
+      font-size: 14px; line-height: 1.55; color: var(--text-secondary);
+    }
+    .preview-text .more { color: var(--brand-primary); }
+    .preview-gallery {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;
+      margin-top: 12px;
+    }
+    .preview-gallery .thumb {
+      aspect-ratio: 1; border-radius: var(--radius-sm);
+      background: linear-gradient(145deg, #C5DDF5, #7BB8F0);
+      position: relative; overflow: hidden;
+    }
+    .preview-gallery .thumb.more-n::after {
+      content: attr(data-n);
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.35);
+      color: #fff; font-size: 20px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-number);
+    }
+    .topic-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 10px; height: 24px; padding: 0 10px;
+      border-radius: var(--radius-pill);
+      background: var(--brand-primary-faded); color: var(--brand-primary);
+      font-size: 12px; border: 1px solid var(--border-primary-subtle);
+    }
+
+    .lock-mask {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 140px;
+      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.88) 40%, #fff 72%);
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      padding-bottom: 20px; gap: 6px;
+    }
+    .lock-mask i { font-size: 28px; color: var(--text-disabled); }
+    .lock-mask span { font-size: 13px; color: var(--text-tertiary); }
+
+    .guest-bottom {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 10px 16px 22px;
+      background: var(--surface-card);
+      border-top: 1px solid rgba(216,216,216,0.55);
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: var(--shadow-floating); z-index: 20;
+    }
+    .assist-entry {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      width: 52px; flex-shrink: 0; color: var(--text-secondary); font-size: 11px;
+    }
+    .assist-entry i { font-size: 22px; color: var(--text-secondary); }
+    .assist-entry:active { opacity: 0.7; }
+
+    .join-btn {
+      flex: 1; height: 44px; border-radius: var(--radius-pill);
+      background: var(--brand-primary); color: #fff;
+      font-size: 16px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s ease, transform 0.12s ease;
+    }
+    .join-btn:active { background: var(--brand-primary-pressed); transform: scale(0.98); }
+
+    /* —— Join gate —— */
+    .sheet-join {
+      padding: 8px 16px 28px;
+      max-height: 78%;
+      overflow-y: auto;
+    }
+    .join-gate-head {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 4px 8px 16px;
+    }
+    .join-gate-mascot {
+      width: 36px; height: 36px; border-radius: var(--radius-full);
+      background: var(--brand-primary-faded); color: var(--brand-primary);
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+      flex-shrink: 0;
+    }
+    .join-gate-head h3 {
+      font-size: 17px; font-weight: 600; color: var(--text-primary); text-align: left;
+    }
+    .cond-card {
+      background: var(--surface-card-muted);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .cond-title-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; margin-bottom: 10px;
+    }
+    .cond-title {
+      font-size: 15px; font-weight: 600; color: var(--text-primary);
+    }
+    .rule-link {
+      display: inline-flex; align-items: center; gap: 2px;
+      font-size: 13px; color: var(--text-tertiary); flex-shrink: 0;
+      min-height: 32px; padding: 0 2px;
+    }
+    .rule-link i { font-size: 16px; color: var(--text-tertiary); }
+    .rule-link:active { color: var(--brand-primary); }
+    .cond-links { display: flex; flex-direction: column; gap: 2px; }
+    .cond-link {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 44px; padding: 8px 4px;
+      font-size: 15px; color: var(--brand-primary); font-weight: 500;
+      border-radius: var(--radius-sm);
+    }
+    .cond-link:active { background: rgba(27, 136, 238, 0.06); }
+    .cond-link i { font-size: 18px; color: var(--brand-primary); }
+
+    .modal-layer {
+      position: absolute; inset: 0; z-index: 55;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      background: rgba(30, 42, 58, 0.45);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.22s ease, visibility 0.22s ease;
+    }
+    .modal-layer.is-open { opacity: 1; visibility: visible; }
+    .rule-modal {
+      width: 100%; max-width: 310px;
+      background: var(--surface-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transform: translateY(10px) scale(0.98);
+      transition: transform 0.22s ease;
+      box-shadow: var(--shadow-floating);
+    }
+    .modal-layer.is-open .rule-modal { transform: translateY(0) scale(1); }
+    .rule-modal-hero {
+      height: 88px;
+      background: linear-gradient(180deg, #DBEBFF 0%, #F0F6FF 100%);
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; position: relative;
+    }
+    .rule-modal-hero .bubble {
+      width: 52px; height: 52px; border-radius: var(--radius-full);
+      background: var(--brand-primary); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 28px;
+    }
+    .rule-modal-hero .clip {
+      width: 40px; height: 48px; border-radius: 6px;
+      background: #fff; border: 2px solid var(--border-primary-subtle);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--brand-primary); font-size: 22px;
+      box-shadow: var(--shadow-card-soft);
+    }
+    .rule-modal-body { padding: 16px 18px 8px; }
+    .rule-modal-body h4 {
+      font-size: 17px; font-weight: 600; text-align: center; margin-bottom: 14px;
+    }
+    .rule-modal-body ol {
+      padding-left: 18px; margin: 0;
+      font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+    }
+    .rule-modal-body li + li { margin-top: 10px; }
+    .rule-modal-foot { padding: 12px 18px 18px; }
+    .rule-modal-foot .got-it {
+      width: 100%; height: 44px; border-radius: var(--radius-sm);
+      background: var(--brand-primary); color: #fff;
+      font-size: 16px; font-weight: 600;
+    }
+    .rule-modal-foot .got-it:active {
+      background: var(--brand-primary-pressed); transform: scale(0.98);
+    }
+
+    .elig-bar {
+      display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+      margin-top: 4px;
+    }
+    .elig-bar button {
+      height: 28px; padding: 0 10px; border-radius: var(--radius-pill);
+      font-size: 12px; color: var(--text-secondary);
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(156, 203, 248, 0.55);
+    }
+    .elig-bar button.is-active {
+      background: var(--brand-primary-faded); color: var(--brand-primary);
+      border-color: var(--border-primary-subtle); font-weight: 600;
+    }
+
+    /* —— Joined —— */
+    .nav {
+      height: 44px; padding: 0 var(--space-h5-safe);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface-card); flex-shrink: 0;
+      border-bottom: 1px solid rgba(216,216,216,0.45); z-index: 10;
+    }
+    .nav-btn {
+      width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-full); color: var(--text-primary);
+    }
+    .nav-btn:active { background: var(--surface-card-muted); }
+    .nav-title { font-size: 17px; font-weight: 600; }
+    .nav-actions { display: flex; gap: 2px; }
+
+    .circle-hero {
+      background: linear-gradient(165deg, #3A8FF0 0%, var(--brand-poster) 48%, #1A6FD0 100%);
+      padding: 20px var(--space-h5-safe) 28px; color: #fff; position: relative; overflow: hidden;
+    }
+    .circle-top { display: flex; gap: 14px; align-items: flex-start; position: relative; z-index: 1; }
+    .circle-avatar {
+      width: 56px; height: 56px; border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.22); border: 2px solid rgba(255,255,255,0.45);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .circle-avatar i { font-size: 28px; color: #fff; }
+    .circle-name { font-size: 20px; font-weight: 600; line-height: 1.35; margin-bottom: 6px; }
+    .circle-stats { display: flex; align-items: center; gap: 6px; font-size: 13px; opacity: 0.92; }
+    .circle-stats strong { font-family: var(--font-number); font-weight: 700; font-size: 15px; }
+    .circle-stats .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.55); }
+    .circle-actions { display: flex; gap: 10px; margin-top: 18px; position: relative; z-index: 1; }
+    .btn-ghost, .btn-solid-lite {
+      flex: 1; height: 40px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,0.16); color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    .btn-solid-lite { background: #fff; color: var(--brand-primary); }
+    .btn-ghost:active, .btn-solid-lite:active { opacity: 0.9; transform: scale(0.98); }
+
+    .sticky-tabs {
+      position: sticky; top: 0; z-index: 15;
+      background: var(--surface-card);
+      border-bottom: 1px solid rgba(216,216,216,0.55);
+    }
+    .channel-tabs { display: flex; padding: 0 8px; overflow-x: auto; scrollbar-width: none; }
+    .channel-tabs::-webkit-scrollbar { display: none; }
+    .channel-tab {
+      flex-shrink: 0; padding: 14px 14px 12px; font-size: 15px;
+      color: var(--text-secondary); position: relative; min-height: 44px;
+    }
+    .channel-tab.is-active { color: var(--brand-primary); font-weight: 600; }
+    .channel-tab.is-active::after {
+      content: ""; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+      width: 20px; height: 3px; border-radius: 2px; background: var(--brand-primary);
+    }
+    .filter-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px var(--space-h5-safe) 12px; overflow-x: auto; scrollbar-width: none;
+    }
+    .filter-row::-webkit-scrollbar { display: none; }
+    .filter-chip {
+      flex-shrink: 0; height: 30px; padding: 0 12px; border-radius: var(--radius-pill);
+      font-size: 13px; color: var(--text-secondary); background: var(--surface-card-muted);
+    }
+    .filter-chip.is-active {
+      color: var(--brand-primary); background: var(--brand-primary-faded);
+      border: 1px solid var(--border-primary-subtle); font-weight: 600;
+    }
+    .post-count { margin-left: auto; font-size: 12px; color: var(--text-tertiary); font-family: var(--font-number); }
+
+    .feed { padding: 12px 16px 100px; display: flex; flex-direction: column; gap: 12px; }
+    .post-card {
+      background: var(--surface-card); border-radius: var(--radius-md); padding: 16px;
+      box-shadow: var(--shadow-card-soft); border: 1px solid rgba(216,216,216,0.55);
+    }
+    .post-card.is-hidden { display: none; }
+    .post-head { display: flex; align-items: flex-start; gap: 10px; }
+    .user-avatar {
+      width: 40px; height: 40px; border-radius: var(--radius-full);
+      background: linear-gradient(135deg, #7BB8F5, #1B88EE);
+      color: #fff; font-size: 15px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .user-avatar.alt { background: linear-gradient(135deg, #A8B4C8, #6B8099); }
+    .user-info { flex: 1; min-width: 0; }
+    .user-row { display: flex; align-items: center; gap: 6px; }
+    .user-name { font-size: 15px; font-weight: 600; }
+    .user-days { font-size: 12px; color: var(--text-tertiary); font-family: var(--font-number); }
+    .role-tag {
+      display: inline-flex; height: 20px; padding: 0 8px; align-items: center;
+      border-radius: var(--radius-xs); font-size: 11px; margin-top: 4px;
+      color: var(--brand-primary); background: var(--brand-primary-faded);
+      border: 1px solid var(--border-primary-subtle);
+    }
+    .post-more { width: 32px; height: 32px; color: var(--text-tertiary); display: flex; align-items: center; justify-content: center; }
+    .post-body { margin-top: 12px; }
+    .post-title { font-size: 17px; font-weight: 600; line-height: 1.45; margin-bottom: 8px; }
+    .post-text { font-size: 15px; line-height: 1.55; color: var(--text-secondary); }
+    .post-text .expand { color: var(--brand-primary); font-weight: 500; }
+    .topic-tag {
+      display: inline-flex; align-items: center; gap: 4px; margin-top: 10px;
+      font-size: 13px; color: var(--brand-primary); font-weight: 500;
+    }
+    .post-meta {
+      display: flex; align-items: center; gap: 8px; margin-top: 10px;
+      font-size: 12px; color: var(--text-tertiary);
+    }
+    .post-meta .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--text-disabled); }
+    .engage {
+      display: flex; margin-top: 14px; padding-top: 12px;
+      border-top: 1px solid rgba(216,216,216,0.55); gap: 4px;
+    }
+    .engage-btn {
+      flex: 1; height: 36px; display: flex; align-items: center; justify-content: center;
+      gap: 6px; font-size: 13px; color: var(--text-tertiary); border-radius: var(--radius-sm);
+    }
+    .engage-btn i { font-size: 18px; }
+    .engage-btn.is-liked { color: var(--semantic-error); }
+    .comments {
+      margin-top: 12px; background: var(--surface-card-muted);
+      border-radius: var(--radius-sm); padding: 12px;
+    }
+    .comment-item { font-size: 13px; line-height: 1.5; color: var(--text-secondary); margin-bottom: 8px; }
+    .comment-item .who { color: var(--text-primary); font-weight: 600; }
+    .comment-item .author-badge { color: var(--brand-primary); font-weight: 500; margin: 0 2px; }
+    .view-all-comments {
+      display: flex; align-items: center; margin-top: 10px;
+      font-size: 13px; color: var(--brand-primary); font-weight: 500; gap: 2px;
+    }
+    .disclosure {
+      margin-top: 4px; padding: 10px 12px; background: var(--surface-card-muted);
+      border-radius: var(--radius-sm); font-size: 11px; line-height: 1.45; color: var(--text-tertiary);
+    }
+
+    .fab {
+      position: absolute; right: 20px; bottom: 28px;
+      width: 52px; height: 52px; border-radius: var(--radius-full);
+      background: var(--brand-primary); color: #fff;
+      box-shadow: var(--shadow-floating), 0 4px 12px rgba(27,136,238,0.35);
+      display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 20;
+    }
+    .fab:active { transform: scale(0.94); background: var(--brand-primary-pressed); }
+
+    .panel { display: none; padding: 48px 24px; text-align: center; }
+    .panel.is-active { display: block; }
+    .panel-icon {
+      width: 64px; height: 64px; margin: 0 auto 16px; border-radius: var(--radius-lg);
+      background: var(--brand-primary-faded); color: var(--brand-primary);
+      display: flex; align-items: center; justify-content: center; font-size: 32px;
+    }
+    .panel h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .panel p { font-size: 14px; color: var(--text-tertiary); line-height: 1.5; }
+
+    /* —— Live tab —— */
+    .live-panel {
+      display: none;
+      padding: 16px 16px 100px;
+      text-align: left;
+    }
+    .live-panel.is-active { display: block; }
+    .live-section-title {
+      font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);
+    }
+    .live-section-title + .live-card,
+    .live-section-title + .replay-list { margin-bottom: 20px; }
+
+    .live-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-card-soft);
+      border: 1px solid rgba(216,216,216,0.55);
+      margin-bottom: 12px;
+    }
+    .live-card:active { opacity: 0.92; }
+    .live-cover {
+      position: relative;
+      height: 168px;
+      background:
+        linear-gradient(160deg, rgba(15, 78, 168, 0.55), rgba(27, 136, 238, 0.25)),
+        linear-gradient(135deg, #3A7BB8 0%, #69B1F4 55%, #DBEBFF 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .live-cover .play {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.92); color: var(--brand-primary);
+      display: flex; align-items: center; justify-content: center; font-size: 28px;
+      box-shadow: 0 4px 12px rgba(30,62,98,0.18);
+    }
+    .live-badge {
+      position: absolute; left: 10px; top: 10px;
+      height: 22px; padding: 0 8px; border-radius: var(--radius-xs);
+      background: #FA440C; color: #fff; font-size: 11px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .live-badge::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: #fff; animation: livePulse 1.2s ease infinite;
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    .live-cover-meta {
+      position: absolute; left: 10px; right: 10px; bottom: 10px;
+      display: flex; justify-content: space-between; align-items: center;
+      color: #fff; font-size: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    }
+    .live-body { padding: 12px 14px 14px; }
+    .live-title {
+      font-size: 16px; font-weight: 600; line-height: 1.4; color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .live-sub {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+      font-size: 13px; color: var(--text-tertiary);
+    }
+    .live-sub .host { color: var(--text-secondary); font-weight: 500; }
+    .live-sub .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--text-disabled); }
+
+    .replay-list { display: flex; flex-direction: column; gap: 12px; }
+    .replay-card {
+      display: flex; gap: 12px; align-items: stretch;
+      background: var(--surface-card);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      box-shadow: var(--shadow-card-soft);
+      border: 1px solid rgba(216,216,216,0.55);
+      text-align: left; width: 100%;
+    }
+    .replay-card:active { background: #FCFCFC; }
+    .replay-thumb {
+      width: 112px; height: 74px; flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(145deg, #7BB8F0, #3A7BB8);
+      position: relative; overflow: hidden;
+    }
+    .replay-thumb .tag {
+      position: absolute; left: 6px; top: 6px;
+      height: 18px; padding: 0 6px; border-radius: 3px;
+      background: rgba(0,0,0,0.55); color: #fff; font-size: 10px; font-weight: 600;
+      display: inline-flex; align-items: center;
+    }
+    .replay-thumb .duration {
+      position: absolute; right: 6px; bottom: 6px;
+      font-size: 10px; color: #fff; font-family: var(--font-number);
+      background: rgba(0,0,0,0.45); padding: 1px 5px; border-radius: 3px;
+    }
+    .replay-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .replay-title {
+      font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--text-primary);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .replay-meta {
+      margin-top: auto; padding-top: 8px;
+      font-size: 12px; color: var(--text-tertiary); line-height: 1.45;
+    }
+    .replay-meta .row {
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .replay-meta .topic {
+      color: var(--brand-primary); font-weight: 500;
+    }
+    .replay-meta .views {
+      font-family: var(--font-number);
+    }
+
+    .overlay {
+      position: absolute; inset: 0; background: rgba(30,42,58,0.42);
+      z-index: 40; opacity: 0; visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .overlay.is-open { opacity: 1; visibility: visible; }
+    .sheet {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      background: var(--surface-card); border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      padding: 12px 16px 28px; z-index: 50;
+      transform: translateY(105%);
+      transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .sheet.is-open { transform: translateY(0); }
+    .sheet-handle {
+      width: 36px; height: 4px; border-radius: 2px; background: var(--border-default);
+      margin: 4px auto 16px;
+    }
+    .sheet-title { font-size: 17px; font-weight: 600; text-align: center; margin-bottom: 16px; }
+    .sheet-list button {
+      width: 100%; height: 52px; display: flex; align-items: center; gap: 12px;
+      padding: 0 8px; font-size: 16px; border-radius: var(--radius-sm);
+    }
+    .sheet-list button:active { background: var(--surface-card-muted); }
+    .sheet-list i { font-size: 22px; color: var(--text-secondary); }
+    .sheet-cancel {
+      margin-top: 8px; height: 48px; width: 100%; border-radius: var(--radius-sm);
+      background: var(--surface-card-muted); font-size: 16px; font-weight: 600; color: var(--text-secondary);
+    }
+    .compose-area {
+      width: 100%; min-height: 120px; border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm); padding: 12px; font-size: 15px; line-height: 1.5;
+      font-family: var(--font-sans); resize: none; outline: none;
+    }
+    .compose-area:focus {
+      border-color: var(--border-primary);
+      box-shadow: 0 0 0 3px rgba(27,136,238,0.12);
+    }
+    .compose-actions { display: flex; gap: 10px; margin-top: 16px; }
+    .btn-secondary {
+      flex: 1; height: 44px; border-radius: var(--radius-sm); background: #fff;
+      color: var(--brand-primary); border: 1px solid var(--border-primary);
+      font-size: 16px; font-weight: 600;
+    }
+    .btn-primary {
+      flex: 1.2; height: 44px; border-radius: var(--radius-sm);
+      background: var(--brand-primary); color: #fff; font-size: 16px; font-weight: 600;
+    }
+    .btn-primary:disabled { background: var(--text-disabled); }
+    .btn-primary:active:not(:disabled) { background: var(--brand-primary-pressed); }
+
+    .toast {
+      position: absolute; left: 50%; bottom: 110px;
+      transform: translateX(-50%) translateY(12px);
+      background: rgba(51,51,51,0.92); color: #fff; font-size: 14px;
+      padding: 10px 18px; border-radius: var(--radius-sm); z-index: 60;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      white-space: nowrap; max-width: calc(100% - 48px);
+    }
+    .toast.is-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .detail {
+      position: absolute; inset: 0; background: var(--surface-page); z-index: 35;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+      display: flex; flex-direction: column;
+    }
+    .detail.is-open { transform: translateX(0); }
+    .detail-scroll { flex: 1; overflow-y: auto; }
+    .detail-content { background: var(--surface-card); padding: 16px; }
+    .detail-article { font-size: 15px; line-height: 1.7; color: var(--text-secondary); margin-top: 12px; }
+    .detail-article p + p { margin-top: 12px; }
+    .detail-comment-input {
+      display: flex; gap: 10px; align-items: center;
+      padding: 10px 16px 20px; background: var(--surface-card);
+      border-top: 1px solid rgba(216,216,216,0.55);
+    }
+    .detail-comment-input input {
+      flex: 1; height: 40px; border: 1px solid var(--border-default);
+      border-radius: var(--radius-pill); padding: 0 16px; font-size: 14px;
+      outline: none; font-family: var(--font-sans);
+    }
+    .send-btn {
+      width: 40px; height: 40px; border-radius: var(--radius-full);
+      background: var(--brand-primary); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+
+    .home-indicator {
+      position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 4px; border-radius: 2px;
+      background: rgba(0,0,0,0.18); z-index: 25; pointer-events: none;
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 0; background: var(--surface-page); align-items: stretch; }
+      .stage { width: 100%; gap: 0; }
+      .stage-label, .stage-switch, .elig-bar { display: none; }
+      .phone { width: 100%; height: 100vh; height: 100dvh; border-radius: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <p class="stage-label">且慢 App · 圈子详情 · 未加入 / 已加入</p>
+    <div class="stage-switch" role="tablist" aria-label="状态切换">
+      <button type="button" class="is-active" data-state="guest">未加入</button>
+      <button type="button" data-state="joined">已加入</button>
+    </div>
+    <div class="elig-bar" id="eligBar" aria-label="资格模拟（演示）">
+      <button type="button" class="is-active" data-elig="none">资格：未满足</button>
+      <button type="button" data-elig="follow">已跟投+协议</button>
+      <button type="button" data-elig="service">已购投顾服务</button>
+    </div>
+
+    <div class="phone" id="phone">
+      <!-- ========== 未加入 ========== -->
+      <div class="view is-active" id="viewGuest" data-view="guest">
+        <div class="scroll" id="guestScroll">
+          <section class="guest-hero">
+            <div class="status-bar on-blue" aria-hidden="true">
+              <span>9:41</span>
+              <div class="status-icons">
+                <i class="ri-signal-wifi-fill"></i>
+                <i class="ri-battery-fill"></i>
+              </div>
+            </div>
+            <button class="guest-back" type="button" aria-label="返回" id="guestBack">
+              <i class="ri-arrow-left-s-line"></i>
+            </button>
+            <div class="guest-brand">
+              <div class="guest-avatar" aria-hidden="true"><i class="ri-landscape-line"></i></div>
+              <h1 class="guest-name">思远定投全球好资产(举例小组)</h1>
+              <p class="guest-desc">
+                <span>专属投顾陪伴小组，交流定投节奏与全球配置观察，长期主义同行…</span>
+                <i class="ri-arrow-right-s-line"></i>
+              </p>
+            </div>
+            <div class="guest-metrics">
+              <div class="guest-metric">
+                <div class="num"><i class="ri-user-line"></i>99999+</div>
+                <div class="label">成员</div>
+              </div>
+              <div class="guest-metric">
+                <div class="num"><i class="ri-file-list-3-line"></i>99999+</div>
+                <div class="label">内容</div>
+              </div>
+              <div class="guest-metric">
+                <div class="num"><i class="ri-calendar-line"></i>10085</div>
+                <div class="label">活跃天数</div>
+              </div>
+            </div>
+          </section>
+
+          <div class="guest-body">
+            <h2 class="section-title">组长</h2>
+            <div class="info-card">
+              <div class="leader-row">
+                <div class="leader-avatar">小<span class="badge"><i class="ri-check-line"></i></span></div>
+                <div class="leader-meta">
+                  <div class="leader-name-row">
+                    <span class="leader-name">小小</span>
+                    <span class="days-tag">3196天</span>
+                  </div>
+                  <p class="leader-bio">某策略主理人，爱分享投资~</p>
+                </div>
+              </div>
+            </div>
+
+            <h2 class="section-title">加入须知</h2>
+            <div class="info-card">
+              <p class="notice-body" id="noticeText">
+                1. 需为跟投客户且已签署投顾服务协议，或为指定策略/增值服务的付费客户；<br />
+                2. 加入后请遵守社区交流规范，理性讨论、独立决策，内容不构成投资建议；<br />
+                3. 小组内观点仅供学习参考，市场有风险，投资需谨慎。
+              </p>
+              <button type="button" class="notice-more" id="btnNoticeMore">
+                查看更多 <i class="ri-arrow-down-s-line"></i>
+              </button>
+            </div>
+
+            <h2 class="section-title">小组预览</h2>
+            <div class="preview-chips" role="tablist" aria-label="预览频道">
+              <button type="button" class="preview-chip is-active">帖子</button>
+              <button type="button" class="preview-chip">直播</button>
+              <button type="button" class="preview-chip">课程</button>
+              <button type="button" class="preview-chip">工具</button>
+              <button type="button" class="preview-chip">策略</button>
+            </div>
+
+            <div class="preview-card">
+              <div class="leader-row">
+                <div class="leader-avatar" style="width:36px;height:36px;font-size:13px">小</div>
+                <div class="leader-meta">
+                  <div class="leader-name-row">
+                    <span class="leader-name">小小</span>
+                    <span class="days-tag">3196天</span>
+                  </div>
+                </div>
+              </div>
+              <h3 class="preview-title">波动进一步加大了怎么办？（示例标题）</h3>
+              <p class="preview-text">
+                市场又到了波动加剧的阶段，不少朋友最近开始焦虑了起来，这完全没必要。我们看的是长期资产配置节奏……
+                <span class="more">全文</span>
+              </p>
+              <div class="preview-gallery" aria-hidden="true">
+                <div class="thumb"></div>
+                <div class="thumb"></div>
+                <div class="thumb more-n" data-n="6"></div>
+              </div>
+              <span class="topic-pill"><i class="ri-global-line"></i>投资闲聊话题</span>
+              <div class="lock-mask">
+                <i class="ri-lock-2-line"></i>
+                <span>加入后查看更多精彩内容</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guest-bottom">
+          <button type="button" class="assist-entry" id="guestAssist">
+            <i class="ri-chat-smile-2-line"></i>
+            联系助理
+          </button>
+          <button type="button" class="join-btn" id="btnJoin">加入小组</button>
+        </div>
+      </div>
+
+      <!-- ========== 已加入 ========== -->
+      <div class="view" id="viewJoined" data-view="joined">
+        <div class="status-bar on-white" aria-hidden="true">
+          <span>9:41</span>
+          <div class="status-icons">
+            <i class="ri-signal-wifi-fill"></i>
+            <i class="ri-battery-fill"></i>
+          </div>
+        </div>
+        <header class="nav">
+          <button class="nav-btn" type="button" aria-label="返回" id="joinedBack">
+            <i class="ri-arrow-left-s-line" style="font-size:28px"></i>
+          </button>
+          <h1 class="nav-title">圈子</h1>
+          <div class="nav-actions">
+            <button class="nav-btn" type="button" aria-label="搜索" id="btnSearch"><i class="ri-search-line" style="font-size:22px"></i></button>
+            <button class="nav-btn" type="button" aria-label="分享" id="btnShare"><i class="ri-share-line" style="font-size:22px"></i></button>
+          </div>
+        </header>
+
+        <div class="scroll" id="mainScroll">
+          <section class="circle-hero">
+            <div class="circle-top">
+              <div class="circle-avatar"><i class="ri-earth-line"></i></div>
+              <div>
+                <h2 class="circle-name">思远定投全球好资产</h2>
+                <div class="circle-stats">
+                  <span><strong>89,999+</strong> 用户</span>
+                  <span class="dot"></span>
+                  <span>策略陪伴圈</span>
+                </div>
+              </div>
+            </div>
+            <div class="circle-actions">
+              <button class="btn-ghost" type="button" id="btnAssist"><i class="ri-customer-service-2-line"></i>联系助理</button>
+              <button class="btn-solid-lite" type="button" id="btnManage"><i class="ri-settings-3-line"></i>管理</button>
+            </div>
+          </section>
+
+          <div class="sticky-tabs">
+            <nav class="channel-tabs" role="tablist">
+              <button class="channel-tab is-active" data-channel="posts">帖子</button>
+              <button class="channel-tab" data-channel="live">直播</button>
+              <button class="channel-tab" data-channel="course">课程</button>
+              <button class="channel-tab" data-channel="tools">工具</button>
+              <button class="channel-tab" data-channel="strategy">策略</button>
+            </nav>
+            <div class="filter-row" id="filterRow">
+              <button class="filter-chip is-active" data-filter="all">全部</button>
+              <button class="filter-chip" data-filter="essence">精华</button>
+              <button class="filter-chip" data-filter="leader">只看组长</button>
+              <span class="post-count" id="postCount">7 发帖</span>
+            </div>
+          </div>
+
+          <div class="feed" id="feedPosts">
+            <article class="post-card" data-essence="true" data-leader="true">
+              <div class="post-head">
+                <div class="user-avatar">小</div>
+                <div class="user-info">
+                  <div class="user-row">
+                    <span class="user-name">小小</span>
+                    <span class="user-days">3196天</span>
+                  </div>
+                  <span class="role-tag">某策略主理人</span>
+                </div>
+                <button class="post-more" type="button" data-action="more" aria-label="更多"><i class="ri-more-fill"></i></button>
+              </div>
+              <div class="post-body">
+                <h3 class="post-title">波动进一步加大了怎么办？</h3>
+                <p class="post-text">市场又到了波动加剧的阶段，不少朋友最近开始焦虑了起来，这完全没必要。我们看的是长期资产配置节奏，而不是短期涨跌……
+                  <button type="button" class="expand" data-action="expand">全文</button>
+                </p>
+                <button type="button" class="topic-tag"><i class="ri-hashtag"></i>投资闲聊话题</button>
+                <div class="post-meta"><span>更新于 2 个月前</span><span class="sep"></span><span>广东省广州市</span></div>
+              </div>
+              <div class="engage">
+                <button class="engage-btn" type="button" data-action="like" data-count="90"><i class="ri-heart-line"></i><span class="like-num">90</span></button>
+                <button class="engage-btn" type="button" data-action="comment"><i class="ri-chat-3-line"></i><span>999</span></button>
+                <button class="engage-btn" type="button" data-action="share-post"><i class="ri-share-forward-line"></i><span>分享</span></button>
+              </div>
+              <div class="comments">
+                <div class="comment-item"><span class="who">张星月</span>：最近是个适合增加资金的好机会吗</div>
+                <div class="comment-item"><span class="who">大WV老师</span><span class="author-badge">作者</span> 评论 张星月：看图片哦</div>
+                <div class="comment-item"><span class="who">小夏子</span> 评论 张星月：[图片]</div>
+                <button type="button" class="view-all-comments" data-action="view-comments">查看全部评论 <i class="ri-arrow-right-s-line"></i></button>
+              </div>
+            </article>
+
+            <article class="post-card" data-essence="true" data-leader="false">
+              <div class="post-head">
+                <div class="user-avatar alt">星</div>
+                <div class="user-info">
+                  <div class="user-row"><span class="user-name">张星月</span><span class="user-days">842天</span></div>
+                </div>
+                <button class="post-more" type="button" data-action="more" aria-label="更多"><i class="ri-more-fill"></i></button>
+              </div>
+              <div class="post-body">
+                <h3 class="post-title">定投节奏要不要跟着波动调整？</h3>
+                <p class="post-text">想请教一下大家：最近波动加大，有没有人调整了定投频率？或者还是按原计划执行？</p>
+                <button type="button" class="topic-tag"><i class="ri-hashtag"></i>定投交流</button>
+                <div class="post-meta"><span>更新于 3 周前</span><span class="sep"></span><span>上海市</span></div>
+              </div>
+              <div class="engage">
+                <button class="engage-btn" type="button" data-action="like" data-count="36"><i class="ri-heart-line"></i><span class="like-num">36</span></button>
+                <button class="engage-btn" type="button" data-action="comment"><i class="ri-chat-3-line"></i><span>48</span></button>
+                <button class="engage-btn" type="button" data-action="share-post"><i class="ri-share-forward-line"></i><span>分享</span></button>
+              </div>
+            </article>
+
+            <article class="post-card" data-essence="false" data-leader="true">
+              <div class="post-head">
+                <div class="user-avatar">小</div>
+                <div class="user-info">
+                  <div class="user-row"><span class="user-name">小小</span><span class="user-days">3196天</span></div>
+                  <span class="role-tag">某策略主理人</span>
+                </div>
+                <button class="post-more" type="button" data-action="more" aria-label="更多"><i class="ri-more-fill"></i></button>
+              </div>
+              <div class="post-body">
+                <h3 class="post-title">本周全球配置观察（示例）</h3>
+                <p class="post-text">本周把关注点放在资产相关性与波动中枢上。不承诺收益，仅作圈内讨论参考……
+                  <button type="button" class="expand" data-action="expand">全文</button>
+                </p>
+                <div class="post-meta"><span>更新于 5 天前</span><span class="sep"></span><span>广东省广州市</span></div>
+              </div>
+              <div class="engage">
+                <button class="engage-btn" type="button" data-action="like" data-count="128"><i class="ri-heart-line"></i><span class="like-num">128</span></button>
+                <button class="engage-btn" type="button" data-action="comment"><i class="ri-chat-3-line"></i><span>216</span></button>
+                <button class="engage-btn" type="button" data-action="share-post"><i class="ri-share-forward-line"></i><span>分享</span></button>
+              </div>
+            </article>
+
+            <div class="disclosure">风险提示：圈子内容仅供交流讨论，不构成投资建议。历史表现不预示未来收益。示例数据仅用于界面演示。</div>
+          </div>
+
+          <div class="live-panel" id="livePanel" data-panel="live">
+            <h2 class="live-section-title">近期直播</h2>
+            <button type="button" class="live-card" data-live-action="enter">
+              <div class="live-cover">
+                <span class="live-badge">直播中</span>
+                <div class="play" aria-hidden="true"><i class="ri-play-fill"></i></div>
+                <div class="live-cover-meta">
+                  <span>郭志强</span>
+                  <span>8月8日 19:00</span>
+                </div>
+              </div>
+              <div class="live-body">
+                <div class="live-title">机会跌出来了吗？市场回顾与展望</div>
+                <div class="live-sub">
+                  <span class="host">郭志强</span>
+                  <span class="sep"></span>
+                  <span>直播时间：8月8日 19:00</span>
+                </div>
+              </div>
+            </button>
+
+            <h2 class="live-section-title">直播回放</h2>
+            <div class="replay-list">
+              <button type="button" class="replay-card" data-live-action="replay">
+                <div class="replay-thumb">
+                  <span class="tag">回放</span>
+                  <span class="duration">45:20</span>
+                </div>
+                <div class="replay-info">
+                  <div class="replay-title">机会跌出来了吗？市场回顾与展望</div>
+                  <div class="replay-meta">
+                    <div class="row"><span>郭志强</span><span class="sep" style="width:3px;height:3px;border-radius:50%;background:#ccc;display:inline-block"></span><span>8月8日 19:00</span></div>
+                  </div>
+                </div>
+              </button>
+
+              <button type="button" class="replay-card" data-live-action="replay">
+                <div class="replay-thumb" style="background:linear-gradient(145deg,#F88D72,#3A7BB8)">
+                  <span class="tag">回放</span>
+                  <span class="duration">38:12</span>
+                </div>
+                <div class="replay-info">
+                  <div class="replay-title">投资中一些基本道理你需要懂</div>
+                  <div class="replay-meta">
+                    <div class="row"><span>杨老师</span><span class="topic">#周周同行</span></div>
+                    <div class="row" style="margin-top:4px"><span>7月15日</span><span class="views">800万次观看</span></div>
+                  </div>
+                </div>
+              </button>
+
+              <button type="button" class="replay-card" data-live-action="replay">
+                <div class="replay-thumb" style="background:linear-gradient(145deg,#ADAFE8,#1B88EE)">
+                  <span class="tag">回放</span>
+                  <span class="duration">52:08</span>
+                </div>
+                <div class="replay-info">
+                  <div class="replay-title">机会跌出来了吗？市场回顾与展望</div>
+                  <div class="replay-meta">
+                    <div class="row"><span>郭志强</span><span>·</span><span>8月8日 19:00</span></div>
+                  </div>
+                </div>
+              </button>
+
+              <button type="button" class="replay-card" data-live-action="replay">
+                <div class="replay-thumb" style="background:linear-gradient(145deg,#7DD4C4,#3A7BB8)">
+                  <span class="tag">回放</span>
+                  <span class="duration">41:33</span>
+                </div>
+                <div class="replay-info">
+                  <div class="replay-title">投资中一些基本道理你需要懂</div>
+                  <div class="replay-meta">
+                    <div class="row"><span>杨老师</span><span class="topic">#周周同行</span></div>
+                    <div class="row" style="margin-top:4px"><span>7月15日</span><span class="views">800万次观看</span></div>
+                  </div>
+                </div>
+              </button>
+
+              <button type="button" class="replay-card" data-live-action="replay">
+                <div class="replay-thumb" style="background:linear-gradient(145deg,#FBCA74,#1B88EE)">
+                  <span class="tag">回放</span>
+                  <span class="duration">36:50</span>
+                </div>
+                <div class="replay-info">
+                  <div class="replay-title">投资中一些基本道理你需要懂</div>
+                  <div class="replay-meta">
+                    <div class="row"><span>杨老师</span><span class="topic">#周周同行</span></div>
+                    <div class="row" style="margin-top:4px"><span>7月15日</span><span class="views">800万次观看</span></div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="panel" data-panel="course"><div class="panel-icon"><i class="ri-book-open-line"></i></div><h3>暂无课程</h3><p>课程与复盘将在此更新。</p></div>
+          <div class="panel" data-panel="tools"><div class="panel-icon"><i class="ri-tools-line"></i></div><h3>暂无工具</h3><p>定投计算器等工具即将上线。</p></div>
+          <div class="panel" data-panel="strategy"><div class="panel-icon"><i class="ri-line-chart-line"></i></div><h3>暂无策略卡片</h3><p>关联策略介绍将在此呈现。</p></div>
+        </div>
+
+        <button class="fab" type="button" id="btnCompose" aria-label="发帖"><i class="ri-add-line"></i></button>
+      </div>
+
+      <div class="home-indicator" aria-hidden="true"></div>
+      <div class="overlay" id="overlay"></div>
+
+      <div class="sheet" id="sheetMore">
+        <div class="sheet-handle"></div>
+        <h3 class="sheet-title">更多操作</h3>
+        <div class="sheet-list">
+          <button type="button" data-toast="已收藏"><i class="ri-star-line"></i>收藏帖子</button>
+          <button type="button" data-toast="已复制链接"><i class="ri-link"></i>复制链接</button>
+          <button type="button" data-toast="已提交举报"><i class="ri-alarm-warning-line"></i>举报</button>
+        </div>
+        <button class="sheet-cancel" type="button" data-close>取消</button>
+      </div>
+
+      <div class="sheet" id="sheetManage">
+        <div class="sheet-handle"></div>
+        <h3 class="sheet-title">圈子管理</h3>
+        <div class="sheet-list">
+          <button type="button" data-toast="已进入消息设置"><i class="ri-notification-off-line"></i>消息设置</button>
+          <button type="button" data-toast="已置顶圈子"><i class="ri-pushpin-line"></i>置顶圈子</button>
+          <button type="button" id="btnLeaveGroup"><i class="ri-logout-box-r-line"></i>退出圈子</button>
+        </div>
+        <button class="sheet-cancel" type="button" data-close>取消</button>
+      </div>
+
+      <!-- 加入前置条件 -->
+      <div class="sheet sheet-join" id="sheetJoin" role="dialog" aria-labelledby="joinGateTitle">
+        <div class="sheet-handle"></div>
+        <div class="join-gate-head">
+          <div class="join-gate-mascot" aria-hidden="true"><i class="ri-robot-2-line"></i></div>
+          <h3 id="joinGateTitle">满足任一条件可加入小组</h3>
+        </div>
+
+        <div class="cond-card">
+          <div class="cond-title-row">
+            <span class="cond-title">跟投策略并签署投顾协议</span>
+            <button type="button" class="rule-link" data-rule="follow" aria-label="查看跟投规则">
+              规则 <i class="ri-question-line"></i>
+            </button>
+          </div>
+          <div class="cond-links">
+            <button type="button" class="cond-link" data-path="follow" data-name="思远定投全球好资产">
+              <span>思远定投全球好资产</span>
+              <i class="ri-arrow-right-s-line"></i>
+            </button>
+            <button type="button" class="cond-link" data-path="follow" data-name="春夏秋冬策略">
+              <span>春夏秋冬策略</span>
+              <i class="ri-arrow-right-s-line"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="cond-card">
+          <div class="cond-title-row">
+            <span class="cond-title">购买投顾服务</span>
+            <button type="button" class="rule-link" data-rule="service" aria-label="查看投顾服务规则">
+              规则 <i class="ri-question-line"></i>
+            </button>
+          </div>
+          <div class="cond-links">
+            <button type="button" class="cond-link" data-path="service" data-name="投顾服务 (¥999.99/年)">
+              <span>投顾服务 (¥999.99/年)</span>
+              <i class="ri-arrow-right-s-line"></i>
+            </button>
+            <button type="button" class="cond-link" data-path="service" data-name="投顾服务 (¥500/季)">
+              <span>投顾服务 (¥500/季)</span>
+              <i class="ri-arrow-right-s-line"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 规则弹窗：跟投 -->
+      <div class="modal-layer" id="modalFollow" role="dialog" aria-modal="true" aria-labelledby="modalFollowTitle">
+        <div class="rule-modal">
+          <div class="rule-modal-hero" aria-hidden="true">
+            <div class="bubble"><i class="ri-user-smile-line"></i></div>
+            <div class="clip"><i class="ri-file-list-3-line"></i></div>
+          </div>
+          <div class="rule-modal-body">
+            <h4 id="modalFollowTitle">跟投策略并签署投顾协议</h4>
+            <ol>
+              <li>需为持仓满足页面提示策略的客户（资产&gt;100元），且签署了投顾服务协议。</li>
+              <li>若客户解约了投顾协议，则不能再次查看，自动退出小组。</li>
+            </ol>
+          </div>
+          <div class="rule-modal-foot">
+            <button type="button" class="got-it" data-close-modal="modalFollow">知道了</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 规则弹窗：投顾服务 -->
+      <div class="modal-layer" id="modalService" role="dialog" aria-modal="true" aria-labelledby="modalServiceTitle">
+        <div class="rule-modal">
+          <div class="rule-modal-hero" aria-hidden="true">
+            <div class="bubble"><i class="ri-user-smile-line"></i></div>
+            <div class="clip"><i class="ri-file-list-3-line"></i></div>
+          </div>
+          <div class="rule-modal-body">
+            <h4 id="modalServiceTitle">购买投顾服务</h4>
+            <ol>
+              <li>购买页面显示的投顾服务，在有效期内可以加入小组。</li>
+              <li>到期后可续费投顾服务，若到期不续费则自动退出小组。</li>
+            </ol>
+          </div>
+          <div class="rule-modal-foot">
+            <button type="button" class="got-it" data-close-modal="modalService">知道了</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet" id="sheetCompose">
+        <div class="sheet-handle"></div>
+        <h3 class="sheet-title">发布帖子</h3>
+        <textarea class="compose-area" id="composeInput" placeholder="分享你的投资观察与问题（请勿承诺收益）…" maxlength="500"></textarea>
+        <div class="disclosure" style="margin-top:12px">发布内容需遵守社区规范。观点交流不等于投资建议。</div>
+        <div class="compose-actions">
+          <button class="btn-secondary" type="button" data-close>取消</button>
+          <button class="btn-primary" type="button" id="btnPublish" disabled>发布</button>
+        </div>
+      </div>
+
+      <div class="detail" id="postDetail" aria-hidden="true">
+        <div class="status-bar on-white" aria-hidden="true"><span>9:41</span><div class="status-icons"><i class="ri-signal-wifi-fill"></i><i class="ri-battery-fill"></i></div></div>
+        <header class="nav">
+          <button class="nav-btn" type="button" id="btnCloseDetail" aria-label="关闭"><i class="ri-arrow-left-s-line" style="font-size:28px"></i></button>
+          <h2 class="nav-title">帖子详情</h2>
+          <div class="nav-actions"><button class="nav-btn" type="button" id="btnDetailMore"><i class="ri-more-fill" style="font-size:22px"></i></button></div>
+        </header>
+        <div class="detail-scroll">
+          <div class="detail-content">
+            <div class="post-head">
+              <div class="user-avatar">小</div>
+              <div class="user-info">
+                <div class="user-row"><span class="user-name">小小</span><span class="user-days">3196天</span></div>
+                <span class="role-tag">某策略主理人</span>
+              </div>
+            </div>
+            <h3 class="post-title" style="margin-top:16px">波动进一步加大了怎么办？</h3>
+            <div class="detail-article">
+              <p>市场又到了波动加剧的阶段，不少朋友最近开始焦虑了起来，这完全没必要。</p>
+              <p>我们看的是长期资产配置节奏，而不是短期涨跌本身。波动加大时，更重要的是确认资金节奏、风险承受与持有目标是否一致。</p>
+              <p>如果定投计划匹配现金流与风险偏好，短期波动更像执行纪律的考验。请结合自身情况，理性讨论、独立决策。</p>
+            </div>
+            <button type="button" class="topic-tag"><i class="ri-hashtag"></i>投资闲聊话题</button>
+            <div class="post-meta"><span>更新于 2 个月前</span><span class="sep"></span><span>广东省广州市</span></div>
+          </div>
+          <div style="padding:12px 16px">
+            <div class="comments">
+              <div class="comment-item"><span class="who">张星月</span>：最近是个适合增加资金的好机会吗</div>
+              <div class="comment-item"><span class="who">大WV老师</span><span class="author-badge">作者</span> 评论 张星月：看图片哦</div>
+            </div>
+            <div class="disclosure" style="margin-top:12px">风险提示：以上讨论不构成投资建议。</div>
+          </div>
+        </div>
+        <div class="detail-comment-input">
+          <input type="text" id="commentInput" placeholder="说点什么…" maxlength="200" aria-label="评论输入" />
+          <button class="send-btn" type="button" id="btnSendComment" aria-label="发送"><i class="ri-send-plane-2-fill"></i></button>
+        </div>
+      </div>
+
+      <div class="toast" id="toast" role="status"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const toastEl = document.getElementById("toast");
+      const overlay = document.getElementById("overlay");
+      const viewGuest = document.getElementById("viewGuest");
+      const viewJoined = document.getElementById("viewJoined");
+      const feedPosts = document.getElementById("feedPosts");
+      const filterRow = document.getElementById("filterRow");
+      const postCount = document.getElementById("postCount");
+      const postDetail = document.getElementById("postDetail");
+      const composeInput = document.getElementById("composeInput");
+      const btnPublish = document.getElementById("btnPublish");
+      const eligBar = document.getElementById("eligBar");
+      let toastTimer = null;
+
+      /** 用户资格：none | follow | service */
+      let eligibility = "none";
+
+      function showToast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add("is-show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove("is-show"), 1800);
+      }
+
+      function isQualified() {
+        return eligibility === "follow" || eligibility === "service";
+      }
+
+      function setEligibility(next) {
+        eligibility = next;
+        eligBar.querySelectorAll("button").forEach((b) => {
+          b.classList.toggle("is-active", b.dataset.elig === next);
+        });
+      }
+
+      eligBar.querySelectorAll("button").forEach((btn) => {
+        btn.addEventListener("click", () => setEligibility(btn.dataset.elig));
+      });
+
+      function setState(state) {
+        const isGuest = state === "guest";
+        viewGuest.classList.toggle("is-active", isGuest);
+        viewJoined.classList.toggle("is-active", !isGuest);
+        document.querySelectorAll(".stage-switch button").forEach((b) => {
+          b.classList.toggle("is-active", b.dataset.state === state);
+        });
+        eligBar.style.display = isGuest ? "flex" : "none";
+        closeSheet();
+        closeModal();
+        closeDetail();
+      }
+
+      document.querySelectorAll(".stage-switch button").forEach((btn) => {
+        btn.addEventListener("click", () => setState(btn.dataset.state));
+      });
+
+      /** 加入：先校验资格 → 已满足直接加入，否则弹出前置条件 */
+      function tryJoinGroup() {
+        if (isQualified()) {
+          completeJoin(
+            eligibility === "follow"
+              ? "已校验跟投+协议，成功加入小组"
+              : "已校验投顾服务有效，成功加入小组"
+          );
+          return;
+        }
+        openSheet("sheetJoin");
+      }
+
+      function completeJoin(msg) {
+        closeSheet();
+        closeModal();
+        showToast(msg || "已加入小组");
+        setTimeout(() => setState("joined"), 360);
+      }
+
+      document.getElementById("btnJoin").addEventListener("click", tryJoinGroup);
+
+      document.getElementById("btnLeaveGroup").addEventListener("click", () => {
+        showToast("已退出圈子");
+        setEligibility("none");
+        closeSheet();
+        setTimeout(() => setState("guest"), 300);
+      });
+
+      /* 规则弹窗 */
+      function openModal(id) {
+        document.getElementById(id).classList.add("is-open");
+      }
+      function closeModal() {
+        document.querySelectorAll(".modal-layer.is-open").forEach((m) => m.classList.remove("is-open"));
+      }
+      document.querySelectorAll("[data-rule]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const key = btn.dataset.rule;
+          openModal(key === "follow" ? "modalFollow" : "modalService");
+        });
+      });
+      document.querySelectorAll("[data-close-modal]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.getElementById(btn.dataset.closeModal).classList.remove("is-open");
+        });
+      });
+      document.querySelectorAll(".modal-layer").forEach((layer) => {
+        layer.addEventListener("click", (e) => {
+          if (e.target === layer) layer.classList.remove("is-open");
+        });
+      });
+
+      /* 条件路径：模拟完成跟投/购买后具备资格并加入 */
+      document.querySelectorAll(".cond-link").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const path = btn.dataset.path;
+          const name = btn.dataset.name;
+          if (path === "follow") {
+            showToast("前往「" + name + "」跟投并签署协议…");
+            setEligibility("follow");
+            setTimeout(() => completeJoin("跟投协议已签署，已加入小组"), 700);
+          } else {
+            showToast("前往购买「" + name + "」…");
+            setEligibility("service");
+            setTimeout(() => completeJoin("投顾服务已开通，已加入小组"), 700);
+          }
+        });
+      });
+
+      /* notice expand */
+      document.getElementById("btnNoticeMore").addEventListener("click", function () {
+        const text = document.getElementById("noticeText");
+        const open = text.classList.toggle("is-expanded");
+        this.innerHTML = open
+          ? '收起 <i class="ri-arrow-up-s-line"></i>'
+          : '查看更多 <i class="ri-arrow-down-s-line"></i>';
+      });
+
+      document.querySelectorAll(".preview-chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          document.querySelectorAll(".preview-chip").forEach((c) => c.classList.remove("is-active"));
+          chip.classList.add("is-active");
+          if (chip.textContent !== "帖子") showToast("加入后可查看" + chip.textContent);
+        });
+      });
+
+      document.getElementById("guestAssist").addEventListener("click", () => showToast("已唤起联系助理"));
+      document.getElementById("guestBack").addEventListener("click", () => showToast("返回上一页"));
+
+      function openSheet(id) {
+        closeSheet();
+        overlay.classList.add("is-open");
+        document.getElementById(id).classList.add("is-open");
+      }
+      function closeSheet() {
+        overlay.classList.remove("is-open");
+        document.querySelectorAll(".sheet.is-open").forEach((s) => s.classList.remove("is-open"));
+      }
+      overlay.addEventListener("click", () => {
+        if (document.querySelector(".modal-layer.is-open")) return;
+        closeSheet();
+      });
+      document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", closeSheet));
+      document.querySelectorAll(".sheet-list [data-toast]").forEach((b) => {
+        b.addEventListener("click", () => { showToast(b.getAttribute("data-toast")); closeSheet(); });
+      });
+
+      /* joined channels */
+      const livePanel = document.getElementById("livePanel");
+      const channelTabs = document.querySelectorAll(".channel-tab");
+      channelTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const name = tab.dataset.channel;
+          channelTabs.forEach((t) => t.classList.toggle("is-active", t === tab));
+          feedPosts.style.display = name === "posts" ? "flex" : "none";
+          filterRow.style.display = name === "posts" ? "flex" : "none";
+          document.getElementById("btnCompose").style.display = name === "posts" ? "flex" : "none";
+          livePanel.classList.toggle("is-active", name === "live");
+          document.querySelectorAll(".panel").forEach((p) => {
+            p.classList.toggle("is-active", p.dataset.panel === name);
+          });
+        });
+      });
+
+      document.querySelectorAll("[data-live-action]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const action = btn.dataset.liveAction;
+          showToast(action === "enter" ? "进入直播间…" : "打开直播回放…");
+        });
+      });
+
+      filterRow.querySelectorAll(".filter-chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const filter = chip.dataset.filter;
+          filterRow.querySelectorAll(".filter-chip").forEach((c) => c.classList.toggle("is-active", c === chip));
+          let n = 0;
+          feedPosts.querySelectorAll(".post-card").forEach((card) => {
+            const show =
+              filter === "all" ||
+              (filter === "essence" && card.dataset.essence === "true") ||
+              (filter === "leader" && card.dataset.leader === "true");
+            card.classList.toggle("is-hidden", !show);
+            if (show) n += 1;
+          });
+          postCount.textContent = n + " 发帖";
+        });
+      });
+
+      function openDetail() {
+        postDetail.classList.add("is-open");
+        postDetail.setAttribute("aria-hidden", "false");
+      }
+      function closeDetail() {
+        postDetail.classList.remove("is-open");
+        postDetail.setAttribute("aria-hidden", "true");
+      }
+
+      document.getElementById("phone").addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-action]");
+        if (!btn) return;
+        const action = btn.dataset.action;
+        if (action === "like") {
+          const liked = btn.classList.toggle("is-liked");
+          if (!btn.dataset.base) btn.dataset.base = btn.dataset.count || "0";
+          const base = parseInt(btn.dataset.base, 10) || 0;
+          const num = btn.querySelector(".like-num");
+          if (num) num.textContent = liked ? base + 1 : base;
+          showToast(liked ? "已点赞" : "已取消点赞");
+        } else if (action === "more") {
+          openSheet("sheetMore");
+        } else if (action === "expand" || action === "view-comments" || action === "comment") {
+          openDetail();
+        } else if (action === "share-post") {
+          showToast("分享面板已打开");
+        }
+      });
+
+      document.getElementById("btnCloseDetail").addEventListener("click", closeDetail);
+      document.getElementById("btnDetailMore").addEventListener("click", () => openSheet("sheetMore"));
+      document.getElementById("btnManage").addEventListener("click", () => openSheet("sheetManage"));
+      document.getElementById("btnAssist").addEventListener("click", () => showToast("已唤起联系助理"));
+      document.getElementById("btnSearch").addEventListener("click", () => showToast("搜索圈子内容"));
+      document.getElementById("btnShare").addEventListener("click", () => showToast("分享圈子"));
+      document.getElementById("joinedBack").addEventListener("click", () => {
+        if (postDetail.classList.contains("is-open")) closeDetail();
+        else showToast("返回上一页");
+      });
+      document.getElementById("btnCompose").addEventListener("click", () => {
+        openSheet("sheetCompose");
+        setTimeout(() => composeInput.focus(), 280);
+      });
+      composeInput.addEventListener("input", () => {
+        btnPublish.disabled = !composeInput.value.trim();
+      });
+      btnPublish.addEventListener("click", () => {
+        if (btnPublish.disabled) return;
+        showToast("帖子已发布");
+        composeInput.value = "";
+        btnPublish.disabled = true;
+        closeSheet();
+      });
+      document.getElementById("btnSendComment").addEventListener("click", () => {
+        const input = document.getElementById("commentInput");
+        if (!input.value.trim()) { showToast("请输入评论内容"); return; }
+        showToast("评论已发送");
+        input.value = "";
+      });
+
+      document.querySelectorAll('[data-action="like"]').forEach((btn) => {
+        btn.dataset.base = btn.dataset.count || "0";
+      });
+
+      setEligibility("none");
+      setState("guest");
+    })();
+  </script>
+</body>
+</html>

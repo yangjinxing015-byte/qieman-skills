@@ -1,0 +1,11 @@
+{
+  "skill": "qieman-ui-design-system",
+  "generated_at": "2026-07-08T02:55:14.294695Z",
+  "source_files": [
+    "色阶.json",
+    "色彩 .json",
+    "单元 .json",
+    "🌟Qieman Design Mobile.fig"
+  ],
+  "note": "Original .fig source file is not embedded in the zip to keep package lightweight. Place it in assets/figma-library if needed."
+}

@@ -1,0 +1,116 @@
+# L2 图表 token。字号 / 圆角凡与 L0 同名，用 L0。
+# 系列色真源：本文件（Figma Mobile「7、chart 图表色」29238:3379），不以 L0 旧 05/06 为准。
+# 继承：../qieman-ui-design/references/tokens.yaml
+# 组件稿：Figma Qieman Design Charts（file e0e7HneAYwkFrP0efHp2gj）
+# 字号一律 px，禁止 pt。轴标签 / 风险句 ≥ 11px。
+
+colors:
+  # 系列色 · Figma jflpIzZBUNd9HbH70guNFV node 29238:3379
+  chart-01: "#69B1F4"   # 货币型、海外市场
+  chart-02: "#F88D72"   # 股票型、A股
+  chart-03: "#FBCA74"   # 债券型、黄金
+  chart-04: "#7DD4C4"   # 保本型、海外新兴
+  chart-05: "#ADAFE8"   # 混合型、境内债券型 · 紫，勿写成青
+  chart-06: "#68E0F3"   # 商品型、原油 · 青，勿写成紫
+  chart-07: "#3A7BB8"   # 指数型、海外债券
+  chart-08: "#FAB6A5"   # 盈米宝、现金
+  chart-09: "#EDC273"   # 另类型
+  chart-10: "#9CCBF8"   # QD
+  chart-11: "#C8CAEF"   # FOF
+  chart-12: "#6B9CCA"   # 保险
+  chart-13: "#BBC4CE"
+  chart-cash: "#DBEBFF"
+  chart-wallet: "#EA9500"
+
+  # 双向图 / 温度带（Figma green/red/warning faded，勿用 chart-01 顶替）
+  chart-band-01: "#E6F7F4"
+  chart-band-02: "#CDEFE9"
+  chart-band-03: "#FFF0D6"
+  chart-band-04: "#FEEDE9"
+  chart-band-05: "#FDDBD3"
+  chart-track: "#F7F7F7"
+  chart-line: "#3A7BB8"
+  chart-tooltip: "#3B4145"
+  corr-neg-soft: "#DBEBFF"
+  corr-neg-strong: "#9CCBF8"
+  chart-card-dark: "#2B2B2B"
+  gauge-fill: "#B4C8F5"
+  gauge-track: "#E4EAF2"
+
+typography:
+  chart-title:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 15px
+    fontWeight: 500
+    lineHeight: 1.5
+  chart-legend:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 13px
+    fontWeight: 400
+    lineHeight: 1.2
+  chart-label:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 13px
+    fontWeight: 500
+    lineHeight: 1.2
+  chart-label-sm:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 12px
+    fontWeight: 500
+    lineHeight: 20px
+  chart-axis:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 11px
+    fontWeight: 400
+    lineHeight: 1.7
+  chart-tab:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1
+  scale-value:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 13px
+    fontWeight: 600
+    lineHeight: 1.2
+  pie-title:
+    fontFamily: "PingFang SC, MiSans, system-ui, -apple-system, sans-serif"
+    fontSize: 17px
+    fontWeight: 500
+    lineHeight: 1
+
+canvas:
+  cardWidth: 343px
+  cardPaddingX: 12px
+  cardPaddingY: 16px
+  cardGap: 16px
+  plotHeight: 170px
+  scaleBarWidth: 12px
+  pieSize: 120px
+  legendSwatch: 6px
+  barGap: 1px
+  gaugeWidth: 158px
+  gaugePlot: 134px
+  treemapHeight: 285px
+  radarHeight: 239px
+  corrCell: 44px
+  corrFund: 131px
+
+components:
+  chart-card:
+    backgroundColor: "{colors.surface-card}"
+    rounded: "{rounded.md}"
+    padding: "16px 12px"
+    width: "{canvas.cardWidth}"
+  chart-legend:
+    swatch: 6px
+    gap: 8px
+    textColor: "{colors.text-secondary}"
+  chart-axis:
+    textColor: "{colors.text-tertiary}"
+  chart-tooltip:
+    backgroundColor: "{colors.chart-tooltip}"
+    textColor: "{colors.text-inverse}"
+    rounded: "{rounded.xs}"
+    fontSize: 9px
+    opacity: 0.9

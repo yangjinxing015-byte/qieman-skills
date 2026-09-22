@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qieman Token Example</title>
+  <link rel="stylesheet" href="../css-variable/qieman-tokens.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: var(--qdm-color-background-page-deep);
+      color: var(--qdm-color-foreground-neutral);
+    }
+    .page {
+      width: 375px;
+      min-height: 812px;
+      margin: 0 auto;
+      padding: var(--qdm-unit-layout-x6);
+      box-sizing: border-box;
+    }
+    .card {
+      background: var(--qdm-color-background-card-default);
+      border: 1px solid var(--qdm-color-border-default);
+      border-radius: var(--qdm-unit-radius-large-1);
+      padding: var(--qdm-unit-layout-x5);
+    }
+    .title {
+      margin: 0 0 var(--qdm-unit-layout-x3);
+      color: var(--qdm-color-foreground-neutral);
+      font-size: 22px;
+      line-height: 32px;
+      font-weight: 600;
+    }
+    .desc {
+      margin: 0;
+      color: var(--qdm-color-foreground-neutral-subtle);
+      font-size: 15px;
+      line-height: 24px;
+    }
+    .button {
+      margin-top: var(--qdm-unit-layout-x6);
+      width: 100%;
+      height: 48px;
+      border: 0;
+      border-radius: var(--qdm-unit-radius-circular);
+      background: var(--qdm-color-background-primary);
+      color: var(--qdm-color-foreground-inverse);
+      font-size: 16px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <main class="page">
+    <section class="card">
+      <h1 class="title">且慢 Design Token 示例</h1>
+      <p class="desc">本示例通过语义变量调用颜色、间距和圆角，避免页面硬编码品牌色。</p>
+      <button class="button">开始使用</button>
+    </section>
+  </main>
+</body>
+</html>

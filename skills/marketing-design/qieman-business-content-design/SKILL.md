@@ -25,8 +25,8 @@ standalone: true
 | **默认载体** | 移动端业务长页 / App WebView / 单文件 HTML |
 | **资源依赖** | 运行可独立；规范层默认继承 `qieman-ui-design` 与 `qieman-chart-design`，品牌素材存在时增强，不存在时自动降级 |
 | **核心原则** | 内容锁定、按钮锁定、视觉重做、金融可信、数据优先、品牌克制、移动端可读 |
-| **版本** | V9.1 CTA Role Fix · Frozen Baseline |
-| **更新日期** | 2026-09-11 |
+| **版本** | V10 Framework-Locked Redesign |
+| **更新日期** | 2026-09-14 |
 
 ---
 
@@ -1946,78 +1946,273 @@ Sticky CTA
 
 ## 14.0 Source Mode｜输入模式
 
-默认支持两种模式：
+支持三种模式：
 
 ```txt
+framework-locked-redesign
 requirement-only
 visual-continuation
 ```
 
-### A. `requirement-only`｜默认
+### A. `framework-locked-redesign`｜业务 HTML 默认模式
 
-除非用户明确要求保留视觉，否则：
+当输入是顾问、市场、内容、保险、产品运营等团队已经确认业务内容与框架的 HTML，或用户明确要求：
 
-> **输入文件默认只是 Requirement Source，不是 Visual Reference。**
+- “内容、框架不变”
+- “模块顺序不变”
+- “业务逻辑不变”
+- “只重新设计视觉”
+- “不要沿用原型表现，但结构需求保持”
 
-只继承：
+默认进入：
 
-- 原始文案；
-- 数据、金额、百分比、日期、单位；
-- 业务规则；
-- 风险提示与合规文案；
-- 模块所表达的业务主题；
-- 真实的业务关系；
-- 必要交互与状态；
-- 必须保持的业务顺序。
+```txt
+source_mode = framework-locked-redesign
+```
 
-默认**不继承**：
+此时：
 
-- Hero 高度与构图；
-- Hero → 正文承接方式；
-- 原卡片数量；
-- 原卡片嵌套关系；
-- 原 DOM / Grid / Flex 结构；
-- 原背景分区；
-- 原圆角、阴影、边框；
-- 原字号层级；
-- 原 spacing；
-- 原 Icon / Illustration 位置与形式；
-- 原数据图表类型；
-- 原信息可视化方式；
-- 原 CSS class 与视觉代码。
+> **HTML 既是 Requirement Source，也是 Framework Contract；但不是 Visual Template。**
+
+### Framework Contract｜框架锁定内容
+
+必须保留：
+
+- 全部原始文案；
+- 全部数据、金额、百分比、日期、单位；
+- 业务模块数量；
+- 业务模块顺序；
+- 模块之间的业务关系；
+- 产品 / 策略 / 活动逻辑；
+- CTA 文案、动作与出现位置所承担的业务角色；
+- 交互状态与必要流程；
+- 风险提示、数据来源、合规内容。
+
+默认禁止：
+
+- 调换业务模块顺序；
+- 跨模块合并业务内容；
+- 把一个业务模块拆成新的业务模块；
+- 删除原有内容；
+- 新增业务结论；
+- 为视觉效果改变产品逻辑；
+- 将原本属于 A 模块的数据移动到 B 模块。
+
+允许重新设计：
+
+- Hero / KV 视觉；
+- 页面背景与氛围；
+- Hero → 正文衔接；
+- 一级标题体系；
+- 卡片视觉系统；
+- 同一业务模块内部的版式；
+- 同一模块内部的数据可视化方式；
+- Icon / Illustration；
+- 信息层级与重点表达；
+- spacing、圆角、阴影、分割、留白；
+- 同一模块内部文字 / 图表 / Diagram 的组合方式。
 
 核心原则：
 
-> **继承需求关系，不继承视觉关系。**
+> **框架锁定，视觉自由。**
 
-### B. `visual-continuation`｜明确触发
+> **保持“这页讲什么、按什么顺序讲”，重新设计“怎么讲得更成熟”。**
+
+---
+
+### B. `requirement-only`｜结构仍可重组时使用
+
+适用于：
+
+- PRD；
+- 低保真线框；
+- 粗略需求稿；
+- 用户明确允许重新组织页面结构；
+- 用户明确说“模块可以重新组合 / 调整顺序”。
+
+此时：
+
+> 输入只是 Requirement Source，不是 Framework Contract，也不是 Visual Reference。
+
+只继承：
+
+- 文案；
+- 数据；
+- 业务事实；
+- 业务规则；
+- 风险与合规；
+- 真实业务关系；
+- 必要交互与状态。
+
+允许重新判断：
+
+- 模块分组；
+- 页面顺序；
+- Hero / KV；
+- 卡片架构；
+- 数据表达；
+- Section 组织；
+- 页面节奏。
+
+---
+
+### C. `visual-continuation`｜明确沿用现有设计
 
 仅当用户明确表达：
 
 - “沿用当前样式”
 - “保持这个布局”
 - “基于现有设计优化”
-- “参考这个视觉继续做”
-- “不要改结构 / 构图”
+- “参考现在这版继续”
+- “只优化我指出的部分”
 
-才允许把输入升级为 Visual Reference，并继承用户明确要求保留的视觉关系。
+才进入：
+
+```txt
+source_mode = visual-continuation
+```
+
+此时当前已确认页面可成为：
+
+- Locked Layout；
+- Locked Component；
+- Locked Transition；
+- Locked Visual Direction。
+
+后续只修改用户明确指出的区域。
 
 ---
 
-## 14.1 Requirement Source Isolation｜原型视觉隔离
+## 14.1 Framework Isolation｜框架锁定下的视觉隔离
 
-在 `requirement-only` 模式下，不允许：
+在 `framework-locked-redesign` 模式下，不能走：
 
 ```txt
 输入 HTML
-→ 直接改 CSS
-→ 输出新 HTML
+→ 改颜色 / 圆角 / CSS
+→ 输出 HTML
 ```
 
-必须经过中间隔离层：
+也不能走：
 
 ```txt
-输入 HTML / 原型
+输入 HTML
+→ 打散业务框架
+→ 重新发明页面结构
+```
+
+正确路径：
+
+```txt
+输入业务 HTML
+↓
+Framework Contract
+↓
+Module Semantic Mapping
+↓
+Page Visual Strategy
+↓
+Module-level Visual Recomposition
+↓
+新 HTML
+↓
+Framework / Content 回源核对
+```
+
+### Framework Contract 抽取
+
+先锁定：
+
+```txt
+Page Goal
+Module Order
+Module Topics
+Locked Copy
+Locked Data
+Business Relations
+CTA / Interaction
+Risk / Compliance
+```
+
+此阶段保留业务结构，但不继承原视觉代码。
+
+### Module Semantic Mapping｜模块语义映射
+
+逐模块判断：
+
+- 这一模块的核心任务是什么？
+- 是结论、解释、对比、趋势、构成、流程、配置、权益、服务还是风险？
+- 哪些信息同级？
+- 哪些信息需要视觉强调？
+- 哪些信息适合文字、图表、Diagram、Icon 或 Illustration？
+- 模块内部是否存在可以优化的视觉分组？
+
+**模块边界与顺序锁定；模块内部的视觉组织允许重做。**
+
+例如原业务 HTML：
+
+```txt
+Hero
+↓
+核心收益
+↓
+策略亮点
+↓
+配置方案
+↓
+陪伴服务
+↓
+适合谁
+↓
+团队介绍
+↓
+风险提示
+```
+
+输出仍必须保持：
+
+```txt
+Hero
+↓
+核心收益
+↓
+策略亮点
+↓
+配置方案
+↓
+陪伴服务
+↓
+适合谁
+↓
+团队介绍
+↓
+风险提示
+```
+
+但“策略亮点”模块内部可以从：
+
+```txt
+3 段文字
+```
+
+重新设计为：
+
+```txt
+核心数据
++ 关系图
++ 卖点列表
+```
+
+前提是原有内容、数据和业务含义全部保留。
+
+---
+
+## 14.2 Requirement Source Isolation｜结构可重组时的视觉隔离
+
+仅当 `source_mode = requirement-only` 时，执行完整 Semantic Reconstruction：
+
+```txt
+输入 PRD / 原型
 ↓
 Requirement Model
 ↓
@@ -2027,12 +2222,12 @@ Visual Recomposition
 ↓
 新页面
 ↓
-再回到 Source 做内容完整性核对
+内容完整性核对
 ```
 
 ### Requirement Model｜无样式需求模型
 
-先从输入材料抽取：
+抽取：
 
 ```txt
 Page Goal
@@ -2040,237 +2235,290 @@ Module Topics
 Locked Copy
 Locked Data
 Business Relations
-Required Order
 Interaction / State
 Risk / Compliance
 ```
 
-此阶段**不携带原 CSS、原卡片形式、原 Hero 构图、原图表形式**。
+此阶段不携带：
+
+- 原 CSS；
+- 原 Hero；
+- 原卡片数量；
+- 原 DOM / Grid / Flex；
+- 原背景分区；
+- 原图表类型；
+- 原视觉层级。
 
 ### Semantic Reconstruction｜语义重建
 
-根据业务语义重新判断：
+仅在结构未锁定时，才允许重新判断：
 
-- 哪些内容是并列；
-- 哪些是流程；
-- 哪些是因果；
-- 哪些是“问题 → 原因 → 解法”；
-- 哪些是核心结论；
-- 哪些数据适合趋势 / 比较 / 构成 / 时间 / 配置 / 现金流表达；
-- 哪些模块应合并为一个更完整的视觉主题；
-- 哪些原型卡片只是排版容器，不代表真实业务层级。
-
-**业务关系必须保留，视觉容器关系可以重建。**
-
-例如输入原型为：
-
-```txt
-Hero
-↓
-3 个纵向白卡
-↓
-数字卡
-↓
-2 个对比卡
-```
-
-抽取后可能只是：
-
-```txt
-主题
-3 个平行卖点
-一组趋势数据
-两组业务差异
-```
-
-最终可重新设计为：
-
-```txt
-Hero + 核心结论
-↓
-平行卖点信息区
-↓
-趋势图
-↓
-对比矩阵
-```
-
-只要业务事实与业务关系没有改变，就属于正确重设计。
+- 模块是否并列；
+- 是否存在流程 / 因果；
+- 是否需要合并 / 拆分视觉主题；
+- 页面阅读顺序；
+- Section 分组；
+- 页面 Pattern。
 
 ---
 
-## 14.2 Visual Recomposition｜视觉重组
+## 14.3 Visual Recomposition｜视觉重组
 
-在默认重设计任务中，应主动重新判断：
+三种模式都可以重做视觉，但范围不同。
 
-- Hero / KV 构图；
-- Hero → 正文 `transition_mode`；
-- Section 分组；
-- 卡片架构；
-- 数据可视化；
+### `framework-locked-redesign`
+
+可重做：
+
+- Hero / KV；
+- 背景；
+- Transition；
+- Title System；
+- Card Visual System；
+- Module Internal Layout；
+- Data Visualization；
+- Icon / Illustration；
+- Emphasis；
+- Rhythm。
+
+不可重做：
+
+- 业务模块顺序；
+- 模块业务边界；
+- 业务事实与逻辑。
+
+### `requirement-only`
+
+在不改变业务事实的前提下，可同时重组：
+
+- 页面 IA；
+- Section；
+- 模块组合；
+- 视觉结构。
+
+### `visual-continuation`
+
+只修改用户指定区域，其余保持。
+
+---
+
+## 14.4 Data Visualization Re-evaluation Gate｜数据可视化重判
+
+即使 Framework 已锁定，只要某个模块内部存在数据，也必须重新判断最清晰的视觉表达。
+
+必须判断：
+
+1. 数据关系：趋势 / 比较 / 构成 / 阶段 / 现金流 / 配置 / 风险收益 / 信号；
+2. 原表达是否适合移动端；
+3. 是否应切换为折线、柱状、堆叠、环形、时间轴、区间图、配置图、矩阵或 Diagram；
+4. 是否存在“本可以图形化却仍堆 KPI / 文本”的问题。
+
+限制：
+
+- 不得跨业务模块移动数据；
+- 不得修改数值、比例、正负方向与数据口径；
+- 图表表现遵循 `qieman-chart-design`。
+
+---
+
+## 14.5 Visual Maturity Gate｜成熟设计门槛
+
+目标不是“与原型差得越多越好”，而是：
+
+> **在业务框架正确的前提下，输出一份可进入设计评审的成熟页面。**
+
+### `framework-locked-redesign`
+
+以下维度中，应至少有 **4 项**体现明确的专业设计决策：
+
+- Hero / KV 表达；
+- Hero → 正文衔接；
+- 页面背景与 Surface System；
+- 一级标题体系；
+- Card Visual System；
+- 模块内部版式；
+- 数据可视化形式；
 - Icon / Illustration；
 - 信息强调方式；
-- 阅读节奏。
+- 长页阅读节奏。
 
-不得为了“忠实原型”机械保留原始视觉骨架。
-
-但是：
-
-> **视觉重组不能改写业务逻辑。**
-
-若原内容存在明确因果、时间顺序、流程顺序，则必须保留其真实关系；并列内容则可以自由选择更合适的视觉组合。
-
----
-
-## 14.3 Data Visualization Re-evaluation Gate｜数据可视化重判
-
-如果 Requirement Source 已包含图表、数字卡、进度条、饼图或其他数据表达，不得默认沿用原形式。
-
-必须重新判断：
-
-1. 数据关系：趋势 / 比较 / 构成 / 流程 / 阶段 / 现金流 / 配置 / 风险收益 / 信号；
-2. 原表达是否是移动端最清晰的表达；
-3. 是否应切换为折线、柱状、堆叠、环形、时间轴、配置图、矩阵、现金流图、Diagram 等；
-4. 是否存在“能图形化但仍只堆 KPI / 文本卡”的问题。
-
-图表内容遵循 Locked Content，图表表现遵循 `qieman-chart-design`。
-
----
-
-## 14.4 Visual Divergence Gate｜视觉差异门
-
-当 `source_mode = requirement-only` 时，最终输出必须证明自己是真正的视觉重设计。
-
-以下维度中，**至少 4 项**应相较 Requirement Source 发生明显重新设计：
-
-- Hero / KV 构图；
-- Hero → 正文承接方式；
-- Section 分组方式；
-- 卡片架构；
-- 数据可视化形式；
-- Icon / Illustration 表达；
-- 信息强调方式；
-- 页面阅读节奏。
-
-以下变化**不计入**有效视觉差异：
+不算成熟设计：
 
 - 只换品牌色；
 - 只改圆角；
 - 只改 shadow；
-- 只调字号；
+- 只统一字号；
 - 只调 margin / padding；
-- 原 DOM / 卡片结构基本不变，只做 CSS 美化。
+- 原模块内部结构完全不变，只做 CSS 换肤。
 
-如果 Source 与 Output 在核心视觉骨架上仍高度相似：
+### `requirement-only`
 
-> **Visual Redesign Failed → 必须重新进行 Semantic Reconstruction / Visual Recomposition。**
+继续执行完整 Visual Divergence 要求，避免原型换皮。
 
-### 例外
+### `visual-continuation`
 
-若用户明确要求：
-- 保留结构；
-- 保持构图；
-- 只做局部美化；
-- visual-continuation；
-
-则不执行“至少 4 项差异”的硬要求，只执行用户指定范围。
+不要求视觉差异，只要求局部修改准确且无回归。
 
 ---
 
-## 14.5 Production Rule｜快速生产规则
+## 14.6 Production Rule｜真实生产规则
 
-本 Skill 是生产 Skill，不承担完整 Audit，但必须保证：
+业务团队日常提供的已确认 HTML，默认使用：
 
-- Locked Content 不被改动；
-- Requirement Source 与视觉参考身份不混淆；
-- 默认先抽取需求模型，再做视觉重组；
-- 不把输入 HTML 当作可直接美化的页面底稿；
-- 图表重新判断；
-- Page Type / transition_mode 重新判断；
-- 输出前通过 Visual Divergence Gate；
-- 已经被用户确认的当前版本继续执行 Regression Gate。
+```txt
+framework-locked-redesign
+```
 
-> **第一次根据需求 HTML 生成 = 重设计。**  
-> **用户确认后的下一轮 = 稳定迭代。**
+生产时必须保证：
+
+- Locked Content 不动；
+- Framework Contract 不动；
+- 原 HTML 不是 Visual Template；
+- 视觉系统重新建立；
+- 模块内部表达按业务语义重新设计；
+- 数据表达重新判断；
+- 页面整体具有一致的背景、标题、卡片、间距与组件语言；
+- 已确认版本继续使用 Regression Guard。
+
+> **第一次根据已确认业务 HTML 生成 = 框架锁定下的视觉重设计。**
+
+> **用户确认后的下一轮 = 稳定局部迭代。**
 
 
 # 15. Generation Workflow｜标准生产工作流
 
-本 Skill 沿用用户确认的标准工作流：
+`qieman-business-content-design` 是业务页面的主设计入口。
 
 ```txt
-原型 / PRD / HTML / 文案 / 数据
+业务 HTML / PRD / 原型 / 文案 / 数据
         ↓
 qieman-business-content-design
         ↓
-初版页面 HTML
+自动判断 Source Mode
         ↓
-需要更强数据表达？ → 按需叠加 qieman-chart-design
-需要 KV / 插画专项？ → 按需叠加独立视觉增强 Skill
+锁定 Content / Framework
         ↓
-最终版 HTML
+自动判断 Page Goal 与业务语境
+        ↓
+建立整页 Visual Strategy
+        ↓
+按模块选择文字 / 图表 / Diagram / Icon / Illustration
+        ↓
+按需叠加 qieman-chart-design / 垂类 Skill / 视觉 Skill
+        ↓
+输出完整 HTML
         ↓
 qieman-design-content-audit
-        ↓
-问题清单 / 验收
 ```
-
-`qieman-business-content-design` 是主生产入口；其它 Skill 是按需增强，不应让业务方每次手动组合全部能力。
 
 页面内部执行顺序：
 
 ```txt
 STEP 0 读取当前任务是否已有用户确认的 Locked Layout / Locked Component
-       - 第一次读取需求原型时，不自动建立 Locked Layout
 ↓
 STEP 1 读取输入材料
 ↓
 STEP 2 判断 source_mode
-       - 默认 requirement-only
-       - 用户明确要求沿用视觉时才 visual-continuation
+
+       已确认业务 HTML / 内容框架固定
+       → framework-locked-redesign
+
+       PRD / 低保真 / 用户允许结构重组
+       → requirement-only
+
+       用户明确沿用当前视觉 / 只改局部
+       → visual-continuation
 ↓
 STEP 3 锁定 Locked Content
 ↓
-STEP 4 建立无样式 Requirement Model
-       - Page Goal / Module Topics / Copy / Data / Business Relations / Order / Risk
+STEP 4 若为 framework-locked-redesign
+       → 建立 Framework Contract
+       → 锁定 Module Order / Module Topics / Business Relations / CTA / Risk
+
+       若为 requirement-only
+       → 建立无样式 Requirement Model
 ↓
-STEP 5 执行 Semantic Reconstruction
-       - 只保留真实业务关系，不保留原视觉容器关系
+STEP 5 识别 Page Goal / Primary Communication Goal
+       - 营销转化
+       - 产品解释
+       - 策略解释
+       - 投教阅读
+       - 报告 / 诊断
+       - 权益 / 活动
+       - 服务 / 功能
+       - 品牌传播
 ↓
-STEP 6 判断 Page Type 与 Primary Communication Goal
+STEP 6 建立整页 Visual Strategy
+       - Hero 强弱
+       - 页面背景关系
+       - Surface / Card System
+       - Title System
+       - 信息密度
+       - transition_mode
+       - Icon / Illustration 语言
 ↓
-STEP 7 重新选择 Hero / KV → 正文 transition_mode
-       - auto / rounded-surface / soft-gradient / flat-spacing
+STEP 7 调用 qieman-ui-design Foundation Tokens
 ↓
-STEP 8 选择合适 Pattern，但不把原型 Pattern 当模板
+STEP 8 模块级设计
+
+       framework-locked-redesign
+       → 保持模块顺序和边界
+       → 重做模块内部表达
+
+       requirement-only
+       → 可重新组织 Section / IA
+
+       visual-continuation
+       → 只改指定区域
 ↓
-STEP 9 调用 qieman-ui-design Foundation Tokens
+STEP 9 数据模块执行 Data Visualization Re-evaluation
+       → 遵循 qieman-chart-design
 ↓
-STEP 10 重新建立视觉信息架构与模块内部表达
+STEP 10 按需叠加垂类 Skill
+        - Insurance
+        - VIP
+        - IP
+        - 其它专项
 ↓
-STEP 11 判断文字 / 图表 / Diagram / Icon / Illustration 的最佳表达
-        - 数据可视化遵循 qieman-chart-design
+STEP 11 按需调用 qieman-marketing-visual-design
+        → Hero / KV / Background / Illustration
 ↓
-STEP 12 检测 Assets：Brand Mode / Portable Mode
+STEP 12 生成完整移动端 HTML
 ↓
-STEP 13 生成页面
-        - 首次重设计：允许视觉重组
-        - 已确认版本迭代：只修改用户明确指出区域
+STEP 13 Visual Maturity Gate
 ↓
-STEP 14 Visual Divergence Gate
-        - requirement-only 模式至少 4 个视觉维度明显重设计
+STEP 14 Framework / Content Fidelity Gate
 ↓
-STEP 15 Data Visualization Gate
+STEP 15 Regression Gate
 ↓
-STEP 16 Regression Gate
-        - 仅针对用户已经确认 / 锁定的区域
-↓
-STEP 17 内容、数据、风险、视觉、移动端验收
-↓
-STEP 18 按用户要求输出 HTML / H5 / 视觉方案
+STEP 16 Mobile / Risk / Interaction 验收
 ```
 
----
+### Universal Mature Design Principle｜通用成熟设计原则
+
+无论需求来自市场、顾问、内容、产品运营、保险、VIP 或 AI：
+
+> **统一的是设计质量，不是页面模板。**
+
+主 Skill 应自动判断：
+
+- 页面需要强 Hero 还是弱 Hero；
+- 背景应该连续还是明确分区；
+- 是否需要白卡；
+- 卡片是否统一；
+- 哪些模块应数据化；
+- 哪些模块应保持阅读型；
+- 哪里需要视觉强化；
+- 哪里应该克制。
+
+禁止：
+
+> 先判断“这是什么模板”，再套固定页面外观。
+
+应该：
+
+> 先理解“这页为什么存在、用户要理解什么”，再决定视觉表达。
+
 
 # 16. Generation Checklist｜生成验收
 
@@ -2316,8 +2564,8 @@ STEP 18 按用户要求输出 HTML / H5 / 视觉方案
 - [ ] 同层级连续白卡间距是否统一为 16px，模块组之间是否统一为 24px？
 - [ ] 同一组并列 KPI 是否保持相同字号、字重和视觉权重，没有出现一大两小？
 - [ ] 固定吸底区域是否只有一个整行大按钮，没有左侧信息区、双按钮、半宽按钮或小胶囊样式？
-- [ ] 如果输入为需求 HTML，是否明确将其作为 Requirement Source 而不是 Visual Template？
-- [ ] 是否真正重建了视觉层级、模块内部版式和组件体系，而非只换色 / 圆角 / 间距？
+- [ ] 如果输入为已确认业务 HTML，是否将其作为 Framework Contract + Requirement Source，而不是 Visual Template？
+- [ ] 是否在不改业务框架的前提下，真正重建了视觉层级、模块内部版式和组件体系，而非只换色 / 圆角 / 间距？
 - [ ] Source vs Output 是否能明显看出是重新设计后的两个视觉方案？
 - [ ] 页面是否符合且慢克制、可信的品牌气质？
 - [ ] 卡片是否避免过度嵌套？
@@ -2327,10 +2575,12 @@ STEP 18 按用户要求输出 HTML / H5 / 视觉方案
 
 
 - [ ] 是否明确判断 `source_mode`？
-- [ ] 默认 Requirement Source 是否先被抽取成无样式 Requirement Model？
-- [ ] 是否做到“继承需求关系，不继承视觉关系”？
-- [ ] 原型的 Hero、卡片数量、DOM、图表类型、背景分区是否没有被机械继承？
-- [ ] `requirement-only` 模式是否至少有 4 个核心视觉维度发生明显重设计？
+- [ ] 已确认业务 HTML 是否进入 `framework-locked-redesign`？
+- [ ] Framework Contract 中的模块数量、顺序、业务关系、CTA、风险内容是否保持？
+- [ ] 是否做到“框架锁定，视觉自由”？
+- [ ] 是否没有机械继承原 Hero、卡片视觉、图表形式和背景分区？
+- [ ] `framework-locked-redesign` 是否至少在 4 个视觉维度体现明确设计决策？
+- [ ] `requirement-only` 是否仅用于结构仍允许重组的材料？
 - [ ] 是否避免“只换色 / 圆角 / 阴影 / 间距”的伪重设计？
 
 
@@ -2429,107 +2679,134 @@ STEP 18 按用户要求输出 HTML / H5 / 视觉方案
 
 # 18. Invocation Templates｜精简调用模板
 
-本 Skill 的详细规则已经内置，业务方日常调用**不需要重复写 spacing、CTA、KPI、transition、chart、Regression 等规则**。
+业务方日常调用不需要重复写 spacing、CTA、KPI、transition、chart 等规则。
 
-## 18.1 默认重设计｜推荐
+## 18.1 已确认业务 HTML｜默认推荐
 
 ```txt
 调用 qieman-business-content-design，
-根据附件重新设计移动端业务页面。
-内容不变，原型仅作为 Requirement Source，视觉重做。
-输出完整可运行 HTML。
+根据附件重新设计业务页面。
+内容、框架、模块顺序及业务逻辑保持不变，只重新设计视觉表达。
+根据页面业务目标自动选择合适的视觉方式，输出完整移动端 HTML。
 ```
 
-这 4 句默认等价于：
+默认自动进入：
+
+```txt
+source_mode = framework-locked-redesign
+```
+
+自动执行：
 
 - Locked Content；
-- `source_mode=requirement-only`；
-- Requirement Source Isolation；
-- Semantic Reconstruction；
+- Framework Contract；
+- Module Semantic Mapping；
+- Page Goal 判断；
+- Visual Strategy；
 - qieman-ui-design；
 - qieman-chart-design；
-- Transition Routing；
-- Visual Divergence Gate；
-- Sticky CTA Strong Contract；
-- Regression / Mobile / Risk 基础检查。
+- transition_mode；
+- Visual Maturity Gate；
+- Sticky CTA Contract；
+- Risk / Mobile / Regression Gate。
 
 ## 18.2 更短调用｜上下文明确时
 
 ```txt
 调用 qieman-business-content-design，
 根据附件重新设计。
-内容不变，视觉重做，输出 HTML。
+内容和框架不变，视觉重做，输出 HTML。
 ```
 
-若输入为需求 HTML，本 Skill 仍自动按 Requirement Source 处理。
+若附件是业务 HTML，默认视为 Framework Contract。
 
-## 18.3 营销页面
+## 18.3 市场 / 顾问 / 内容等业务团队
+
+无需为不同团队准备不同主 Skill。
+
+统一可使用：
 
 ```txt
 调用 qieman-business-content-design，
-根据附件重新设计营销业务页面。
-需求内容保持不变，视觉重新设计，输出移动端 HTML。
+根据附件重新设计业务页面。
+保持需求内容与框架不变，
+自动根据业务目标完成成熟视觉设计，
+输出完整移动端 HTML。
 ```
 
-## 18.4 局部迭代
+主 Skill 自动判断业务语境与页面目标，并按需调用视觉 / 图表 / 垂类能力。
+
+## 18.4 结构允许重组
+
+仅当用户明确允许重新组织页面结构时：
+
+```txt
+调用 qieman-business-content-design，
+根据附件重新设计页面。
+内容和业务事实不变，页面结构可重新组织。
+输出完整移动端 HTML。
+```
+
+此时：
+
+```txt
+source_mode = requirement-only
+```
+
+## 18.5 局部迭代
 
 ```txt
 调用 qieman-business-content-design，
 基于当前版本只优化我指出的部分，其余保持不变。
 ```
 
-局部迭代自动进入：
-- Locked Layout；
-- Locked Component；
-- Regression Guard。
-
-## 18.5 视觉延续｜仅用户明确需要时
-
-```txt
-调用 qieman-business-content-design，
-沿用当前视觉和布局，只优化我指出的部分。
-```
-
-此时：
+自动进入：
 
 ```txt
 source_mode = visual-continuation
 ```
+
+并执行：
+
+- Locked Layout；
+- Locked Component；
+- Locked Transition；
+- Regression Guard。
 
 ---
 
 # 19. Invocation Interpretation｜调用语义
 
-只要用户出现以下表达：
+### 默认进入 `framework-locked-redesign`
 
-- “重新设计”
-- “不要照搬原型”
-- “内容不变，视觉重做”
-- “根据附件重新生成”
+当：
 
-默认：
+- 输入是顾问 / 市场 / 内容 / 产品运营等团队提供的需求 HTML；
+- 用户说“内容不变”；
+- 用户说“框架不变”；
+- 用户说“模块顺序不变”；
+- 用户说“只重新设计视觉”。
 
-```txt
-source_mode = requirement-only
-```
+### 进入 `requirement-only`
 
-只要用户明确出现：
+仅当：
+
+- 输入为 PRD / 粗线框 / 未确认结构；
+- 用户明确说可以调整模块顺序；
+- 用户明确要求重新组织信息架构。
+
+### 进入 `visual-continuation`
+
+当：
 
 - “沿用当前样式”
-- “保持这个布局”
-- “参考现在这版继续”
-- “不要改结构”
+- “保持当前布局”
 - “只优化这里”
+- “其余保持不变”
+- “基于现在这版继续”
 
-才切换为：
+**不要要求业务方理解这些模式名称。Skill 自动判断。**
 
-```txt
-source_mode = visual-continuation
-```
-
-**不要要求业务方每次重新填写完整设计规范。Skill 自己负责执行规范。**
-
----
 
 # 20. Design Decision Priority｜冲突时的优先级
 
@@ -2540,7 +2817,7 @@ source_mode = visual-continuation
 2. 原始业务事实 / 数据 / 合规要求
 3. Locked Content / 已确认 Locked Component
 4. 用户已确认的 Locked Layout / Locked Transition / Regression Guard
-5. source_mode 与 Requirement Source Isolation
+5. source_mode / Framework Contract / Requirement Source Isolation
 6. Content Fidelity
 7. 信息理解与业务关系
 8. Page Type / Pattern / transition_mode
