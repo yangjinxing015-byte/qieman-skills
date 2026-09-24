@@ -1,0 +1,26 @@
+{
+  "template": "horizontal-card",
+  "name": "丁龙飞",
+  "portrait": "assets/portraits/dinglongfei.png",
+  "phone": "18127961347",
+  "license_id": "A20230822001284",
+  "services": [
+    "财务规划",
+    "资产配置",
+    "产品咨询",
+    "持仓分析",
+    "市场解读",
+    "陪伴服务"
+  ],
+  "title": "资深理财规划师",
+  "experience_years": "6年",
+  "service_label": "累计服务高净值用户",
+  "service_value": "1000+",
+  "experience_description": [
+    "此处填写真实从业经历",
+    "此处填写真实擅长方向"
+  ],
+  "education": "",
+  "certifications": [],
+  "qr_code": ""
+}

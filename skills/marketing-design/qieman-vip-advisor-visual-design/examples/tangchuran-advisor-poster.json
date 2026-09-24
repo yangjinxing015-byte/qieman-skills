@@ -1,0 +1,22 @@
+{
+  "template": "advisor-poster",
+  "name": "汤楚然",
+  "portrait": "assets/portraits/汤楚然.png",
+  "title": "资深理财规划师",
+  "experience_years": "6年",
+  "service_label": "累计服务高净值用户",
+  "service_value": "1000+",
+  "experience_description": [
+    "曾任职于头部券商，熟悉多类资产定价逻辑。",
+    "擅长：资产配置、风险管理、财务分析"
+  ],
+  "education": "投资学专业，经济学学士学位",
+  "certifications": [
+    "证券从业证书",
+    "基金从业证书",
+    "证券投资顾问执业资格"
+  ],
+  "license_id": "A20260519002741",
+  "phone": "18127961347",
+  "qr_code": "assets/qr/汤楚然.png"
+}

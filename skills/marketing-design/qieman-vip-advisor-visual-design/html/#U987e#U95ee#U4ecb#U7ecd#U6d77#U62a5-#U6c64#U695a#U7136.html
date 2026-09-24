@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP顾问介绍海报 · 汤楚然</title>
+  <style>
+    :root {
+      --card-w: 973px;
+      --card-h: 1280px;
+      --blue: #2887e3;
+      --gold-from: #ffe2a7;
+      --gold-to: #f0c56a;
+      --cream: #fff6e3;
+      --font: "PingFang SC", "PingFang TC", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
+      --font-num: "MiSans", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-display: "Alibaba PuHuiTi", "Alibaba PuHuiTi 2.0", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    img { display: block; }
+
+    body {
+      font-family: var(--font);
+      background: #e6e6e6;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      display: grid;
+      place-items: center;
+      min-height: 100%;
+      padding: 32px 16px;
+    }
+
+    .stage {
+      width: min(var(--card-w), 100%);
+    }
+
+    .poster {
+      position: relative;
+      width: var(--card-w);
+      height: var(--card-h);
+      overflow: hidden;
+      background: var(--blue);
+      box-shadow: 0 18px 48px rgba(40, 135, 227, 0.28);
+      transform-origin: top left;
+    }
+
+    .glow {
+      position: absolute;
+      left: 200px;
+      top: -60px;
+      width: 900px;
+      height: 900px;
+      pointer-events: none;
+      background: radial-gradient(
+        circle at 58% 42%,
+        rgba(210, 236, 255, 0.58) 0%,
+        rgba(140, 200, 250, 0.22) 38%,
+        rgba(40, 135, 227, 0) 68%
+      );
+    }
+
+    .bg-deco {
+      position: absolute;
+      left: -279.49px;
+      top: 162.75px;
+      width: 1522.424px;
+      height: 1016.048px;
+      pointer-events: none;
+    }
+
+    .bg-deco img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .title {
+      position: absolute;
+      left: 50%;
+      top: 154.9px;
+      width: 772.86px;
+      height: 101.975px;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+
+    .title img {
+      width: 772.86px;
+      height: 101.975px;
+    }
+
+    .kpis {
+      position: absolute;
+      left: 90px;
+      top: 335px;
+      width: 564.068px;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      gap: 23px;
+    }
+
+    .kpi-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kpi-row {
+      display: flex;
+      align-items: baseline;
+      white-space: nowrap;
+    }
+
+    .kpi-row--years {
+      height: 106px;
+      margin-bottom: -11px;
+    }
+
+    .kpi-row--years .kpi-label {
+      padding-top: 44px;
+    }
+
+    .kpi-row--users {
+      height: 93px;
+    }
+
+    .kpi-row--users .kpi-label {
+      padding-top: 30px;
+    }
+
+    .kpi-label {
+      font-family: var(--font-display);
+      color: var(--cream);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .kpi-row--years .kpi-label {
+      font-size: 38.102px;
+    }
+
+    .kpi-row--users .kpi-label {
+      font-size: 38.494px;
+      font-weight: 500;
+    }
+
+    .kpi-value {
+      font-family: var(--font-num);
+      font-weight: 600;
+      line-height: 1;
+      background: linear-gradient(to left, var(--gold-from), var(--gold-to));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-left: 10px;
+    }
+
+    .kpi-row--years .kpi-value {
+      font-size: 80px;
+      margin-left: 10px;
+    }
+
+    .kpi-row--users .kpi-value {
+      font-size: 70px;
+      margin-left: 2px;
+    }
+
+    .bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 526px;
+    }
+
+    .bullet {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .bullet__dot {
+      width: 10px;
+      height: 26px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .bullet__dot::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 16px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .bullet p {
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.39;
+      letter-spacing: 0.28px;
+      color: #fff;
+    }
+
+    .portrait {
+      position: absolute;
+      left: 407px;
+      top: 245px;
+      width: 729px;
+      height: 965px;
+      overflow: hidden;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .portrait img {
+      position: absolute;
+      left: -118.16px;
+      top: -0.33px;
+      width: 965.325px;
+      height: 965.325px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .info-card {
+      position: absolute;
+      left: 95px;
+      top: 815px;
+      width: 813px;
+      height: 502px;
+      border-radius: 40px;
+      overflow: hidden;
+      background: rgba(21, 98, 164, 0.6);
+      backdrop-filter: blur(17px);
+      -webkit-backdrop-filter: blur(17px);
+      z-index: 6;
+    }
+
+    .info-card__name {
+      position: absolute;
+      left: 41.74px;
+      top: 11px;
+      font-size: 60px;
+      font-weight: 600;
+      line-height: 84px;
+      color: #fff;
+      white-space: nowrap;
+      font-synthesis: none;
+    }
+
+    .info-card__meta {
+      position: absolute;
+      left: 288px;
+      top: 33.5px;
+      width: 505px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 39px;
+      color: #fff;
+    }
+
+    .qr {
+      position: absolute;
+      left: 92px;
+      top: 117px;
+      width: 100px;
+      height: 100px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .qr img {
+      width: 99px;
+      height: 99px;
+      margin: 0 auto;
+    }
+
+    .wave-cyan,
+    .wave-blue {
+      position: absolute;
+      left: 0;
+      width: 973px;
+      pointer-events: none;
+      z-index: 7;
+    }
+
+    .wave-cyan {
+      top: 812px;
+      height: 428px;
+    }
+
+    .wave-blue {
+      top: 832px;
+      height: 448px;
+    }
+
+    .wave-cyan img,
+    .wave-blue img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .brand {
+      position: absolute;
+      left: 50%;
+      top: 1153px;
+      width: 260px;
+      height: 54.026px;
+      transform: translateX(-50%);
+      z-index: 8;
+    }
+
+    .brand img {
+      width: 260px;
+      height: 54.026px;
+      object-fit: contain;
+    }
+
+    @media (max-width: 1005px) {
+      .stage {
+        height: calc((100vw - 32px) * 1280 / 973);
+      }
+      .poster {
+        transform: scale(calc((100vw - 32px) / 973));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <article class="poster" aria-label="VIP顾问介绍海报 汤楚然">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="bg-deco" aria-hidden="true">
+        <img src="顾问介绍海报-汤楚然/assets/bg-pattern.svg" width="1522" height="1016" alt="" />
+      </div>
+
+      <div class="title">
+        <img src="顾问介绍海报-汤楚然/assets/title.svg" width="773" height="102" alt="资深理财规划师" />
+      </div>
+
+      <div class="portrait">
+        <img src="顾问介绍海报-汤楚然/assets/portrait.png" width="965" height="965" alt="汤楚然" />
+      </div>
+
+      <div class="kpis">
+        <div class="kpi-block">
+          <div class="kpi-row kpi-row--years">
+            <span class="kpi-label">金融从业经验</span>
+            <span class="kpi-value">6年</span>
+          </div>
+          <div class="kpi-row kpi-row--users">
+            <span class="kpi-label">累计服务高净值用户</span>
+            <span class="kpi-value">1000+</span>
+          </div>
+        </div>
+        <ul class="bullets">
+          <li class="bullet">
+            <span class="bullet__dot" aria-hidden="true"></span>
+            <p>曾任职于头部券商，熟悉多类资产<br />定价逻辑。</p>
+          </li>
+          <li class="bullet">
+            <span class="bullet__dot" aria-hidden="true"></span>
+            <p>擅长：资产配置、风险管理、财务分析</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h1 class="info-card__name">汤楚然</h1>
+        <div class="info-card__meta">
+          <p>投资学专业，经济学学士学位， 证券、基金从业证书、证券投资顾问执业资格</p>
+          <p>基金从业资格编号：A20260519002741</p>
+          <p>联系电话：18127961347</p>
+        </div>
+        <div class="qr">
+          <img src="顾问介绍海报-汤楚然/assets/qr.png" width="99" height="99" alt="顾问二维码" />
+        </div>
+      </div>
+
+      <div class="wave-cyan" aria-hidden="true">
+        <img src="顾问介绍海报-汤楚然/assets/wave-cyan.png" width="973" height="428" alt="" />
+      </div>
+      <div class="wave-blue" aria-hidden="true">
+        <img src="顾问介绍海报-汤楚然/assets/wave-blue.png" width="973" height="448" alt="" />
+      </div>
+
+      <div class="brand">
+        <img src="顾问介绍海报-汤楚然/assets/yingmi-logo.svg" width="260" height="54" alt="盈米基金" />
+      </div>
+    </article>
+  </div>
+</body>
+</html>

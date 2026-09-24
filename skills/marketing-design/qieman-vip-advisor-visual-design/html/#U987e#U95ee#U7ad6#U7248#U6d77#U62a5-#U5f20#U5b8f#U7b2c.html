@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP顾问竖版海报 · 张宏第</title>
+  <style>
+    :root {
+      --card-w: 414px;
+      --card-h: 721px;
+      --blue: #0b7ae0;
+      --blue-deep: #006ccb;
+      --font: "PingFang SC", "PingFang TC", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font);
+      background: #e6e6e6;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      display: grid;
+      place-items: center;
+      min-height: 100%;
+      padding: 32px 16px;
+    }
+
+    img { display: block; }
+
+    .stage {
+      width: min(var(--card-w), 100%);
+    }
+
+    .card {
+      position: relative;
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 2px;
+      overflow: hidden;
+      background: linear-gradient(231.44deg, var(--blue) 7.52%, var(--blue-deep) 93.13%);
+      box-shadow: 0 18px 48px rgba(11, 122, 224, 0.28);
+      transform-origin: top left;
+    }
+
+    .bg-deco {
+      position: absolute;
+      left: -265.7px;
+      top: -173.95px;
+      width: 1288.023px;
+      height: 1242.132px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .bg-deco__inner {
+      flex: none;
+      width: 1025.035px;
+      height: 948.089px;
+      transform: rotate(-20.06deg);
+    }
+
+    .bg-deco__inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .main {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 44px;
+      width: 358px;
+      margin: 40.16px 0 0 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      height: 20.389px;
+    }
+
+    .logo-yingmi {
+      width: 81.011px;
+      height: 16.834px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-yingmi img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-rule {
+      width: 1px;
+      height: 13.449px;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .logo-qieman {
+      width: 53.38px;
+      height: 20.389px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-qieman img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .portrait {
+      position: relative;
+      width: 358px;
+      height: 358px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .portrait img {
+      width: 358px;
+      height: 358px;
+      object-fit: cover;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(circle 173px at 179px 180px, #000 99.6%, transparent 100%);
+      mask-image: radial-gradient(circle 173px at 179px 180px, #000 99.6%, transparent 100%);
+    }
+
+    .identity {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      width: 298.945px;
+    }
+
+    .name {
+      font-size: 51px;
+      font-weight: 600;
+      line-height: 71px;
+      color: #fff;
+      letter-spacing: 0;
+      white-space: nowrap;
+      font-synthesis: none;
+    }
+
+    .divider {
+      width: 298.945px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 18.702px;
+      font-weight: 400;
+      line-height: 34.287px;
+      color: #fff;
+      white-space: nowrap;
+      font-synthesis: none;
+    }
+
+    @media (max-width: 446px) {
+      .stage {
+        height: calc((100vw - 32px) * 721 / 414);
+      }
+      .card {
+        transform: scale(calc((100vw - 32px) / 414));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <article class="card" aria-label="VIP顾问竖版海报 张宏第">
+      <div class="bg-deco" aria-hidden="true">
+        <div class="bg-deco__inner">
+          <img src="顾问竖版海报-张宏第/assets/bg-pattern.svg" width="1025" height="948" alt="" />
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="brand">
+          <div class="logo-yingmi">
+            <img src="顾问竖版海报-张宏第/assets/yingmi-logo.svg" width="81" height="17" alt="盈米基金" />
+          </div>
+          <span class="brand-rule" aria-hidden="true"></span>
+          <div class="logo-qieman">
+            <img src="顾问竖版海报-张宏第/assets/qieman-logo.svg" width="53" height="20" alt="且慢" />
+          </div>
+        </div>
+
+        <div class="portrait">
+          <img src="顾问竖版海报-张宏第/assets/portrait.png" width="358" height="358" alt="张宏第" />
+        </div>
+
+        <div class="identity">
+          <h1 class="name">张宏第</h1>
+          <div class="divider" aria-hidden="true"></div>
+          <div class="contact">
+            <p>联系电话：13925996396</p>
+            <p>执业编号：A20260515002268</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</body>
+</html>

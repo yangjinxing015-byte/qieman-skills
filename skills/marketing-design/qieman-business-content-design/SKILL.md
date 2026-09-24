@@ -73,57 +73,86 @@ standalone: true
 7. 在没有素材包的环境中，页面是否仍能独立完成？
 8. 输出是否能够直接用于验证、评审或继续设计开发？
 
-### 0.2 与且慢基础 UI 的关系
+### 0.2 与 Foundation 的关系
 
-本 Skill 的基础 UI 语言继承自 `qieman-ui-design`（L0），但**不要求运行时必须同时加载 L0 Skill**。
+本 Skill 是 `marketing-design` 应用线的主编排层。基础品牌、Design Token、基础 UI 组件与金融合规**不由本 Skill 重新定义**，而是优先继承当前完整 Skill 环境中的 Foundation。
 
-### Foundation Dependency Contract｜基础依赖约定
+### Foundation Runtime Contract｜Foundation 运行依赖
 
-本 Skill 是主编排层，默认协调以下基础规范：
+当完整 `qieman-skills` 环境可用时，正式生成、团队生产与 Skill 验证任务必须先读取并执行：
 
-1. **`qieman-ui-design`**
-   - 管页面基础 UI 与 Token
-   - 包括：页面背景、白卡、字体、字号、字重、圆角、按钮、表单、基础涨跌色、spacing token
+1. **`qieman-brand-guidelines`**
+   - 品牌人格、视觉语言、品牌色与禁用风格
+2. **`qieman-design-token-system`**
+   - Semantic Color、Typography、Spacing、Radius、Shadow 等 Token
+3. **`qieman-ui-design-system`**
+   - Button / Card / Navigation / Feedback 等基础组件与状态
+4. **`qieman-financial-compliance-guidelines`**
+   - 收益、风险、营销表达与风险披露边界
 
-2. **`qieman-chart-design`**
-   - 管图表与数据可视化表达
-   - 包括：柱状图、折线图、饼图 / 环图、对比图、趋势图、收益 / 回撤 / 波动图、图例、坐标轴、标签、注释、高亮逻辑
-
-3. **可选垂类 Skill**
-   - 如 `qieman-insurance-design`、`qieman-vip-design` 等
-   - 仅在对应业务语境下叠加，不作为本 Skill 的运行硬依赖
-
-### Dependency Priority｜冲突时的优先级
-
-当规范交叉时，使用以下优先级：
-
-- **页面容器与基础组件** → 以 `qieman-ui-design` 为准
-- **图表本体与数据可视化样式** → 以 `qieman-chart-design` 为准
-- **垂类业务元素**（如保险人物 / icon / 插画语境） → 以对应垂类 Skill 为准
-- **本 Skill** 负责最终内容结构重组、信息层级、视觉策略、版式整合与输出
-
-
-
-为保证单 Skill 可独立运行，本文件内置一份精简的 **Qieman Foundation UI**：
-
-- 基础品牌色与文字色 Token；
-- 字体家族与可读性下限；
-- 间距、圆角、边框与基础层级；
-- Remix Icon 4.6.0 通用图标规则；
-- 44px 最小触控高度；
-- 风险披露最低 11px；
-- 已经由实际 Figma 设计稿确认的 Business Content Typography Overrides。
-
-冲突时遵循：
+执行顺序：
 
 ```txt
-用户明确 Figma / 设计工具标注
-> 本 Skill 已确认的 Business Content Override
-> Qieman Foundation UI（L0）
-> 通用默认值
+Foundation Preflight
+→ Source / Framework Lock
+→ Business Content
+→ Marketing Visual / Domain Skill / Chart Skill
+→ HTML Implementation
+→ Foundation Final Gate
+→ Visual / Content / Regression QA
+→ Output
 ```
 
-保险设计、VIP 设计等更具体的垂类 Skill 可在此基础上继续叠加，但不得成为本 Skill 的运行硬依赖。
+正式环境：
+
+```txt
+foundation_mode = required
+```
+
+仅当上述 Foundation 文件在运行环境中确实不可用时，才允许：
+
+```txt
+foundation_mode = fallback
+```
+
+Fallback 仅用于保证单 Skill 可运行；**当 Foundation 可用时，内置 fallback 不得覆盖、替代或弱化 Foundation。**
+
+### Downstream Capability Contract｜下游能力
+
+- **`qieman-chart-design`**：负责图表与数据可视化表达；存在时优先调用。
+- **`qieman-marketing-visual-design`**：负责 Hero / KV、视觉路线、插画、构图与视觉成熟度。
+- **可选垂类 Skill**：如 `qieman-insurance-design`、`qieman-vip-design`、`qieman-ip-visual-design`，仅在对应业务语境下叠加。
+
+### Dependency Priority｜冲突时优先级
+
+```txt
+业务事实 / 金融合规
+> Foundation Hard Rules
+> Domain Skill
+> Business Content 编排
+> Marketing Visual 表现
+> Source Visual CSS / 案例偏好
+```
+
+特别说明：
+
+- 金融涨跌语义色、风险披露最低字号、基础组件状态等 **Foundation Hard Rules 不得被业务视觉覆盖**。
+- 用户提供的明确 Figma / 设计工具标注可用于补充业务层 Typography，但只能在 Foundation 允许范围内生效。
+- 本 Skill 负责内容结构、信息层级、业务表达和最终编排，不拥有 Foundation Token 的定义权。
+
+### Foundation Preflight｜生成前强制检查
+
+当 `foundation_mode = required` 时，在读取页面视觉之前必须确认：
+
+- 已读取当前版本 Brand / Token / UI / Compliance Foundation；
+- 已建立 Semantic Token 映射，而不是沿用原 HTML 自定义变量；
+- 已识别金融语义（正收益 / 负收益 / 回撤 / 风险 / 警告）；
+- 已识别 Typography 可读性下限；
+- 已识别 Spacing / Radius / Shadow / Component 基础规则。
+
+未完成 Foundation Preflight，不得直接进入 HTML 视觉实现。
+
+为保证单 Skill 可独立运行，本文件仍保留精简 fallback，但其优先级始终低于真实 Foundation。
 
 ---
 
@@ -2018,6 +2047,38 @@ source_mode = framework-locked-redesign
 
 > **保持“这页讲什么、按什么顺序讲”，重新设计“怎么讲得更成熟”。**
 
+### Source Style Isolation｜源样式隔离（强制）
+
+当 `source_mode = framework-locked-redesign` 时：
+
+**必须继承：**
+
+- 文案、数据、金额、百分比、日期、单位；
+- 模块数量与模块顺序；
+- 业务关系、CTA 角色、交互状态；
+- 风险提示、数据来源与合规文本。
+
+**默认不得继承为新页面规范：**
+
+- 原 HTML 的 CSS Variable；
+- 原 HTML 的 Typography 数值；
+- 原 HTML 的文字色 / 金融涨跌色；
+- 原 HTML 的 margin / padding；
+- 原 HTML 的 radius / shadow；
+- 原 HTML 的 Button / Card / Tag 基础样式；
+- inline style 中的视觉值；
+- 原页面 Hero / KV / 背景 / 图表装饰样式。
+
+除非用户明确要求“沿用当前视觉”或指定某项视觉必须保留，否则：
+
+```txt
+DOM / Content / Framework 可以继承
+Visual CSS 必须从当前 Foundation 重新建立
+Source CSS ≠ Foundation Token
+```
+
+特别是金融语义值不得从 Source CSS 继承。例如原页面把负收益 / 回撤写成蓝色，新页面仍必须回到 Foundation 的 `foreground/fall`。
+
 ---
 
 ### B. `requirement-only`｜结构仍可重组时使用
@@ -2414,7 +2475,12 @@ qieman-design-content-audit
 页面内部执行顺序：
 
 ```txt
-STEP 0 读取当前任务是否已有用户确认的 Locked Layout / Locked Component
+STEP 0 Foundation Preflight
+       → 读取 Brand / Token / UI / Compliance Foundation
+       → foundation_mode = required（Foundation 可用时）
+       → 建立 Semantic Token / Typography / Spacing / Component 基线
+↓
+STEP 0.5 读取当前任务是否已有用户确认的 Locked Layout / Locked Component
 ↓
 STEP 1 读取输入材料
 ↓
@@ -2434,6 +2500,8 @@ STEP 3 锁定 Locked Content
 STEP 4 若为 framework-locked-redesign
        → 建立 Framework Contract
        → 锁定 Module Order / Module Topics / Business Relations / CTA / Risk
+       → 执行 Source Style Isolation
+       → 丢弃原 HTML 视觉 CSS 作为规范来源
 
        若为 requirement-only
        → 建立无样式 Requirement Model
@@ -2485,14 +2553,82 @@ STEP 11 按需调用 qieman-marketing-visual-design
 ↓
 STEP 12 生成完整移动端 HTML
 ↓
-STEP 13 Visual Maturity Gate
+STEP 13 Foundation Final Gate（Blocking）
+        → Color Semantic
+        → Typography
+        → Spacing
+        → Radius / Shadow
+        → Component State
+        → Compliance
+        → 发现违规先修 HTML，不允许带 warning 交付
 ↓
-STEP 14 Framework / Content Fidelity Gate
+STEP 14 Visual Maturity Gate
 ↓
-STEP 15 Regression Gate
+STEP 15 Framework / Content Fidelity Gate
 ↓
-STEP 16 Mobile / Risk / Interaction 验收
+STEP 16 Regression Gate
+↓
+STEP 17 Mobile / Risk / Interaction 验收
 ```
+
+### Foundation Final Gate｜最终基础规范门禁（Blocking）
+
+最终 HTML 输出前，必须检查**实际生成结果**，而不是只检查设计意图。以下任一项失败，不得直接交付，必须先修改 HTML 再重新检查。
+
+#### A. Color Semantic Gate
+
+金融数据必须使用当前 Foundation Semantic Token：
+
+```txt
+rise / 正收益 / 上涨
+→ foreground/rise
+→ Light: #FA440C
+
+fall / 负收益 / 下跌 / 回撤
+→ foreground/fall
+→ Light: #07AD8F
+```
+
+禁止：
+
+- 使用品牌蓝表示负收益、回撤或下跌；
+- 为营销氛围自定义第二套涨跌色；
+- 用 Marketing Visual 色覆盖金融语义色；
+- Source HTML 原有错误颜色继续进入新页面。
+
+#### B. Typography Gate
+
+- 正文、标题、数字、辅助信息遵循当前 Foundation Typography；
+- 风险披露、费用、免责声明不得低于 Foundation 下限（当前 ≥ 11px）；
+- 数据来源 / 日期优先使用 Foundation Caption 规则；
+- 不得为了塞内容缩小字号；
+- 同层级文字保持一致的字号、字重和行高。
+
+#### C. Spacing Gate
+
+- 页面边距、模块间距、卡片间距与卡片 padding 优先调用 Foundation Layout Token；
+- 禁止把 Source CSS 的随机 margin / padding 当成新页面规范；
+- 5px / 7px / 13px / 15px / 17px 等非体系 spacing，若不是图表几何或明确视觉例外，应回收到 Foundation Token。
+
+#### D. Component Gate
+
+Button / Card / Tag / Navigation / Feedback 等基础组件行为与状态优先继承 `qieman-ui-design-system`。Marketing / Business Skill 可以编排组件，但不得重新定义 Foundation 基础组件行为。
+
+#### E. Token Override Gate
+
+Marketing / Domain / Source Visual 不得覆盖 Foundation 已存在的：
+
+- financial semantic color；
+- text semantic color；
+- typography baseline / legal minimum；
+- spacing token；
+- radius / shadow baseline；
+- component state；
+- compliance rule。
+
+冲突时 Foundation 自动获胜。
+
+> **Foundation Final Gate = blocking gate。发现违规：先修正 HTML，再输出；不得仅记录 warning 后继续交付。**
 
 ### Universal Mature Design Principle｜通用成熟设计原则
 
@@ -2557,7 +2693,18 @@ STEP 16 Mobile / Risk / Interaction 验收
 - [ ] 插画是否真正服务业务语义？
 - [ ] Data Hero 是否让数据优先于装饰？
 
-## 16.5 Visual
+## 16.5 Foundation Compliance
+
+- [ ] 完整 Skill 环境可用时，是否先执行 Foundation Preflight？
+- [ ] 是否未把 Source HTML 的 CSS Variable / inline style 当成 Foundation Token？
+- [ ] 正收益 / 上涨是否为 `foreground/rise`（Light `#FA440C`）？
+- [ ] 负收益 / 下跌 / 回撤是否为 `foreground/fall`（Light `#07AD8F`）？
+- [ ] 风险 / 法律披露是否满足 Foundation 最低字号？
+- [ ] 页面边距、卡片间距、模块间距是否来自 Foundation Spacing Token？
+- [ ] Button / Card / Navigation 等基础组件是否继承 UI Design System？
+- [ ] 是否通过 Blocking Foundation Final Gate 后才交付？
+
+## 16.6 Visual
 
 - [ ] 页面基础背景是否使用 qieman-ui-design 页面色，卡片是否保持白色体系？
 - [ ] 页面左右安全边距、卡片间距、卡片内边距是否全部来自 spacing tokens？
@@ -2595,7 +2742,7 @@ STEP 16 Mobile / Risk / Interaction 验收
 - [ ] 是否避免因为 Sticky CTA 存在而误删正文模块内按钮？
 - [ ] Hero / KV 是否只在原需求明确存在 CTA 时才保留按钮，未擅自新增？
 
-## 16.6 Data
+## 16.7 Data
 
 - [ ] 金融涨跌是否为“涨红 #FA440C / 跌绿 #07AD8F”，且整页一致？
 - [ ] 负收益、回撤是否没有误用品牌蓝？

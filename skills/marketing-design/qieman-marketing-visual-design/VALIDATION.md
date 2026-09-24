@@ -1,756 +1,446 @@
-# qieman-marketing-visual-design｜验证与迭代规范
+# qieman-marketing-visual-design｜VALIDATION
 
-> 用于持续验证 `qieman-marketing-visual-design` 的视觉成熟度、通用性与回归稳定性。  
-> 本文是验证规范，不是具体业务页面模板。
-
----
-
-## 1. Skill 定位
-
-`qieman-marketing-visual-design` 是整个且慢设计 Skill 包体中的**视觉总控层**。
-
-它重点负责：
-
-- KV / Hero 视觉方向
-- 页面整体视觉气质
-- 主视觉成熟度
-- 色彩、材质、光影、比例
-- Hero → 正文的视觉承接
-- 营销氛围与品牌完成度
-- 视觉减法与冗余控制
-- 防止页面退化为「原型美化版」或「AI 初稿」
-
-它不负责：
-
-- 改业务结构
-- 改模块顺序
-- 改业务文案
-- 改 CTA 逻辑
-- 改风险提示
-- 改数据真实性
-
-核心目标：
-
-> **不是“让页面更花”，而是让页面达到成熟、专业、克制、可上线的视觉完成度。**
+> 本文用于验证 `qieman-marketing-visual-design` 的通用性、成熟度与回归稳定性。  
+> 它不是页面模板，也不定义 Foundation。
 
 ---
 
-# 2. 验证原则
+# 1. Validation Goal
 
-每次修改 `qieman-marketing-visual-design` 后，都必须经过案例回归验证。
+验证目标不是“页面是否生成成功”，而是：
 
-验证时不只判断：
+> **同一套规则能否在不同业务场景中稳定生成成熟、专业、主题明确且不模板化的视觉。**
 
-> 能不能生成页面？
+正式冻结前必须同时验证：
 
-而要判断：
-
-> **能不能稳定生成成熟设计视觉？**
-
-统一遵循 5 条原则：
-
-1. **固定设计判断标准，不固定视觉模板**
-2. **减少冗余，不降低视觉完成度**
-3. **增强营销感，不牺牲专业感**
-4. **局部修复，不制造回归**
-5. **视觉重建，不破坏业务框架**
+- Foundation Compatibility
+- Visual Foundation
+- Visual Routing
+- Hero / KV
+- Asset Quality
+- Transition
+- Regression Lock
 
 ---
 
-# 3. 固定验证场景池
+# 2. Fixed Scene Pool
 
-正式冻结前建议完成 5 类场景验证；日常迭代至少选择 3 类回归。
+每次重大版本至少验证 3 类；冻结 Stable 前覆盖全部 5 类。
 
-## A. 活动营销 / 转化页
+## A. Marketing / Conversion
 
-典型场景：
+例如：
 
-- 盈米宝充值
-- 节日充值活动
-- 汇款领券
-- 回购计划
-- 新功能引导
+- 充值活动
+- 节日活动
+- 权益活动
+- 新功能转化
 
-重点看：
+重点：
 
-- KV 是否有营销氛围
-- 利益点是否突出但不过度促销
-- 主视觉是否成熟
-- Hero → 正文是否自然
-- 首卡承接是否稳定
-- CTA 前的视觉节奏是否合理
+- 营销感是否存在但不过度促销；
+- Hero 是否成熟；
+- 是否避免低幼物件拼贴；
+- Hero → 首卡是否自然。
 
----
+## B. Strategy / Product
 
-## B. 策略 / 产品介绍页
+例如：
 
-典型场景：
+- 策略介绍
+- 固收增强
+- 全球配置
+- 红利 / 现金流
 
-- 锦上添花
-- 全球优选策略
-- 安心动盈
-- 中西合璧
-- 纳指管家
+重点：
 
-重点看：
+- 是否有策略主题；
+- 是否只会生成抽象点线面；
+- Landscape Illustration 等路线能否正确触发；
+- 是否稳重、专业、金融可信。
 
-- 策略主题是否一眼可识别
-- 金融属性是否明确
-- 是否避免陈旧金融符号
-- 数据 / 图表与主题是否统一
-- 页面是否稳重、专业
-- 视觉是否服务业务理解
+## C. Advisor / Service
 
----
+重点：
 
-## C. 顾问 / 服务营销页
+- 信赖感；
+- 服务关系；
+- 人物是否成熟；
+- 是否避免广告感过重。
 
-典型场景：
+## D. Insurance
 
-- 顾问组合介绍
-- 自动跟车
-- 投顾服务说明
-- 账户诊断
-- 服务权益介绍
+重点：
 
-重点看：
+- Marketing Visual 与 Insurance Domain 是否职责清楚；
+- 人物 / 家庭 / 医疗语义是否专业亲和；
+- 是否避免通用金融模板；
+- `soft-gradient` 是否自然。
 
-- 信赖感
-- 专业感
-- 服务关系表达
-- 人物 / 顾问素材是否恰当
-- 是否避免广告感过强
-- 功能区是否保持清晰
+## E. Content / Report / Education
 
----
+重点：
 
-## D. 保险产品介绍页
-
-典型场景：
-
-- 众民保百万医疗险
-- 长相安
-- 家庭保障方案
-- 保单检视
-- 教育金 / 养老测算
-
-重点看：
-
-- 是否符合保险专项语境
-- 家庭 / 医疗 / 保障元素是否专业亲和
-- 人物是否不低幼
-- Hero 是否柔和可信
-- `soft-gradient` 是否自然
-- 是否避免做成通用金融模板
+- 内容优先；
+- 信息密度；
+- 插图是否辅助理解；
+- 是否避免强行 Hero 化；
+- `flat-spacing` 是否成立。
 
 ---
 
-## E. 内容 / 投教 / 报告页
-
-典型场景：
-
-- 投教专题
-- 红利科普
-- 投资观察站
-- 账户报告
-- 诊断报告
-
-重点看：
-
-- 阅读节奏
-- 内容优先级
-- 信息密度
-- 插图是否辅助理解
-- 是否避免所有模块都营销化
-- `flat-spacing` 是否成立
-
----
-
-# 4. 核心视觉验收：8 个维度
-
-每一轮验证都必须检查以下 8 项。
-
-## 4.1 Hierarchy｜主次
+# 3. Foundation Compatibility Test
 
 检查：
 
-- [ ] 第一视觉中心是否明确
-- [ ] 标题 / 核心利益是否高于装饰
-- [ ] 主视觉是否增强主题而非抢主题
-- [ ] 辅助元素是否主动降权
-- [ ] 第一眼能否看懂这一屏在讲什么
+- [ ] 未重新定义 Foundation Token 真源
+- [ ] 未覆盖 UI Component 基础行为
+- [ ] 未覆盖品牌基础规则
+- [ ] 未覆盖金融合规
+- [ ] Domain Skill 规则得到保留
 
 失败：
 
-> **Hierarchy Failed**
+> **Foundation Conflict Failed**
 
 ---
 
-## 4.2 Proportion｜比例
+# 4. Visual Foundation Test
 
-检查：
+## 4.1 Hierarchy
 
-- [ ] Hero 高度与信息量是否匹配
-- [ ] 文字区与视觉区比例是否稳定
-- [ ] 主视觉是否不挤压标题
-- [ ] 主视觉是否不小到像装饰 Icon
-- [ ] 首卡与 Hero 比例是否自然
-- [ ] 375px 下仍然成立
+- [ ] 第一视觉中心明确
+- [ ] 标题 / 核心利益高于装饰
+- [ ] 辅助元素降权
 
-原则：
+## 4.2 Proportion
 
-> **先调比例，再调细节。**
+- [ ] Hero 高度与信息量匹配
+- [ ] 图文比例稳定
+- [ ] 主视觉不挤压文字
+- [ ] 首卡比例自然
 
-失败：
+## 4.3 Density
 
-> **Proportion Failed**
-
----
-
-## 4.3 Density｜密度
-
-检查：
-
-- [ ] 每个元素都有业务或构图价值
 - [ ] 没有纯填空元素
-- [ ] 没有图标拼贴
-- [ ] 删除某个元素后不会明显更好
-- [ ] 留白仍然可感知
+- [ ] 没有 Icon collage
+- [ ] 删除冗余元素后不会更好
 
-原则：
+## 4.4 Color Depth
 
-> **元素可以少，但不能粗糙；元素可以多，但必须有主次。**
+- [ ] 有主色域与明度层次
+- [ ] 强调色克制
+- [ ] 不多色抢权重
 
-失败：
-
-> **Visual Redundancy Failed**
-
----
-
-## 4.4 Material｜材质
-
-检查：
+## 4.5 Material
 
 - [ ] 主视觉材质语言统一
-- [ ] Hero / Icon / Illustration 可以共存
-- [ ] 同组图标线宽、圆角、质感一致
 - [ ] 不像多个素材库拼接
-- [ ] 扁平 / 轻 3D / 玻璃 / 半拟物的使用有明确理由
+
+## 4.6 Lighting
+
+- [ ] 光源逻辑统一
+- [ ] 无过度 Glow
+- [ ] 背景光效不干扰文字
+
+## 4.7 Detail Quality
+
+- [ ] 细节在移动端仍有价值
+- [ ] 边缘、阴影、透明边界干净
+
+## 4.8 Restraint
+
+- [ ] 没有为了“设计感”堆装饰
+- [ ] 简化没有降低完成度
+
+---
+
+# 4.9 Visual Maturity Blocking Test
+
+这一项是阻断项，不是建议项。
+
+每个案例必须先标注：
+
+```text
+Scene Type:
+Atmosphere Strength: Low–Medium / Medium / Medium–High
+Primary Visual Weight Source:
+```
+
+检查：
+
+- [ ] 第一眼存在明确主题氛围
+- [ ] Hero 视觉重量不低于首卡
+- [ ] 主色域不发灰、不发虚
+- [ ] 浅色方案有主体 / 空间 / 对比 / 材质补偿
+- [ ] 不存在“浅底 + 小图 + 大空白 + 弱焦点”
+- [ ] 标题、主视觉、利益点进入顺序清楚
+- [ ] 375px 下主视觉仍然成立，不退化成 Icon
+- [ ] 页面简洁但不显得未完成
+- [ ] Marketing / Conversion 场景不应像普通内容页
+- [ ] 视觉成熟度不依赖堆元素获得
+
+以下任一情况直接 Fail：
+
+```text
+结构正确，但视觉明显偏弱
+Hero 比首卡更轻
+整体色调过浅且无视觉锚点
+主视觉像小装饰而不是 KV
+用户已确认成熟参考，但新版本明显降级
+```
 
 失败：
 
-> **Material Consistency Failed**
+> **Visual Maturity Failed**
 
 ---
 
-## 4.5 Lighting｜光影
+# 5. Visual Routing Test
+
+每个案例必须记录：
+
+```text
+Primary Route:
+Why:
+Rejected Routes:
+Why Rejected:
+```
 
 检查：
 
-- [ ] 主光方向一致
-- [ ] 主体与辅助阴影有层级
-- [ ] 光效不压文字
-- [ ] 不滥用辉光
-- [ ] 阴影服务空间关系而非装饰
+- [ ] 路线来自业务语义而不是页面类型机械匹配
+- [ ] Abstract Financial 没有成为无脑默认项
+- [ ] Strategy 场景能选择 Landscape / Data-led 等不同路线
+- [ ] Route 不会把不同业务都做成同一视觉
 
 失败：
 
-> **Lighting Failed**
+> **Visual Routing Failed**
 
 ---
 
-## 4.6 Color Depth｜色彩层次
+# 6. Hero Maturity Test
 
-检查：
+Hero 是高优先级专项。
 
-- [ ] 有明确主色域
-- [ ] 有稳定明度层次
-- [ ] 强调色使用克制
-- [ ] 高饱和色没有平均分配
-- [ ] 金融语义色与装饰色不混用
-- [ ] Hero 与正文色彩可衔接
+即使正文通过，只要 Hero 明显低幼 / 粗糙 / 像功能 Icon，整页仍为 Fail。
+
+必须检查：
+
+- [ ] Theme 清楚
+- [ ] Hero Quality Floor 通过
+- [ ] Background Complexity 受控
+- [ ] Text Safe Area 稳定
+- [ ] 主视觉有明确中心
+- [ ] 不存在 Sticker / Toy / Candy 感
+- [ ] 不存在功能 Icon 放大承担品牌 Hero
+- [ ] 不存在“简洁化导致资产质量回退”
+- [ ] 不存在“过浅背景 + 小图 + 弱焦点”
+- [ ] Hero 视觉重量不低于首卡
+- [ ] 当前场景氛围强度达标
 
 失败：
 
-> **Color Depth Failed**
+> **Hero Maturity Failed**
 
 ---
 
-## 4.7 Detail Quality｜细节完成度
+# 7. Landscape Illustration Test
 
-检查：
+当路由选择 Landscape Illustration 时：
 
-- [ ] 对齐稳定
-- [ ] 圆角关系统一
-- [ ] 线宽统一
-- [ ] 边缘、高光、透明度有控制
-- [ ] 细节在手机尺寸下仍有意义
-- [ ] 不依赖无效小装饰制造“精致”
-
-原则：
-
-> **减少元素数量，不减少视觉完成度。**
+- [ ] 风景不是旅游海报
+- [ ] 场景足够简洁
+- [ ] 山 / 路 / 晨光等有明确语义作用
+- [ ] 没有儿童绘本感
+- [ ] 没有复杂无关细节
+- [ ] 保留金融品牌克制感
+- [ ] 文字区有足够安全空间
 
 失败：
 
-> **Detail Quality Failed**
+> **Landscape Maturity Failed**
 
 ---
 
-## 4.8 Restraint｜克制
+# 8. Asset Quality Test
+
+## HTML / CSS / SVG
+
+适合低权重背景、结构与图示。
 
 检查：
 
-- [ ] 不是所有模块都有阴影
-- [ ] 不是所有标题都有 Icon
-- [ ] 不是所有数字都有强调色
-- [ ] 不是所有内容都做成卡片
-- [ ] 不是所有 Hero 都做复杂主视觉
-- [ ] 没有因为“这里空”而补装饰
+- [ ] 没有用简单 SVG 冒充需要高质量资产的 Hero
+- [ ] SVG 不是“Icon 放大”
+
+## Independent Asset
+
+检查：
+
+- [ ] 资产无页面主标题
+- [ ] 边缘融合自然
+- [ ] 裁切正确
+- [ ] 透视正确
+- [ ] 缩放后仍然成熟
 
 失败：
 
-> **Restraint Failed**
+> **Asset Quality Failed**
 
 ---
 
-# 5. Hero / KV 专项验收
-
-## 5.1 Theme First
+# 9. Transition Test
 
 检查：
 
-- [ ] KV 是否能用一句业务话概括
-- [ ] 主视觉是否直接服务业务主题
-- [ ] 是否避免“蓝色 + 科技感 + 金融元素”的通用表达
-- [ ] 是否继承主题，而不是继承原型画法
+- [ ] Background Continuity
+- [ ] Transition Zone 长度合理
+- [ ] Text Protection
+- [ ] Asset Edge Blending
+- [ ] First Surface Relationship
 
----
+### overlay-card
 
-## 5.2 Hero Asset Quality
+- [ ] 首卡只轻度承接
+- [ ] 不形成深度悬浮
 
-### SVG / CSS 适合
+### soft-gradient
 
-- 简单几何背景
-- 流程关系
-- 数据图
-- 功能图标
-- 轻装饰
+- [ ] 不形成长雾区
+- [ ] 色域连续
 
-### 品牌级 KV 若需要
+### flat-spacing
 
-- 材质
-- 柔光
-- 空间
-- 人物
-- 高级产品感
-- 节日营销氛围
-
-应优先使用高质量视觉资产。
-
-失败标准：
-
-> 如果主视觉看起来像“放大的功能 Icon / 程序化示意图”，则 **Hero Asset Quality Failed**。
-
----
-
-## 5.3 Typography
-
-检查：
-
-- [ ] KV 主标题层级稳定
-- [ ] 不因空间不足随机缩字号
-- [ ] 同层级字号一致
-- [ ] KPI 等权
-- [ ] 日期 / 数字 / 单位不被拆开
-- [ ] 375px 下无单字掉行
-- [ ] 主视觉不挤压文字安全区
-
----
-
-# 6. Hero → 正文承接专项验收
-
-## 6.1 Background Continuity
-
-检查：
-
-- [ ] Hero 背景与正文背景有连续关系
-- [ ] 图片资产无矩形硬边
-- [ ] 没有“图片结束 → 页面突然换底色”
-- [ ] 主视觉边缘通过同色背景 / 蒙版 / 淡出自然融合
+- [ ] 无需强行加渐变 / overlap
 
 失败：
 
-> **Background Continuity Failed**
+> **Hero Handoff Failed**
 
 ---
 
-## 6.2 Transition Zone
+# 10. Anti-pattern Regression
 
-推荐参考：
+每次版本必须主动找以下回归：
+
+- [ ] 蓝紫渐变 + 圆球 + 轨迹泛化
+- [ ] 点线面成为所有策略页默认答案
+- [ ] 时钟 / 日历 / 金币等 Icon 拼贴
+- [ ] Q 版 / 贴纸 / 玩具感
+- [ ] 过多光效
+- [ ] Hero 过高、空白过大
+- [ ] 主视觉缩小后退化为装饰 Icon
+- [ ] 修 Transition 导致 Hero 退化
+- [ ] 修 Hero 导致正文结构变化
+
+---
+
+# 11. Regression Lock
+
+记录每个已确认案例的 Locked Items：
 
 ```text
-常规移动端：36–56px
-参考起点：约 44px
+Case:
+Locked Hero:
+Locked Proportion:
+Locked Transition:
+Locked Asset Quality:
+Locked Content / Framework:
 ```
 
-检查：
-
-- [ ] 承接区不是空白区
-- [ ] 不形成明显色带
-- [ ] 不出现大面积无意义雾化
-- [ ] 越靠近正文，视觉复杂度越低
-- [ ] 首卡进入前画面已经收干净
-
----
-
-## 6.3 Text Protection
-
-检查：
-
-- [ ] 标题不进入低对比区域
-- [ ] 副标题不因背景变浅而看不清
-- [ ] 主视觉与文字区域主动避让
-- [ ] 核心文案在渐变变浅前完成
+后续局部修改不得破坏这些确认项。
 
 失败：
 
-> **Text Protection Failed**
+> **Regression Lock Failed**
 
 ---
 
-## 6.4 First Content Surface
+# 12. Pass / Weak / Fail
 
-`overlay-card` 建议参考：
+## Pass
+
+- 路线正确；
+- 主题明确；
+- Hero 成熟；
+- 资产质量合格；
+- 页面不模板化；
+- 无明显回归。
+
+## Weak
+
+- 业务正确；
+- 基础视觉可用；
+- 但路线泛化、比例、材质或视觉完成度仍偏普通。
+
+## Fail
+
+以下任一严重问题：
+
+- Foundation 冲突；
+- 业务框架被改变；
+- Hero 低幼；
+- 功能 Icon 充当品牌 Hero；
+- 视觉路线与主题无关；
+- 修复一个问题制造明显回归；
+- 已确认视觉资产质量下降。
+
+---
+
+# 13. Validation Record Template
 
 ```text
-首卡 overlap：20–28px
-常用参考：约 24px
-```
-
-检查：
-
-- [ ] 首卡没有深压 Hero
-- [ ] 首卡与 Hero 之间没有空洞
-- [ ] 圆角、阴影与全页 Card System 一致
-- [ ] 首卡像从 Hero 中自然进入
-
----
-
-# 7. Approved Visual Regression Lock
-
-这是高优先级规则。
-
-当某一版已经被明确确认：
-
-- “这个 KV 很好”
-- “这个比例很好”
-- “这个过渡很好”
-- “这个视觉方向对”
-- “这个卡片系统可以固定”
-
-则进入：
-
-> **Regression Lock**
-
-之后只允许修改用户明确指出的问题。
-
-例如用户说：
-
-> “过渡不自然”
-
-只能修改：
-
-- Transition Zone
-- Asset Blend
-- First Surface Relationship
-
-禁止：
-
-- 重画 KV
-- 改主题色
-- 换视觉母题
-- 降低主视觉资产质量
-- 改正文结构
-- 改 Card System
-
-若修一个问题破坏两个正确部分：
-
-> **Regression Failed**
-
----
-
-# 8. 常见失败模式
-
-## 8.1 AI 初稿感
-
-表现：
-
-- 蓝色渐变 + 几个图标
-- 大量发光圆形
-- 通用玻璃卡片
-- 主视觉没有业务主题
-- 看起来“设计过”但没有品牌性
-
-处理：
-
-> 回到 Theme / Hierarchy / Material / Restraint。
-
----
-
-## 8.2 功能 Icon 放大成 KV
-
-表现：
-
-- 简单 SVG 时钟 / 盾牌 / 地球
-- 缺少材质、空间、光影
-- 像产品功能图标，不像营销视觉
-
-处理：
-
-> 不要通过增加小元素补救；提升核心视觉资产质量。
-
----
-
-## 8.3 元素减法变成品质降级
-
-表现：
-
-- 为了“简洁”删掉质感
-- 高质量资产被换成简单 SVG
-- 元素少了但页面更廉价
-
-规则：
-
-> **Visual Simplification ≠ Asset Quality Reduction**
-
----
-
-## 8.4 过渡修复导致 KV 回归
-
-表现：
-
-- 为了修过渡重新构图
-- 改变已确认标题比例
-- 视觉主体被重画
-- 原本成熟的 Hero 变差
-
-处理：
-
-> 启用 Regression Lock，只修 Transition。
-
----
-
-## 8.5 视觉过度丰富
-
-表现：
-
-- 主体 + 卡片 + 星星 + 光圈 + 金币 + 图标 + 礼物同时出现
-- 无法判断第一视觉中心
-
-处理：
-
-> Visual Redundancy Gate。
-
----
-
-## 8.6 页面像原型美化
-
-表现：
-
-- 模块都有正确样式，但没有整体视觉主题
-- Hero 缺乏品牌感
-- 每个卡片都独立设计，没有整页统一性
-
-处理：
-
-> Whole-page Visual Strategy + Hero defines page tone。
-
----
-
-# 9. 问题归属
-
-| 问题 | 归属 |
-|---|---|
-| KV 不成熟 | `qieman-marketing-visual-design` |
-| 主视觉低幼 / 粗糙 | `qieman-marketing-visual-design` |
-| Hero 色调不对 | `qieman-marketing-visual-design` |
-| Hero → 正文过渡不自然 | marketing + 主 Skill 实现 |
-| 图片硬切 | `qieman-marketing-visual-design` |
-| 字号层级混乱 | marketing + `qieman-ui-design` |
-| 内容被改 | `qieman-business-content-design` |
-| 模块顺序错 | `qieman-business-content-design` |
-| CTA 规则错 | `qieman-business-content-design` |
-| 卡片间距不稳定 | `qieman-business-content-design` |
-| 数据图表达不清 | `qieman-chart-design` |
-| 保险人物 / 医疗图标不对 | `qieman-insurance-design` |
-| 高净值专项视觉不对 | `qieman-vip-design` |
-
-原则：
-
-> **不要因为 marketing 的问题去改业务结构，也不要因为结构问题去重写 marketing。**
-
----
-
-# 10. 每轮验证流程
-
-建议固定为 6 步：
-
-```text
-01 选择验证案例
-↓
-02 用当前 Skill 生成页面
-↓
-03 按验收维度检查
-↓
-04 标记 Pass / Weak / Fail
-↓
-05 判断是个案问题还是共性问题
-↓
-06 只修改共性规则，再做回归验证
+Case:
+Scene Type:
+Primary Route:
+Domain Skill:
+
+Foundation Compatibility: Pass / Weak / Fail
+Hierarchy: Pass / Weak / Fail
+Proportion: Pass / Weak / Fail
+Density: Pass / Weak / Fail
+Color Depth: Pass / Weak / Fail
+Material: Pass / Weak / Fail
+Lighting: Pass / Weak / Fail
+Detail Quality: Pass / Weak / Fail
+Restraint: Pass / Weak / Fail
+Hero Maturity: Pass / Weak / Fail
+Asset Quality: Pass / Weak / Fail
+Transition: Pass / Weak / Fail
+Regression: Pass / Weak / Fail
+
+Observed Issue:
+Issue Owner:
+Local Fix:
+Locked Items:
+Next Test:
 ```
 
 ---
 
-# 11. 每轮验证记录模板
+# 14. Stable Freeze Conditions
 
-## Case
+只有同时满足以下条件，才能从 `candidate / validation` 升级为 Stable：
 
-```text
-页面：
-业务类型：
-输入源：
-Skill 版本：
-测试日期：
-```
+- [ ] 5 类场景全部验证
+- [ ] 至少连续 3 个不同业务案例无严重视觉回归
+- [ ] Abstract Financial 不再泛化为默认 Hero
+- [ ] Landscape Illustration 路由验证通过
+- [ ] Hero 简化不会导致资产质量下降
+- [ ] Transition 修复不会破坏 Hero
+- [ ] Domain Skill 与 Marketing Visual 无职责冲突
+- [ ] 同一规则不会把不同业务做成同一种视觉
 
-## 视觉评分
+核心冻结标准：
 
-统一使用：
+> **减少冗余，不降低完成度。**
 
-```text
-Pass
-Weak
-Fail
-```
+> **增强营销感，不牺牲专业感。**
 
-| 维度 | 结果 | 问题 |
-|---|---|---|
-| Theme |  |  |
-| Hierarchy |  |  |
-| Proportion |  |  |
-| Density |  |  |
-| Material |  |  |
-| Lighting |  |  |
-| Color Depth |  |  |
-| Detail Quality |  |  |
-| Restraint |  |  |
-| Typography |  |  |
-| Hero Asset Quality |  |  |
-| Transition |  |  |
-| Whole-page Consistency |  |  |
+> **视觉重建，不破坏业务框架。**
 
-## 本轮需要修复
+> **局部修复，不制造回归。**
 
-```text
-1.
-2.
-3.
-```
-
-## Regression Lock
-
-```text
-不允许回归：
--
--
--
-```
-
----
-
-# 12. 哪些问题应该写入 Skill
-
-测试后先判断：
-
-```text
-个案问题
-or
-共性问题
-```
-
-只有满足以下条件之一，才写进通用 Skill：
-
-1. 不同业务重复出现
-2. 已出现两次以上
-3. 属于明确设计原则
-4. 不修会造成大量页面退化
-5. 属于 Regression Guard
-
-不要固化：
-
-- 某个产品固定用什么元素
-- 某个业务固定用什么颜色
-- 某个案例具体构图
-- 某个页面专属视觉资产
-- 某次临时修复参数
-
-核心：
-
-> **沉淀判断方法，不沉淀案例模板。**
-
----
-
-# 13. 正式冻结条件
-
-`qieman-marketing-visual-design` 某版本进入 Stable 前，应满足：
-
-## 场景覆盖
-
-- [ ] 活动营销页通过
-- [ ] 策略 / 产品页通过
-- [ ] 顾问 / 服务页通过
-- [ ] 保险页通过
-- [ ] 内容 / 投教页通过
-
-## 回归稳定
-
-- [ ] 连续至少 3 个案例无严重视觉回归
-- [ ] 修 Transition 不会破坏 KV
-- [ ] 修 KV 不会改变业务框架
-- [ ] 简洁度优化不会降低主视觉资产质量
-- [ ] 同一规则不会强行生成同一种视觉
-
-## 输出质量
-
-- [ ] 不低幼
-- [ ] 不像 AI 初稿
-- [ ] 不像原型美化
-- [ ] 视觉主题明确
-- [ ] 品牌关系稳定
-- [ ] 375px 下成立
-- [ ] 达到可进入正式设计评审的完成度
-
-未通过时：
-
-> 保持 `Candidate / Validation`，不要覆盖 Stable 版本。
-
----
-
-# 14. 最终核心判断
-
-`qieman-marketing-visual-design` 的目标不是：
-
-> 让 AI 多画一些东西。
-
-而是：
-
-> **让 AI 知道什么应该画、什么不应该画、画到什么程度才算成熟，以及什么时候应该停止继续设计。**
-
-最终五条：
-
-> **减少冗余，不降低完成度。**  
-> **增强营销感，不牺牲专业感。**  
-> **视觉重建，不破坏业务框架。**  
-> **局部修复，不制造回归。**  
 > **固定判断标准，不固定视觉模板。**

@@ -1,0 +1,16 @@
+{
+  "template": "horizontal-card",
+  "name": "汤楚然",
+  "portrait": "assets/portraits/汤楚然.png",
+  "license_id": "A20260519002741",
+  "location": "广州",
+  "services": [
+    "财务规划",
+    "资产配置",
+    "产品咨询",
+    "持仓分析",
+    "市场解读",
+    "陪伴服务"
+  ],
+  "source": "https://yingmi.feishu.cn/wiki/NmRUwEfzTildnDkORPscG8SOnSh"
+}

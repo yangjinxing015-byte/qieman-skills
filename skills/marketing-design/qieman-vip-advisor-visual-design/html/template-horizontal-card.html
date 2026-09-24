@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP顾问横版名牌模板</title>
+  <style>
+    :root {
+      --card-w: 733px;
+      --card-h: 403px;
+      --blue: #0b79df;
+      --blue-deep: #016bc7;
+      --font: "PingFang SC", "PingFang TC", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font);
+      background: #e6e6e6;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      display: grid;
+      place-items: center;
+      min-height: 100%;
+      padding: 32px 16px;
+    }
+
+    img { display: block; }
+
+    .stage {
+      width: min(var(--card-w), 100%);
+    }
+
+    .card {
+      position: relative;
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 2px;
+      overflow: hidden;
+      background:
+        linear-gradient(-12.65deg, var(--blue-deep) 4.19%, rgba(10, 121, 217, 0) 91.91%),
+        linear-gradient(90deg, var(--blue) 0%, var(--blue) 100%);
+      box-shadow: 0 18px 48px rgba(11, 121, 223, 0.28);
+      transform-origin: top left;
+    }
+
+    .bg-deco {
+      position: absolute;
+      left: -332.96px;
+      top: -284.57px;
+      width: 1425.936px;
+      height: 1375.132px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .bg-deco__inner {
+      flex: none;
+      width: 1134.789px;
+      height: 1049.604px;
+      transform: rotate(-20.06deg);
+      overflow: hidden;
+    }
+
+    .bg-deco__inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .main {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      width: 733px;
+      height: 403px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 66px;
+      width: 358.945px;
+      height: 403px;
+      padding: 40px 0 40px 60px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15.829px;
+      height: 26.895px;
+    }
+
+    .logo-yingmi {
+      width: 106.864px;
+      height: 22.205px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-yingmi img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-rule {
+      width: 1px;
+      height: 17.74px;
+      background: #fff;
+      opacity: 0.92;
+      flex-shrink: 0;
+    }
+
+    .logo-qieman {
+      width: 70.415px;
+      height: 26.895px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-qieman img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .identity {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      width: 298.945px;
+    }
+
+    .name-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .name {
+      font-size: 42px;
+      font-weight: 600;
+      line-height: 59px;
+      color: #fff;
+      letter-spacing: 0;
+    }
+
+    .license {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 34.287px;
+      color: #fff;
+      opacity: 0.9;
+    }
+
+    .divider {
+      width: 298.945px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .services {
+      font-size: 18.702px;
+      font-weight: 400;
+      line-height: 34.287px;
+      color: #fff;
+      white-space: pre;
+    }
+
+    .portrait {
+      position: relative;
+      width: 373px;
+      height: 403px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .portrait img {
+      position: absolute;
+      left: 7.94px;
+      top: 0;
+      width: 357.114px;
+      height: 446.233px;
+      object-fit: cover;
+      object-position: top center;
+      pointer-events: none;
+    }
+
+    .photo-fade {
+      position: absolute;
+      left: 336px;
+      top: 314px;
+      width: 500px;
+      height: 195px;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 120, 220, 0) 0%,
+        rgba(10, 120, 220, 0.5) 100%
+      );
+    }
+
+    @media (max-width: 764px) {
+      .stage {
+        height: calc((100vw - 32px) * 403 / 733);
+      }
+      .card {
+        transform: scale(calc((100vw - 32px) / 733));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <article class="card" aria-label="投顾顾问名片 {{name}}">
+      <div class="bg-deco" aria-hidden="true">
+        <div class="bg-deco__inner">
+          <img src="template-horizontal-card/assets/bg-pattern.svg" width="1134.789" height="1049.604" alt="" />
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="info">
+          <div class="brand">
+            <div class="logo-yingmi">
+              <img src="template-horizontal-card/assets/yingmi-logo.svg" width="106.864" height="22.205" alt="盈米基金" />
+            </div>
+            <span class="brand-rule" aria-hidden="true"></span>
+            <div class="logo-qieman">
+              <img src="template-horizontal-card/assets/qieman-logo.svg" width="70.415" height="26.895" alt="且慢" />
+            </div>
+          </div>
+
+          <div class="identity">
+            <div class="name-block">
+              <h1 class="name">{{name}}</h1>
+              <p class="license">执业编号：{{license_id}}</p>
+            </div>
+            <div class="divider" aria-hidden="true"></div>
+            <p class="services">财务规划｜资产配置｜产品咨询 
+持仓分析｜市场解读｜陪伴服务 </p>
+          </div>
+        </div>
+
+        <div class="portrait">
+          <img src="template-horizontal-card/assets/portrait.png" width="357.114" height="446.233" alt="{{name}}" />
+        </div>
+      </div>
+
+      <div class="photo-fade" aria-hidden="true"></div>
+    </article>
+  </div>
+</body>
+</html>

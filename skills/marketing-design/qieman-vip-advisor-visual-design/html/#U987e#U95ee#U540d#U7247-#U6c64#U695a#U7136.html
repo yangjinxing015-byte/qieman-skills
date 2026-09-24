@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>顾问名片 · 汤楚然</title>
+  <style>
+    :root {
+      --card-w: 733px;
+      --card-h: 403px;
+      --font: "PingFang SC", "PingFang TC", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    img { display: block; }
+
+    body {
+      font-family: var(--font);
+      background: #e6e6e6;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      display: grid;
+      place-items: center;
+      min-height: 100%;
+      padding: 32px 16px;
+    }
+
+    .stage { width: min(var(--card-w), 100%); }
+
+    .card {
+      position: relative;
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 2px;
+      overflow: hidden;
+      background: #0b79df;
+      box-shadow: 0 18px 48px rgba(11, 121, 223, 0.28);
+      transform-origin: top left;
+    }
+
+    .card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .main {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      width: 733px;
+      height: 403px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 66px;
+      width: 359px;
+      height: 403px;
+      padding: 40px 0 40px 60px;
+    }
+
+    .brand {
+      width: 209px;
+      height: 27px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 209px;
+      height: 27px;
+    }
+
+    .identity {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      width: 299px;
+    }
+
+    h1 { font-weight: inherit; }
+
+    .name {
+      font-size: 42px;
+      font-weight: 600;
+      line-height: 59px;
+      color: #fff;
+      letter-spacing: 0;
+      font-synthesis: none;
+    }
+
+    .license {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 34.287px;
+      color: #fff;
+      opacity: 0.9;
+      font-synthesis: none;
+    }
+
+    .divider {
+      width: 299px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .services {
+      font-size: 18.702px;
+      font-weight: 400;
+      line-height: 34.287px;
+      color: #fff;
+      font-synthesis: none;
+    }
+
+    .portrait {
+      position: relative;
+      width: 373px;
+      height: 403px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .portrait img {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 373px;
+      height: 403px;
+      object-fit: contain;
+      object-position: bottom right;
+      pointer-events: none;
+    }
+
+    .photo-fade {
+      position: absolute;
+      left: 336px;
+      top: 314px;
+      width: 500px;
+      height: 195px;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 120, 220, 0) 0%,
+        rgba(10, 120, 220, 0.5) 100%
+      );
+    }
+
+    @media (max-width: 764px) {
+      .stage { height: calc((100vw - 32px) * 403 / 733); }
+      .card { transform: scale(calc((100vw - 32px) / 733)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <article class="card" aria-label="投顾顾问名片 汤楚然">
+      <img class="card__bg" src="顾问名片-汤楚然/assets/bg-vip-card-horizontal.jpg" width="733" height="403" alt="" />
+
+      <div class="main">
+        <div class="info">
+          <div class="brand">
+            <img src="顾问名片-汤楚然/assets/brand-logo.svg" width="209" height="27" alt="盈米基金 且慢" />
+          </div>
+
+          <div class="identity">
+            <div>
+              <h1 class="name">汤楚然</h1>
+              <p class="license">执业编号：A20260519002741</p>
+            </div>
+            <div class="divider" aria-hidden="true"></div>
+            <p class="services">财务规划｜资产配置｜产品咨询<br />持仓分析｜市场解读｜陪伴服务</p>
+          </div>
+        </div>
+
+        <div class="portrait">
+          <img src="顾问名片-汤楚然/assets/portrait.png" width="373" height="403" alt="汤楚然" />
+        </div>
+      </div>
+
+      <div class="photo-fade" aria-hidden="true"></div>
+    </article>
+  </div>
+</body>
+</html>

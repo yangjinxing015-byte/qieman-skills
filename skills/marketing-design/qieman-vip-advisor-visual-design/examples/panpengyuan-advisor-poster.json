@@ -1,0 +1,22 @@
+{
+  "template": "advisor-poster",
+  "name": "潘鹏远",
+  "portrait": "assets/portraits/潘鹏远.png",
+  "title": "资深理财规划师",
+  "experience_years": "10年",
+  "service_label": "累计服务高净值用户",
+  "service_value": "1000+",
+  "experience_description": [
+    "曾就职于外资银行、国有股份制银行、头部互联网银行，主导管理资产规模30亿。",
+    "擅长：高净值家庭资产架构搭建、大类资产配置、跨周期财富规划"
+  ],
+  "education": "会计学硕士学位",
+  "certifications": [
+    "基金从业证书",
+    "保险从业证书"
+  ],
+  "license_id": "B13000000000919",
+  "location": "广州",
+  "source": "https://yingmi.feishu.cn/wiki/NmRUwEfzTildnDkORPscG8SOnSh",
+  "notes": "飞书表该行未提供联系电话与二维码，对应模块已隐藏。"
+}
